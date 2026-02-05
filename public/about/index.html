@@ -1,0 +1,551 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
+  <head><script src="/docs/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=docs/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/docs/favicons/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/docs/favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/docs/favicons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/docs/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="/docs/favicons/favicon-256.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/docs/favicons/apple-touch-icon.png">
+<link rel="manifest" href="/docs/favicons/site.webmanifest">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="msapplication-TileColor" content="#0D0D0D">
+
+<title>About ThunderDB | ThunderDB Documentation</title>
+<meta name="description" content="Learn about ThunderDB&#39;s vision, roadmap, and the team behind it.">
+<meta property="og:url" content="http://localhost:1313/docs/about/">
+  <meta property="og:site_name" content="ThunderDB Documentation">
+  <meta property="og:title" content="About ThunderDB">
+  <meta property="og:description" content="Learn about ThunderDB&#39;s vision, roadmap, and the team behind it.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+
+  <meta itemprop="name" content="About ThunderDB">
+  <meta itemprop="description" content="Learn about ThunderDB&#39;s vision, roadmap, and the team behind it.">
+  <meta itemprop="wordCount" content="1630">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="About ThunderDB">
+  <meta name="twitter:description" content="Learn about ThunderDB&#39;s vision, roadmap, and the team behind it.">
+<link href="/docs/scss/main.css" rel="stylesheet">
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+  crossorigin="anonymous"></script>
+<script defer
+  src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
+  integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
+  crossorigin="anonymous"></script>
+
+  </head>
+  <body class="td-section">
+    <header>
+      <nav class="td-navbar js-navbar-scroll" data-bs-theme="dark">
+<div class="td-navbar-container container-fluid flex-column flex-md-row">
+  <a class="navbar-brand" href="/docs/"><span class="navbar-brand__logo navbar-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="300" height="64"><defs><symbol id="b" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#331500" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FF6B00"/><rect width="4.8" height=".6" rx=".55" fill="#FA4" opacity=".5"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#F83" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#930" opacity=".35"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D50"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,200,100,0.3)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FC8" opacity=".55"/></symbol><symbol id="c" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#4D3000" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FA0"/><rect width="4.8" height=".6" rx=".55" fill="#FD6" opacity=".55"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#FB3" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#960" opacity=".3"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D80"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,230,150,0.35)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FE9" opacity=".6"/></symbol></defs><use href="#b" x="35" y="2" width="5" height="5"/><use href="#b" x="41" y="2" width="5" height="5"/><use href="#b" x="29" y="8" width="5" height="5"/><use href="#b" x="35" y="8" width="5" height="5"/><use href="#b" x="23" y="14" width="5" height="5"/><use href="#b" x="29" y="14" width="5" height="5"/><use href="#b" x="17" y="20" width="5" height="5"/><use href="#b" x="23" y="20" width="5" height="5"/><use href="#c" x="5" y="26" width="5" height="5"/><use href="#c" x="11" y="26" width="5" height="5"/><use href="#c" x="17" y="26" width="5" height="5"/><use href="#c" x="23" y="26" width="5" height="5"/><use href="#c" x="29" y="26" width="5" height="5"/><use href="#c" x="35" y="26" width="5" height="5"/><use href="#c" x="41" y="26" width="5" height="5"/><use href="#c" x="47" y="26" width="5" height="5"/><use href="#b" x="35" y="32" width="5" height="5"/><use href="#b" x="41" y="32" width="5" height="5"/><use href="#b" x="29" y="38" width="5" height="5"/><use href="#b" x="35" y="38" width="5" height="5"/><use href="#b" x="23" y="44" width="5" height="5"/><use href="#b" x="29" y="44" width="5" height="5"/><use href="#b" x="17" y="50" width="5" height="5"/><use href="#b" x="23" y="50" width="5" height="5"/><use href="#b" x="11" y="56" width="5" height="5"/><use href="#b" x="17" y="56" width="5" height="5"/><text x="66" y="43" font-family="'SF Mono','Fira Code','Consolas','Courier New',monospace" font-size="27" font-weight="900" letter-spacing=".5"><tspan fill="#FFF">Thunder</tspan><tspan fill="#FF6B00">DB</tspan></text></svg></span><span class="navbar-brand__name">ThunderDB Documentation</span></a>
+  <div class="td-navbar-nav-scroll td-navbar-nav-scroll--indicator" id="main_navbar">
+    <div class="scroll-indicator scroll-left"></div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/"><span>Documentation</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/architecture/"><span>Architecture</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/developer/api-reference/"><span>API Reference</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="/docs/about/"><span>About</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/thunderdb/thunderdb" target="_blank" rel="noopener"><i class='fab fa-github'></i><span>GitHub</span></a>
+      </li>
+      </ul>
+    <div class="scroll-indicator scroll-right"></div>
+  </div>
+  <div class="d-none d-lg-block td-navbar__search">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+  </div>
+</div>
+</nav>
+    </header>
+    <div class="container-fluid td-default td-outer">
+      <main role="main" class="td-main">
+        <h2 id="what-is-thunderdb">What Is ThunderDB?</h2>
+<p>ThunderDB is a <strong>production-grade distributed HTAP (Hybrid Transactional/Analytical
+Processing) database</strong> written entirely in Rust. It combines transactional workloads
+(OLTP), analytical workloads (OLAP), and AI-native vector search into a single,
+unified system.</p>
+<p>ThunderDB natively speaks <strong>PostgreSQL</strong>, <strong>MySQL</strong>, and <strong>Redis</strong> wire protocols,
+meaning your existing applications, drivers, ORMs, and tools connect without any
+code changes. It also exposes <strong>REST</strong>, <strong>gRPC</strong>, <strong>GraphQL</strong>, and <strong>WebSocket</strong>
+APIs for modern application architectures.</p>
+<p>Rather than demanding a full migration, ThunderDB is designed to be deployed
+<strong>alongside</strong> your existing databases using <strong>Change Data Capture (CDC)</strong> and
+<strong>Foreign Data Wrappers (FDW)</strong>, allowing you to adopt it incrementally and
+migrate workloads at your own pace.</p>
+<hr>
+<h2 id="vision-universal-database-companion-for-the-ai-era">Vision: Universal Database Companion for the AI Era</h2>
+<p>The database landscape is undergoing a fundamental shift. Applications increasingly
+require:</p>
+<ul>
+<li><strong>Transactional consistency</strong> for user-facing operations</li>
+<li><strong>Analytical power</strong> for dashboards, reporting, and business intelligence</li>
+<li><strong>Vector search</strong> for AI/ML embeddings, RAG pipelines, and semantic retrieval</li>
+<li><strong>Multi-protocol access</strong> because teams use diverse tools and languages</li>
+<li><strong>Real-time data federation</strong> across multiple data sources</li>
+</ul>
+<p>Today, teams cobble together PostgreSQL for transactions, ClickHouse or BigQuery for
+analytics, Pinecone or Milvus for vectors, Redis for caching, and a constellation of
+ETL pipelines to keep everything in sync. This fragmentation creates operational
+complexity, data inconsistency, increased latency, and skyrocketing infrastructure costs.</p>
+<p><strong>ThunderDB&rsquo;s vision is to eliminate this fragmentation.</strong> A single system that
+handles transactional queries, analytical scans, and vector similarity search &ndash;
+with native protocol compatibility so you never have to rewrite your application.</p>
+<p>We call this the <strong>Universal Database Companion</strong> philosophy: ThunderDB slots into
+your existing infrastructure, speaks the protocols your applications already use,
+and progressively absorbs workloads that currently require separate specialized systems.</p>
+<hr>
+<h2 id="why-thunderdb-exists">Why ThunderDB Exists</h2>
+<h3 id="the-problem-fragmented-data-infrastructure">The Problem: Fragmented Data Infrastructure</h3>
+<p>Modern data architectures suffer from several compounding problems:</p>
+<ol>
+<li>
+<p><strong>Database Sprawl.</strong> A typical organization runs 5-10 different database systems.
+Each requires its own operational expertise, monitoring, backup procedures, and
+security hardening.</p>
+</li>
+<li>
+<p><strong>Data Synchronization Nightmares.</strong> Moving data between OLTP and OLAP systems
+involves complex ETL/ELT pipelines that introduce latency (minutes to hours),
+create consistency gaps, and break silently.</p>
+</li>
+<li>
+<p><strong>The AI/ML Gap.</strong> Vector databases are yet another system to deploy and
+synchronize. Keeping embeddings in sync with source-of-truth data is a
+significant engineering burden.</p>
+</li>
+<li>
+<p><strong>Protocol Lock-In.</strong> Switching from PostgreSQL to a new database means rewriting
+every application, ORM configuration, and database tool integration.</p>
+</li>
+<li>
+<p><strong>Operational Overhead.</strong> Each database system has different scaling mechanisms,
+failure modes, upgrade procedures, and monitoring approaches.</p>
+</li>
+</ol>
+<h3 id="the-solution-one-engine-multiple-protocols-zero-migration">The Solution: One Engine, Multiple Protocols, Zero Migration</h3>
+<p>ThunderDB solves these problems by:</p>
+<ul>
+<li><strong>Unifying OLTP + OLAP + Vector</strong> in a single storage and query engine, eliminating
+ETL pipelines and synchronization complexity.</li>
+<li><strong>Speaking existing protocols</strong> (PostgreSQL, MySQL, Redis) so applications connect
+without code changes.</li>
+<li><strong>Supporting incremental adoption</strong> through CDC and FDW &ndash; start with one workload,
+expand over time.</li>
+<li><strong>Being written in Rust</strong> for memory safety, predictable performance, and
+zero-cost abstractions that deliver C/C++ speed without the footguns.</li>
+</ul>
+<hr>
+<h2 id="key-differentiators">Key Differentiators</h2>
+<h3 id="thunderdb-vs-cockroachdb">ThunderDB vs CockroachDB</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Dimension</th>
+          <th>ThunderDB</th>
+          <th>CockroachDB</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Processing model</strong></td>
+          <td>True HTAP (row + columnar + vector)</td>
+          <td>OLTP-focused with limited analytics</td>
+      </tr>
+      <tr>
+          <td><strong>Wire protocols</strong></td>
+          <td>PostgreSQL, MySQL, Redis</td>
+          <td>PostgreSQL only</td>
+      </tr>
+      <tr>
+          <td><strong>Vector search</strong></td>
+          <td>Native HNSW + IVF indexes</td>
+          <td>Not supported natively</td>
+      </tr>
+      <tr>
+          <td><strong>CDC / FDW</strong></td>
+          <td>Built-in CDC consumer and FDW</td>
+          <td>Limited CDC; no built-in FDW</td>
+      </tr>
+      <tr>
+          <td><strong>Language</strong></td>
+          <td>Rust</td>
+          <td>Go</td>
+      </tr>
+      <tr>
+          <td><strong>API surface</strong></td>
+          <td>SQL + REST + gRPC + GraphQL + WebSocket</td>
+          <td>SQL + REST (limited)</td>
+      </tr>
+      <tr>
+          <td><strong>License</strong></td>
+          <td>Apache 2.0 / BSL 1.1</td>
+          <td>BSL 1.1 (converts to Apache)</td>
+      </tr>
+      <tr>
+          <td><strong>Key-value access</strong></td>
+          <td>Native Redis/RESP protocol</td>
+          <td>Not available</td>
+      </tr>
+  </tbody>
+</table>
+<p>CockroachDB is an excellent distributed SQL database for OLTP workloads. ThunderDB
+differentiates by offering true HTAP processing with columnar storage and vectorized
+execution, native vector search for AI/ML workloads, and multi-protocol support
+that avoids PostgreSQL lock-in.</p>
+<h3 id="thunderdb-vs-tidb">ThunderDB vs TiDB</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Dimension</th>
+          <th>ThunderDB</th>
+          <th>TiDB</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Processing model</strong></td>
+          <td>Unified row + columnar + vector</td>
+          <td>Separate TiKV (row) + TiFlash (columnar)</td>
+      </tr>
+      <tr>
+          <td><strong>Wire protocols</strong></td>
+          <td>PostgreSQL, MySQL, Redis</td>
+          <td>MySQL only</td>
+      </tr>
+      <tr>
+          <td><strong>Vector search</strong></td>
+          <td>Native HNSW + IVF indexes</td>
+          <td>Not supported</td>
+      </tr>
+      <tr>
+          <td><strong>Architecture</strong></td>
+          <td>Single binary, integrated engine</td>
+          <td>Multiple components (TiDB, TiKV, PD, TiFlash)</td>
+      </tr>
+      <tr>
+          <td><strong>Language</strong></td>
+          <td>Rust</td>
+          <td>Go (TiDB) + Rust (TiKV) + C++ (TiFlash)</td>
+      </tr>
+      <tr>
+          <td><strong>Deployment complexity</strong></td>
+          <td>Single binary or simple Docker</td>
+          <td>Requires orchestrating 4+ components</td>
+      </tr>
+      <tr>
+          <td><strong>CDC / FDW</strong></td>
+          <td>Built-in bidirectional</td>
+          <td>TiCDC (outbound only)</td>
+      </tr>
+  </tbody>
+</table>
+<p>TiDB pioneered the HTAP model with its TiKV + TiFlash architecture. ThunderDB builds
+on this concept but simplifies deployment by integrating row storage, columnar storage,
+and vector indexing into a single engine. ThunderDB also supports multiple wire protocols
+and has a significantly simpler operational footprint.</p>
+<h3 id="thunderdb-vs-yugabytedb">ThunderDB vs YugabyteDB</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Dimension</th>
+          <th>ThunderDB</th>
+          <th>YugabyteDB</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Processing model</strong></td>
+          <td>True HTAP (row + columnar + vector)</td>
+          <td>OLTP-focused (row store)</td>
+      </tr>
+      <tr>
+          <td><strong>Wire protocols</strong></td>
+          <td>PostgreSQL, MySQL, Redis</td>
+          <td>PostgreSQL, YCQL (Cassandra-like)</td>
+      </tr>
+      <tr>
+          <td><strong>Vector search</strong></td>
+          <td>Native HNSW + IVF indexes</td>
+          <td>Via pgvector extension</td>
+      </tr>
+      <tr>
+          <td><strong>Analytical queries</strong></td>
+          <td>Native columnar store + vectorized execution</td>
+          <td>Limited; relies on PostgreSQL executor</td>
+      </tr>
+      <tr>
+          <td><strong>Language</strong></td>
+          <td>Rust</td>
+          <td>C / C++</td>
+      </tr>
+      <tr>
+          <td><strong>CDC / FDW</strong></td>
+          <td>Built-in CDC consumer + FDW</td>
+          <td>CDC via Debezium; PostgreSQL FDW</td>
+      </tr>
+      <tr>
+          <td><strong>Memory safety</strong></td>
+          <td>Rust ownership model</td>
+          <td>Manual C/C++ memory management</td>
+      </tr>
+  </tbody>
+</table>
+<p>YugabyteDB provides strong PostgreSQL compatibility and a Cassandra-compatible API.
+ThunderDB differentiates with its integrated HTAP engine (columnar + row + vector),
+native MySQL and Redis protocol support, and the memory safety guarantees that come
+from being written entirely in Rust.</p>
+<hr>
+<h2 id="roadmap">Roadmap</h2>
+<p>ThunderDB follows a 42-month development roadmap divided into seven phases. Each
+phase builds upon the previous one, progressively expanding capabilities while
+maintaining production stability.</p>
+<h3 id="phase-1-foundation-months-1-6">Phase 1: Foundation (Months 1-6)</h3>
+<p><strong>Goal:</strong> Core single-node database engine with basic SQL support.</p>
+<ul>
+<li>Rust-based storage engine with B-tree and LSM-tree hybrid</li>
+<li>SQL parser and query planner (PostgreSQL-compatible subset)</li>
+<li>PostgreSQL wire protocol implementation</li>
+<li>Basic data types: integers, floats, strings, booleans, timestamps</li>
+<li>ACID transactions with MVCC (Multi-Version Concurrency Control)</li>
+<li>Write-ahead log (WAL) for crash recovery</li>
+<li>Basic configuration system (TOML-based)</li>
+<li>Unit and integration test framework</li>
+<li>CI/CD pipeline and release automation</li>
+</ul>
+<h3 id="phase-2-multi-protocol-and-api-layer-months-7-12">Phase 2: Multi-Protocol and API Layer (Months 7-12)</h3>
+<p><strong>Goal:</strong> Expand protocol support and build the API surface.</p>
+<ul>
+<li>MySQL wire protocol implementation</li>
+<li>Redis/RESP protocol for key-value operations</li>
+<li>REST API with OpenAPI specification</li>
+<li>gRPC API with Protocol Buffers definitions</li>
+<li>Connection pooling and session management</li>
+<li>Authentication (password, SCRAM-SHA-256)</li>
+<li>TLS/SSL for all protocols</li>
+<li>Basic role-based access control (RBAC)</li>
+<li>Query result caching layer</li>
+<li>Prepared statements and parameterized queries</li>
+</ul>
+<h3 id="phase-3-distributed-engine-months-13-18">Phase 3: Distributed Engine (Months 13-18)</h3>
+<p><strong>Goal:</strong> Scale beyond a single node with distributed consensus.</p>
+<ul>
+<li>Raft consensus protocol implementation</li>
+<li>Automatic sharding with consistent hashing</li>
+<li>Distributed transactions with two-phase commit (2PC)</li>
+<li>Multi-node cluster formation and discovery</li>
+<li>Leader election and failover</li>
+<li>Distributed query routing and execution</li>
+<li>Cross-shard query coordination</li>
+<li>Node membership management (add/remove nodes)</li>
+<li>Rebalancing and data migration</li>
+<li>Cluster-aware connection routing</li>
+</ul>
+<h3 id="phase-4-htap-engine-months-19-24">Phase 4: HTAP Engine (Months 19-24)</h3>
+<p><strong>Goal:</strong> True HTAP with columnar storage and vectorized execution.</p>
+<ul>
+<li>Columnar storage engine (Apache Arrow-based)</li>
+<li>Vectorized query execution engine</li>
+<li>Automatic workload classification (OLTP vs OLAP)</li>
+<li>Row-to-columnar data transformation pipeline</li>
+<li>Hybrid query optimizer (cost-based)</li>
+<li>Parallel query execution</li>
+<li>Window functions and advanced aggregations</li>
+<li>Materialized views with incremental refresh</li>
+<li>Query result streaming</li>
+<li>Resource isolation between OLTP and OLAP workloads</li>
+</ul>
+<h3 id="phase-5-ai-native-features-months-25-30">Phase 5: AI-Native Features (Months 25-30)</h3>
+<p><strong>Goal:</strong> Native vector search and AI/ML integration.</p>
+<ul>
+<li>VECTOR data type with configurable dimensions</li>
+<li>HNSW (Hierarchical Navigable Small World) index</li>
+<li>IVF (Inverted File) index for billion-scale datasets</li>
+<li>Cosine, Euclidean, and inner-product distance functions</li>
+<li>Hybrid search (vector + metadata filtering)</li>
+<li>Built-in embedding generation via ONNX Runtime</li>
+<li>RAG (Retrieval-Augmented Generation) pipeline helpers</li>
+<li>Full-text search with BM25 scoring</li>
+<li>GraphQL API with subscription support</li>
+<li>WebSocket API for real-time streaming</li>
+</ul>
+<h3 id="phase-6-data-integration-months-31-36">Phase 6: Data Integration (Months 31-36)</h3>
+<p><strong>Goal:</strong> Seamless integration with the broader data ecosystem.</p>
+<ul>
+<li>Change Data Capture (CDC) consumer for PostgreSQL</li>
+<li>CDC consumer for MySQL (binlog)</li>
+<li>CDC consumer for MongoDB (change streams)</li>
+<li>Foreign Data Wrappers (FDW) for PostgreSQL, MySQL, SQLite</li>
+<li>FDW for S3 / Parquet / CSV / JSON files</li>
+<li>FDW for REST APIs (generic HTTP wrapper)</li>
+<li>Outbound CDC (ThunderDB as source)</li>
+<li>Kafka Connect integration</li>
+<li>Apache Spark connector</li>
+<li>dbt adapter</li>
+</ul>
+<h3 id="phase-7-enterprise-and-ecosystem-months-37-42">Phase 7: Enterprise and Ecosystem (Months 37-42)</h3>
+<p><strong>Goal:</strong> Enterprise-grade features and ecosystem maturity.</p>
+<ul>
+<li>Multi-region replication with conflict resolution</li>
+<li>Encryption at rest (AES-256)</li>
+<li>Comprehensive audit logging</li>
+<li>Fine-grained access control (column-level, row-level)</li>
+<li>Online schema changes (non-blocking DDL)</li>
+<li>Point-in-time recovery (PITR)</li>
+<li>Automated backup to S3 / GCS / Azure Blob</li>
+<li>Web-based management console (ThunderDB Studio)</li>
+<li>Kubernetes Operator for declarative cluster management</li>
+<li>Terraform and Pulumi providers</li>
+<li>Grafana and Datadog integration packages</li>
+<li>Comprehensive benchmarking suite (TPC-C, TPC-H, ANN-Benchmarks)</li>
+</ul>
+<hr>
+<h2 id="team-and-community">Team and Community</h2>
+<p>ThunderDB is built by a team of database engineers, systems programmers, and
+distributed systems researchers passionate about solving the data fragmentation
+problem.</p>
+<h3 id="contributing">Contributing</h3>
+<p>ThunderDB is an open-source project and welcomes contributions of all kinds:</p>
+<ul>
+<li><strong>Code contributions</strong> &ndash; Bug fixes, features, performance improvements</li>
+<li><strong>Documentation</strong> &ndash; Guides, tutorials, API docs, translations</li>
+<li><strong>Testing</strong> &ndash; Bug reports, test cases, benchmarks</li>
+<li><strong>Community</strong> &ndash; Answering questions, writing blog posts, giving talks</li>
+</ul>
+<p>See the <a href="/docs/contributor/">Contributor Guide</a> for instructions on setting up
+your development environment, understanding the codebase, and submitting pull
+requests.</p>
+<h3 id="community-channels">Community Channels</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Channel</th>
+          <th>Link</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>GitHub Discussions</td>
+          <td><a href="https://github.com/thunderdb/thunderdb/discussions">github.com/thunderdb/thunderdb/discussions</a></td>
+      </tr>
+      <tr>
+          <td>Discord</td>
+          <td><a href="https://discord.gg/thunderdb">discord.gg/thunderdb</a></td>
+      </tr>
+      <tr>
+          <td>Twitter / X</td>
+          <td><a href="https://twitter.com/thunderdb">@thunderabordb</a></td>
+      </tr>
+      <tr>
+          <td>Monthly Community Call</td>
+          <td>Second Thursday of each month, 10:00 AM PT</td>
+      </tr>
+      <tr>
+          <td>Blog</td>
+          <td><a href="https://thunderdb.io/blog">thunderdb.io/blog</a></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="code-of-conduct">Code of Conduct</h3>
+<p>ThunderDB follows the <a href="https://www.contributor-covenant.org/">Contributor Covenant Code of Conduct</a>.
+We are committed to providing a welcoming, inclusive, and harassment-free
+environment for everyone.</p>
+<hr>
+<h2 id="license">License</h2>
+<p>ThunderDB is dual-licensed:</p>
+<ul>
+<li>
+<p><strong>Apache License 2.0</strong> &ndash; For the core database engine, client libraries, and
+developer tools. This allows unrestricted use, modification, and distribution
+in both open-source and commercial projects.</p>
+</li>
+<li>
+<p><strong>Business Source License 1.1 (BSL 1.1)</strong> &ndash; For certain enterprise features
+(multi-region replication, advanced audit logging, management console). The BSL
+automatically converts to Apache 2.0 after 36 months, ensuring all code
+eventually becomes fully open source.</p>
+</li>
+</ul>
+<p>The client libraries (SDKs for Python, Go, Java, Node.js, Rust) and the CLI tools
+are always Apache 2.0 licensed.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Copyright 2024-2026 ThunderDB Contributors
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+</span></span><span style="display:flex;"><span>you may not use this file except in compliance with the License.
+</span></span><span style="display:flex;"><span>You may obtain a copy of the License at
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    http://www.apache.org/licenses/LICENSE-2.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Unless required by applicable law or agreed to in writing, software
+</span></span><span style="display:flex;"><span>distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+</span></span><span style="display:flex;"><span>WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+</span></span><span style="display:flex;"><span>See the License for the specific language governing permissions and
+</span></span><span style="display:flex;"><span>limitations under the License.
+</span></span></code></pre></div>
+      </main>
+      <footer class="td-footer row d-print-none">
+  <div class="container-fluid">
+    <div class="row mx-md-2">
+      <div class="td-footer__left col-6 col-sm-4 order-sm-1">
+        
+      </div><div class="td-footer__right col-6 col-sm-4 order-sm-3">
+        <ul class="td-footer__links-list">
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="GitHub" aria-label="GitHub">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="Discussions" aria-label="Discussions">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb/discussions" aria-label="Discussions">
+      <i class="fas fa-comments"></i>
+    </a>
+  </li>
+  
+</ul>
+
+      </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
+        <span class="td-footer__copyright">&copy;
+    2026
+    <span class="td-footer__authors">ThunderDB Contributors</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><p class="td-footer__about mt-2"><a href="/docs/about/">About ThunderDB</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script src="/docs/js/main.js"></script>
+<script defer src="/docs/js/click-to-copy.js" crossorigin="anonymous"></script>
+<script src='/docs/js/tabpane-persist.js'></script>
+
+  </body>
+</html>

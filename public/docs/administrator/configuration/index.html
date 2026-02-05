@@ -1,0 +1,1198 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
+  <head><script src="/docs/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=docs/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/docs/favicons/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/docs/favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/docs/favicons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/docs/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="/docs/favicons/favicon-256.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/docs/favicons/apple-touch-icon.png">
+<link rel="manifest" href="/docs/favicons/site.webmanifest">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="msapplication-TileColor" content="#0D0D0D">
+
+<title>Configuration | ThunderDB Documentation</title>
+<meta name="description" content="Complete configuration reference for ThunderDB including TOML settings, environment variable overrides, and performance tuning guides.">
+<meta property="og:url" content="http://localhost:1313/docs/docs/administrator/configuration/">
+  <meta property="og:site_name" content="ThunderDB Documentation">
+  <meta property="og:title" content="Configuration">
+  <meta property="og:description" content="Complete configuration reference for ThunderDB including TOML settings, environment variable overrides, and performance tuning guides.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+
+  <meta itemprop="name" content="Configuration">
+  <meta itemprop="description" content="Complete configuration reference for ThunderDB including TOML settings, environment variable overrides, and performance tuning guides.">
+  <meta itemprop="wordCount" content="2122">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Configuration">
+  <meta name="twitter:description" content="Complete configuration reference for ThunderDB including TOML settings, environment variable overrides, and performance tuning guides.">
+<link href="/docs/scss/main.css" rel="stylesheet">
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+  crossorigin="anonymous"></script>
+<script defer
+  src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
+  integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
+  crossorigin="anonymous"></script>
+
+  </head>
+  <body class="td-section">
+    <header>
+      <nav class="td-navbar js-navbar-scroll" data-bs-theme="dark">
+<div class="td-navbar-container container-fluid flex-column flex-md-row">
+  <a class="navbar-brand" href="/docs/"><span class="navbar-brand__logo navbar-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="300" height="64"><defs><symbol id="b" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#331500" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FF6B00"/><rect width="4.8" height=".6" rx=".55" fill="#FA4" opacity=".5"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#F83" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#930" opacity=".35"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D50"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,200,100,0.3)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FC8" opacity=".55"/></symbol><symbol id="c" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#4D3000" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FA0"/><rect width="4.8" height=".6" rx=".55" fill="#FD6" opacity=".55"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#FB3" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#960" opacity=".3"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D80"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,230,150,0.35)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FE9" opacity=".6"/></symbol></defs><use href="#b" x="35" y="2" width="5" height="5"/><use href="#b" x="41" y="2" width="5" height="5"/><use href="#b" x="29" y="8" width="5" height="5"/><use href="#b" x="35" y="8" width="5" height="5"/><use href="#b" x="23" y="14" width="5" height="5"/><use href="#b" x="29" y="14" width="5" height="5"/><use href="#b" x="17" y="20" width="5" height="5"/><use href="#b" x="23" y="20" width="5" height="5"/><use href="#c" x="5" y="26" width="5" height="5"/><use href="#c" x="11" y="26" width="5" height="5"/><use href="#c" x="17" y="26" width="5" height="5"/><use href="#c" x="23" y="26" width="5" height="5"/><use href="#c" x="29" y="26" width="5" height="5"/><use href="#c" x="35" y="26" width="5" height="5"/><use href="#c" x="41" y="26" width="5" height="5"/><use href="#c" x="47" y="26" width="5" height="5"/><use href="#b" x="35" y="32" width="5" height="5"/><use href="#b" x="41" y="32" width="5" height="5"/><use href="#b" x="29" y="38" width="5" height="5"/><use href="#b" x="35" y="38" width="5" height="5"/><use href="#b" x="23" y="44" width="5" height="5"/><use href="#b" x="29" y="44" width="5" height="5"/><use href="#b" x="17" y="50" width="5" height="5"/><use href="#b" x="23" y="50" width="5" height="5"/><use href="#b" x="11" y="56" width="5" height="5"/><use href="#b" x="17" y="56" width="5" height="5"/><text x="66" y="43" font-family="'SF Mono','Fira Code','Consolas','Courier New',monospace" font-size="27" font-weight="900" letter-spacing=".5"><tspan fill="#FFF">Thunder</tspan><tspan fill="#FF6B00">DB</tspan></text></svg></span><span class="navbar-brand__name">ThunderDB Documentation</span></a>
+  <div class="td-navbar-nav-scroll td-navbar-nav-scroll--indicator" id="main_navbar">
+    <div class="scroll-indicator scroll-left"></div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/"><span>Documentation</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/architecture/"><span>Architecture</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/developer/api-reference/"><span>API Reference</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/about/"><span>About</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/thunderdb/thunderdb" target="_blank" rel="noopener"><i class='fab fa-github'></i><span>GitHub</span></a>
+      </li>
+      </ul>
+    <div class="scroll-indicator scroll-right"></div>
+  </div>
+  <div class="d-none d-lg-block td-navbar__search">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+  </div>
+</div>
+</nav>
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main" data-bs-spy="scroll" data-bs-target=".td-toc" data-bs-root-margin="0px 0px -10%">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+  <script>
+    $(function() {
+    $("#td-section-nav a").removeClass("active");
+    $("#td-section-nav #m-docsdocsadministratorconfiguration").addClass("active");
+    $("#td-section-nav #m-docsdocsadministratorconfiguration-li span").addClass("td-sidebar-nav-active-item");
+    $("#td-section-nav #m-docsdocsadministratorconfiguration").parents("li").addClass("active-path");
+    $("#td-section-nav li.active-path").addClass("show");
+    $("#td-section-nav li.active-path").children("input").prop('checked', true);
+    $("#td-section-nav #m-docsdocsadministratorconfiguration-li").siblings("li").addClass("show");
+    $("#td-section-nav #m-docsdocsadministratorconfiguration-li").children("ul").children("li").addClass("show");
+    $("#td-sidebar-menu").toggleClass("d-none");
+    });
+  </script>
+  <div id="td-sidebar-menu" class="td-sidebar__inner d-none">
+  <form class="td-sidebar__search d-flex align-items-center">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+    <button class="btn btn-link td-sidebar__toggle" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  <nav class="td-sidebar-nav collapse foldable-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocs-li">
+    <a href="/docs/docs/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docsdocs"><span class="">Documentation</span></a>
+    <ul class="ul-1">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsgetting-started-li">
+    <input type="checkbox" id="m-docsdocsgetting-started-check"/>
+    <label for="m-docsdocsgetting-started-check"><a href="/docs/docs/getting-started/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsgetting-started"><span class="">Getting Started</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsarchitecture-li">
+    <input type="checkbox" id="m-docsdocsarchitecture-check"/>
+    <label for="m-docsdocsarchitecture-check"><a href="/docs/docs/architecture/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsarchitecture"><span class="">Architecture</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsdeveloper-li">
+    <input type="checkbox" id="m-docsdocsdeveloper-check"/>
+    <label for="m-docsdocsdeveloper-check"><a href="/docs/docs/developer/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloper"><span class="">Developer Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperapi-reference-li">
+    <input type="checkbox" id="m-docsdocsdeveloperapi-reference-check"/>
+    <label for="m-docsdocsdeveloperapi-reference-check"><a href="/docs/docs/developer/api-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperapi-reference"><span class="">API Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersql-reference-li">
+    <input type="checkbox" id="m-docsdocsdevelopersql-reference-check"/>
+    <label for="m-docsdocsdevelopersql-reference-check"><a href="/docs/docs/developer/sql-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersql-reference"><span class="">SQL Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersdk-li">
+    <input type="checkbox" id="m-docsdocsdevelopersdk-check"/>
+    <label for="m-docsdocsdevelopersdk-check"><a href="/docs/docs/developer/sdk/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersdk"><span class="">SDKs &amp; Drivers</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperexamples-li">
+    <input type="checkbox" id="m-docsdocsdeveloperexamples-check"/>
+    <label for="m-docsdocsdeveloperexamples-check"><a href="/docs/docs/developer/examples/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperexamples"><span class="">Examples &amp; Use Cases</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsadministrator-li">
+    <input type="checkbox" id="m-docsdocsadministrator-check"/>
+    <label for="m-docsdocsadministrator-check"><a href="/docs/docs/administrator/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministrator"><span class="">Administrator Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratordeployment-li">
+    <input type="checkbox" id="m-docsdocsadministratordeployment-check"/>
+    <label for="m-docsdocsadministratordeployment-check"><a href="/docs/docs/administrator/deployment/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratordeployment"><span class="">Deployment</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorconfiguration-li">
+    <input type="checkbox" id="m-docsdocsadministratorconfiguration-check"/>
+    <label for="m-docsdocsadministratorconfiguration-check"><a href="/docs/docs/administrator/configuration/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorconfiguration"><span class="">Configuration</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratormonitoring-li">
+    <input type="checkbox" id="m-docsdocsadministratormonitoring-check"/>
+    <label for="m-docsdocsadministratormonitoring-check"><a href="/docs/docs/administrator/monitoring/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratormonitoring"><span class="">Monitoring</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorbackup-recovery-li">
+    <input type="checkbox" id="m-docsdocsadministratorbackup-recovery-check"/>
+    <label for="m-docsdocsadministratorbackup-recovery-check"><a href="/docs/docs/administrator/backup-recovery/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorbackup-recovery"><span class="">Backup &amp; Recovery</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorsecurity-li">
+    <input type="checkbox" id="m-docsdocsadministratorsecurity-check"/>
+    <label for="m-docsdocsadministratorsecurity-check"><a href="/docs/docs/administrator/security/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorsecurity"><span class="">Security</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratortroubleshooting-li">
+    <input type="checkbox" id="m-docsdocsadministratortroubleshooting-check"/>
+    <label for="m-docsdocsadministratortroubleshooting-check"><a href="/docs/docs/administrator/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratortroubleshooting"><span class="">Troubleshooting</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocscontributor-li">
+    <input type="checkbox" id="m-docsdocscontributor-check"/>
+    <label for="m-docsdocscontributor-check"><a href="/docs/docs/contributor/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributor"><span class="">Contributor Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributordevelopment-setup-li">
+    <input type="checkbox" id="m-docsdocscontributordevelopment-setup-check"/>
+    <label for="m-docsdocscontributordevelopment-setup-check"><a href="/docs/docs/contributor/development-setup/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributordevelopment-setup"><span class="">Development Setup</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorcodebase-guide-li">
+    <input type="checkbox" id="m-docsdocscontributorcodebase-guide-check"/>
+    <label for="m-docsdocscontributorcodebase-guide-check"><a href="/docs/docs/contributor/codebase-guide/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorcodebase-guide"><span class="">Codebase Guide</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributortesting-li">
+    <input type="checkbox" id="m-docsdocscontributortesting-check"/>
+    <label for="m-docsdocscontributortesting-check"><a href="/docs/docs/contributor/testing/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributortesting"><span class="">Testing</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorrelease-process-li">
+    <input type="checkbox" id="m-docsdocscontributorrelease-process-check"/>
+    <label for="m-docsdocscontributorrelease-process-check"><a href="/docs/docs/contributor/release-process/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorrelease-process"><span class="">Release Process</span></a></label>
+    
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
+<a href="https://github.com/thunderdb/thunderdb/tree/main/content/docs/administrator/configuration/_index.md" class="td-page-meta--view td-page-meta__view" target="_blank" rel="noopener"><i class="fa-solid fa-file-lines fa-fw"></i> View page source</a>
+  <a href="https://github.com/thunderdb/thunderdb/edit/main/content/docs/administrator/configuration/_index.md" class="td-page-meta--edit td-page-meta__edit" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Edit this page</a>
+  <a href="https://github.com/thunderdb/thunderdb/new/main/content/docs/administrator/configuration?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child td-page-meta__child" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Create child page</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new?title=Configuration" class="td-page-meta--issue td-page-meta__issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create documentation issue</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new" class="td-page-meta--project td-page-meta__project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create project issue</a>
+  
+</div>
+
+            <div class="td-toc" data-proofer-ignore>
+<div class="td-toc-title">
+      <span class="td-toc-title__text">On this page</span>
+      <a class="td-toc-title__link" title="Top of page" href="#"></a>
+    </div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#configuration-file-format">Configuration File Format</a>
+      <ul>
+        <li><a href="#complete-reference-configuration">Complete Reference Configuration</a></li>
+      </ul>
+    </li>
+    <li><a href="#section-reference">Section Reference</a>
+      <ul>
+        <li><a href="#node">[node]</a></li>
+        <li><a href="#network">[network]</a></li>
+        <li><a href="#storage">[storage]</a></li>
+        <li><a href="#cluster">[cluster]</a></li>
+        <li><a href="#security">[security]</a></li>
+        <li><a href="#logging">[logging]</a></li>
+      </ul>
+    </li>
+    <li><a href="#environment-variable-overrides">Environment Variable Overrides</a>
+      <ul>
+        <li><a href="#using-environment-variables-with-docker">Using Environment Variables with Docker</a></li>
+        <li><a href="#using-environment-variables-with-systemd">Using Environment Variables with systemd</a></li>
+      </ul>
+    </li>
+    <li><a href="#performance-tuning-guide">Performance Tuning Guide</a>
+      <ul>
+        <li><a href="#oltp-optimized-configuration">OLTP-Optimized Configuration</a></li>
+        <li><a href="#olap-optimized-configuration">OLAP-Optimized Configuration</a></li>
+        <li><a href="#mixed-htap-configuration">Mixed HTAP Configuration</a></li>
+        <li><a href="#memory-sizing-guide">Memory Sizing Guide</a></li>
+        <li><a href="#compression-algorithm-comparison">Compression Algorithm Comparison</a></li>
+        <li><a href="#os-level-tuning">OS-Level Tuning</a></li>
+        <li><a href="#disk-io-tuning">Disk I/O Tuning</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+
+            
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/">Documentation</a></li>
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/administrator/">Administrator Guide</a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    Configuration</li>
+  </ol>
+</nav>
+<div class="td-content">
+	<h1>Configuration</h1>
+  <div class="lead">Complete configuration reference for ThunderDB including TOML settings, environment variable overrides, and performance tuning guides.</div>
+	<header class="article-meta">
+		
+</header>
+	<h1 id="configuration">Configuration</h1>
+<p>ThunderDB is configured through a TOML configuration file, typically located at <code>/etc/thunderdb/thunderdb.toml</code>. Every setting can also be overridden via environment variables, making it easy to customize behavior in containerized deployments.</p>
+<hr>
+<h2 id="configuration-file-format">Configuration File Format</h2>
+<p>The configuration file is organized into the following sections:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[node]
+</span></span><span style="display:flex;"><span>[network]
+</span></span><span style="display:flex;"><span>[storage]
+</span></span><span style="display:flex;"><span>[cluster]
+</span></span><span style="display:flex;"><span>[security]
+</span></span><span style="display:flex;"><span>[logging]
+</span></span></code></pre></div><h3 id="complete-reference-configuration">Complete Reference Configuration</h3>
+<p>Below is a fully annotated configuration file with all available settings and their defaults:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#6272a4"># =============================================================================</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># ThunderDB Configuration File</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># =============================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># -----------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Node Settings</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># -----------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span>[node]
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Unique identifier for this node in the cluster.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Must be unique across all nodes. In Kubernetes, this is typically derived</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># from the pod ordinal index.</span>
+</span></span><span style="display:flex;"><span>node_id = <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># -----------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Network Settings</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># -----------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span>[network]
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Address to bind all listeners to.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Use &#34;0.0.0.0&#34; to listen on all interfaces, or a specific IP to restrict.</span>
+</span></span><span style="display:flex;"><span>listen_addr = <span style="color:#f1fa8c">&#34;0.0.0.0&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># PostgreSQL wire protocol port.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Compatible with psql, pgcli, and all PostgreSQL client libraries.</span>
+</span></span><span style="display:flex;"><span>pg_port = <span style="color:#bd93f9">5432</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># MySQL wire protocol port.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Compatible with mysql CLI and all MySQL client libraries.</span>
+</span></span><span style="display:flex;"><span>mysql_port = <span style="color:#bd93f9">3306</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># RESP (Redis Serialization Protocol) port.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Compatible with redis-cli and all Redis client libraries.</span>
+</span></span><span style="display:flex;"><span>resp_port = <span style="color:#bd93f9">6379</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># HTTP API port.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Used for REST API, admin endpoints, metrics, and health checks.</span>
+</span></span><span style="display:flex;"><span>http_port = <span style="color:#bd93f9">8088</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># gRPC port.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Used for inter-node communication and the native gRPC client API.</span>
+</span></span><span style="display:flex;"><span>grpc_port = <span style="color:#bd93f9">9090</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># -----------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Storage Settings</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># -----------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span>[storage]
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Directory for storing data files (pages, indexes, metadata).</span>
+</span></span><span style="display:flex;"><span>data_dir = <span style="color:#f1fa8c">&#34;/var/lib/thunderdb/data&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Directory for write-ahead log (WAL) files.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># For best performance, place on a separate disk from data_dir.</span>
+</span></span><span style="display:flex;"><span>wal_dir = <span style="color:#f1fa8c">&#34;/var/lib/thunderdb/wal&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Size of the buffer pool (in-memory page cache).</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># This is the single most important tuning parameter. Larger values improve</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># read performance by keeping more pages in memory.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Supports suffixes: KB, MB, GB.</span>
+</span></span><span style="display:flex;"><span>buffer_pool_size = <span style="color:#f1fa8c">&#34;128MB&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Size of the WAL write buffer.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Larger values improve write throughput by batching WAL writes.</span>
+</span></span><span style="display:flex;"><span>wal_buffer_size = <span style="color:#f1fa8c">&#34;16MB&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Size of each data page.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Changing this after initialization requires a full data migration.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Valid values: 4KB, 8KB, 16KB, 32KB.</span>
+</span></span><span style="display:flex;"><span>page_size = <span style="color:#f1fa8c">&#34;16KB&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Interval between automatic checkpoints.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Checkpoints flush dirty pages to disk, reducing recovery time.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Lower values reduce recovery time but increase I/O.</span>
+</span></span><span style="display:flex;"><span>checkpoint_interval = <span style="color:#f1fa8c">&#34;60s&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Number of threads dedicated to background compaction.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># More threads speed up compaction but consume CPU.</span>
+</span></span><span style="display:flex;"><span>compaction_threads = <span style="color:#bd93f9">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Enable direct I/O to bypass the OS page cache.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Recommended for production to avoid double-caching.</span>
+</span></span><span style="display:flex;"><span>direct_io = <span style="color:#ff79c6">false</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Enable compression for data pages on disk.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Reduces storage requirements at a small CPU cost.</span>
+</span></span><span style="display:flex;"><span>compression = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Compression algorithm to use when compression is enabled.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Options: &#34;Lz4&#34; (fast), &#34;Snappy&#34; (balanced), &#34;Zstd&#34; (high ratio).</span>
+</span></span><span style="display:flex;"><span>compression_algorithm = <span style="color:#f1fa8c">&#34;Lz4&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Maximum WAL size before forcing a checkpoint.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># When the WAL reaches this size, a checkpoint is triggered regardless</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># of the checkpoint_interval.</span>
+</span></span><span style="display:flex;"><span>max_wal_size = <span style="color:#f1fa8c">&#34;1GB&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Whether to flush WAL to disk on every commit.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># true:  Guarantees durability (no data loss on crash). Recommended for production.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># false: Better write performance but risks losing the last few transactions on crash.</span>
+</span></span><span style="display:flex;"><span>sync_commit = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># -----------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Cluster Settings</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># -----------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span>[cluster]
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Cluster name. All nodes in the same cluster must use the same name.</span>
+</span></span><span style="display:flex;"><span>cluster_name = <span style="color:#f1fa8c">&#34;default&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># List of peer node addresses (host:grpc_port).</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Exclude the current node&#39;s address.</span>
+</span></span><span style="display:flex;"><span>peers = []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Raft election timeout.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># If a follower doesn&#39;t hear from the leader within this duration,</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># it starts a new election. Must be greater than raft_heartbeat_interval.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># For WAN deployments, increase to 3-5s.</span>
+</span></span><span style="display:flex;"><span>raft_election_timeout = <span style="color:#f1fa8c">&#34;1s&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Raft heartbeat interval.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># The leader sends heartbeats at this interval.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Must be significantly less than raft_election_timeout (typically 1/10th).</span>
+</span></span><span style="display:flex;"><span>raft_heartbeat_interval = <span style="color:#f1fa8c">&#34;100ms&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Number of copies of each data region.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3 is recommended for production (tolerates 1 node failure).</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Cannot exceed the number of nodes in the cluster.</span>
+</span></span><span style="display:flex;"><span>replication_factor = <span style="color:#bd93f9">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Maximum size of a single data region before it is split.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Smaller regions enable finer-grained load balancing.</span>
+</span></span><span style="display:flex;"><span>max_region_size = <span style="color:#f1fa8c">&#34;256MB&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Minimum size of a single data region before it is merged.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Prevents excessive fragmentation from many small regions.</span>
+</span></span><span style="display:flex;"><span>min_region_size = <span style="color:#f1fa8c">&#34;64MB&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Enable automatic region balancing across nodes.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># When enabled, the leader periodically rebalances regions</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># to maintain even distribution.</span>
+</span></span><span style="display:flex;"><span>auto_balance = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># -----------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Security Settings</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># -----------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span>[security]
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Enable client authentication.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># When false, all connections are accepted without credentials.</span>
+</span></span><span style="display:flex;"><span>authentication_enabled = <span style="color:#ff79c6">false</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Enable TLS for all client-facing protocols.</span>
+</span></span><span style="display:flex;"><span>tls_enabled = <span style="color:#ff79c6">false</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Path to the TLS certificate file (PEM format).</span>
+</span></span><span style="display:flex;"><span>tls_cert_path = <span style="color:#f1fa8c">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Path to the TLS private key file (PEM format).</span>
+</span></span><span style="display:flex;"><span>tls_key_path = <span style="color:#f1fa8c">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Superuser account name.</span>
+</span></span><span style="display:flex;"><span>superuser = <span style="color:#f1fa8c">&#34;admin&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Superuser password (plaintext, for initial setup only).</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># In production, use THUNDERDB_SUPERUSER_PASSWORD_HASH environment variable</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># with an Argon2 hash instead.</span>
+</span></span><span style="display:flex;"><span>superuser_password = <span style="color:#f1fa8c">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># -----------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Logging Settings</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># -----------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span>[logging]
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Log level. Options: &#34;trace&#34;, &#34;debug&#34;, &#34;info&#34;, &#34;warn&#34;, &#34;error&#34;.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Use &#34;info&#34; for production, &#34;debug&#34; for development, &#34;trace&#34; for deep debugging.</span>
+</span></span><span style="display:flex;"><span>level = <span style="color:#f1fa8c">&#34;info&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Log output format. Options: &#34;text&#34; (human-readable), &#34;json&#34; (structured).</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Use &#34;json&#34; for production environments with log aggregation.</span>
+</span></span><span style="display:flex;"><span>format = <span style="color:#f1fa8c">&#34;text&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Enable slow query logging.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Queries exceeding the threshold are logged at WARN level.</span>
+</span></span><span style="display:flex;"><span>slow_query_enabled = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Threshold for slow query logging.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Queries taking longer than this are logged.</span>
+</span></span><span style="display:flex;"><span>slow_query_threshold = <span style="color:#f1fa8c">&#34;1s&#34;</span>
+</span></span></code></pre></div><hr>
+<h2 id="section-reference">Section Reference</h2>
+<h3 id="node">[node]</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Parameter</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>node_id</code></td>
+          <td>integer</td>
+          <td><code>1</code></td>
+          <td>Unique node identifier within the cluster.</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="network">[network]</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Parameter</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>listen_addr</code></td>
+          <td>string</td>
+          <td><code>&quot;0.0.0.0&quot;</code></td>
+          <td>Bind address for all listeners.</td>
+      </tr>
+      <tr>
+          <td><code>pg_port</code></td>
+          <td>integer</td>
+          <td><code>5432</code></td>
+          <td>PostgreSQL wire protocol port.</td>
+      </tr>
+      <tr>
+          <td><code>mysql_port</code></td>
+          <td>integer</td>
+          <td><code>3306</code></td>
+          <td>MySQL wire protocol port.</td>
+      </tr>
+      <tr>
+          <td><code>resp_port</code></td>
+          <td>integer</td>
+          <td><code>6379</code></td>
+          <td>RESP (Redis) wire protocol port.</td>
+      </tr>
+      <tr>
+          <td><code>http_port</code></td>
+          <td>integer</td>
+          <td><code>8088</code></td>
+          <td>HTTP API and admin endpoint port.</td>
+      </tr>
+      <tr>
+          <td><code>grpc_port</code></td>
+          <td>integer</td>
+          <td><code>9090</code></td>
+          <td>gRPC port for inter-node and client communication.</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="storage">[storage]</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Parameter</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>data_dir</code></td>
+          <td>string</td>
+          <td><code>&quot;/var/lib/thunderdb/data&quot;</code></td>
+          <td>Data file storage directory.</td>
+      </tr>
+      <tr>
+          <td><code>wal_dir</code></td>
+          <td>string</td>
+          <td><code>&quot;/var/lib/thunderdb/wal&quot;</code></td>
+          <td>WAL file storage directory.</td>
+      </tr>
+      <tr>
+          <td><code>buffer_pool_size</code></td>
+          <td>size</td>
+          <td><code>&quot;128MB&quot;</code></td>
+          <td>In-memory page cache size.</td>
+      </tr>
+      <tr>
+          <td><code>wal_buffer_size</code></td>
+          <td>size</td>
+          <td><code>&quot;16MB&quot;</code></td>
+          <td>WAL write buffer size.</td>
+      </tr>
+      <tr>
+          <td><code>page_size</code></td>
+          <td>size</td>
+          <td><code>&quot;16KB&quot;</code></td>
+          <td>Data page size. Immutable after initialization.</td>
+      </tr>
+      <tr>
+          <td><code>checkpoint_interval</code></td>
+          <td>duration</td>
+          <td><code>&quot;60s&quot;</code></td>
+          <td>Automatic checkpoint interval.</td>
+      </tr>
+      <tr>
+          <td><code>compaction_threads</code></td>
+          <td>integer</td>
+          <td><code>2</code></td>
+          <td>Background compaction thread count.</td>
+      </tr>
+      <tr>
+          <td><code>direct_io</code></td>
+          <td>boolean</td>
+          <td><code>false</code></td>
+          <td>Bypass OS page cache with direct I/O.</td>
+      </tr>
+      <tr>
+          <td><code>compression</code></td>
+          <td>boolean</td>
+          <td><code>true</code></td>
+          <td>Enable on-disk page compression.</td>
+      </tr>
+      <tr>
+          <td><code>compression_algorithm</code></td>
+          <td>string</td>
+          <td><code>&quot;Lz4&quot;</code></td>
+          <td>Compression algorithm: <code>Lz4</code>, <code>Snappy</code>, or <code>Zstd</code>.</td>
+      </tr>
+      <tr>
+          <td><code>max_wal_size</code></td>
+          <td>size</td>
+          <td><code>&quot;1GB&quot;</code></td>
+          <td>Maximum WAL size before forced checkpoint.</td>
+      </tr>
+      <tr>
+          <td><code>sync_commit</code></td>
+          <td>boolean</td>
+          <td><code>true</code></td>
+          <td>Flush WAL to disk on every commit.</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="cluster">[cluster]</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Parameter</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>cluster_name</code></td>
+          <td>string</td>
+          <td><code>&quot;default&quot;</code></td>
+          <td>Cluster name shared by all nodes.</td>
+      </tr>
+      <tr>
+          <td><code>peers</code></td>
+          <td>array</td>
+          <td><code>[]</code></td>
+          <td>Peer node addresses in <code>&quot;host:port&quot;</code> format.</td>
+      </tr>
+      <tr>
+          <td><code>raft_election_timeout</code></td>
+          <td>duration</td>
+          <td><code>&quot;1s&quot;</code></td>
+          <td>Raft follower election timeout.</td>
+      </tr>
+      <tr>
+          <td><code>raft_heartbeat_interval</code></td>
+          <td>duration</td>
+          <td><code>&quot;100ms&quot;</code></td>
+          <td>Raft leader heartbeat interval.</td>
+      </tr>
+      <tr>
+          <td><code>replication_factor</code></td>
+          <td>integer</td>
+          <td><code>3</code></td>
+          <td>Number of region replicas.</td>
+      </tr>
+      <tr>
+          <td><code>max_region_size</code></td>
+          <td>size</td>
+          <td><code>&quot;256MB&quot;</code></td>
+          <td>Region split threshold.</td>
+      </tr>
+      <tr>
+          <td><code>min_region_size</code></td>
+          <td>size</td>
+          <td><code>&quot;64MB&quot;</code></td>
+          <td>Region merge threshold.</td>
+      </tr>
+      <tr>
+          <td><code>auto_balance</code></td>
+          <td>boolean</td>
+          <td><code>true</code></td>
+          <td>Enable automatic region rebalancing.</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="security">[security]</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Parameter</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>authentication_enabled</code></td>
+          <td>boolean</td>
+          <td><code>false</code></td>
+          <td>Require client authentication.</td>
+      </tr>
+      <tr>
+          <td><code>tls_enabled</code></td>
+          <td>boolean</td>
+          <td><code>false</code></td>
+          <td>Enable TLS encryption.</td>
+      </tr>
+      <tr>
+          <td><code>tls_cert_path</code></td>
+          <td>string</td>
+          <td><code>&quot;&quot;</code></td>
+          <td>Path to TLS certificate (PEM).</td>
+      </tr>
+      <tr>
+          <td><code>tls_key_path</code></td>
+          <td>string</td>
+          <td><code>&quot;&quot;</code></td>
+          <td>Path to TLS private key (PEM).</td>
+      </tr>
+      <tr>
+          <td><code>superuser</code></td>
+          <td>string</td>
+          <td><code>&quot;admin&quot;</code></td>
+          <td>Superuser account name.</td>
+      </tr>
+      <tr>
+          <td><code>superuser_password</code></td>
+          <td>string</td>
+          <td><code>&quot;&quot;</code></td>
+          <td>Superuser password (plaintext).</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="logging">[logging]</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Parameter</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>level</code></td>
+          <td>string</td>
+          <td><code>&quot;info&quot;</code></td>
+          <td>Log level: <code>trace</code>, <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>.</td>
+      </tr>
+      <tr>
+          <td><code>format</code></td>
+          <td>string</td>
+          <td><code>&quot;text&quot;</code></td>
+          <td>Log format: <code>text</code> or <code>json</code>.</td>
+      </tr>
+      <tr>
+          <td><code>slow_query_enabled</code></td>
+          <td>boolean</td>
+          <td><code>true</code></td>
+          <td>Enable slow query logging.</td>
+      </tr>
+      <tr>
+          <td><code>slow_query_threshold</code></td>
+          <td>duration</td>
+          <td><code>&quot;1s&quot;</code></td>
+          <td>Slow query time threshold.</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="environment-variable-overrides">Environment Variable Overrides</h2>
+<p>Every configuration parameter can be overridden by an environment variable. This is especially useful for Docker and Kubernetes deployments where secrets and per-instance values should not be baked into configuration files.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Environment Variable</th>
+          <th>Overrides</th>
+          <th>Example</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>THUNDERDB_DATA_DIR</code></td>
+          <td><code>storage.data_dir</code></td>
+          <td><code>/mnt/ssd/thunderdb/data</code></td>
+      </tr>
+      <tr>
+          <td><code>THUNDERDB_WAL_DIR</code></td>
+          <td><code>storage.wal_dir</code></td>
+          <td><code>/mnt/ssd/thunderdb/wal</code></td>
+      </tr>
+      <tr>
+          <td><code>THUNDERDB_LOG_LEVEL</code></td>
+          <td><code>logging.level</code></td>
+          <td><code>debug</code></td>
+      </tr>
+      <tr>
+          <td><code>THUNDERDB_SUPERUSER_PASSWORD_HASH</code></td>
+          <td><code>security.superuser_password</code></td>
+          <td><code>argon2:$argon2id$v=19$...</code></td>
+      </tr>
+      <tr>
+          <td><code>THUNDERDB_NODE_ID</code></td>
+          <td><code>node.node_id</code></td>
+          <td><code>2</code></td>
+      </tr>
+      <tr>
+          <td><code>THUNDERDB_LISTEN_ADDR</code></td>
+          <td><code>network.listen_addr</code></td>
+          <td><code>0.0.0.0</code></td>
+      </tr>
+      <tr>
+          <td><code>THUNDERDB_PG_PORT</code></td>
+          <td><code>network.pg_port</code></td>
+          <td><code>15432</code></td>
+      </tr>
+      <tr>
+          <td><code>THUNDERDB_MYSQL_PORT</code></td>
+          <td><code>network.mysql_port</code></td>
+          <td><code>13306</code></td>
+      </tr>
+      <tr>
+          <td><code>THUNDERDB_RESP_PORT</code></td>
+          <td><code>network.resp_port</code></td>
+          <td><code>16379</code></td>
+      </tr>
+      <tr>
+          <td><code>THUNDERDB_HTTP_PORT</code></td>
+          <td><code>network.http_port</code></td>
+          <td><code>18088</code></td>
+      </tr>
+      <tr>
+          <td><code>THUNDERDB_GRPC_PORT</code></td>
+          <td><code>network.grpc_port</code></td>
+          <td><code>19090</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Precedence</strong>: Environment variables take precedence over values in the configuration file. Command-line flags (if any) take precedence over both.</p>
+<h3 id="using-environment-variables-with-docker">Using Environment Variables with Docker</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -e <span style="color:#8be9fd;font-style:italic">THUNDERDB_NODE_ID</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -e <span style="color:#8be9fd;font-style:italic">THUNDERDB_LISTEN_ADDR</span><span style="color:#ff79c6">=</span>0.0.0.0 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -e <span style="color:#8be9fd;font-style:italic">THUNDERDB_LOG_LEVEL</span><span style="color:#ff79c6">=</span>info <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -e <span style="color:#8be9fd;font-style:italic">THUNDERDB_SUPERUSER_PASSWORD_HASH</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;argon2:$argon2id$v=19$m=65536,t=3,p=4$...&#39;</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -e <span style="color:#8be9fd;font-style:italic">THUNDERDB_DATA_DIR</span><span style="color:#ff79c6">=</span>/var/lib/thunderdb/data <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -e <span style="color:#8be9fd;font-style:italic">THUNDERDB_WAL_DIR</span><span style="color:#ff79c6">=</span>/var/lib/thunderdb/wal <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  thunderdb:latest
+</span></span></code></pre></div><h3 id="using-environment-variables-with-systemd">Using Environment Variables with systemd</h3>
+<p>Add an override file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl edit thunderdb
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#ff79c6">[Service]</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">Environment</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;THUNDERDB_LOG_LEVEL=debug&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">Environment</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;THUNDERDB_SUPERUSER_PASSWORD_HASH=argon2:$argon2id$v=19$...&#34;</span>
+</span></span></code></pre></div><hr>
+<h2 id="performance-tuning-guide">Performance Tuning Guide</h2>
+<p>ThunderDB&rsquo;s HTAP architecture means it must be tuned differently depending on whether your workload leans toward OLTP (transactional), OLAP (analytical), or a mix of both.</p>
+<h3 id="oltp-optimized-configuration">OLTP-Optimized Configuration</h3>
+<p>For workloads dominated by short, high-frequency transactions (point lookups, inserts, updates):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[storage]
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Large buffer pool to keep hot rows in memory.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Aim for 60-70% of available system RAM.</span>
+</span></span><span style="display:flex;"><span>buffer_pool_size = <span style="color:#f1fa8c">&#34;8GB&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Moderate WAL buffer -- OLTP writes are typically small.</span>
+</span></span><span style="display:flex;"><span>wal_buffer_size = <span style="color:#f1fa8c">&#34;32MB&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Ensure every commit is durable.</span>
+</span></span><span style="display:flex;"><span>sync_commit = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Frequent checkpoints reduce recovery time after crashes.</span>
+</span></span><span style="display:flex;"><span>checkpoint_interval = <span style="color:#f1fa8c">&#34;30s&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Fewer compaction threads needed; OLTP generates less bulk data.</span>
+</span></span><span style="display:flex;"><span>compaction_threads = <span style="color:#bd93f9">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Bypass OS cache to avoid double-buffering.</span>
+</span></span><span style="display:flex;"><span>direct_io = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Lz4 for minimal CPU overhead on the write path.</span>
+</span></span><span style="display:flex;"><span>compression = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>compression_algorithm = <span style="color:#f1fa8c">&#34;Lz4&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Smaller max WAL keeps recovery time bounded.</span>
+</span></span><span style="display:flex;"><span>max_wal_size = <span style="color:#f1fa8c">&#34;512MB&#34;</span>
+</span></span></code></pre></div><p><strong>Key principles:</strong></p>
+<ul>
+<li>Maximize buffer pool size to serve reads from memory.</li>
+<li>Use <code>sync_commit = true</code> to guarantee durability.</li>
+<li>Lower <code>checkpoint_interval</code> to reduce crash recovery time.</li>
+<li>Use Lz4 compression for its speed advantage on the write path.</li>
+</ul>
+<h3 id="olap-optimized-configuration">OLAP-Optimized Configuration</h3>
+<p>For workloads dominated by large scans, aggregations, and batch processing:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[storage]
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Moderate buffer pool -- OLAP scans are sequential and don&#39;t benefit</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># as much from caching random pages.</span>
+</span></span><span style="display:flex;"><span>buffer_pool_size = <span style="color:#f1fa8c">&#34;4GB&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Large WAL buffer to handle bulk writes efficiently.</span>
+</span></span><span style="display:flex;"><span>wal_buffer_size = <span style="color:#f1fa8c">&#34;128MB&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Async commit is acceptable if some data loss on crash is tolerable.</span>
+</span></span><span style="display:flex;"><span>sync_commit = <span style="color:#ff79c6">false</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Less frequent checkpoints to reduce I/O during long-running queries.</span>
+</span></span><span style="display:flex;"><span>checkpoint_interval = <span style="color:#f1fa8c">&#34;300s&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># More compaction threads for faster background processing of bulk data.</span>
+</span></span><span style="display:flex;"><span>compaction_threads = <span style="color:#bd93f9">8</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Direct I/O is still beneficial for large sequential reads.</span>
+</span></span><span style="display:flex;"><span>direct_io = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Zstd compression for maximum space savings on large datasets.</span>
+</span></span><span style="display:flex;"><span>compression = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>compression_algorithm = <span style="color:#f1fa8c">&#34;Zstd&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Larger max WAL to avoid checkpoint storms during bulk loads.</span>
+</span></span><span style="display:flex;"><span>max_wal_size = <span style="color:#f1fa8c">&#34;4GB&#34;</span>
+</span></span></code></pre></div><p><strong>Key principles:</strong></p>
+<ul>
+<li>Allocate more to WAL buffer for batch write throughput.</li>
+<li>Use more compaction threads to keep up with bulk data ingestion.</li>
+<li>Use Zstd compression to minimize storage costs for large datasets.</li>
+<li>Larger <code>max_wal_size</code> and <code>checkpoint_interval</code> reduce I/O interference with queries.</li>
+</ul>
+<h3 id="mixed-htap-configuration">Mixed HTAP Configuration</h3>
+<p>For workloads with both transactional and analytical queries (the most common ThunderDB use case):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[storage]
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Balance between caching hot transactional data and leaving room</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># for analytical query memory needs.</span>
+</span></span><span style="display:flex;"><span>buffer_pool_size = <span style="color:#f1fa8c">&#34;6GB&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Balanced WAL buffer.</span>
+</span></span><span style="display:flex;"><span>wal_buffer_size = <span style="color:#f1fa8c">&#34;64MB&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Durability is important for the transactional component.</span>
+</span></span><span style="display:flex;"><span>sync_commit = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Moderate checkpoint interval balances recovery time and I/O.</span>
+</span></span><span style="display:flex;"><span>checkpoint_interval = <span style="color:#f1fa8c">&#34;60s&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Moderate compaction thread count.</span>
+</span></span><span style="display:flex;"><span>compaction_threads = <span style="color:#bd93f9">4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Direct I/O recommended.</span>
+</span></span><span style="display:flex;"><span>direct_io = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Lz4 is a good default balance of speed and compression.</span>
+</span></span><span style="display:flex;"><span>compression = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>compression_algorithm = <span style="color:#f1fa8c">&#34;Lz4&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Moderate max WAL size.</span>
+</span></span><span style="display:flex;"><span>max_wal_size = <span style="color:#f1fa8c">&#34;1GB&#34;</span>
+</span></span></code></pre></div><h3 id="memory-sizing-guide">Memory Sizing Guide</h3>
+<p>Use the following guidelines to size ThunderDB&rsquo;s memory parameters based on available system RAM:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Available RAM</th>
+          <th>Buffer Pool</th>
+          <th>WAL Buffer</th>
+          <th>Recommended For</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>8 GB</td>
+          <td>4 GB</td>
+          <td>32 MB</td>
+          <td>Development / Small production</td>
+      </tr>
+      <tr>
+          <td>16 GB</td>
+          <td>10 GB</td>
+          <td>64 MB</td>
+          <td>Medium OLTP workloads</td>
+      </tr>
+      <tr>
+          <td>32 GB</td>
+          <td>20 GB</td>
+          <td>128 MB</td>
+          <td>Large OLTP / Mixed HTAP</td>
+      </tr>
+      <tr>
+          <td>64 GB</td>
+          <td>40 GB</td>
+          <td>256 MB</td>
+          <td>Heavy HTAP workloads</td>
+      </tr>
+      <tr>
+          <td>128 GB</td>
+          <td>80 GB</td>
+          <td>512 MB</td>
+          <td>Large-scale analytics</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>General rules:</strong></p>
+<ul>
+<li>Allocate 50-70% of total RAM to <code>buffer_pool_size</code>.</li>
+<li>Reserve at least 2-4 GB for the OS, file system cache, and other processes.</li>
+<li>The WAL buffer should be 0.5-1% of the buffer pool size.</li>
+<li>For Kubernetes, set resource <code>requests</code> to the sum of buffer pool + WAL buffer + 2 GB overhead, and <code>limits</code> to 1.5x the requests.</li>
+</ul>
+<h3 id="compression-algorithm-comparison">Compression Algorithm Comparison</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Algorithm</th>
+          <th>Compression Ratio</th>
+          <th>Compression Speed</th>
+          <th>Decompression Speed</th>
+          <th>Best For</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Lz4</strong></td>
+          <td>Low-Medium</td>
+          <td>Very Fast</td>
+          <td>Very Fast</td>
+          <td>OLTP, low-latency reads</td>
+      </tr>
+      <tr>
+          <td><strong>Snappy</strong></td>
+          <td>Medium</td>
+          <td>Fast</td>
+          <td>Fast</td>
+          <td>General purpose</td>
+      </tr>
+      <tr>
+          <td><strong>Zstd</strong></td>
+          <td>High</td>
+          <td>Moderate</td>
+          <td>Fast</td>
+          <td>OLAP, storage-constrained</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="os-level-tuning">OS-Level Tuning</h3>
+<p>For optimal performance, apply these OS-level settings on Linux:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Increase file descriptor limits</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;thunder soft nofile 65535&#34;</span> &gt;&gt; /etc/security/limits.conf
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;thunder hard nofile 65535&#34;</span> &gt;&gt; /etc/security/limits.conf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Reduce swappiness (prefer keeping data in RAM)</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;vm.swappiness=1&#34;</span> &gt;&gt; /etc/sysctl.conf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Increase the number of memory map areas</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;vm.max_map_count=262144&#34;</span> &gt;&gt; /etc/sysctl.conf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Increase network buffer sizes for high-throughput workloads</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;net.core.somaxconn=65535&#34;</span> &gt;&gt; /etc/sysctl.conf
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;net.ipv4.tcp_max_syn_backlog=65535&#34;</span> &gt;&gt; /etc/sysctl.conf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Apply changes</span>
+</span></span><span style="display:flex;"><span>sysctl -p
+</span></span></code></pre></div><h3 id="disk-io-tuning">Disk I/O Tuning</h3>
+<p>For SSD-backed storage:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Use noop or none scheduler for SSDs</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;none&#34;</span> &gt; /sys/block/sda/queue/scheduler
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Set readahead to 256 KB for SSDs (reduce for random I/O workloads)</span>
+</span></span><span style="display:flex;"><span>blockdev --setra <span style="color:#bd93f9">512</span> /dev/sda
+</span></span></code></pre></div><p>For best results, place <code>data_dir</code> and <code>wal_dir</code> on separate physical disks or volumes. WAL writes are sequential and benefit from dedicated I/O bandwidth.</p>
+
+	<div class="section-index">
+    
+    
+    </div>
+<style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<div class="d-print-none">
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+</div>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'page_helpful', {
+      'event_category': 'Helpful',
+      'event_label': window.location.pathname,
+      'value': value
+    });
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback( 100 );
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+<br />
+</div>
+
+          </main>
+        </div>
+      </div>
+      <footer class="td-footer row d-print-none">
+  <div class="container-fluid">
+    <div class="row mx-md-2">
+      <div class="td-footer__left col-6 col-sm-4 order-sm-1">
+        
+      </div><div class="td-footer__right col-6 col-sm-4 order-sm-3">
+        <ul class="td-footer__links-list">
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="GitHub" aria-label="GitHub">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="Discussions" aria-label="Discussions">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb/discussions" aria-label="Discussions">
+      <i class="fas fa-comments"></i>
+    </a>
+  </li>
+  
+</ul>
+
+      </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
+        <span class="td-footer__copyright">&copy;
+    2026
+    <span class="td-footer__authors">ThunderDB Contributors</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><p class="td-footer__about mt-2"><a href="/docs/about/">About ThunderDB</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script src="/docs/js/main.js"></script>
+<script defer src="/docs/js/click-to-copy.js" crossorigin="anonymous"></script>
+<script src='/docs/js/tabpane-persist.js'></script>
+
+  </body>
+</html>

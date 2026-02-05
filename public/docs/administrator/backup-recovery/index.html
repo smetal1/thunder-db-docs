@@ -1,0 +1,899 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
+  <head><script src="/docs/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=docs/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/docs/favicons/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/docs/favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/docs/favicons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/docs/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="/docs/favicons/favicon-256.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/docs/favicons/apple-touch-icon.png">
+<link rel="manifest" href="/docs/favicons/site.webmanifest">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="msapplication-TileColor" content="#0D0D0D">
+
+<title>Backup &amp; Recovery | ThunderDB Documentation</title>
+<meta name="description" content="Protect your data with full backups, incremental WAL-based backups, point-in-time recovery, and disaster recovery planning.">
+<meta property="og:url" content="http://localhost:1313/docs/docs/administrator/backup-recovery/">
+  <meta property="og:site_name" content="ThunderDB Documentation">
+  <meta property="og:title" content="Backup & Recovery">
+  <meta property="og:description" content="Protect your data with full backups, incremental WAL-based backups, point-in-time recovery, and disaster recovery planning.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+
+  <meta itemprop="name" content="Backup & Recovery">
+  <meta itemprop="description" content="Protect your data with full backups, incremental WAL-based backups, point-in-time recovery, and disaster recovery planning.">
+  <meta itemprop="wordCount" content="1815">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Backup & Recovery">
+  <meta name="twitter:description" content="Protect your data with full backups, incremental WAL-based backups, point-in-time recovery, and disaster recovery planning.">
+<link href="/docs/scss/main.css" rel="stylesheet">
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+  crossorigin="anonymous"></script>
+<script defer
+  src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
+  integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
+  crossorigin="anonymous"></script>
+
+  </head>
+  <body class="td-section">
+    <header>
+      <nav class="td-navbar js-navbar-scroll" data-bs-theme="dark">
+<div class="td-navbar-container container-fluid flex-column flex-md-row">
+  <a class="navbar-brand" href="/docs/"><span class="navbar-brand__logo navbar-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="300" height="64"><defs><symbol id="b" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#331500" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FF6B00"/><rect width="4.8" height=".6" rx=".55" fill="#FA4" opacity=".5"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#F83" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#930" opacity=".35"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D50"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,200,100,0.3)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FC8" opacity=".55"/></symbol><symbol id="c" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#4D3000" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FA0"/><rect width="4.8" height=".6" rx=".55" fill="#FD6" opacity=".55"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#FB3" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#960" opacity=".3"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D80"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,230,150,0.35)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FE9" opacity=".6"/></symbol></defs><use href="#b" x="35" y="2" width="5" height="5"/><use href="#b" x="41" y="2" width="5" height="5"/><use href="#b" x="29" y="8" width="5" height="5"/><use href="#b" x="35" y="8" width="5" height="5"/><use href="#b" x="23" y="14" width="5" height="5"/><use href="#b" x="29" y="14" width="5" height="5"/><use href="#b" x="17" y="20" width="5" height="5"/><use href="#b" x="23" y="20" width="5" height="5"/><use href="#c" x="5" y="26" width="5" height="5"/><use href="#c" x="11" y="26" width="5" height="5"/><use href="#c" x="17" y="26" width="5" height="5"/><use href="#c" x="23" y="26" width="5" height="5"/><use href="#c" x="29" y="26" width="5" height="5"/><use href="#c" x="35" y="26" width="5" height="5"/><use href="#c" x="41" y="26" width="5" height="5"/><use href="#c" x="47" y="26" width="5" height="5"/><use href="#b" x="35" y="32" width="5" height="5"/><use href="#b" x="41" y="32" width="5" height="5"/><use href="#b" x="29" y="38" width="5" height="5"/><use href="#b" x="35" y="38" width="5" height="5"/><use href="#b" x="23" y="44" width="5" height="5"/><use href="#b" x="29" y="44" width="5" height="5"/><use href="#b" x="17" y="50" width="5" height="5"/><use href="#b" x="23" y="50" width="5" height="5"/><use href="#b" x="11" y="56" width="5" height="5"/><use href="#b" x="17" y="56" width="5" height="5"/><text x="66" y="43" font-family="'SF Mono','Fira Code','Consolas','Courier New',monospace" font-size="27" font-weight="900" letter-spacing=".5"><tspan fill="#FFF">Thunder</tspan><tspan fill="#FF6B00">DB</tspan></text></svg></span><span class="navbar-brand__name">ThunderDB Documentation</span></a>
+  <div class="td-navbar-nav-scroll td-navbar-nav-scroll--indicator" id="main_navbar">
+    <div class="scroll-indicator scroll-left"></div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/"><span>Documentation</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/architecture/"><span>Architecture</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/developer/api-reference/"><span>API Reference</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/about/"><span>About</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/thunderdb/thunderdb" target="_blank" rel="noopener"><i class='fab fa-github'></i><span>GitHub</span></a>
+      </li>
+      </ul>
+    <div class="scroll-indicator scroll-right"></div>
+  </div>
+  <div class="d-none d-lg-block td-navbar__search">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+  </div>
+</div>
+</nav>
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main" data-bs-spy="scroll" data-bs-target=".td-toc" data-bs-root-margin="0px 0px -10%">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+  <script>
+    $(function() {
+    $("#td-section-nav a").removeClass("active");
+    $("#td-section-nav #m-docsdocsadministratorbackup-recovery").addClass("active");
+    $("#td-section-nav #m-docsdocsadministratorbackup-recovery-li span").addClass("td-sidebar-nav-active-item");
+    $("#td-section-nav #m-docsdocsadministratorbackup-recovery").parents("li").addClass("active-path");
+    $("#td-section-nav li.active-path").addClass("show");
+    $("#td-section-nav li.active-path").children("input").prop('checked', true);
+    $("#td-section-nav #m-docsdocsadministratorbackup-recovery-li").siblings("li").addClass("show");
+    $("#td-section-nav #m-docsdocsadministratorbackup-recovery-li").children("ul").children("li").addClass("show");
+    $("#td-sidebar-menu").toggleClass("d-none");
+    });
+  </script>
+  <div id="td-sidebar-menu" class="td-sidebar__inner d-none">
+  <form class="td-sidebar__search d-flex align-items-center">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+    <button class="btn btn-link td-sidebar__toggle" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  <nav class="td-sidebar-nav collapse foldable-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocs-li">
+    <a href="/docs/docs/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docsdocs"><span class="">Documentation</span></a>
+    <ul class="ul-1">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsgetting-started-li">
+    <input type="checkbox" id="m-docsdocsgetting-started-check"/>
+    <label for="m-docsdocsgetting-started-check"><a href="/docs/docs/getting-started/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsgetting-started"><span class="">Getting Started</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsarchitecture-li">
+    <input type="checkbox" id="m-docsdocsarchitecture-check"/>
+    <label for="m-docsdocsarchitecture-check"><a href="/docs/docs/architecture/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsarchitecture"><span class="">Architecture</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsdeveloper-li">
+    <input type="checkbox" id="m-docsdocsdeveloper-check"/>
+    <label for="m-docsdocsdeveloper-check"><a href="/docs/docs/developer/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloper"><span class="">Developer Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperapi-reference-li">
+    <input type="checkbox" id="m-docsdocsdeveloperapi-reference-check"/>
+    <label for="m-docsdocsdeveloperapi-reference-check"><a href="/docs/docs/developer/api-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperapi-reference"><span class="">API Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersql-reference-li">
+    <input type="checkbox" id="m-docsdocsdevelopersql-reference-check"/>
+    <label for="m-docsdocsdevelopersql-reference-check"><a href="/docs/docs/developer/sql-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersql-reference"><span class="">SQL Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersdk-li">
+    <input type="checkbox" id="m-docsdocsdevelopersdk-check"/>
+    <label for="m-docsdocsdevelopersdk-check"><a href="/docs/docs/developer/sdk/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersdk"><span class="">SDKs &amp; Drivers</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperexamples-li">
+    <input type="checkbox" id="m-docsdocsdeveloperexamples-check"/>
+    <label for="m-docsdocsdeveloperexamples-check"><a href="/docs/docs/developer/examples/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperexamples"><span class="">Examples &amp; Use Cases</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsadministrator-li">
+    <input type="checkbox" id="m-docsdocsadministrator-check"/>
+    <label for="m-docsdocsadministrator-check"><a href="/docs/docs/administrator/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministrator"><span class="">Administrator Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratordeployment-li">
+    <input type="checkbox" id="m-docsdocsadministratordeployment-check"/>
+    <label for="m-docsdocsadministratordeployment-check"><a href="/docs/docs/administrator/deployment/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratordeployment"><span class="">Deployment</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorconfiguration-li">
+    <input type="checkbox" id="m-docsdocsadministratorconfiguration-check"/>
+    <label for="m-docsdocsadministratorconfiguration-check"><a href="/docs/docs/administrator/configuration/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorconfiguration"><span class="">Configuration</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratormonitoring-li">
+    <input type="checkbox" id="m-docsdocsadministratormonitoring-check"/>
+    <label for="m-docsdocsadministratormonitoring-check"><a href="/docs/docs/administrator/monitoring/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratormonitoring"><span class="">Monitoring</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorbackup-recovery-li">
+    <input type="checkbox" id="m-docsdocsadministratorbackup-recovery-check"/>
+    <label for="m-docsdocsadministratorbackup-recovery-check"><a href="/docs/docs/administrator/backup-recovery/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorbackup-recovery"><span class="">Backup &amp; Recovery</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorsecurity-li">
+    <input type="checkbox" id="m-docsdocsadministratorsecurity-check"/>
+    <label for="m-docsdocsadministratorsecurity-check"><a href="/docs/docs/administrator/security/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorsecurity"><span class="">Security</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratortroubleshooting-li">
+    <input type="checkbox" id="m-docsdocsadministratortroubleshooting-check"/>
+    <label for="m-docsdocsadministratortroubleshooting-check"><a href="/docs/docs/administrator/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratortroubleshooting"><span class="">Troubleshooting</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocscontributor-li">
+    <input type="checkbox" id="m-docsdocscontributor-check"/>
+    <label for="m-docsdocscontributor-check"><a href="/docs/docs/contributor/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributor"><span class="">Contributor Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributordevelopment-setup-li">
+    <input type="checkbox" id="m-docsdocscontributordevelopment-setup-check"/>
+    <label for="m-docsdocscontributordevelopment-setup-check"><a href="/docs/docs/contributor/development-setup/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributordevelopment-setup"><span class="">Development Setup</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorcodebase-guide-li">
+    <input type="checkbox" id="m-docsdocscontributorcodebase-guide-check"/>
+    <label for="m-docsdocscontributorcodebase-guide-check"><a href="/docs/docs/contributor/codebase-guide/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorcodebase-guide"><span class="">Codebase Guide</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributortesting-li">
+    <input type="checkbox" id="m-docsdocscontributortesting-check"/>
+    <label for="m-docsdocscontributortesting-check"><a href="/docs/docs/contributor/testing/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributortesting"><span class="">Testing</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorrelease-process-li">
+    <input type="checkbox" id="m-docsdocscontributorrelease-process-check"/>
+    <label for="m-docsdocscontributorrelease-process-check"><a href="/docs/docs/contributor/release-process/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorrelease-process"><span class="">Release Process</span></a></label>
+    
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
+<a href="https://github.com/thunderdb/thunderdb/tree/main/content/docs/administrator/backup-recovery/_index.md" class="td-page-meta--view td-page-meta__view" target="_blank" rel="noopener"><i class="fa-solid fa-file-lines fa-fw"></i> View page source</a>
+  <a href="https://github.com/thunderdb/thunderdb/edit/main/content/docs/administrator/backup-recovery/_index.md" class="td-page-meta--edit td-page-meta__edit" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Edit this page</a>
+  <a href="https://github.com/thunderdb/thunderdb/new/main/content/docs/administrator/backup-recovery?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child td-page-meta__child" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Create child page</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new?title=Backup%20&amp;%20Recovery" class="td-page-meta--issue td-page-meta__issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create documentation issue</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new" class="td-page-meta--project td-page-meta__project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create project issue</a>
+  
+</div>
+
+            <div class="td-toc" data-proofer-ignore>
+<div class="td-toc-title">
+      <span class="td-toc-title__text">On this page</span>
+      <a class="td-toc-title__link" title="Top of page" href="#"></a>
+    </div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#backup-overview">Backup Overview</a></li>
+    <li><a href="#full-backup">Full Backup</a>
+      <ul>
+        <li><a href="#online-backup-recommended">Online Backup (Recommended)</a></li>
+        <li><a href="#manual-full-backup">Manual Full Backup</a></li>
+        <li><a href="#backup-contents">Backup Contents</a></li>
+        <li><a href="#verifying-a-backup">Verifying a Backup</a></li>
+      </ul>
+    </li>
+    <li><a href="#incremental-backup-wal-archiving">Incremental Backup (WAL Archiving)</a>
+      <ul>
+        <li><a href="#enabling-wal-archiving">Enabling WAL Archiving</a></li>
+        <li><a href="#how-wal-archiving-works">How WAL Archiving Works</a></li>
+        <li><a href="#monitoring-wal-archiving">Monitoring WAL Archiving</a></li>
+        <li><a href="#wal-archive-to-object-storage">WAL Archive to Object Storage</a></li>
+      </ul>
+    </li>
+    <li><a href="#point-in-time-recovery-pitr">Point-in-Time Recovery (PITR)</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#recovery-procedure">Recovery Procedure</a></li>
+        <li><a href="#step-by-step-pitr-process">Step-by-Step PITR Process</a></li>
+        <li><a href="#recovery-output">Recovery Output</a></li>
+      </ul>
+    </li>
+    <li><a href="#wal-based-recovery-aries">WAL-Based Recovery (ARIES)</a>
+      <ul>
+        <li><a href="#phase-1-analysis">Phase 1: Analysis</a></li>
+        <li><a href="#phase-2-redo">Phase 2: Redo</a></li>
+        <li><a href="#phase-3-undo">Phase 3: Undo</a></li>
+        <li><a href="#monitoring-recovery">Monitoring Recovery</a></li>
+        <li><a href="#recovery-tuning">Recovery Tuning</a></li>
+      </ul>
+    </li>
+    <li><a href="#backup-scheduling-best-practices">Backup Scheduling Best Practices</a>
+      <ul>
+        <li><a href="#recommended-backup-schedule">Recommended Backup Schedule</a></li>
+        <li><a href="#automated-backup-script">Automated Backup Script</a></li>
+        <li><a href="#backup-monitoring">Backup Monitoring</a></li>
+      </ul>
+    </li>
+    <li><a href="#disaster-recovery-planning">Disaster Recovery Planning</a>
+      <ul>
+        <li><a href="#recovery-scenarios">Recovery Scenarios</a></li>
+        <li><a href="#cross-region-backup-strategy">Cross-Region Backup Strategy</a></li>
+        <li><a href="#disaster-recovery-runbook">Disaster Recovery Runbook</a></li>
+        <li><a href="#testing-recovery">Testing Recovery</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+
+            
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/">Documentation</a></li>
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/administrator/">Administrator Guide</a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    Backup &amp; Recovery</li>
+  </ol>
+</nav>
+<div class="td-content">
+	<h1>Backup &amp; Recovery</h1>
+  <div class="lead">Protect your data with full backups, incremental WAL-based backups, point-in-time recovery, and disaster recovery planning.</div>
+	<header class="article-meta">
+		
+</header>
+	<h1 id="backup--recovery">Backup &amp; Recovery</h1>
+<p>Data protection is a critical aspect of operating ThunderDB in production. This guide covers full backup procedures, incremental backups through WAL archiving, point-in-time recovery (PITR), and disaster recovery planning.</p>
+<hr>
+<h2 id="backup-overview">Backup Overview</h2>
+<p>ThunderDB supports multiple backup strategies that can be combined for comprehensive data protection:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Strategy</th>
+          <th>RPO</th>
+          <th>RTO</th>
+          <th>Storage Cost</th>
+          <th>Complexity</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Full backup</td>
+          <td>Point-in-time of backup</td>
+          <td>Minutes to hours</td>
+          <td>High</td>
+          <td>Low</td>
+      </tr>
+      <tr>
+          <td>Incremental (WAL archiving)</td>
+          <td>Near-zero (last WAL flush)</td>
+          <td>Minutes</td>
+          <td>Low (deltas only)</td>
+          <td>Medium</td>
+      </tr>
+      <tr>
+          <td>Full + Incremental (PITR)</td>
+          <td>Near-zero</td>
+          <td>Minutes</td>
+          <td>Medium</td>
+          <td>Medium</td>
+      </tr>
+      <tr>
+          <td>Cross-region replication</td>
+          <td>Near-zero</td>
+          <td>Seconds (failover)</td>
+          <td>High</td>
+          <td>High</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>RPO</strong> = Recovery Point Objective (how much data you can afford to lose).
+<strong>RTO</strong> = Recovery Time Objective (how quickly you need to recover).</p>
+<hr>
+<h2 id="full-backup">Full Backup</h2>
+<p>A full backup captures the complete state of a ThunderDB node at a point in time. It includes the data directory and current WAL files.</p>
+<h3 id="online-backup-recommended">Online Backup (Recommended)</h3>
+<p>ThunderDB supports online (hot) backups that do not require stopping the server:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Trigger a consistent backup via the admin API</span>
+</span></span><span style="display:flex;"><span>curl -X POST http://localhost:8088/admin/backup <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -H <span style="color:#f1fa8c">&#34;Content-Type: application/json&#34;</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -d <span style="color:#f1fa8c">&#39;{
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    &#34;destination&#34;: &#34;/backups/thunderdb/full-2026-01-15&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    &#34;include_wal&#34;: true,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    &#34;compress&#34;: true
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">  }&#39;</span>
+</span></span></code></pre></div><p>Response:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&#34;status&#34;</span>: <span style="color:#f1fa8c">&#34;started&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&#34;backup_id&#34;</span>: <span style="color:#f1fa8c">&#34;bk-20260115-103045&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&#34;destination&#34;</span>: <span style="color:#f1fa8c">&#34;/backups/thunderdb/full-2026-01-15&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&#34;estimated_size_bytes&#34;</span>: <span style="color:#bd93f9">5368709120</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Monitor backup progress:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl http://localhost:8088/admin/backup/status/bk-20260115-103045
+</span></span></code></pre></div><h3 id="manual-full-backup">Manual Full Backup</h3>
+<p>If you prefer a manual approach, follow these steps:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 1. Force a checkpoint to flush dirty pages to disk</span>
+</span></span><span style="display:flex;"><span>curl -X POST http://localhost:8088/admin/checkpoint
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 2. Copy the data directory</span>
+</span></span><span style="display:flex;"><span>sudo -u thunder rsync -av --progress <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  /var/lib/thunderdb/data/ <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  /backups/thunderdb/full-<span style="color:#ff79c6">$(</span>date +%Y%m%d<span style="color:#ff79c6">)</span>/data/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3. Copy the WAL directory</span>
+</span></span><span style="display:flex;"><span>sudo -u thunder rsync -av --progress <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  /var/lib/thunderdb/wal/ <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  /backups/thunderdb/full-<span style="color:#ff79c6">$(</span>date +%Y%m%d<span style="color:#ff79c6">)</span>/wal/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 4. Copy the configuration</span>
+</span></span><span style="display:flex;"><span>sudo cp /etc/thunderdb/thunderdb.toml <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  /backups/thunderdb/full-<span style="color:#ff79c6">$(</span>date +%Y%m%d<span style="color:#ff79c6">)</span>/thunderdb.toml
+</span></span></code></pre></div><h3 id="backup-contents">Backup Contents</h3>
+<p>A full backup includes:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Directory / File</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>data/</code></td>
+          <td>All data pages, indexes, and metadata files.</td>
+      </tr>
+      <tr>
+          <td><code>wal/</code></td>
+          <td>Write-ahead log files active at backup time.</td>
+      </tr>
+      <tr>
+          <td><code>thunderdb.toml</code></td>
+          <td>Configuration file (for reference during restore).</td>
+      </tr>
+      <tr>
+          <td><code>backup_manifest.json</code></td>
+          <td>Metadata about the backup (timestamp, LSN, checksum).</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="verifying-a-backup">Verifying a Backup</h3>
+<p>Always verify backups after creation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Verify backup integrity</span>
+</span></span><span style="display:flex;"><span>thunderdb --verify-backup /backups/thunderdb/full-2026-01-15
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Expected output:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Backup verification: PASSED</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Backup time: 2026-01-15T10:30:45Z</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># LSN: 0/1A3B4C5D</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Data pages: 8192 (verified)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># WAL segments: 12 (verified)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Checksum: OK</span>
+</span></span></code></pre></div><hr>
+<h2 id="incremental-backup-wal-archiving">Incremental Backup (WAL Archiving)</h2>
+<p>Incremental backups capture only the changes since the last full or incremental backup by archiving WAL (Write-Ahead Log) segments. This dramatically reduces backup storage and time.</p>
+<h3 id="enabling-wal-archiving">Enabling WAL Archiving</h3>
+<p>Add the following to your configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[storage]
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Enable WAL archiving</span>
+</span></span><span style="display:flex;"><span>wal_archive_enabled = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Directory or command for archiving WAL segments</span>
+</span></span><span style="display:flex;"><span>wal_archive_dir = <span style="color:#f1fa8c">&#34;/backups/thunderdb/wal-archive&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Alternative: archive via command (e.g., to S3)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># wal_archive_command = &#34;aws s3 cp %f s3://my-bucket/thunderdb/wal/%n&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Retain archived WAL segments for this duration</span>
+</span></span><span style="display:flex;"><span>wal_archive_retention = <span style="color:#f1fa8c">&#34;7d&#34;</span>
+</span></span></code></pre></div><h3 id="how-wal-archiving-works">How WAL Archiving Works</h3>
+<ol>
+<li>ThunderDB writes transactions to WAL segments (files of <code>max_wal_size</code> or less).</li>
+<li>When a WAL segment is full or a checkpoint occurs, the segment is archived (copied to the archive directory or processed by the archive command).</li>
+<li>Archived segments are retained according to <code>wal_archive_retention</code>.</li>
+<li>For recovery, archived WAL segments are replayed on top of a full backup.</li>
+</ol>
+<h3 id="monitoring-wal-archiving">Monitoring WAL Archiving</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Check archiving status</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/wal/archive/status
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Response:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># {</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   &#34;archiving_enabled&#34;: true,</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   &#34;last_archived_segment&#34;: &#34;000000010000000000000042&#34;,</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   &#34;last_archive_time&#34;: &#34;2026-01-15T10:30:45Z&#34;,</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   &#34;segments_pending&#34;: 0,</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   &#34;archive_rate_bytes_per_sec&#34;: 1048576,</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   &#34;total_archived_bytes&#34;: 536870912</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># }</span>
+</span></span></code></pre></div><h3 id="wal-archive-to-object-storage">WAL Archive to Object Storage</h3>
+<p>For cloud deployments, archive WAL segments to object storage:</p>
+<p><strong>Amazon S3:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[storage]
+</span></span><span style="display:flex;"><span>wal_archive_command = <span style="color:#f1fa8c">&#34;aws s3 cp %f s3://my-thunderdb-backups/wal/%n --storage-class STANDARD_IA&#34;</span>
+</span></span><span style="display:flex;"><span>wal_restore_command = <span style="color:#f1fa8c">&#34;aws s3 cp s3://my-thunderdb-backups/wal/%n %f&#34;</span>
+</span></span></code></pre></div><p><strong>Google Cloud Storage:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[storage]
+</span></span><span style="display:flex;"><span>wal_archive_command = <span style="color:#f1fa8c">&#34;gsutil cp %f gs://my-thunderdb-backups/wal/%n&#34;</span>
+</span></span><span style="display:flex;"><span>wal_restore_command = <span style="color:#f1fa8c">&#34;gsutil cp gs://my-thunderdb-backups/wal/%n %f&#34;</span>
+</span></span></code></pre></div><p><strong>Azure Blob Storage:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[storage]
+</span></span><span style="display:flex;"><span>wal_archive_command = <span style="color:#f1fa8c">&#34;az storage blob upload --file %f --container-name thunderdb-wal --name %n&#34;</span>
+</span></span><span style="display:flex;"><span>wal_restore_command = <span style="color:#f1fa8c">&#34;az storage blob download --container-name thunderdb-wal --name %n --file %f&#34;</span>
+</span></span></code></pre></div><p>In these commands:</p>
+<ul>
+<li><code>%f</code> is replaced with the full path to the WAL segment file.</li>
+<li><code>%n</code> is replaced with the WAL segment filename only.</li>
+</ul>
+<hr>
+<h2 id="point-in-time-recovery-pitr">Point-in-Time Recovery (PITR)</h2>
+<p>PITR allows you to restore a ThunderDB instance to any specific point in time, provided you have a full backup and the WAL archive covering that time period.</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>A full backup taken before the target recovery time.</li>
+<li>All WAL archive segments from the backup time to the target recovery time.</li>
+</ul>
+<h3 id="recovery-procedure">Recovery Procedure</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Restore to a specific timestamp</span>
+</span></span><span style="display:flex;"><span>thunderdb --restore-pitr <span style="color:#f1fa8c">&#34;2026-01-15T14:30:00Z&#34;</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --restore-backup /backups/thunderdb/full-2026-01-15
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Restore to the latest available point</span>
+</span></span><span style="display:flex;"><span>thunderdb --restore-pitr <span style="color:#f1fa8c">&#34;latest&#34;</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --restore-backup /backups/thunderdb/full-2026-01-15
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Restore to a specific WAL LSN (Log Sequence Number)</span>
+</span></span><span style="display:flex;"><span>thunderdb --restore-pitr <span style="color:#f1fa8c">&#34;lsn:0/1A3B4C5D&#34;</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --restore-backup /backups/thunderdb/full-2026-01-15
+</span></span></code></pre></div><h3 id="step-by-step-pitr-process">Step-by-Step PITR Process</h3>
+<ol>
+<li>
+<p><strong>Stop ThunderDB</strong> on the target node:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl stop thunderdb
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Clear the existing data and WAL directories</strong> (or use a fresh node):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo rm -rf /var/lib/thunderdb/data/*
+</span></span><span style="display:flex;"><span>sudo rm -rf /var/lib/thunderdb/wal/*
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Restore from the full backup:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo -u thunder cp -a /backups/thunderdb/full-2026-01-15/data/* /var/lib/thunderdb/data/
+</span></span><span style="display:flex;"><span>sudo -u thunder cp -a /backups/thunderdb/full-2026-01-15/wal/* /var/lib/thunderdb/wal/
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Run PITR recovery:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>thunderdb --restore-pitr <span style="color:#f1fa8c">&#34;2026-01-15T14:30:00Z&#34;</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --restore-backup /backups/thunderdb/full-2026-01-15 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --wal-archive-dir /backups/thunderdb/wal-archive <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --config /etc/thunderdb/thunderdb.toml
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Start ThunderDB</strong> normally after recovery completes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl start thunderdb
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Verify data</strong> integrity after recovery:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl http://localhost:8088/admin/health
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Connect via psql and verify data</span>
+</span></span><span style="display:flex;"><span>psql -h localhost -U admin -c <span style="color:#f1fa8c">&#34;SELECT COUNT(*) FROM your_table;&#34;</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="recovery-output">Recovery Output</h3>
+<p>During PITR, ThunderDB logs the recovery progress:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>[INFO] Starting Point-in-Time Recovery
+</span></span><span style="display:flex;"><span>[INFO] Target time: 2026-01-15T14:30:00Z
+</span></span><span style="display:flex;"><span>[INFO] Base backup LSN: 0/1A000000
+</span></span><span style="display:flex;"><span>[INFO] Phase 1: Restoring base backup... done (8192 pages)
+</span></span><span style="display:flex;"><span>[INFO] Phase 2: Replaying WAL segments...
+</span></span><span style="display:flex;"><span>[INFO]   Replaying segment 000000010000000000000038... done
+</span></span><span style="display:flex;"><span>[INFO]   Replaying segment 000000010000000000000039... done
+</span></span><span style="display:flex;"><span>[INFO]   Replaying segment 00000001000000000000003A... done (target reached)
+</span></span><span style="display:flex;"><span>[INFO] Phase 3: Recovery complete
+</span></span><span style="display:flex;"><span>[INFO] Recovered to: 2026-01-15T14:30:00.000Z (LSN: 0/1A3B4C5D)
+</span></span><span style="display:flex;"><span>[INFO] Transactions recovered: 45,231
+</span></span><span style="display:flex;"><span>[INFO] Transactions rolled back: 12 (in-progress at recovery point)
+</span></span></code></pre></div><hr>
+<h2 id="wal-based-recovery-aries">WAL-Based Recovery (ARIES)</h2>
+<p>ThunderDB uses the ARIES (Algorithm for Recovery and Isolation Exploiting Semantics) recovery algorithm, which provides crash recovery through a three-phase process. This happens automatically on startup after an unclean shutdown.</p>
+<h3 id="phase-1-analysis">Phase 1: Analysis</h3>
+<p>The analysis phase scans the WAL from the last checkpoint to determine:</p>
+<ul>
+<li>Which pages were dirty (modified but not flushed) at the time of the crash.</li>
+<li>Which transactions were active (not yet committed or aborted).</li>
+<li>The starting point for the redo phase.</li>
+</ul>
+<h3 id="phase-2-redo">Phase 2: Redo</h3>
+<p>The redo phase replays all WAL records from the analysis starting point forward, reapplying all changes to bring the database to the exact state it was in at the time of the crash. This includes changes made by transactions that will later be undone.</p>
+<h3 id="phase-3-undo">Phase 3: Undo</h3>
+<p>The undo phase rolls back all transactions that were active (not committed) at the time of the crash. It processes undo records in reverse order, ensuring the database only contains the effects of committed transactions.</p>
+<h3 id="monitoring-recovery">Monitoring Recovery</h3>
+<p>Recovery progress is logged during startup:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>[INFO] Crash recovery initiated
+</span></span><span style="display:flex;"><span>[INFO] Last checkpoint LSN: 0/1A000000
+</span></span><span style="display:flex;"><span>[INFO] Phase 1 (Analysis): Scanning WAL... 42 dirty pages, 3 active transactions
+</span></span><span style="display:flex;"><span>[INFO] Phase 2 (Redo): Replaying from LSN 0/1A000000... 1,234 records replayed
+</span></span><span style="display:flex;"><span>[INFO] Phase 3 (Undo): Rolling back 3 active transactions... done
+</span></span><span style="display:flex;"><span>[INFO] Recovery complete in 2.34s
+</span></span></code></pre></div><h3 id="recovery-tuning">Recovery Tuning</h3>
+<p>For large databases where recovery time is critical:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[storage]
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># More frequent checkpoints reduce the amount of WAL to replay</span>
+</span></span><span style="display:flex;"><span>checkpoint_interval = <span style="color:#f1fa8c">&#34;30s&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Smaller max WAL size limits recovery scope</span>
+</span></span><span style="display:flex;"><span>max_wal_size = <span style="color:#f1fa8c">&#34;512MB&#34;</span>
+</span></span></code></pre></div><hr>
+<h2 id="backup-scheduling-best-practices">Backup Scheduling Best Practices</h2>
+<h3 id="recommended-backup-schedule">Recommended Backup Schedule</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Backup Type</th>
+          <th>Frequency</th>
+          <th>Retention</th>
+          <th>Purpose</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Full backup</td>
+          <td>Daily (off-peak hours)</td>
+          <td>7 days</td>
+          <td>Base for PITR, standalone restore</td>
+      </tr>
+      <tr>
+          <td>WAL archiving</td>
+          <td>Continuous</td>
+          <td>7 days</td>
+          <td>Incremental changes for PITR</td>
+      </tr>
+      <tr>
+          <td>Full backup (weekly)</td>
+          <td>Weekly (Sunday night)</td>
+          <td>30 days</td>
+          <td>Longer-term recovery</td>
+      </tr>
+      <tr>
+          <td>Full backup (monthly)</td>
+          <td>Monthly</td>
+          <td>12 months</td>
+          <td>Compliance and archival</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="automated-backup-script">Automated Backup Script</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#ff79c6">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"># /etc/cron.d/thunderdb-backup.sh</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run daily at 2:00 AM: 0 2 * * * /etc/cron.d/thunderdb-backup.sh</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -euo pipefail
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">BACKUP_DIR</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;/backups/thunderdb&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">DATE</span><span style="color:#ff79c6">=</span><span style="color:#ff79c6">$(</span>date +%Y%m%d<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">RETENTION_DAYS</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">7</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;[</span><span style="color:#ff79c6">$(</span>date<span style="color:#ff79c6">)</span><span style="color:#f1fa8c">] Starting ThunderDB backup...&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Trigger online backup</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">RESPONSE</span><span style="color:#ff79c6">=</span><span style="color:#ff79c6">$(</span>curl -s -X POST http://localhost:8088/admin/backup <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -H <span style="color:#f1fa8c">&#34;Content-Type: application/json&#34;</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -d <span style="color:#f1fa8c">&#34;{\&#34;destination\&#34;: \&#34;</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">BACKUP_DIR</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">/full-</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">DATE</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">\&#34;, \&#34;include_wal\&#34;: true, \&#34;compress\&#34;: true}&#34;</span><span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">BACKUP_ID</span><span style="color:#ff79c6">=</span><span style="color:#ff79c6">$(</span><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#8be9fd;font-style:italic">$RESPONSE</span> | jq -r <span style="color:#f1fa8c">&#39;.backup_id&#39;</span><span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;[</span><span style="color:#ff79c6">$(</span>date<span style="color:#ff79c6">)</span><span style="color:#f1fa8c">] Backup started: </span><span style="color:#8be9fd;font-style:italic">$BACKUP_ID</span><span style="color:#f1fa8c">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Wait for backup to complete</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">while</span> true; <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">STATUS</span><span style="color:#ff79c6">=</span><span style="color:#ff79c6">$(</span>curl -s http://localhost:8088/admin/backup/status/<span style="color:#8be9fd;font-style:italic">$BACKUP_ID</span> | jq -r <span style="color:#f1fa8c">&#39;.status&#39;</span><span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">[</span> <span style="color:#f1fa8c">&#34;</span><span style="color:#8be9fd;font-style:italic">$STATUS</span><span style="color:#f1fa8c">&#34;</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;completed&#34;</span> <span style="color:#ff79c6">]</span>; <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;[</span><span style="color:#ff79c6">$(</span>date<span style="color:#ff79c6">)</span><span style="color:#f1fa8c">] Backup completed successfully&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">break</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">elif</span> <span style="color:#ff79c6">[</span> <span style="color:#f1fa8c">&#34;</span><span style="color:#8be9fd;font-style:italic">$STATUS</span><span style="color:#f1fa8c">&#34;</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;failed&#34;</span> <span style="color:#ff79c6">]</span>; <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;[</span><span style="color:#ff79c6">$(</span>date<span style="color:#ff79c6">)</span><span style="color:#f1fa8c">] ERROR: Backup failed!&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">exit</span> <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">fi</span>
+</span></span><span style="display:flex;"><span>  sleep <span style="color:#bd93f9">10</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Verify backup</span>
+</span></span><span style="display:flex;"><span>thunderdb --verify-backup <span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">BACKUP_DIR</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">/full-</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">DATE</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Remove old backups</span>
+</span></span><span style="display:flex;"><span>find <span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">BACKUP_DIR</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span> -maxdepth <span style="color:#bd93f9">1</span> -name <span style="color:#f1fa8c">&#34;full-*&#34;</span> -mtime +<span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">RETENTION_DAYS</span><span style="color:#f1fa8c">}</span> -exec rm -rf <span style="color:#ff79c6">{}</span> <span style="color:#f1fa8c">\;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;[</span><span style="color:#ff79c6">$(</span>date<span style="color:#ff79c6">)</span><span style="color:#f1fa8c">] Cleaned up backups older than </span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">RETENTION_DAYS</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c"> days&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;[</span><span style="color:#ff79c6">$(</span>date<span style="color:#ff79c6">)</span><span style="color:#f1fa8c">] Backup process complete&#34;</span>
+</span></span></code></pre></div><h3 id="backup-monitoring">Backup Monitoring</h3>
+<p>Add alerts for backup failures:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#6272a4"># deploy/prometheus/rules/thunderdb-backup-alerts.yml</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">groups</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ff79c6">name</span>: thunderdb.backup
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">rules</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ff79c6">alert</span>: ThunderDBBackupFailed
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">expr</span>: thunderdb_last_backup_status == 0
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span>: 1m
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">labels</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">severity</span>: critical
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">annotations</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">summary</span>: <span style="color:#f1fa8c">&#34;ThunderDB backup failed on {{ $labels.instance }}&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ff79c6">alert</span>: ThunderDBBackupStale
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">expr</span>: time() - thunderdb_last_backup_timestamp &gt; 86400 * 2
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span>: 1h
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">labels</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">severity</span>: warning
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">annotations</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">summary</span>: <span style="color:#f1fa8c">&#34;No successful backup in 48 hours on {{ $labels.instance }}&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ff79c6">alert</span>: ThunderDBWALArchiveLag
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">expr</span>: thunderdb_wal_archive_pending_segments &gt; 100
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span>: 10m
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">labels</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">severity</span>: warning
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">annotations</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">summary</span>: <span style="color:#f1fa8c">&#34;WAL archiving is falling behind on {{ $labels.instance }}&#34;</span>
+</span></span></code></pre></div><hr>
+<h2 id="disaster-recovery-planning">Disaster Recovery Planning</h2>
+<h3 id="recovery-scenarios">Recovery Scenarios</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Scenario</th>
+          <th>Strategy</th>
+          <th>Expected RTO</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Single node failure (cluster)</td>
+          <td>Automatic Raft failover</td>
+          <td>Seconds</td>
+      </tr>
+      <tr>
+          <td>Data corruption on one node</td>
+          <td>Restore from backup or re-replicate from peers</td>
+          <td>Minutes</td>
+      </tr>
+      <tr>
+          <td>Full cluster failure (same region)</td>
+          <td>Restore all nodes from backup + WAL archive</td>
+          <td>30-60 minutes</td>
+      </tr>
+      <tr>
+          <td>Regional disaster</td>
+          <td>Failover to cross-region replica</td>
+          <td>Minutes</td>
+      </tr>
+      <tr>
+          <td>Accidental data deletion</td>
+          <td>PITR to before deletion timestamp</td>
+          <td>15-30 minutes</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="cross-region-backup-strategy">Cross-Region Backup Strategy</h3>
+<p>For maximum disaster resilience, maintain backups in a different geographic region:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Primary Region (us-east-1)          Backup Region (us-west-2)
+</span></span><span style="display:flex;"><span>+-------------------+               +-------------------+
+</span></span><span style="display:flex;"><span>| ThunderDB Cluster |  -- WAL --&gt;   | S3 Bucket         |
+</span></span><span style="display:flex;"><span>| (3 nodes)         |  archiving    | (WAL archive)     |
+</span></span><span style="display:flex;"><span>|                   |               |                   |
+</span></span><span style="display:flex;"><span>| Daily full backup |  -- sync --&gt;  | S3 Bucket         |
+</span></span><span style="display:flex;"><span>| (local disk)      |               | (full backups)    |
+</span></span><span style="display:flex;"><span>+-------------------+               +-------------------+
+</span></span></code></pre></div><p>Implementation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Sync local backups to a remote region</span>
+</span></span><span style="display:flex;"><span>aws s3 sync /backups/thunderdb/ s3://thunderdb-backups-us-west-2/ <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --storage-class STANDARD_IA <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --region us-west-2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Configure WAL archiving to the remote region</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># In thunderdb.toml:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># wal_archive_command = &#34;aws s3 cp %f s3://thunderdb-backups-us-west-2/wal/%n --region us-west-2&#34;</span>
+</span></span></code></pre></div><h3 id="disaster-recovery-runbook">Disaster Recovery Runbook</h3>
+<ol>
+<li><strong>Assess the failure scope</strong>: Determine whether it is a single node, full cluster, or regional failure.</li>
+<li><strong>For single node failure</strong>: If the cluster has quorum, the node will recover automatically. Otherwise, restore from backup.</li>
+<li><strong>For full cluster failure</strong>:
+a. Provision new infrastructure (or use standby).
+b. Restore the most recent full backup on each node.
+c. Apply WAL archive to bring all nodes to the same point.
+d. Start the cluster and verify data integrity.
+e. Update DNS/load balancer to point to the recovered cluster.</li>
+<li><strong>For accidental deletion</strong>: Use PITR to recover to a timestamp just before the deletion.</li>
+<li><strong>Post-recovery</strong>: Verify data integrity, check replication status, resume backups.</li>
+</ol>
+<h3 id="testing-recovery">Testing Recovery</h3>
+<p>Regularly test your recovery procedures (at least quarterly):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 1. Provision a test environment</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 2. Restore from the latest production backup</span>
+</span></span><span style="display:flex;"><span>thunderdb --restore-pitr <span style="color:#f1fa8c">&#34;latest&#34;</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --restore-backup /backups/thunderdb/full-latest <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --config /etc/thunderdb/thunderdb-test.toml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3. Start the test instance</span>
+</span></span><span style="display:flex;"><span>thunderdb --config /etc/thunderdb/thunderdb-test.toml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 4. Run validation queries to verify data integrity</span>
+</span></span><span style="display:flex;"><span>psql -h localhost -p <span style="color:#bd93f9">15432</span> -U admin -f /scripts/recovery-validation.sql
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 5. Document the recovery time and any issues</span>
+</span></span></code></pre></div><p>Record the results of each recovery test, including actual RTO, data completeness verification, and any problems encountered.</p>
+
+	<div class="section-index">
+    
+    
+    </div>
+<style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<div class="d-print-none">
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+</div>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'page_helpful', {
+      'event_category': 'Helpful',
+      'event_label': window.location.pathname,
+      'value': value
+    });
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback( 100 );
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+<br />
+</div>
+
+          </main>
+        </div>
+      </div>
+      <footer class="td-footer row d-print-none">
+  <div class="container-fluid">
+    <div class="row mx-md-2">
+      <div class="td-footer__left col-6 col-sm-4 order-sm-1">
+        
+      </div><div class="td-footer__right col-6 col-sm-4 order-sm-3">
+        <ul class="td-footer__links-list">
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="GitHub" aria-label="GitHub">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="Discussions" aria-label="Discussions">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb/discussions" aria-label="Discussions">
+      <i class="fas fa-comments"></i>
+    </a>
+  </li>
+  
+</ul>
+
+      </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
+        <span class="td-footer__copyright">&copy;
+    2026
+    <span class="td-footer__authors">ThunderDB Contributors</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><p class="td-footer__about mt-2"><a href="/docs/about/">About ThunderDB</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script src="/docs/js/main.js"></script>
+<script defer src="/docs/js/click-to-copy.js" crossorigin="anonymous"></script>
+<script src='/docs/js/tabpane-persist.js'></script>
+
+  </body>
+</html>

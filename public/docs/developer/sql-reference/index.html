@@ -1,0 +1,2074 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
+  <head><script src="/docs/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=docs/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/docs/favicons/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/docs/favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/docs/favicons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/docs/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="/docs/favicons/favicon-256.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/docs/favicons/apple-touch-icon.png">
+<link rel="manifest" href="/docs/favicons/site.webmanifest">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="msapplication-TileColor" content="#0D0D0D">
+
+<title>SQL Reference | ThunderDB Documentation</title>
+<meta name="description" content="Complete SQL language reference for ThunderDB covering DDL, DML, transactions, vector operations, foreign data wrappers, and built-in functions.">
+<meta property="og:url" content="http://localhost:1313/docs/docs/developer/sql-reference/">
+  <meta property="og:site_name" content="ThunderDB Documentation">
+  <meta property="og:title" content="SQL Reference">
+  <meta property="og:description" content="Complete SQL language reference for ThunderDB covering DDL, DML, transactions, vector operations, foreign data wrappers, and built-in functions.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+
+  <meta itemprop="name" content="SQL Reference">
+  <meta itemprop="description" content="Complete SQL language reference for ThunderDB covering DDL, DML, transactions, vector operations, foreign data wrappers, and built-in functions.">
+  <meta itemprop="wordCount" content="4369">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SQL Reference">
+  <meta name="twitter:description" content="Complete SQL language reference for ThunderDB covering DDL, DML, transactions, vector operations, foreign data wrappers, and built-in functions.">
+<link href="/docs/scss/main.css" rel="stylesheet">
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+  crossorigin="anonymous"></script>
+<script defer
+  src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
+  integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
+  crossorigin="anonymous"></script>
+
+  </head>
+  <body class="td-section">
+    <header>
+      <nav class="td-navbar js-navbar-scroll" data-bs-theme="dark">
+<div class="td-navbar-container container-fluid flex-column flex-md-row">
+  <a class="navbar-brand" href="/docs/"><span class="navbar-brand__logo navbar-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="300" height="64"><defs><symbol id="b" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#331500" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FF6B00"/><rect width="4.8" height=".6" rx=".55" fill="#FA4" opacity=".5"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#F83" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#930" opacity=".35"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D50"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,200,100,0.3)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FC8" opacity=".55"/></symbol><symbol id="c" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#4D3000" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FA0"/><rect width="4.8" height=".6" rx=".55" fill="#FD6" opacity=".55"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#FB3" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#960" opacity=".3"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D80"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,230,150,0.35)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FE9" opacity=".6"/></symbol></defs><use href="#b" x="35" y="2" width="5" height="5"/><use href="#b" x="41" y="2" width="5" height="5"/><use href="#b" x="29" y="8" width="5" height="5"/><use href="#b" x="35" y="8" width="5" height="5"/><use href="#b" x="23" y="14" width="5" height="5"/><use href="#b" x="29" y="14" width="5" height="5"/><use href="#b" x="17" y="20" width="5" height="5"/><use href="#b" x="23" y="20" width="5" height="5"/><use href="#c" x="5" y="26" width="5" height="5"/><use href="#c" x="11" y="26" width="5" height="5"/><use href="#c" x="17" y="26" width="5" height="5"/><use href="#c" x="23" y="26" width="5" height="5"/><use href="#c" x="29" y="26" width="5" height="5"/><use href="#c" x="35" y="26" width="5" height="5"/><use href="#c" x="41" y="26" width="5" height="5"/><use href="#c" x="47" y="26" width="5" height="5"/><use href="#b" x="35" y="32" width="5" height="5"/><use href="#b" x="41" y="32" width="5" height="5"/><use href="#b" x="29" y="38" width="5" height="5"/><use href="#b" x="35" y="38" width="5" height="5"/><use href="#b" x="23" y="44" width="5" height="5"/><use href="#b" x="29" y="44" width="5" height="5"/><use href="#b" x="17" y="50" width="5" height="5"/><use href="#b" x="23" y="50" width="5" height="5"/><use href="#b" x="11" y="56" width="5" height="5"/><use href="#b" x="17" y="56" width="5" height="5"/><text x="66" y="43" font-family="'SF Mono','Fira Code','Consolas','Courier New',monospace" font-size="27" font-weight="900" letter-spacing=".5"><tspan fill="#FFF">Thunder</tspan><tspan fill="#FF6B00">DB</tspan></text></svg></span><span class="navbar-brand__name">ThunderDB Documentation</span></a>
+  <div class="td-navbar-nav-scroll td-navbar-nav-scroll--indicator" id="main_navbar">
+    <div class="scroll-indicator scroll-left"></div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/"><span>Documentation</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/architecture/"><span>Architecture</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/developer/api-reference/"><span>API Reference</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/about/"><span>About</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/thunderdb/thunderdb" target="_blank" rel="noopener"><i class='fab fa-github'></i><span>GitHub</span></a>
+      </li>
+      </ul>
+    <div class="scroll-indicator scroll-right"></div>
+  </div>
+  <div class="d-none d-lg-block td-navbar__search">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+  </div>
+</div>
+</nav>
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main" data-bs-spy="scroll" data-bs-target=".td-toc" data-bs-root-margin="0px 0px -10%">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+  <script>
+    $(function() {
+    $("#td-section-nav a").removeClass("active");
+    $("#td-section-nav #m-docsdocsdevelopersql-reference").addClass("active");
+    $("#td-section-nav #m-docsdocsdevelopersql-reference-li span").addClass("td-sidebar-nav-active-item");
+    $("#td-section-nav #m-docsdocsdevelopersql-reference").parents("li").addClass("active-path");
+    $("#td-section-nav li.active-path").addClass("show");
+    $("#td-section-nav li.active-path").children("input").prop('checked', true);
+    $("#td-section-nav #m-docsdocsdevelopersql-reference-li").siblings("li").addClass("show");
+    $("#td-section-nav #m-docsdocsdevelopersql-reference-li").children("ul").children("li").addClass("show");
+    $("#td-sidebar-menu").toggleClass("d-none");
+    });
+  </script>
+  <div id="td-sidebar-menu" class="td-sidebar__inner d-none">
+  <form class="td-sidebar__search d-flex align-items-center">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+    <button class="btn btn-link td-sidebar__toggle" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  <nav class="td-sidebar-nav collapse foldable-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocs-li">
+    <a href="/docs/docs/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docsdocs"><span class="">Documentation</span></a>
+    <ul class="ul-1">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsgetting-started-li">
+    <input type="checkbox" id="m-docsdocsgetting-started-check"/>
+    <label for="m-docsdocsgetting-started-check"><a href="/docs/docs/getting-started/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsgetting-started"><span class="">Getting Started</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsarchitecture-li">
+    <input type="checkbox" id="m-docsdocsarchitecture-check"/>
+    <label for="m-docsdocsarchitecture-check"><a href="/docs/docs/architecture/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsarchitecture"><span class="">Architecture</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsdeveloper-li">
+    <input type="checkbox" id="m-docsdocsdeveloper-check"/>
+    <label for="m-docsdocsdeveloper-check"><a href="/docs/docs/developer/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloper"><span class="">Developer Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperapi-reference-li">
+    <input type="checkbox" id="m-docsdocsdeveloperapi-reference-check"/>
+    <label for="m-docsdocsdeveloperapi-reference-check"><a href="/docs/docs/developer/api-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperapi-reference"><span class="">API Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersql-reference-li">
+    <input type="checkbox" id="m-docsdocsdevelopersql-reference-check"/>
+    <label for="m-docsdocsdevelopersql-reference-check"><a href="/docs/docs/developer/sql-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersql-reference"><span class="">SQL Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersdk-li">
+    <input type="checkbox" id="m-docsdocsdevelopersdk-check"/>
+    <label for="m-docsdocsdevelopersdk-check"><a href="/docs/docs/developer/sdk/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersdk"><span class="">SDKs &amp; Drivers</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperexamples-li">
+    <input type="checkbox" id="m-docsdocsdeveloperexamples-check"/>
+    <label for="m-docsdocsdeveloperexamples-check"><a href="/docs/docs/developer/examples/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperexamples"><span class="">Examples &amp; Use Cases</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsadministrator-li">
+    <input type="checkbox" id="m-docsdocsadministrator-check"/>
+    <label for="m-docsdocsadministrator-check"><a href="/docs/docs/administrator/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministrator"><span class="">Administrator Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratordeployment-li">
+    <input type="checkbox" id="m-docsdocsadministratordeployment-check"/>
+    <label for="m-docsdocsadministratordeployment-check"><a href="/docs/docs/administrator/deployment/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratordeployment"><span class="">Deployment</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorconfiguration-li">
+    <input type="checkbox" id="m-docsdocsadministratorconfiguration-check"/>
+    <label for="m-docsdocsadministratorconfiguration-check"><a href="/docs/docs/administrator/configuration/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorconfiguration"><span class="">Configuration</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratormonitoring-li">
+    <input type="checkbox" id="m-docsdocsadministratormonitoring-check"/>
+    <label for="m-docsdocsadministratormonitoring-check"><a href="/docs/docs/administrator/monitoring/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratormonitoring"><span class="">Monitoring</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorbackup-recovery-li">
+    <input type="checkbox" id="m-docsdocsadministratorbackup-recovery-check"/>
+    <label for="m-docsdocsadministratorbackup-recovery-check"><a href="/docs/docs/administrator/backup-recovery/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorbackup-recovery"><span class="">Backup &amp; Recovery</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorsecurity-li">
+    <input type="checkbox" id="m-docsdocsadministratorsecurity-check"/>
+    <label for="m-docsdocsadministratorsecurity-check"><a href="/docs/docs/administrator/security/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorsecurity"><span class="">Security</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratortroubleshooting-li">
+    <input type="checkbox" id="m-docsdocsadministratortroubleshooting-check"/>
+    <label for="m-docsdocsadministratortroubleshooting-check"><a href="/docs/docs/administrator/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratortroubleshooting"><span class="">Troubleshooting</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocscontributor-li">
+    <input type="checkbox" id="m-docsdocscontributor-check"/>
+    <label for="m-docsdocscontributor-check"><a href="/docs/docs/contributor/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributor"><span class="">Contributor Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributordevelopment-setup-li">
+    <input type="checkbox" id="m-docsdocscontributordevelopment-setup-check"/>
+    <label for="m-docsdocscontributordevelopment-setup-check"><a href="/docs/docs/contributor/development-setup/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributordevelopment-setup"><span class="">Development Setup</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorcodebase-guide-li">
+    <input type="checkbox" id="m-docsdocscontributorcodebase-guide-check"/>
+    <label for="m-docsdocscontributorcodebase-guide-check"><a href="/docs/docs/contributor/codebase-guide/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorcodebase-guide"><span class="">Codebase Guide</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributortesting-li">
+    <input type="checkbox" id="m-docsdocscontributortesting-check"/>
+    <label for="m-docsdocscontributortesting-check"><a href="/docs/docs/contributor/testing/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributortesting"><span class="">Testing</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorrelease-process-li">
+    <input type="checkbox" id="m-docsdocscontributorrelease-process-check"/>
+    <label for="m-docsdocscontributorrelease-process-check"><a href="/docs/docs/contributor/release-process/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorrelease-process"><span class="">Release Process</span></a></label>
+    
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
+<a href="https://github.com/thunderdb/thunderdb/tree/main/content/docs/developer/sql-reference/_index.md" class="td-page-meta--view td-page-meta__view" target="_blank" rel="noopener"><i class="fa-solid fa-file-lines fa-fw"></i> View page source</a>
+  <a href="https://github.com/thunderdb/thunderdb/edit/main/content/docs/developer/sql-reference/_index.md" class="td-page-meta--edit td-page-meta__edit" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Edit this page</a>
+  <a href="https://github.com/thunderdb/thunderdb/new/main/content/docs/developer/sql-reference?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child td-page-meta__child" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Create child page</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new?title=SQL%20Reference" class="td-page-meta--issue td-page-meta__issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create documentation issue</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new" class="td-page-meta--project td-page-meta__project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create project issue</a>
+  
+</div>
+
+            <div class="td-toc" data-proofer-ignore>
+<div class="td-toc-title">
+      <span class="td-toc-title__text">On this page</span>
+      <a class="td-toc-title__link" title="Top of page" href="#"></a>
+    </div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#data-types">Data Types</a>
+      <ul>
+        <li><a href="#numeric-types">Numeric Types</a></li>
+        <li><a href="#string-types">String Types</a></li>
+        <li><a href="#binary-types">Binary Types</a></li>
+        <li><a href="#date--time-types">Date &amp; Time Types</a></li>
+        <li><a href="#other-types">Other Types</a></li>
+        <li><a href="#type-casting">Type Casting</a></li>
+      </ul>
+    </li>
+    <li><a href="#ddl-data-definition-language">DDL (Data Definition Language)</a>
+      <ul>
+        <li><a href="#create-table">CREATE TABLE</a></li>
+        <li><a href="#drop-table">DROP TABLE</a></li>
+        <li><a href="#alter-table">ALTER TABLE</a></li>
+        <li><a href="#create-index">CREATE INDEX</a></li>
+        <li><a href="#drop-index">DROP INDEX</a></li>
+      </ul>
+    </li>
+    <li><a href="#dml-data-manipulation-language">DML (Data Manipulation Language)</a>
+      <ul>
+        <li><a href="#insert">INSERT</a></li>
+        <li><a href="#update">UPDATE</a></li>
+        <li><a href="#delete">DELETE</a></li>
+        <li><a href="#select">SELECT</a></li>
+      </ul>
+    </li>
+    <li><a href="#transactions">Transactions</a>
+      <ul>
+        <li><a href="#begin">BEGIN</a></li>
+        <li><a href="#commit">COMMIT</a></li>
+        <li><a href="#rollback">ROLLBACK</a></li>
+        <li><a href="#savepoint">SAVEPOINT</a></li>
+        <li><a href="#set-transaction-isolation-level">SET TRANSACTION ISOLATION LEVEL</a></li>
+        <li><a href="#transaction-examples">Transaction Examples</a></li>
+      </ul>
+    </li>
+    <li><a href="#vector-operations">Vector Operations</a>
+      <ul>
+        <li><a href="#creating-tables-with-vector-columns">Creating Tables with Vector Columns</a></li>
+        <li><a href="#inserting-vectors">Inserting Vectors</a></li>
+        <li><a href="#similarity-operators">Similarity Operators</a></li>
+        <li><a href="#vector-search-queries">Vector Search Queries</a></li>
+        <li><a href="#creating-vector-indexes">Creating Vector Indexes</a></li>
+        <li><a href="#tuning-ann-search">Tuning ANN Search</a></li>
+      </ul>
+    </li>
+    <li><a href="#foreign-data-wrappers-fdw">Foreign Data Wrappers (FDW)</a>
+      <ul>
+        <li><a href="#create-server">CREATE SERVER</a></li>
+        <li><a href="#create-foreign-table">CREATE FOREIGN TABLE</a></li>
+        <li><a href="#querying-foreign-tables">Querying Foreign Tables</a></li>
+        <li><a href="#drop-server-and-drop-foreign-table">DROP SERVER and DROP FOREIGN TABLE</a></li>
+      </ul>
+    </li>
+    <li><a href="#built-in-functions">Built-in Functions</a>
+      <ul>
+        <li><a href="#aggregate-functions">Aggregate Functions</a></li>
+        <li><a href="#string-functions">String Functions</a></li>
+        <li><a href="#date--time-functions">Date &amp; Time Functions</a></li>
+        <li><a href="#json--jsonb-functions">JSON / JSONB Functions</a></li>
+        <li><a href="#mathematical-functions">Mathematical Functions</a></li>
+        <li><a href="#conditional-expressions">Conditional Expressions</a></li>
+      </ul>
+    </li>
+    <li><a href="#system-commands">System Commands</a></li>
+  </ul>
+</nav>
+  </div>
+
+            
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/">Documentation</a></li>
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/developer/">Developer Guide</a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    SQL Reference</li>
+  </ol>
+</nav>
+<div class="td-content">
+	<h1>SQL Reference</h1>
+  <div class="lead">Complete SQL language reference for ThunderDB covering DDL, DML, transactions, vector operations, foreign data wrappers, and built-in functions.</div>
+	<header class="article-meta">
+		
+</header>
+	<h1 id="sql-reference">SQL Reference</h1>
+<p>ThunderDB implements a rich SQL dialect that is largely compatible with PostgreSQL. This reference documents every statement, data type, operator, and function available in ThunderDB.</p>
+<hr>
+<h2 id="data-types">Data Types</h2>
+<p>ThunderDB supports the following data types:</p>
+<h3 id="numeric-types">Numeric Types</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Type</th>
+          <th>Size</th>
+          <th>Range</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>BOOLEAN</code></td>
+          <td>1 byte</td>
+          <td><code>true</code> / <code>false</code></td>
+          <td>Logical boolean</td>
+      </tr>
+      <tr>
+          <td><code>INT8</code> (alias <code>TINYINT</code>)</td>
+          <td>1 byte</td>
+          <td>-128 to 127</td>
+          <td>8-bit signed integer</td>
+      </tr>
+      <tr>
+          <td><code>INT16</code> (alias <code>SMALLINT</code>)</td>
+          <td>2 bytes</td>
+          <td>-32,768 to 32,767</td>
+          <td>16-bit signed integer</td>
+      </tr>
+      <tr>
+          <td><code>INT32</code> (alias <code>INT</code>, <code>INTEGER</code>)</td>
+          <td>4 bytes</td>
+          <td>-2^31 to 2^31-1</td>
+          <td>32-bit signed integer</td>
+      </tr>
+      <tr>
+          <td><code>INT64</code> (alias <code>BIGINT</code>)</td>
+          <td>8 bytes</td>
+          <td>-2^63 to 2^63-1</td>
+          <td>64-bit signed integer</td>
+      </tr>
+      <tr>
+          <td><code>FLOAT32</code> (alias <code>REAL</code>, <code>FLOAT</code>)</td>
+          <td>4 bytes</td>
+          <td>IEEE 754 single</td>
+          <td>32-bit floating point</td>
+      </tr>
+      <tr>
+          <td><code>FLOAT64</code> (alias <code>DOUBLE PRECISION</code>, <code>DOUBLE</code>)</td>
+          <td>8 bytes</td>
+          <td>IEEE 754 double</td>
+          <td>64-bit floating point</td>
+      </tr>
+      <tr>
+          <td><code>DECIMAL(p, s)</code> (alias <code>NUMERIC</code>)</td>
+          <td>variable</td>
+          <td>Up to 38 digits</td>
+          <td>Exact decimal with precision <code>p</code> and scale <code>s</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="string-types">String Types</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Type</th>
+          <th>Max Size</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>STRING</code> (alias <code>TEXT</code>)</td>
+          <td>2 GB</td>
+          <td>Variable-length unlimited string</td>
+      </tr>
+      <tr>
+          <td><code>CHAR(n)</code></td>
+          <td><code>n</code> bytes</td>
+          <td>Fixed-length string, blank-padded</td>
+      </tr>
+      <tr>
+          <td><code>VARCHAR(n)</code></td>
+          <td><code>n</code> bytes</td>
+          <td>Variable-length string with max length</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="binary-types">Binary Types</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Type</th>
+          <th>Max Size</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>BINARY</code> (alias <code>BYTEA</code>)</td>
+          <td>2 GB</td>
+          <td>Variable-length binary data</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="date--time-types">Date &amp; Time Types</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Type</th>
+          <th>Size</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>DATE</code></td>
+          <td>4 bytes</td>
+          <td>Calendar date (year, month, day)</td>
+      </tr>
+      <tr>
+          <td><code>TIME</code></td>
+          <td>8 bytes</td>
+          <td>Time of day without timezone</td>
+      </tr>
+      <tr>
+          <td><code>TIMESTAMP</code></td>
+          <td>8 bytes</td>
+          <td>Date and time without timezone</td>
+      </tr>
+      <tr>
+          <td><code>TIMESTAMPTZ</code> (alias <code>TIMESTAMP WITH TIME ZONE</code>)</td>
+          <td>8 bytes</td>
+          <td>Date and time with timezone</td>
+      </tr>
+      <tr>
+          <td><code>INTERVAL</code></td>
+          <td>16 bytes</td>
+          <td>Time duration</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="other-types">Other Types</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Type</th>
+          <th>Size</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>UUID</code></td>
+          <td>16 bytes</td>
+          <td>Universally unique identifier</td>
+      </tr>
+      <tr>
+          <td><code>JSON</code></td>
+          <td>variable</td>
+          <td>JSON data stored as text</td>
+      </tr>
+      <tr>
+          <td><code>JSONB</code></td>
+          <td>variable</td>
+          <td>JSON data stored in decomposed binary format (indexable)</td>
+      </tr>
+      <tr>
+          <td><code>ARRAY</code></td>
+          <td>variable</td>
+          <td>One-dimensional array of any scalar type</td>
+      </tr>
+      <tr>
+          <td><code>VECTOR(dim)</code></td>
+          <td><code>dim * 4</code> bytes</td>
+          <td>Fixed-dimension vector of <code>FLOAT32</code> elements</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="type-casting">Type Casting</h3>
+<p>ThunderDB supports explicit casting with <code>CAST()</code> and the <code>::</code> operator:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">CAST</span>(<span style="color:#f1fa8c">&#39;2025-01-15&#39;</span> <span style="color:#ff79c6">AS</span> <span style="color:#8be9fd;font-style:italic">DATE</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#f1fa8c">&#39;42&#39;</span>::INT64;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#f1fa8c">&#39;[1.0, 2.0, 3.0]&#39;</span>::VECTOR(<span style="color:#bd93f9">3</span>);
+</span></span></code></pre></div><hr>
+<h2 id="ddl-data-definition-language">DDL (Data Definition Language)</h2>
+<h3 id="create-table">CREATE TABLE</h3>
+<p>Create a new table with specified columns, constraints, and storage engine.</p>
+<p><strong>Syntax:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> [<span style="color:#ff79c6">IF</span> <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">EXISTS</span>] [<span style="color:#ff79c6">schema</span>.]<span style="color:#ff79c6">table_name</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">column_name</span> data_type [<span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span>] [<span style="color:#ff79c6">DEFAULT</span> expr] [<span style="color:#ff79c6">PRIMARY</span> <span style="color:#ff79c6">KEY</span>],
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>    [<span style="color:#ff79c6">CONSTRAINT</span> name <span style="color:#ff79c6">PRIMARY</span> <span style="color:#ff79c6">KEY</span> (col1, col2, ...)],
+</span></span><span style="display:flex;"><span>    [<span style="color:#ff79c6">CONSTRAINT</span> name <span style="color:#ff79c6">UNIQUE</span> (col1, col2, ...)],
+</span></span><span style="display:flex;"><span>    [<span style="color:#ff79c6">CONSTRAINT</span> name <span style="color:#ff79c6">FOREIGN</span> <span style="color:#ff79c6">KEY</span> (col) <span style="color:#ff79c6">REFERENCES</span> other_table(col)
+</span></span><span style="display:flex;"><span>        [<span style="color:#ff79c6">ON</span> <span style="color:#ff79c6">DELETE</span> <span style="color:#ff79c6">CASCADE</span><span style="color:#ff79c6">|</span><span style="color:#ff79c6">SET</span> <span style="color:#ff79c6">NULL</span><span style="color:#ff79c6">|</span><span style="color:#ff79c6">RESTRICT</span>]
+</span></span><span style="display:flex;"><span>        [<span style="color:#ff79c6">ON</span> <span style="color:#ff79c6">UPDATE</span> <span style="color:#ff79c6">CASCADE</span><span style="color:#ff79c6">|</span><span style="color:#ff79c6">SET</span> <span style="color:#ff79c6">NULL</span><span style="color:#ff79c6">|</span><span style="color:#ff79c6">RESTRICT</span>]],
+</span></span><span style="display:flex;"><span>    [<span style="color:#ff79c6">CONSTRAINT</span> name <span style="color:#ff79c6">CHECK</span> (expression)]
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>[ENGINE <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">ROW</span> <span style="color:#ff79c6">|</span> COLUMNAR]
+</span></span><span style="display:flex;"><span>[PARTITION <span style="color:#ff79c6">BY</span> RANGE<span style="color:#ff79c6">|</span>HASH<span style="color:#ff79c6">|</span>LIST (<span style="color:#ff79c6">column</span>)]
+</span></span><span style="display:flex;"><span>[<span style="color:#ff79c6">WITH</span> (<span style="color:#ff79c6">option</span> <span style="color:#ff79c6">=</span> value, ...)];
+</span></span></code></pre></div><p><strong>Storage Engines:</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>Engine</th>
+          <th>Best For</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>ROW</code> (default)</td>
+          <td>OLTP, transactional</td>
+          <td>Row-oriented storage, optimized for point lookups and writes</td>
+      </tr>
+      <tr>
+          <td><code>COLUMNAR</code></td>
+          <td>OLAP, analytics</td>
+          <td>Column-oriented storage, optimized for scans and aggregations</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Examples:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Basic table
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> users (
+</span></span><span style="display:flex;"><span>    id        <span style="color:#8be9fd;font-style:italic">BIGINT</span> <span style="color:#ff79c6">PRIMARY</span> <span style="color:#ff79c6">KEY</span>,
+</span></span><span style="display:flex;"><span>    name      <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">255</span>) <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span>,
+</span></span><span style="display:flex;"><span>    email     <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">255</span>) <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span> <span style="color:#ff79c6">UNIQUE</span>,
+</span></span><span style="display:flex;"><span>    active    <span style="color:#8be9fd;font-style:italic">BOOLEAN</span> <span style="color:#ff79c6">DEFAULT</span> <span style="color:#ff79c6">true</span>,
+</span></span><span style="display:flex;"><span>    created_at TIMESTAMPTZ <span style="color:#ff79c6">DEFAULT</span> now()
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Table with composite primary key
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> order_items (
+</span></span><span style="display:flex;"><span>    order_id   <span style="color:#8be9fd;font-style:italic">BIGINT</span> <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span>,
+</span></span><span style="display:flex;"><span>    product_id <span style="color:#8be9fd;font-style:italic">BIGINT</span> <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span>,
+</span></span><span style="display:flex;"><span>    quantity   INT32 <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span> <span style="color:#ff79c6">CHECK</span> (quantity <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">0</span>),
+</span></span><span style="display:flex;"><span>    unit_price <span style="color:#8be9fd;font-style:italic">DECIMAL</span>(<span style="color:#bd93f9">10</span>,<span style="color:#bd93f9">2</span>) <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">PRIMARY</span> <span style="color:#ff79c6">KEY</span> (order_id, product_id),
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">FOREIGN</span> <span style="color:#ff79c6">KEY</span> (order_id) <span style="color:#ff79c6">REFERENCES</span> orders(id) <span style="color:#ff79c6">ON</span> <span style="color:#ff79c6">DELETE</span> <span style="color:#ff79c6">CASCADE</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Columnar table for analytics
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> analytics_events (
+</span></span><span style="display:flex;"><span>    event_id    <span style="color:#8be9fd;font-style:italic">BIGINT</span> <span style="color:#ff79c6">PRIMARY</span> <span style="color:#ff79c6">KEY</span>,
+</span></span><span style="display:flex;"><span>    user_id     <span style="color:#8be9fd;font-style:italic">BIGINT</span>,
+</span></span><span style="display:flex;"><span>    event_type  <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">50</span>) <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span>,
+</span></span><span style="display:flex;"><span>    properties  JSONB,
+</span></span><span style="display:flex;"><span>    occurred_at TIMESTAMPTZ <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span>
+</span></span><span style="display:flex;"><span>) ENGINE <span style="color:#ff79c6">=</span> COLUMNAR;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Partitioned table
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> logs (
+</span></span><span style="display:flex;"><span>    id         <span style="color:#8be9fd;font-style:italic">BIGINT</span> <span style="color:#ff79c6">PRIMARY</span> <span style="color:#ff79c6">KEY</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">level</span>      <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">10</span>),
+</span></span><span style="display:flex;"><span>    message    <span style="color:#8be9fd;font-style:italic">TEXT</span>,
+</span></span><span style="display:flex;"><span>    created_at TIMESTAMPTZ <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span>
+</span></span><span style="display:flex;"><span>) PARTITION <span style="color:#ff79c6">BY</span> RANGE (created_at);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Table with vector column
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> documents (
+</span></span><span style="display:flex;"><span>    id        <span style="color:#8be9fd;font-style:italic">BIGINT</span> <span style="color:#ff79c6">PRIMARY</span> <span style="color:#ff79c6">KEY</span>,
+</span></span><span style="display:flex;"><span>    title     <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">500</span>),
+</span></span><span style="display:flex;"><span>    body      <span style="color:#8be9fd;font-style:italic">TEXT</span>,
+</span></span><span style="display:flex;"><span>    embedding VECTOR(<span style="color:#bd93f9">1536</span>),
+</span></span><span style="display:flex;"><span>    metadata  JSONB
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Table with array columns
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> tags (
+</span></span><span style="display:flex;"><span>    id     <span style="color:#8be9fd;font-style:italic">BIGINT</span> <span style="color:#ff79c6">PRIMARY</span> <span style="color:#ff79c6">KEY</span>,
+</span></span><span style="display:flex;"><span>    name   <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">100</span>),
+</span></span><span style="display:flex;"><span>    labels <span style="color:#8be9fd;font-style:italic">ARRAY</span><span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">50</span>)<span style="color:#ff79c6">&gt;</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Conditional creation
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> <span style="color:#ff79c6">IF</span> <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">EXISTS</span> sessions (
+</span></span><span style="display:flex;"><span>    id         UUID <span style="color:#ff79c6">PRIMARY</span> <span style="color:#ff79c6">KEY</span> <span style="color:#ff79c6">DEFAULT</span> gen_random_uuid(),
+</span></span><span style="display:flex;"><span>    user_id    <span style="color:#8be9fd;font-style:italic">BIGINT</span> <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span> <span style="color:#ff79c6">REFERENCES</span> users(id),
+</span></span><span style="display:flex;"><span>    token      <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">255</span>) <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span>,
+</span></span><span style="display:flex;"><span>    expires_at TIMESTAMPTZ <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span>
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><h3 id="drop-table">DROP TABLE</h3>
+<p>Remove a table and its data.</p>
+<p><strong>Syntax:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">DROP</span> <span style="color:#ff79c6">TABLE</span> [<span style="color:#ff79c6">IF</span> <span style="color:#ff79c6">EXISTS</span>] [<span style="color:#ff79c6">schema</span>.]<span style="color:#ff79c6">table_name</span> [<span style="color:#ff79c6">CASCADE</span> <span style="color:#ff79c6">|</span> <span style="color:#ff79c6">RESTRICT</span>];
+</span></span></code></pre></div><p><strong>Examples:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Drop a table (error if it does not exist)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">DROP</span> <span style="color:#ff79c6">TABLE</span> sessions;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Drop only if it exists
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">DROP</span> <span style="color:#ff79c6">TABLE</span> <span style="color:#ff79c6">IF</span> <span style="color:#ff79c6">EXISTS</span> sessions;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Drop and cascade to dependent objects (indexes, foreign keys)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">DROP</span> <span style="color:#ff79c6">TABLE</span> users <span style="color:#ff79c6">CASCADE</span>;
+</span></span></code></pre></div><h3 id="alter-table">ALTER TABLE</h3>
+<p>Modify an existing table structure.</p>
+<p><strong>Syntax:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">ALTER</span> <span style="color:#ff79c6">TABLE</span> [<span style="color:#ff79c6">schema</span>.]<span style="color:#ff79c6">table_name</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">ADD</span> <span style="color:#ff79c6">COLUMN</span> <span style="color:#ff79c6">column_name</span> data_type [<span style="color:#ff79c6">constraints</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">|</span> <span style="color:#ff79c6">DROP</span> <span style="color:#ff79c6">COLUMN</span> <span style="color:#ff79c6">column_name</span> [<span style="color:#ff79c6">CASCADE</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">|</span> <span style="color:#ff79c6">ALTER</span> <span style="color:#ff79c6">COLUMN</span> <span style="color:#ff79c6">column_name</span> <span style="color:#ff79c6">SET</span> <span style="color:#ff79c6">DATA</span> <span style="color:#ff79c6">TYPE</span> data_type
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">|</span> <span style="color:#ff79c6">ALTER</span> <span style="color:#ff79c6">COLUMN</span> <span style="color:#ff79c6">column_name</span> <span style="color:#ff79c6">SET</span> <span style="color:#ff79c6">DEFAULT</span> expr
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">|</span> <span style="color:#ff79c6">ALTER</span> <span style="color:#ff79c6">COLUMN</span> <span style="color:#ff79c6">column_name</span> <span style="color:#ff79c6">DROP</span> <span style="color:#ff79c6">DEFAULT</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">|</span> <span style="color:#ff79c6">ALTER</span> <span style="color:#ff79c6">COLUMN</span> <span style="color:#ff79c6">column_name</span> <span style="color:#ff79c6">SET</span> <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">|</span> <span style="color:#ff79c6">ALTER</span> <span style="color:#ff79c6">COLUMN</span> <span style="color:#ff79c6">column_name</span> <span style="color:#ff79c6">DROP</span> <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">|</span> <span style="color:#ff79c6">ADD</span> <span style="color:#ff79c6">CONSTRAINT</span> constraint_def
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">|</span> <span style="color:#ff79c6">DROP</span> <span style="color:#ff79c6">CONSTRAINT</span> <span style="color:#ff79c6">constraint_name</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">|</span> <span style="color:#ff79c6">RENAME</span> <span style="color:#ff79c6">TO</span> new_table_name
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">|</span> <span style="color:#ff79c6">RENAME</span> <span style="color:#ff79c6">COLUMN</span> old_name <span style="color:#ff79c6">TO</span> new_name;
+</span></span></code></pre></div><p><strong>Examples:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Add a column
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">ALTER</span> <span style="color:#ff79c6">TABLE</span> users <span style="color:#ff79c6">ADD</span> <span style="color:#ff79c6">COLUMN</span> phone <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">20</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Drop a column
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">ALTER</span> <span style="color:#ff79c6">TABLE</span> users <span style="color:#ff79c6">DROP</span> <span style="color:#ff79c6">COLUMN</span> phone;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Change column type
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">ALTER</span> <span style="color:#ff79c6">TABLE</span> users <span style="color:#ff79c6">ALTER</span> <span style="color:#ff79c6">COLUMN</span> name <span style="color:#ff79c6">SET</span> <span style="color:#ff79c6">DATA</span> <span style="color:#ff79c6">TYPE</span> <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">500</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Add a check constraint
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">ALTER</span> <span style="color:#ff79c6">TABLE</span> orders <span style="color:#ff79c6">ADD</span> <span style="color:#ff79c6">CONSTRAINT</span> positive_total <span style="color:#ff79c6">CHECK</span> (total <span style="color:#ff79c6">&gt;=</span> <span style="color:#bd93f9">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Rename a table
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">ALTER</span> <span style="color:#ff79c6">TABLE</span> users <span style="color:#ff79c6">RENAME</span> <span style="color:#ff79c6">TO</span> customers;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Rename a column
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">ALTER</span> <span style="color:#ff79c6">TABLE</span> orders <span style="color:#ff79c6">RENAME</span> <span style="color:#ff79c6">COLUMN</span> total <span style="color:#ff79c6">TO</span> order_total;
+</span></span></code></pre></div><h3 id="create-index">CREATE INDEX</h3>
+<p>Create an index on one or more columns for faster lookups.</p>
+<p><strong>Syntax:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> [<span style="color:#ff79c6">UNIQUE</span>] <span style="color:#ff79c6">INDEX</span> [<span style="color:#ff79c6">IF</span> <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">EXISTS</span>] index_name
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">ON</span> [<span style="color:#ff79c6">schema</span>.]<span style="color:#ff79c6">table_name</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">USING</span> <span style="color:#ff79c6">method</span> (<span style="color:#ff79c6">column_name</span> [<span style="color:#ff79c6">ASC</span><span style="color:#ff79c6">|</span><span style="color:#ff79c6">DESC</span>] [NULLS <span style="color:#ff79c6">FIRST</span><span style="color:#ff79c6">|</span><span style="color:#ff79c6">LAST</span>], ...)
+</span></span><span style="display:flex;"><span>    [<span style="color:#ff79c6">WITH</span> (<span style="color:#ff79c6">option</span> <span style="color:#ff79c6">=</span> value, ...)]
+</span></span><span style="display:flex;"><span>    [<span style="color:#ff79c6">WHERE</span> predicate];
+</span></span></code></pre></div><p><strong>Supported Index Methods:</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>Method</th>
+          <th>Use Case</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>BTREE</code> (default)</td>
+          <td>Equality, range, ordering</td>
+          <td>Balanced tree, supports <code>&lt;</code>, <code>&lt;=</code>, <code>=</code>, <code>&gt;=</code>, <code>&gt;</code></td>
+      </tr>
+      <tr>
+          <td><code>HASH</code></td>
+          <td>Equality only</td>
+          <td>Hash table, supports only <code>=</code></td>
+      </tr>
+      <tr>
+          <td><code>HNSW</code></td>
+          <td>Vector ANN search</td>
+          <td>Hierarchical navigable small world graph</td>
+      </tr>
+      <tr>
+          <td><code>IVF_PQ</code></td>
+          <td>Large-scale vector search</td>
+          <td>Inverted file with product quantization</td>
+      </tr>
+      <tr>
+          <td><code>GIN</code></td>
+          <td>Full-text, JSONB, arrays</td>
+          <td>Generalized inverted index</td>
+      </tr>
+      <tr>
+          <td><code>BRIN</code></td>
+          <td>Large ordered datasets</td>
+          <td>Block range index, very compact</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Examples:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- B-tree index (default)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">INDEX</span> idx_orders_customer <span style="color:#ff79c6">ON</span> orders (customer_id);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Unique index
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">UNIQUE</span> <span style="color:#ff79c6">INDEX</span> idx_users_email <span style="color:#ff79c6">ON</span> users (email);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Composite index
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">INDEX</span> idx_orders_customer_date <span style="color:#ff79c6">ON</span> orders (customer_id, created_at <span style="color:#ff79c6">DESC</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Partial index (conditional)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">INDEX</span> idx_orders_pending <span style="color:#ff79c6">ON</span> orders (created_at)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">WHERE</span> status <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;pending&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- HNSW vector index
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">INDEX</span> idx_docs_embedding <span style="color:#ff79c6">ON</span> documents
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">USING</span> HNSW (embedding)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">WITH</span> (m <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">16</span>, ef_construction <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">200</span>, distance_metric <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;cosine&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- IVF-PQ vector index for large datasets
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">INDEX</span> idx_docs_embedding_ivf <span style="color:#ff79c6">ON</span> documents
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">USING</span> IVF_PQ (embedding)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">WITH</span> (nlist <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1024</span>, m_pq <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">64</span>, distance_metric <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;l2&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- GIN index for JSONB
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">INDEX</span> idx_events_properties <span style="color:#ff79c6">ON</span> analytics_events <span style="color:#ff79c6">USING</span> GIN (properties);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- GIN index for full-text search
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">INDEX</span> idx_docs_body_fts <span style="color:#ff79c6">ON</span> documents <span style="color:#ff79c6">USING</span> GIN (to_tsvector(<span style="color:#f1fa8c">&#39;english&#39;</span>, body));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- BRIN index for time-series data
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">INDEX</span> idx_logs_created <span style="color:#ff79c6">ON</span> logs <span style="color:#ff79c6">USING</span> BRIN (created_at)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">WITH</span> (pages_per_range <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">32</span>);
+</span></span></code></pre></div><h3 id="drop-index">DROP INDEX</h3>
+<p>Remove an index.</p>
+<p><strong>Syntax:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">DROP</span> <span style="color:#ff79c6">INDEX</span> [<span style="color:#ff79c6">IF</span> <span style="color:#ff79c6">EXISTS</span>] index_name [<span style="color:#ff79c6">CASCADE</span> <span style="color:#ff79c6">|</span> <span style="color:#ff79c6">RESTRICT</span>];
+</span></span></code></pre></div><p><strong>Examples:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">DROP</span> <span style="color:#ff79c6">INDEX</span> idx_orders_customer;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">DROP</span> <span style="color:#ff79c6">INDEX</span> <span style="color:#ff79c6">IF</span> <span style="color:#ff79c6">EXISTS</span> idx_docs_embedding;
+</span></span></code></pre></div><hr>
+<h2 id="dml-data-manipulation-language">DML (Data Manipulation Language)</h2>
+<h3 id="insert">INSERT</h3>
+<p>Insert one or more rows into a table.</p>
+<p><strong>Syntax:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> [<span style="color:#ff79c6">schema</span>.]<span style="color:#ff79c6">table_name</span> [(column1, column2, ...)]
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">VALUES</span> (value1, value2, ...) [, (value1, value2, ...), ...]
+</span></span><span style="display:flex;"><span>    [<span style="color:#ff79c6">ON</span> CONFLICT (<span style="color:#ff79c6">column</span>) <span style="color:#ff79c6">DO</span> <span style="color:#ff79c6">NOTHING</span> <span style="color:#ff79c6">|</span> <span style="color:#ff79c6">DO</span> <span style="color:#ff79c6">UPDATE</span> <span style="color:#ff79c6">SET</span> col <span style="color:#ff79c6">=</span> expr, ...]
+</span></span><span style="display:flex;"><span>    [RETURNING column1, column2, ...];
+</span></span></code></pre></div><p><strong>Examples:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Insert a single row
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> users (id, name, email)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">VALUES</span> (<span style="color:#bd93f9">1</span>, <span style="color:#f1fa8c">&#39;Alice Johnson&#39;</span>, <span style="color:#f1fa8c">&#39;alice@example.com&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Insert multiple rows
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> users (id, name, email) <span style="color:#ff79c6">VALUES</span>
+</span></span><span style="display:flex;"><span>    (<span style="color:#bd93f9">2</span>, <span style="color:#f1fa8c">&#39;Bob Smith&#39;</span>, <span style="color:#f1fa8c">&#39;bob@example.com&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#bd93f9">3</span>, <span style="color:#f1fa8c">&#39;Carol White&#39;</span>, <span style="color:#f1fa8c">&#39;carol@example.com&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#bd93f9">4</span>, <span style="color:#f1fa8c">&#39;Dave Brown&#39;</span>, <span style="color:#f1fa8c">&#39;dave@example.com&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Insert with default values
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> users (id, name, email)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">VALUES</span> (<span style="color:#bd93f9">5</span>, <span style="color:#f1fa8c">&#39;Eve Green&#39;</span>, <span style="color:#f1fa8c">&#39;eve@example.com&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- active defaults to true, created_at defaults to now()
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Upsert (insert or update on conflict)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> users (id, name, email)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">VALUES</span> (<span style="color:#bd93f9">1</span>, <span style="color:#f1fa8c">&#39;Alice J. Updated&#39;</span>, <span style="color:#f1fa8c">&#39;alice@example.com&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ON</span> CONFLICT (id) <span style="color:#ff79c6">DO</span> <span style="color:#ff79c6">UPDATE</span> <span style="color:#ff79c6">SET</span> name <span style="color:#ff79c6">=</span> EXCLUDED.name;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Insert and return the inserted row
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> orders (customer_id, product_id, quantity, total)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">VALUES</span> (<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">42</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">149</span>.<span style="color:#bd93f9">97</span>)
+</span></span><span style="display:flex;"><span>RETURNING id, created_at;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Insert from a SELECT
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> order_archive (id, customer_id, total, created_at)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> id, customer_id, total, created_at
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> orders
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> created_at <span style="color:#ff79c6">&lt;</span> <span style="color:#f1fa8c">&#39;2025-01-01&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Insert a vector
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> documents (id, title, embedding)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">VALUES</span> (<span style="color:#bd93f9">1</span>, <span style="color:#f1fa8c">&#39;Quantum Computing&#39;</span>, <span style="color:#f1fa8c">&#39;[0.1, -0.23, 0.98, ...]&#39;</span>::VECTOR(<span style="color:#bd93f9">1536</span>));
+</span></span></code></pre></div><h3 id="update">UPDATE</h3>
+<p>Modify existing rows in a table.</p>
+<p><strong>Syntax:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">UPDATE</span> [<span style="color:#ff79c6">schema</span>.]<span style="color:#ff79c6">table_name</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SET</span> column1 <span style="color:#ff79c6">=</span> expr1, column2 <span style="color:#ff79c6">=</span> expr2, ...
+</span></span><span style="display:flex;"><span>[<span style="color:#ff79c6">FROM</span> other_table]
+</span></span><span style="display:flex;"><span>[<span style="color:#ff79c6">WHERE</span> condition]
+</span></span><span style="display:flex;"><span>[RETURNING column1, column2, ...];
+</span></span></code></pre></div><p><strong>Examples:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Update a single row
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">UPDATE</span> users <span style="color:#ff79c6">SET</span> name <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;Alice Johnson-Smith&#39;</span> <span style="color:#ff79c6">WHERE</span> id <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Update multiple columns
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">UPDATE</span> orders
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SET</span> status <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;shipped&#39;</span>, shipped_at <span style="color:#ff79c6">=</span> now()
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> id <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">5012</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Update with expression
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">UPDATE</span> products
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SET</span> price <span style="color:#ff79c6">=</span> price <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">1</span>.<span style="color:#bd93f9">10</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> category <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;electronics&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Update with subquery
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">UPDATE</span> orders
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SET</span> status <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;vip&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> customer_id <span style="color:#ff79c6">IN</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">SELECT</span> id <span style="color:#ff79c6">FROM</span> users <span style="color:#ff79c6">WHERE</span> membership <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;gold&#39;</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Update with FROM clause (join-based update)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">UPDATE</span> order_items oi
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SET</span> unit_price <span style="color:#ff79c6">=</span> p.price
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> products p
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> oi.product_id <span style="color:#ff79c6">=</span> p.id
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">AND</span> p.price_updated_at <span style="color:#ff79c6">&gt;</span> oi.created_at;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Update and return modified rows
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">UPDATE</span> users
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SET</span> active <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">false</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> last_login <span style="color:#ff79c6">&lt;</span> now() <span style="color:#ff79c6">-</span> <span style="color:#8be9fd;font-style:italic">INTERVAL</span> <span style="color:#f1fa8c">&#39;90 days&#39;</span>
+</span></span><span style="display:flex;"><span>RETURNING id, name, email;
+</span></span></code></pre></div><h3 id="delete">DELETE</h3>
+<p>Remove rows from a table.</p>
+<p><strong>Syntax:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">DELETE</span> <span style="color:#ff79c6">FROM</span> [<span style="color:#ff79c6">schema</span>.]<span style="color:#ff79c6">table_name</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#ff79c6">USING</span> other_table]
+</span></span><span style="display:flex;"><span>[<span style="color:#ff79c6">WHERE</span> condition]
+</span></span><span style="display:flex;"><span>[RETURNING column1, column2, ...];
+</span></span></code></pre></div><p><strong>Examples:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Delete a single row
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">DELETE</span> <span style="color:#ff79c6">FROM</span> users <span style="color:#ff79c6">WHERE</span> id <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">42</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Delete with condition
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">DELETE</span> <span style="color:#ff79c6">FROM</span> sessions <span style="color:#ff79c6">WHERE</span> expires_at <span style="color:#ff79c6">&lt;</span> now();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Delete with subquery
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">DELETE</span> <span style="color:#ff79c6">FROM</span> orders
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> customer_id <span style="color:#ff79c6">IN</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">SELECT</span> id <span style="color:#ff79c6">FROM</span> users <span style="color:#ff79c6">WHERE</span> active <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">false</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Delete with USING (join-based delete)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">DELETE</span> <span style="color:#ff79c6">FROM</span> order_items oi
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">USING</span> orders o
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> oi.order_id <span style="color:#ff79c6">=</span> o.id <span style="color:#ff79c6">AND</span> o.status <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;cancelled&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Delete all rows (truncate-like)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">DELETE</span> <span style="color:#ff79c6">FROM</span> temp_imports;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Delete and return removed rows
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">DELETE</span> <span style="color:#ff79c6">FROM</span> users
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> active <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">false</span>
+</span></span><span style="display:flex;"><span>RETURNING id, name, email;
+</span></span></code></pre></div><h3 id="select">SELECT</h3>
+<p>Query data from one or more tables.</p>
+<p><strong>Syntax:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> [<span style="color:#ff79c6">DISTINCT</span>] column_expr [<span style="color:#ff79c6">AS</span> <span style="color:#ff79c6">alias</span>], ...
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> [<span style="color:#ff79c6">schema</span>.]<span style="color:#ff79c6">table_name</span> [<span style="color:#ff79c6">AS</span> <span style="color:#ff79c6">alias</span>]
+</span></span><span style="display:flex;"><span>    [<span style="color:#ff79c6">JOIN</span> <span style="color:#ff79c6">type</span> join_table <span style="color:#ff79c6">ON</span> condition]
+</span></span><span style="display:flex;"><span>    [<span style="color:#ff79c6">WHERE</span> condition]
+</span></span><span style="display:flex;"><span>    [<span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> column_or_expr, ...]
+</span></span><span style="display:flex;"><span>    [<span style="color:#ff79c6">HAVING</span> condition]
+</span></span><span style="display:flex;"><span>    [<span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> column_or_expr [<span style="color:#ff79c6">ASC</span><span style="color:#ff79c6">|</span><span style="color:#ff79c6">DESC</span>] [NULLS <span style="color:#ff79c6">FIRST</span><span style="color:#ff79c6">|</span><span style="color:#ff79c6">LAST</span>], ...]
+</span></span><span style="display:flex;"><span>    [<span style="color:#ff79c6">LIMIT</span> <span style="color:#ff79c6">count</span>]
+</span></span><span style="display:flex;"><span>    [<span style="color:#ff79c6">OFFSET</span> <span style="color:#ff79c6">count</span>];
+</span></span></code></pre></div><h4 id="basic-queries">Basic Queries</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Select all columns
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> users;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Select specific columns
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> name, email <span style="color:#ff79c6">FROM</span> users;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Select with alias
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    name <span style="color:#ff79c6">AS</span> customer_name,
+</span></span><span style="display:flex;"><span>    email <span style="color:#ff79c6">AS</span> customer_email
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> users;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Select with expression
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    name,
+</span></span><span style="display:flex;"><span>    price,
+</span></span><span style="display:flex;"><span>    price <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">0</span>.<span style="color:#bd93f9">9</span> <span style="color:#ff79c6">AS</span> discounted_price
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> products;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Distinct values
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">DISTINCT</span> category <span style="color:#ff79c6">FROM</span> products;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Count rows
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">COUNT</span>(<span style="color:#ff79c6">*</span>) <span style="color:#ff79c6">FROM</span> orders;
+</span></span></code></pre></div><h4 id="where-clause">WHERE Clause</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Comparison operators
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> products <span style="color:#ff79c6">WHERE</span> price <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">100</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> products <span style="color:#ff79c6">WHERE</span> price <span style="color:#ff79c6">BETWEEN</span> <span style="color:#bd93f9">50</span> <span style="color:#ff79c6">AND</span> <span style="color:#bd93f9">200</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> users <span style="color:#ff79c6">WHERE</span> name <span style="color:#ff79c6">LIKE</span> <span style="color:#f1fa8c">&#39;A%&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> users <span style="color:#ff79c6">WHERE</span> name <span style="color:#ff79c6">ILIKE</span> <span style="color:#f1fa8c">&#39;%smith%&#39;</span>;  <span style="color:#6272a4">-- case-insensitive
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> users <span style="color:#ff79c6">WHERE</span> email <span style="color:#ff79c6">IS</span> <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Logical operators
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> products
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> category <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;electronics&#39;</span> <span style="color:#ff79c6">AND</span> price <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">500</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> products
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> category <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;electronics&#39;</span> <span style="color:#ff79c6">OR</span> category <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;books&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- IN operator
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> orders <span style="color:#ff79c6">WHERE</span> status <span style="color:#ff79c6">IN</span> (<span style="color:#f1fa8c">&#39;pending&#39;</span>, <span style="color:#f1fa8c">&#39;processing&#39;</span>, <span style="color:#f1fa8c">&#39;shipped&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- NOT operator
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> orders <span style="color:#ff79c6">WHERE</span> status <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">IN</span> (<span style="color:#f1fa8c">&#39;cancelled&#39;</span>, <span style="color:#f1fa8c">&#39;refunded&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- EXISTS subquery
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> users u
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> <span style="color:#ff79c6">EXISTS</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">SELECT</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">FROM</span> orders o <span style="color:#ff79c6">WHERE</span> o.customer_id <span style="color:#ff79c6">=</span> u.id
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- ANY / ALL
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> products
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> price <span style="color:#ff79c6">&gt;</span> <span style="color:#ff79c6">ALL</span> (<span style="color:#ff79c6">SELECT</span> price <span style="color:#ff79c6">FROM</span> products <span style="color:#ff79c6">WHERE</span> category <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;books&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- JSONB operators
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> analytics_events
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> properties<span style="color:#ff79c6">-&gt;&gt;</span><span style="color:#f1fa8c">&#39;source&#39;</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;mobile&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> analytics_events
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> properties <span style="color:#ff79c6">@&gt;</span> <span style="color:#f1fa8c">&#39;{&#34;os&#34;: &#34;ios&#34;}&#39;</span>::JSONB;
+</span></span></code></pre></div><h4 id="join-types">JOIN Types</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- INNER JOIN
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> u.name, o.id <span style="color:#ff79c6">AS</span> order_id, o.total
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> users u
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">INNER</span> <span style="color:#ff79c6">JOIN</span> orders o <span style="color:#ff79c6">ON</span> u.id <span style="color:#ff79c6">=</span> o.customer_id;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- LEFT JOIN
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> u.name, <span style="color:#ff79c6">COUNT</span>(o.id) <span style="color:#ff79c6">AS</span> order_count
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> users u
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">LEFT</span> <span style="color:#ff79c6">JOIN</span> orders o <span style="color:#ff79c6">ON</span> u.id <span style="color:#ff79c6">=</span> o.customer_id
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> u.name;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- RIGHT JOIN
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> u.name, o.id <span style="color:#ff79c6">AS</span> order_id
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> orders o
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">RIGHT</span> <span style="color:#ff79c6">JOIN</span> users u <span style="color:#ff79c6">ON</span> u.id <span style="color:#ff79c6">=</span> o.customer_id;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- FULL OUTER JOIN
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> u.name, o.id <span style="color:#ff79c6">AS</span> order_id
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> users u
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FULL</span> <span style="color:#ff79c6">OUTER</span> <span style="color:#ff79c6">JOIN</span> orders o <span style="color:#ff79c6">ON</span> u.id <span style="color:#ff79c6">=</span> o.customer_id;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- CROSS JOIN
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> u.name, p.name <span style="color:#ff79c6">AS</span> product_name
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> users u
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">CROSS</span> <span style="color:#ff79c6">JOIN</span> products p;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Self-join
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> e.name <span style="color:#ff79c6">AS</span> employee, m.name <span style="color:#ff79c6">AS</span> manager
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> employees e
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">LEFT</span> <span style="color:#ff79c6">JOIN</span> employees m <span style="color:#ff79c6">ON</span> e.manager_id <span style="color:#ff79c6">=</span> m.id;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Multiple joins
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    u.name <span style="color:#ff79c6">AS</span> customer,
+</span></span><span style="display:flex;"><span>    p.name <span style="color:#ff79c6">AS</span> product,
+</span></span><span style="display:flex;"><span>    oi.quantity,
+</span></span><span style="display:flex;"><span>    oi.unit_price
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> orders o
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">JOIN</span> users u <span style="color:#ff79c6">ON</span> o.customer_id <span style="color:#ff79c6">=</span> u.id
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">JOIN</span> order_items oi <span style="color:#ff79c6">ON</span> o.id <span style="color:#ff79c6">=</span> oi.order_id
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">JOIN</span> products p <span style="color:#ff79c6">ON</span> oi.product_id <span style="color:#ff79c6">=</span> p.id
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> o.status <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;shipped&#39;</span>;
+</span></span></code></pre></div><h4 id="group-by-and-having">GROUP BY and HAVING</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Basic aggregation
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> category, <span style="color:#ff79c6">COUNT</span>(<span style="color:#ff79c6">*</span>) <span style="color:#ff79c6">AS</span> product_count, <span style="color:#ff79c6">AVG</span>(price) <span style="color:#ff79c6">AS</span> avg_price
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> products
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> category;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Group by with HAVING
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> customer_id, <span style="color:#ff79c6">SUM</span>(total) <span style="color:#ff79c6">AS</span> lifetime_value
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> orders
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> customer_id
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">HAVING</span> <span style="color:#ff79c6">SUM</span>(total) <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">10000</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> lifetime_value <span style="color:#ff79c6">DESC</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Group by with expressions
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    date_trunc(<span style="color:#f1fa8c">&#39;month&#39;</span>, created_at) <span style="color:#ff79c6">AS</span> <span style="color:#ff79c6">month</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">COUNT</span>(<span style="color:#ff79c6">*</span>) <span style="color:#ff79c6">AS</span> order_count,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">SUM</span>(total) <span style="color:#ff79c6">AS</span> revenue
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> orders
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> created_at <span style="color:#ff79c6">&gt;=</span> <span style="color:#f1fa8c">&#39;2025-01-01&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> date_trunc(<span style="color:#f1fa8c">&#39;month&#39;</span>, created_at)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> <span style="color:#ff79c6">month</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Multiple aggregations
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    category,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">COUNT</span>(<span style="color:#ff79c6">*</span>) <span style="color:#ff79c6">AS</span> <span style="color:#ff79c6">count</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">MIN</span>(price) <span style="color:#ff79c6">AS</span> min_price,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">MAX</span>(price) <span style="color:#ff79c6">AS</span> max_price,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">AVG</span>(price) <span style="color:#ff79c6">AS</span> avg_price,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">SUM</span>(price) <span style="color:#ff79c6">AS</span> total_value
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> products
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> category
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> total_value <span style="color:#ff79c6">DESC</span>;
+</span></span></code></pre></div><h4 id="order-by-limit-and-offset">ORDER BY, LIMIT, and OFFSET</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Order ascending (default)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> products <span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> price;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Order descending
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> products <span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> price <span style="color:#ff79c6">DESC</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Multiple order columns
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> products <span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> category <span style="color:#ff79c6">ASC</span>, price <span style="color:#ff79c6">DESC</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Null handling
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> products <span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> discount NULLS <span style="color:#ff79c6">LAST</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Pagination
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> products
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> id
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">LIMIT</span> <span style="color:#bd93f9">20</span> <span style="color:#ff79c6">OFFSET</span> <span style="color:#bd93f9">40</span>;  <span style="color:#6272a4">-- Page 3, 20 items per page
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Top-N query
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> orders
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> total <span style="color:#ff79c6">DESC</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">LIMIT</span> <span style="color:#bd93f9">10</span>;
+</span></span></code></pre></div><h4 id="subqueries-and-ctes">Subqueries and CTEs</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Scalar subquery
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> name,
+</span></span><span style="display:flex;"><span>       (<span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">COUNT</span>(<span style="color:#ff79c6">*</span>) <span style="color:#ff79c6">FROM</span> orders o <span style="color:#ff79c6">WHERE</span> o.customer_id <span style="color:#ff79c6">=</span> u.id) <span style="color:#ff79c6">AS</span> order_count
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> users u;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Derived table (subquery in FROM)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> top_customers.name, top_customers.total_spent
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">SELECT</span> u.name, <span style="color:#ff79c6">SUM</span>(o.total) <span style="color:#ff79c6">AS</span> total_spent
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">FROM</span> users u
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">JOIN</span> orders o <span style="color:#ff79c6">ON</span> u.id <span style="color:#ff79c6">=</span> o.customer_id
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> u.name
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> total_spent <span style="color:#ff79c6">DESC</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">LIMIT</span> <span style="color:#bd93f9">100</span>
+</span></span><span style="display:flex;"><span>) <span style="color:#ff79c6">AS</span> top_customers;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Common Table Expression (CTE)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">WITH</span> monthly_revenue <span style="color:#ff79c6">AS</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>        date_trunc(<span style="color:#f1fa8c">&#39;month&#39;</span>, created_at) <span style="color:#ff79c6">AS</span> <span style="color:#ff79c6">month</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">SUM</span>(total) <span style="color:#ff79c6">AS</span> revenue
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">FROM</span> orders
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">month</span>,
+</span></span><span style="display:flex;"><span>    revenue,
+</span></span><span style="display:flex;"><span>    LAG(revenue) OVER (<span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> <span style="color:#ff79c6">month</span>) <span style="color:#ff79c6">AS</span> prev_month_revenue,
+</span></span><span style="display:flex;"><span>    revenue <span style="color:#ff79c6">-</span> LAG(revenue) OVER (<span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> <span style="color:#ff79c6">month</span>) <span style="color:#ff79c6">AS</span> revenue_change
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> monthly_revenue
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> <span style="color:#ff79c6">month</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Recursive CTE (hierarchical data)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">WITH</span> <span style="color:#ff79c6">RECURSIVE</span> org_tree <span style="color:#ff79c6">AS</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">-- Base case: top-level managers
+</span></span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">SELECT</span> id, name, manager_id, <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">AS</span> depth
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">FROM</span> employees
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">WHERE</span> manager_id <span style="color:#ff79c6">IS</span> <span style="color:#ff79c6">NULL</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">UNION</span> <span style="color:#ff79c6">ALL</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">-- Recursive step
+</span></span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">SELECT</span> e.id, e.name, e.manager_id, t.depth <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">FROM</span> employees e
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">JOIN</span> org_tree t <span style="color:#ff79c6">ON</span> e.manager_id <span style="color:#ff79c6">=</span> t.id
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> org_tree <span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> depth, name;
+</span></span></code></pre></div><h4 id="window-functions">Window Functions</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Row number
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    name,
+</span></span><span style="display:flex;"><span>    category,
+</span></span><span style="display:flex;"><span>    price,
+</span></span><span style="display:flex;"><span>    ROW_NUMBER() OVER (PARTITION <span style="color:#ff79c6">BY</span> category <span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> price <span style="color:#ff79c6">DESC</span>) <span style="color:#ff79c6">AS</span> rank
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> products;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Running total
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    id,
+</span></span><span style="display:flex;"><span>    created_at,
+</span></span><span style="display:flex;"><span>    total,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">SUM</span>(total) OVER (<span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> created_at <span style="color:#ff79c6">ROWS</span> UNBOUNDED PRECEDING) <span style="color:#ff79c6">AS</span> running_total
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> orders;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Moving average
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">date</span>,
+</span></span><span style="display:flex;"><span>    revenue,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">AVG</span>(revenue) OVER (
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> <span style="color:#8be9fd;font-style:italic">date</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">ROWS</span> <span style="color:#ff79c6">BETWEEN</span> <span style="color:#bd93f9">6</span> PRECEDING <span style="color:#ff79c6">AND</span> <span style="color:#ff79c6">CURRENT</span> <span style="color:#ff79c6">ROW</span>
+</span></span><span style="display:flex;"><span>    ) <span style="color:#ff79c6">AS</span> seven_day_avg
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> daily_revenue;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Rank and Dense Rank
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    name,
+</span></span><span style="display:flex;"><span>    category,
+</span></span><span style="display:flex;"><span>    price,
+</span></span><span style="display:flex;"><span>    RANK() OVER (PARTITION <span style="color:#ff79c6">BY</span> category <span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> price <span style="color:#ff79c6">DESC</span>) <span style="color:#ff79c6">AS</span> rank,
+</span></span><span style="display:flex;"><span>    DENSE_RANK() OVER (PARTITION <span style="color:#ff79c6">BY</span> category <span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> price <span style="color:#ff79c6">DESC</span>) <span style="color:#ff79c6">AS</span> dense_rank
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> products;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Lead and Lag
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">month</span>,
+</span></span><span style="display:flex;"><span>    revenue,
+</span></span><span style="display:flex;"><span>    LAG(revenue, <span style="color:#bd93f9">1</span>) OVER (<span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> <span style="color:#ff79c6">month</span>) <span style="color:#ff79c6">AS</span> prev_month,
+</span></span><span style="display:flex;"><span>    LEAD(revenue, <span style="color:#bd93f9">1</span>) OVER (<span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> <span style="color:#ff79c6">month</span>) <span style="color:#ff79c6">AS</span> next_month
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> monthly_revenue;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- NTILE (buckets)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    name,
+</span></span><span style="display:flex;"><span>    price,
+</span></span><span style="display:flex;"><span>    NTILE(<span style="color:#bd93f9">4</span>) OVER (<span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> price) <span style="color:#ff79c6">AS</span> price_quartile
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> products;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- First/Last value
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">DISTINCT</span>
+</span></span><span style="display:flex;"><span>    category,
+</span></span><span style="display:flex;"><span>    FIRST_VALUE(name) OVER (PARTITION <span style="color:#ff79c6">BY</span> category <span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> price <span style="color:#ff79c6">ASC</span>) <span style="color:#ff79c6">AS</span> cheapest,
+</span></span><span style="display:flex;"><span>    FIRST_VALUE(name) OVER (PARTITION <span style="color:#ff79c6">BY</span> category <span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> price <span style="color:#ff79c6">DESC</span>) <span style="color:#ff79c6">AS</span> most_expensive
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> products;
+</span></span></code></pre></div><h4 id="set-operations">Set Operations</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- UNION (deduplicated)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> name, email <span style="color:#ff79c6">FROM</span> users
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">UNION</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> name, email <span style="color:#ff79c6">FROM</span> archived_users;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- UNION ALL (keep duplicates)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> id, total <span style="color:#ff79c6">FROM</span> orders_2024
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">UNION</span> <span style="color:#ff79c6">ALL</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> id, total <span style="color:#ff79c6">FROM</span> orders_2025;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- INTERSECT
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> customer_id <span style="color:#ff79c6">FROM</span> orders
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">INTERSECT</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> id <span style="color:#ff79c6">FROM</span> users <span style="color:#ff79c6">WHERE</span> active <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- EXCEPT
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> id <span style="color:#ff79c6">FROM</span> users
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">EXCEPT</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> customer_id <span style="color:#ff79c6">FROM</span> orders;
+</span></span></code></pre></div><hr>
+<h2 id="transactions">Transactions</h2>
+<p>ThunderDB supports full ACID transactions with multiple isolation levels.</p>
+<h3 id="begin">BEGIN</h3>
+<p>Start a new transaction.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">BEGIN</span>;
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- or
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">BEGIN</span> <span style="color:#ff79c6">TRANSACTION</span>;
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- or with isolation level
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">BEGIN</span> <span style="color:#ff79c6">TRANSACTION</span> <span style="color:#ff79c6">ISOLATION</span> <span style="color:#ff79c6">LEVEL</span> <span style="color:#ff79c6">SERIALIZABLE</span>;
+</span></span></code></pre></div><h3 id="commit">COMMIT</h3>
+<p>Commit the current transaction, making all changes permanent.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">COMMIT</span>;
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- or
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">COMMIT</span> <span style="color:#ff79c6">TRANSACTION</span>;
+</span></span></code></pre></div><h3 id="rollback">ROLLBACK</h3>
+<p>Roll back the current transaction, discarding all changes.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">ROLLBACK</span>;
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- or
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">ROLLBACK</span> <span style="color:#ff79c6">TRANSACTION</span>;
+</span></span></code></pre></div><h3 id="savepoint">SAVEPOINT</h3>
+<p>Create a savepoint within a transaction for partial rollback.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Create a savepoint
+</span></span></span><span style="display:flex;"><span>SAVEPOINT my_savepoint;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Roll back to savepoint (undo changes since savepoint, but keep transaction open)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">ROLLBACK</span> <span style="color:#ff79c6">TO</span> SAVEPOINT my_savepoint;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Release a savepoint (no longer needed)
+</span></span></span><span style="display:flex;"><span>RELEASE SAVEPOINT my_savepoint;
+</span></span></code></pre></div><h3 id="set-transaction-isolation-level">SET TRANSACTION ISOLATION LEVEL</h3>
+<p>Set the isolation level for the current transaction.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">SET</span> <span style="color:#ff79c6">TRANSACTION</span> <span style="color:#ff79c6">ISOLATION</span> <span style="color:#ff79c6">LEVEL</span> <span style="color:#ff79c6">READ</span> <span style="color:#ff79c6">COMMITTED</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SET</span> <span style="color:#ff79c6">TRANSACTION</span> <span style="color:#ff79c6">ISOLATION</span> <span style="color:#ff79c6">LEVEL</span> <span style="color:#ff79c6">REPEATABLE</span> <span style="color:#ff79c6">READ</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SET</span> <span style="color:#ff79c6">TRANSACTION</span> <span style="color:#ff79c6">ISOLATION</span> <span style="color:#ff79c6">LEVEL</span> <span style="color:#ff79c6">SERIALIZABLE</span>;
+</span></span></code></pre></div><p><strong>Isolation Levels:</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>Level</th>
+          <th>Dirty Read</th>
+          <th>Non-Repeatable Read</th>
+          <th>Phantom Read</th>
+          <th>Write Skew</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>READ COMMITTED</code></td>
+          <td>No</td>
+          <td>Possible</td>
+          <td>Possible</td>
+          <td>Possible</td>
+      </tr>
+      <tr>
+          <td><code>REPEATABLE READ</code></td>
+          <td>No</td>
+          <td>No</td>
+          <td>Possible</td>
+          <td>Possible</td>
+      </tr>
+      <tr>
+          <td><code>SERIALIZABLE</code></td>
+          <td>No</td>
+          <td>No</td>
+          <td>No</td>
+          <td>No</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="transaction-examples">Transaction Examples</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Simple transaction
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">BEGIN</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">UPDATE</span> accounts <span style="color:#ff79c6">SET</span> balance <span style="color:#ff79c6">=</span> balance <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">100</span> <span style="color:#ff79c6">WHERE</span> id <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">UPDATE</span> accounts <span style="color:#ff79c6">SET</span> balance <span style="color:#ff79c6">=</span> balance <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">100</span> <span style="color:#ff79c6">WHERE</span> id <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">2</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> transfers (from_id, to_id, amount) <span style="color:#ff79c6">VALUES</span> (<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">100</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COMMIT</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Transaction with savepoint
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">BEGIN</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> orders (customer_id, total) <span style="color:#ff79c6">VALUES</span> (<span style="color:#bd93f9">42</span>, <span style="color:#bd93f9">299</span>.<span style="color:#bd93f9">99</span>);
+</span></span><span style="display:flex;"><span>SAVEPOINT before_items;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> order_items (order_id, product_id, quantity) <span style="color:#ff79c6">VALUES</span> (<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">10</span>, <span style="color:#bd93f9">2</span>);
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Oops, wrong product
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">ROLLBACK</span> <span style="color:#ff79c6">TO</span> SAVEPOINT before_items;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> order_items (order_id, product_id, quantity) <span style="color:#ff79c6">VALUES</span> (<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">15</span>, <span style="color:#bd93f9">2</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COMMIT</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Read-only transaction for consistent analytics
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">BEGIN</span> <span style="color:#ff79c6">TRANSACTION</span> <span style="color:#ff79c6">ISOLATION</span> <span style="color:#ff79c6">LEVEL</span> <span style="color:#ff79c6">REPEATABLE</span> <span style="color:#ff79c6">READ</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SET</span> <span style="color:#ff79c6">TRANSACTION</span> <span style="color:#ff79c6">READ</span> <span style="color:#ff79c6">ONLY</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">COUNT</span>(<span style="color:#ff79c6">*</span>) <span style="color:#ff79c6">FROM</span> orders <span style="color:#ff79c6">WHERE</span> status <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;pending&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">SUM</span>(total) <span style="color:#ff79c6">FROM</span> orders <span style="color:#ff79c6">WHERE</span> status <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;pending&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Both queries see the same snapshot
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">COMMIT</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Serializable transaction for inventory check
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">BEGIN</span> <span style="color:#ff79c6">TRANSACTION</span> <span style="color:#ff79c6">ISOLATION</span> <span style="color:#ff79c6">LEVEL</span> <span style="color:#ff79c6">SERIALIZABLE</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> quantity <span style="color:#ff79c6">FROM</span> inventory <span style="color:#ff79c6">WHERE</span> product_id <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">42</span>;
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Application checks if quantity &gt;= requested amount
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">UPDATE</span> inventory <span style="color:#ff79c6">SET</span> quantity <span style="color:#ff79c6">=</span> quantity <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">5</span> <span style="color:#ff79c6">WHERE</span> product_id <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">42</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> orders (customer_id, product_id, quantity) <span style="color:#ff79c6">VALUES</span> (<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">42</span>, <span style="color:#bd93f9">5</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COMMIT</span>;
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- If another transaction modified inventory concurrently, this will
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- fail with a serialization error and should be retried
+</span></span></span></code></pre></div><hr>
+<h2 id="vector-operations">Vector Operations</h2>
+<p>ThunderDB natively supports vector embeddings for similarity search, enabling AI/ML workloads alongside traditional SQL.</p>
+<h3 id="creating-tables-with-vector-columns">Creating Tables with Vector Columns</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- 1536-dimensional vectors (OpenAI text-embedding-3-small)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> documents (
+</span></span><span style="display:flex;"><span>    id        <span style="color:#8be9fd;font-style:italic">BIGINT</span> <span style="color:#ff79c6">PRIMARY</span> <span style="color:#ff79c6">KEY</span>,
+</span></span><span style="display:flex;"><span>    title     <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">500</span>),
+</span></span><span style="display:flex;"><span>    body      <span style="color:#8be9fd;font-style:italic">TEXT</span>,
+</span></span><span style="display:flex;"><span>    embedding VECTOR(<span style="color:#bd93f9">1536</span>)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- 768-dimensional vectors (sentence-transformers)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> products (
+</span></span><span style="display:flex;"><span>    id          <span style="color:#8be9fd;font-style:italic">BIGINT</span> <span style="color:#ff79c6">PRIMARY</span> <span style="color:#ff79c6">KEY</span>,
+</span></span><span style="display:flex;"><span>    name        <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">255</span>),
+</span></span><span style="display:flex;"><span>    description <span style="color:#8be9fd;font-style:italic">TEXT</span>,
+</span></span><span style="display:flex;"><span>    image_embed VECTOR(<span style="color:#bd93f9">512</span>),
+</span></span><span style="display:flex;"><span>    text_embed  VECTOR(<span style="color:#bd93f9">768</span>)
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><h3 id="inserting-vectors">Inserting Vectors</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Insert with array literal
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> documents (id, title, embedding)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">VALUES</span> (<span style="color:#bd93f9">1</span>, <span style="color:#f1fa8c">&#39;Hello World&#39;</span>, <span style="color:#f1fa8c">&#39;[0.1, -0.2, 0.3, ...]&#39;</span>::VECTOR(<span style="color:#bd93f9">1536</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Insert from application (using bind parameter)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> documents (id, title, embedding)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">VALUES</span> ($<span style="color:#bd93f9">1</span>, $<span style="color:#bd93f9">2</span>, $<span style="color:#bd93f9">3</span>);
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- where $3 is a float array of length 1536
+</span></span></span></code></pre></div><h3 id="similarity-operators">Similarity Operators</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Operator</th>
+          <th>Distance Metric</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>&lt;-&gt;</code></td>
+          <td>L2 (Euclidean)</td>
+          <td>Euclidean distance between two vectors</td>
+      </tr>
+      <tr>
+          <td><code>&lt;=&gt;</code></td>
+          <td>Cosine</td>
+          <td>Cosine distance (1 - cosine similarity)</td>
+      </tr>
+      <tr>
+          <td><code>&lt;#&gt;</code></td>
+          <td>Inner Product</td>
+          <td>Negative inner product (for max inner product search)</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="vector-search-queries">Vector Search Queries</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- K-nearest neighbors with L2 distance
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> id, title, embedding <span style="color:#ff79c6">&lt;-&gt;</span> $<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">AS</span> distance
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> documents
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> embedding <span style="color:#ff79c6">&lt;-&gt;</span> $<span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">LIMIT</span> <span style="color:#bd93f9">10</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Cosine similarity search
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> id, title, <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">-</span> (embedding <span style="color:#ff79c6">&lt;=&gt;</span> $<span style="color:#bd93f9">1</span>) <span style="color:#ff79c6">AS</span> similarity
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> documents
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> embedding <span style="color:#ff79c6">&lt;=&gt;</span> $<span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">LIMIT</span> <span style="color:#bd93f9">10</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Inner product search (for normalized vectors)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> id, title, embedding <span style="color:#ff79c6">&lt;#&gt;</span> $<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">AS</span> score
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> documents
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> embedding <span style="color:#ff79c6">&lt;#&gt;</span> $<span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">LIMIT</span> <span style="color:#bd93f9">10</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Filtered vector search (hybrid search)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> id, title, embedding <span style="color:#ff79c6">&lt;-&gt;</span> $<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">AS</span> distance
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> documents
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> category <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;science&#39;</span> <span style="color:#ff79c6">AND</span> published <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> embedding <span style="color:#ff79c6">&lt;-&gt;</span> $<span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">LIMIT</span> <span style="color:#bd93f9">10</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Vector search with metadata join
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    d.id,
+</span></span><span style="display:flex;"><span>    d.title,
+</span></span><span style="display:flex;"><span>    d.embedding <span style="color:#ff79c6">&lt;-&gt;</span> $<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">AS</span> distance,
+</span></span><span style="display:flex;"><span>    a.name <span style="color:#ff79c6">AS</span> author
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> documents d
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">JOIN</span> authors a <span style="color:#ff79c6">ON</span> d.author_id <span style="color:#ff79c6">=</span> a.id
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> d.embedding <span style="color:#ff79c6">&lt;-&gt;</span> $<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">0</span>.<span style="color:#bd93f9">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> d.embedding <span style="color:#ff79c6">&lt;-&gt;</span> $<span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">LIMIT</span> <span style="color:#bd93f9">20</span>;
+</span></span></code></pre></div><h3 id="creating-vector-indexes">Creating Vector Indexes</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- HNSW index (recommended for most use cases)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">INDEX</span> idx_docs_embed <span style="color:#ff79c6">ON</span> documents
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">USING</span> HNSW (embedding)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">WITH</span> (
+</span></span><span style="display:flex;"><span>        m <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">16</span>,                    <span style="color:#6272a4">-- Max connections per node
+</span></span></span><span style="display:flex;"><span>        ef_construction <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">200</span>,     <span style="color:#6272a4">-- Build-time beam width
+</span></span></span><span style="display:flex;"><span>        distance_metric <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;cosine&#39;</span> <span style="color:#6272a4">-- &#39;l2&#39;, &#39;cosine&#39;, or &#39;inner_product&#39;
+</span></span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- IVF-PQ index (for datasets &gt; 1M vectors)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">INDEX</span> idx_docs_embed_ivf <span style="color:#ff79c6">ON</span> documents
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">USING</span> IVF_PQ (embedding)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">WITH</span> (
+</span></span><span style="display:flex;"><span>        nlist <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1024</span>,              <span style="color:#6272a4">-- Number of clusters
+</span></span></span><span style="display:flex;"><span>        m_pq <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">64</span>,                 <span style="color:#6272a4">-- Number of PQ sub-quantizers
+</span></span></span><span style="display:flex;"><span>        distance_metric <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;l2&#39;</span>
+</span></span><span style="display:flex;"><span>    );
+</span></span></code></pre></div><h3 id="tuning-ann-search">Tuning ANN Search</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Set HNSW search beam width for the current session
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SET</span> hnsw.ef_search <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">128</span>;  <span style="color:#6272a4">-- Higher = more accurate but slower
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Set IVF-PQ probe count
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SET</span> ivf.nprobe <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">20</span>;  <span style="color:#6272a4">-- Higher = more accurate but slower
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Then run your query
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> id, title, embedding <span style="color:#ff79c6">&lt;-&gt;</span> $<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">AS</span> distance
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> documents
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> embedding <span style="color:#ff79c6">&lt;-&gt;</span> $<span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">LIMIT</span> <span style="color:#bd93f9">10</span>;
+</span></span></code></pre></div><hr>
+<h2 id="foreign-data-wrappers-fdw">Foreign Data Wrappers (FDW)</h2>
+<p>ThunderDB can query data stored in external systems and join it with local tables. This enables data federation without ETL.</p>
+<h3 id="create-server">CREATE SERVER</h3>
+<p>Define a connection to an external data source.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- PostgreSQL server
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> SERVER pg_production
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">TYPE</span> <span style="color:#f1fa8c">&#39;postgresql&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">OPTIONS</span> (
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">host</span> <span style="color:#f1fa8c">&#39;10.0.1.50&#39;</span>,
+</span></span><span style="display:flex;"><span>        port <span style="color:#f1fa8c">&#39;5432&#39;</span>,
+</span></span><span style="display:flex;"><span>        dbname <span style="color:#f1fa8c">&#39;production&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">user</span> <span style="color:#f1fa8c">&#39;readonly&#39;</span>,
+</span></span><span style="display:flex;"><span>        password <span style="color:#f1fa8c">&#39;secret&#39;</span>
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- MySQL server
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> SERVER mysql_legacy
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">TYPE</span> <span style="color:#f1fa8c">&#39;mysql&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">OPTIONS</span> (
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">host</span> <span style="color:#f1fa8c">&#39;10.0.2.50&#39;</span>,
+</span></span><span style="display:flex;"><span>        port <span style="color:#f1fa8c">&#39;3306&#39;</span>,
+</span></span><span style="display:flex;"><span>        dbname <span style="color:#f1fa8c">&#39;legacy_app&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">user</span> <span style="color:#f1fa8c">&#39;reader&#39;</span>,
+</span></span><span style="display:flex;"><span>        password <span style="color:#f1fa8c">&#39;secret&#39;</span>
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- MongoDB server
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> SERVER mongo_logs
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">TYPE</span> <span style="color:#f1fa8c">&#39;mongodb&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">OPTIONS</span> (
+</span></span><span style="display:flex;"><span>        connection_string <span style="color:#f1fa8c">&#39;mongodb://10.0.3.50:27017/logs&#39;</span>,
+</span></span><span style="display:flex;"><span>        auth_database <span style="color:#f1fa8c">&#39;admin&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">user</span> <span style="color:#f1fa8c">&#39;reader&#39;</span>,
+</span></span><span style="display:flex;"><span>        password <span style="color:#f1fa8c">&#39;secret&#39;</span>
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Amazon S3 (Parquet files)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> SERVER s3_data_lake
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">TYPE</span> <span style="color:#f1fa8c">&#39;s3&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">OPTIONS</span> (
+</span></span><span style="display:flex;"><span>        region <span style="color:#f1fa8c">&#39;us-east-1&#39;</span>,
+</span></span><span style="display:flex;"><span>        bucket <span style="color:#f1fa8c">&#39;my-data-lake&#39;</span>,
+</span></span><span style="display:flex;"><span>        access_key_id <span style="color:#f1fa8c">&#39;AKIAIOSFODNN7EXAMPLE&#39;</span>,
+</span></span><span style="display:flex;"><span>        secret_access_key <span style="color:#f1fa8c">&#39;wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY&#39;</span>
+</span></span><span style="display:flex;"><span>    );
+</span></span></code></pre></div><h3 id="create-foreign-table">CREATE FOREIGN TABLE</h3>
+<p>Map a remote table or collection to a local table definition.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- From PostgreSQL
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">FOREIGN</span> <span style="color:#ff79c6">TABLE</span> remote_users (
+</span></span><span style="display:flex;"><span>    id     <span style="color:#8be9fd;font-style:italic">BIGINT</span>,
+</span></span><span style="display:flex;"><span>    name   <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">255</span>),
+</span></span><span style="display:flex;"><span>    email  <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">255</span>),
+</span></span><span style="display:flex;"><span>    active <span style="color:#8be9fd;font-style:italic">BOOLEAN</span>
+</span></span><span style="display:flex;"><span>) SERVER pg_production
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">OPTIONS</span> (<span style="color:#ff79c6">schema</span> <span style="color:#f1fa8c">&#39;public&#39;</span>, <span style="color:#ff79c6">table</span> <span style="color:#f1fa8c">&#39;users&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- From MySQL
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">FOREIGN</span> <span style="color:#ff79c6">TABLE</span> legacy_orders (
+</span></span><span style="display:flex;"><span>    order_id   INT32,
+</span></span><span style="display:flex;"><span>    customer   <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">100</span>),
+</span></span><span style="display:flex;"><span>    total      <span style="color:#8be9fd;font-style:italic">DECIMAL</span>(<span style="color:#bd93f9">10</span>,<span style="color:#bd93f9">2</span>),
+</span></span><span style="display:flex;"><span>    order_date <span style="color:#8be9fd;font-style:italic">DATE</span>
+</span></span><span style="display:flex;"><span>) SERVER mysql_legacy
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">OPTIONS</span> (<span style="color:#ff79c6">table</span> <span style="color:#f1fa8c">&#39;orders&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- From MongoDB
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">FOREIGN</span> <span style="color:#ff79c6">TABLE</span> mongo_access_logs (
+</span></span><span style="display:flex;"><span>    _id        <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">24</span>),
+</span></span><span style="display:flex;"><span>    user_id    <span style="color:#8be9fd;font-style:italic">BIGINT</span>,
+</span></span><span style="display:flex;"><span>    endpoint   <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">255</span>),
+</span></span><span style="display:flex;"><span>    status     INT32,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">timestamp</span>  TIMESTAMPTZ
+</span></span><span style="display:flex;"><span>) SERVER mongo_logs
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">OPTIONS</span> (collection <span style="color:#f1fa8c">&#39;access_logs&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- From S3 Parquet files
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">FOREIGN</span> <span style="color:#ff79c6">TABLE</span> s3_events (
+</span></span><span style="display:flex;"><span>    event_id   <span style="color:#8be9fd;font-style:italic">BIGINT</span>,
+</span></span><span style="display:flex;"><span>    event_type <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">50</span>),
+</span></span><span style="display:flex;"><span>    payload    JSONB,
+</span></span><span style="display:flex;"><span>    created_at TIMESTAMPTZ
+</span></span><span style="display:flex;"><span>) SERVER s3_data_lake
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">OPTIONS</span> (path <span style="color:#f1fa8c">&#39;events/year=2025/&#39;</span>, format <span style="color:#f1fa8c">&#39;parquet&#39;</span>);
+</span></span></code></pre></div><h3 id="querying-foreign-tables">Querying Foreign Tables</h3>
+<p>Foreign tables behave like regular tables in queries. ThunderDB pushes down predicates and projections to minimize data transfer.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Query a foreign table directly
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> remote_users <span style="color:#ff79c6">WHERE</span> active <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span> <span style="color:#ff79c6">LIMIT</span> <span style="color:#bd93f9">100</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Join local and foreign tables
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    u.name,
+</span></span><span style="display:flex;"><span>    u.email,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">COUNT</span>(o.order_id) <span style="color:#ff79c6">AS</span> total_orders,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">SUM</span>(o.total) <span style="color:#ff79c6">AS</span> lifetime_value
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> remote_users u
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">JOIN</span> legacy_orders o <span style="color:#ff79c6">ON</span> u.name <span style="color:#ff79c6">=</span> o.customer
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> u.name, u.email
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> lifetime_value <span style="color:#ff79c6">DESC</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">LIMIT</span> <span style="color:#bd93f9">20</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Cross-database federation: PostgreSQL + MySQL + MongoDB in one query
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    u.name,
+</span></span><span style="display:flex;"><span>    o.total <span style="color:#ff79c6">AS</span> order_total,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">COUNT</span>(l._id) <span style="color:#ff79c6">AS</span> access_count
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> remote_users u
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">JOIN</span> legacy_orders o <span style="color:#ff79c6">ON</span> u.name <span style="color:#ff79c6">=</span> o.customer
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">LEFT</span> <span style="color:#ff79c6">JOIN</span> mongo_access_logs l <span style="color:#ff79c6">ON</span> u.id <span style="color:#ff79c6">=</span> l.user_id
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> u.name, o.total
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> access_count <span style="color:#ff79c6">DESC</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Query S3 Parquet files
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    event_type,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">COUNT</span>(<span style="color:#ff79c6">*</span>) <span style="color:#ff79c6">AS</span> event_count,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">MIN</span>(created_at) <span style="color:#ff79c6">AS</span> first_seen,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">MAX</span>(created_at) <span style="color:#ff79c6">AS</span> last_seen
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> s3_events
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> created_at <span style="color:#ff79c6">&gt;=</span> <span style="color:#f1fa8c">&#39;2025-12-01&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> event_type
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> event_count <span style="color:#ff79c6">DESC</span>;
+</span></span></code></pre></div><h3 id="drop-server-and-drop-foreign-table">DROP SERVER and DROP FOREIGN TABLE</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Drop a foreign table
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">DROP</span> <span style="color:#ff79c6">FOREIGN</span> <span style="color:#ff79c6">TABLE</span> <span style="color:#ff79c6">IF</span> <span style="color:#ff79c6">EXISTS</span> remote_users;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Drop a server (must drop foreign tables first, or use CASCADE)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">DROP</span> SERVER <span style="color:#ff79c6">IF</span> <span style="color:#ff79c6">EXISTS</span> pg_production <span style="color:#ff79c6">CASCADE</span>;
+</span></span></code></pre></div><hr>
+<h2 id="built-in-functions">Built-in Functions</h2>
+<h3 id="aggregate-functions">Aggregate Functions</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Function</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>COUNT(*)</code></td>
+          <td>Count of rows</td>
+      </tr>
+      <tr>
+          <td><code>COUNT(expr)</code></td>
+          <td>Count of non-null values</td>
+      </tr>
+      <tr>
+          <td><code>COUNT(DISTINCT expr)</code></td>
+          <td>Count of distinct non-null values</td>
+      </tr>
+      <tr>
+          <td><code>SUM(expr)</code></td>
+          <td>Sum of values</td>
+      </tr>
+      <tr>
+          <td><code>AVG(expr)</code></td>
+          <td>Average of values</td>
+      </tr>
+      <tr>
+          <td><code>MIN(expr)</code></td>
+          <td>Minimum value</td>
+      </tr>
+      <tr>
+          <td><code>MAX(expr)</code></td>
+          <td>Maximum value</td>
+      </tr>
+      <tr>
+          <td><code>ARRAY_AGG(expr)</code></td>
+          <td>Collect values into an array</td>
+      </tr>
+      <tr>
+          <td><code>STRING_AGG(expr, delimiter)</code></td>
+          <td>Concatenate strings with delimiter</td>
+      </tr>
+      <tr>
+          <td><code>BOOL_AND(expr)</code></td>
+          <td>True if all values are true</td>
+      </tr>
+      <tr>
+          <td><code>BOOL_OR(expr)</code></td>
+          <td>True if any value is true</td>
+      </tr>
+      <tr>
+          <td><code>STDDEV(expr)</code></td>
+          <td>Sample standard deviation</td>
+      </tr>
+      <tr>
+          <td><code>VARIANCE(expr)</code></td>
+          <td>Sample variance</td>
+      </tr>
+      <tr>
+          <td><code>PERCENTILE_CONT(fraction)</code></td>
+          <td>Continuous percentile</td>
+      </tr>
+      <tr>
+          <td><code>PERCENTILE_DISC(fraction)</code></td>
+          <td>Discrete percentile</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="string-functions">String Functions</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Function</th>
+          <th>Description</th>
+          <th>Example</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>LENGTH(s)</code></td>
+          <td>String length</td>
+          <td><code>LENGTH('hello')</code> = 5</td>
+      </tr>
+      <tr>
+          <td><code>UPPER(s)</code></td>
+          <td>Uppercase</td>
+          <td><code>UPPER('hello')</code> = <code>'HELLO'</code></td>
+      </tr>
+      <tr>
+          <td><code>LOWER(s)</code></td>
+          <td>Lowercase</td>
+          <td><code>LOWER('HELLO')</code> = <code>'hello'</code></td>
+      </tr>
+      <tr>
+          <td><code>TRIM(s)</code></td>
+          <td>Remove whitespace</td>
+          <td><code>TRIM('  hi  ')</code> = <code>'hi'</code></td>
+      </tr>
+      <tr>
+          <td><code>LTRIM(s)</code></td>
+          <td>Left trim</td>
+          <td><code>LTRIM('  hi')</code> = <code>'hi'</code></td>
+      </tr>
+      <tr>
+          <td><code>RTRIM(s)</code></td>
+          <td>Right trim</td>
+          <td><code>RTRIM('hi  ')</code> = <code>'hi'</code></td>
+      </tr>
+      <tr>
+          <td><code>SUBSTRING(s, start, len)</code></td>
+          <td>Extract substring</td>
+          <td><code>SUBSTRING('hello', 2, 3)</code> = <code>'ell'</code></td>
+      </tr>
+      <tr>
+          <td><code>REPLACE(s, from, to)</code></td>
+          <td>Replace occurrences</td>
+          <td><code>REPLACE('hello', 'l', 'r')</code> = <code>'herro'</code></td>
+      </tr>
+      <tr>
+          <td><code>CONCAT(s1, s2, ...)</code></td>
+          <td>Concatenate strings</td>
+          <td><code>CONCAT('a', 'b', 'c')</code> = <code>'abc'</code></td>
+      </tr>
+      <tr>
+          <td><code>SPLIT_PART(s, delim, n)</code></td>
+          <td>Split and extract</td>
+          <td><code>SPLIT_PART('a.b.c', '.', 2)</code> = <code>'b'</code></td>
+      </tr>
+      <tr>
+          <td><code>REGEXP_MATCH(s, pattern)</code></td>
+          <td>Regex match</td>
+          <td><code>REGEXP_MATCH('abc123', '\d+')</code> = <code>{'123'}</code></td>
+      </tr>
+      <tr>
+          <td><code>REGEXP_REPLACE(s, p, r)</code></td>
+          <td>Regex replace</td>
+          <td><code>REGEXP_REPLACE('abc', '[a-z]', 'X', 'g')</code> = <code>'XXX'</code></td>
+      </tr>
+      <tr>
+          <td><code>STARTS_WITH(s, prefix)</code></td>
+          <td>Prefix check</td>
+          <td><code>STARTS_WITH('hello', 'he')</code> = <code>true</code></td>
+      </tr>
+      <tr>
+          <td><code>MD5(s)</code></td>
+          <td>MD5 hash</td>
+          <td><code>MD5('hello')</code> = <code>'5d41402abc4b2a76...'</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="date--time-functions">Date &amp; Time Functions</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Function</th>
+          <th>Description</th>
+          <th>Example</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>now()</code></td>
+          <td>Current timestamp with timezone</td>
+          <td><code>2025-12-15 10:30:00+00</code></td>
+      </tr>
+      <tr>
+          <td><code>current_date</code></td>
+          <td>Current date</td>
+          <td><code>2025-12-15</code></td>
+      </tr>
+      <tr>
+          <td><code>current_time</code></td>
+          <td>Current time</td>
+          <td><code>10:30:00+00</code></td>
+      </tr>
+      <tr>
+          <td><code>date_trunc(field, ts)</code></td>
+          <td>Truncate to precision</td>
+          <td><code>date_trunc('month', ts)</code></td>
+      </tr>
+      <tr>
+          <td><code>date_part(field, ts)</code></td>
+          <td>Extract field</td>
+          <td><code>date_part('year', ts)</code> = 2025</td>
+      </tr>
+      <tr>
+          <td><code>EXTRACT(field FROM ts)</code></td>
+          <td>Extract field (SQL standard)</td>
+          <td><code>EXTRACT(MONTH FROM ts)</code> = 12</td>
+      </tr>
+      <tr>
+          <td><code>age(ts1, ts2)</code></td>
+          <td>Interval between timestamps</td>
+          <td><code>age(now(), created_at)</code></td>
+      </tr>
+      <tr>
+          <td><code>ts + INTERVAL '...'</code></td>
+          <td>Add interval</td>
+          <td><code>now() + INTERVAL '7 days'</code></td>
+      </tr>
+      <tr>
+          <td><code>ts - INTERVAL '...'</code></td>
+          <td>Subtract interval</td>
+          <td><code>now() - INTERVAL '1 hour'</code></td>
+      </tr>
+      <tr>
+          <td><code>to_char(ts, format)</code></td>
+          <td>Format timestamp</td>
+          <td><code>to_char(now(), 'YYYY-MM-DD')</code></td>
+      </tr>
+      <tr>
+          <td><code>to_timestamp(str, fmt)</code></td>
+          <td>Parse timestamp</td>
+          <td><code>to_timestamp('2025-01-15', 'YYYY-MM-DD')</code></td>
+      </tr>
+      <tr>
+          <td><code>generate_series(start, stop, step)</code></td>
+          <td>Generate time series</td>
+          <td>See example below</td>
+      </tr>
+  </tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Generate a time series
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> ts::<span style="color:#8be9fd;font-style:italic">DATE</span> <span style="color:#ff79c6">AS</span> <span style="color:#ff79c6">day</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> generate_series(
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;2025-01-01&#39;</span>::<span style="color:#ff79c6">TIMESTAMP</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;2025-01-31&#39;</span>::<span style="color:#ff79c6">TIMESTAMP</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;1 day&#39;</span>::<span style="color:#8be9fd;font-style:italic">INTERVAL</span>
+</span></span><span style="display:flex;"><span>) <span style="color:#ff79c6">AS</span> ts;
+</span></span></code></pre></div><h3 id="json--jsonb-functions">JSON / JSONB Functions</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Function / Operator</th>
+          <th>Description</th>
+          <th>Example</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>-&gt;</code></td>
+          <td>Get JSON element by key (returns JSON)</td>
+          <td><code>data-&gt;'name'</code></td>
+      </tr>
+      <tr>
+          <td><code>-&gt;&gt;</code></td>
+          <td>Get JSON element by key (returns text)</td>
+          <td><code>data-&gt;&gt;'name'</code></td>
+      </tr>
+      <tr>
+          <td><code>#&gt;</code></td>
+          <td>Get JSON element by path (returns JSON)</td>
+          <td><code>data#&gt;'{address,city}'</code></td>
+      </tr>
+      <tr>
+          <td><code>#&gt;&gt;</code></td>
+          <td>Get JSON element by path (returns text)</td>
+          <td><code>data#&gt;&gt;'{address,city}'</code></td>
+      </tr>
+      <tr>
+          <td><code>@&gt;</code></td>
+          <td>Contains</td>
+          <td><code>data @&gt; '{&quot;active&quot;: true}'</code></td>
+      </tr>
+      <tr>
+          <td><code>&lt;@</code></td>
+          <td>Contained by</td>
+          <td><code>'{&quot;a&quot;:1}' &lt;@ data</code></td>
+      </tr>
+      <tr>
+          <td><code>?</code></td>
+          <td>Key exists</td>
+          <td><code>data ? 'email'</code></td>
+      </tr>
+      <tr>
+          <td><code>jsonb_build_object(k,v,...)</code></td>
+          <td>Construct JSONB</td>
+          <td><code>jsonb_build_object('name', 'Alice')</code></td>
+      </tr>
+      <tr>
+          <td><code>jsonb_agg(expr)</code></td>
+          <td>Aggregate into JSON array</td>
+          <td><code>jsonb_agg(name)</code></td>
+      </tr>
+      <tr>
+          <td><code>jsonb_object_agg(k, v)</code></td>
+          <td>Aggregate into JSON object</td>
+          <td><code>jsonb_object_agg(key, value)</code></td>
+      </tr>
+      <tr>
+          <td><code>jsonb_array_elements(j)</code></td>
+          <td>Expand JSON array to rows</td>
+          <td><code>jsonb_array_elements('[1,2,3]')</code></td>
+      </tr>
+      <tr>
+          <td><code>jsonb_each(j)</code></td>
+          <td>Expand JSON object to key-value rows</td>
+          <td><code>jsonb_each('{&quot;a&quot;:1}')</code></td>
+      </tr>
+      <tr>
+          <td><code>jsonb_set(j, path, val)</code></td>
+          <td>Set value at path</td>
+          <td><code>jsonb_set(data, '{name}', '&quot;Bob&quot;')</code></td>
+      </tr>
+      <tr>
+          <td><code>jsonb_strip_nulls(j)</code></td>
+          <td>Remove null keys</td>
+          <td><code>jsonb_strip_nulls(data)</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="mathematical-functions">Mathematical Functions</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Function</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>ABS(x)</code></td>
+          <td>Absolute value</td>
+      </tr>
+      <tr>
+          <td><code>CEIL(x)</code> / <code>CEILING(x)</code></td>
+          <td>Round up</td>
+      </tr>
+      <tr>
+          <td><code>FLOOR(x)</code></td>
+          <td>Round down</td>
+      </tr>
+      <tr>
+          <td><code>ROUND(x, d)</code></td>
+          <td>Round to <code>d</code> decimal places</td>
+      </tr>
+      <tr>
+          <td><code>TRUNC(x, d)</code></td>
+          <td>Truncate to <code>d</code> decimal places</td>
+      </tr>
+      <tr>
+          <td><code>MOD(x, y)</code></td>
+          <td>Modulo</td>
+      </tr>
+      <tr>
+          <td><code>POWER(x, y)</code></td>
+          <td>x raised to power y</td>
+      </tr>
+      <tr>
+          <td><code>SQRT(x)</code></td>
+          <td>Square root</td>
+      </tr>
+      <tr>
+          <td><code>LN(x)</code></td>
+          <td>Natural logarithm</td>
+      </tr>
+      <tr>
+          <td><code>LOG(base, x)</code></td>
+          <td>Logarithm with base</td>
+      </tr>
+      <tr>
+          <td><code>EXP(x)</code></td>
+          <td>Exponential (e^x)</td>
+      </tr>
+      <tr>
+          <td><code>RANDOM()</code></td>
+          <td>Random value between 0 and 1</td>
+      </tr>
+      <tr>
+          <td><code>GREATEST(a, b, ...)</code></td>
+          <td>Maximum of values</td>
+      </tr>
+      <tr>
+          <td><code>LEAST(a, b, ...)</code></td>
+          <td>Minimum of values</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="conditional-expressions">Conditional Expressions</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- CASE expression
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> name,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">CASE</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">WHEN</span> price <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">10</span> <span style="color:#ff79c6">THEN</span> <span style="color:#f1fa8c">&#39;budget&#39;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">WHEN</span> price <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">100</span> <span style="color:#ff79c6">THEN</span> <span style="color:#f1fa8c">&#39;mid-range&#39;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">ELSE</span> <span style="color:#f1fa8c">&#39;premium&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">END</span> <span style="color:#ff79c6">AS</span> tier
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> products;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- COALESCE (first non-null)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> COALESCE(nickname, name, <span style="color:#f1fa8c">&#39;Anonymous&#39;</span>) <span style="color:#ff79c6">AS</span> display_name
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> users;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- NULLIF (return null if equal)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">NULLIF</span>(discount, <span style="color:#bd93f9">0</span>) <span style="color:#ff79c6">AS</span> effective_discount
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> products;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- IIF (inline if)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> name, IIF(active, <span style="color:#f1fa8c">&#39;Active&#39;</span>, <span style="color:#f1fa8c">&#39;Inactive&#39;</span>) <span style="color:#ff79c6">AS</span> status
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> users;
+</span></span></code></pre></div><hr>
+<h2 id="system-commands">System Commands</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Show server version
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">version</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Show current database
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> current_database();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Show current user
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">current_user</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Show all tables
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SHOW</span> TABLES;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Show table schema
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">DESCRIBE</span> users;
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- or
+</span></span></span><span style="display:flex;"><span>\d users
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Show running queries
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> thunder_catalog.running_queries;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Show cluster status
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> thunder_catalog.cluster_nodes;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Show replication status
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> thunder_catalog.replication_status;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Cancel a running query
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> thunder_cancel_query(<span style="color:#f1fa8c">&#39;query_id_here&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Analyze table statistics (for query planner)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">ANALYZE</span> users;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Vacuum (reclaim storage)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">VACUUM</span> users;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">VACUUM</span> <span style="color:#ff79c6">FULL</span> users;  <span style="color:#6272a4">-- Rewrites table, reclaims maximum space
+</span></span></span></code></pre></div>
+	<div class="section-index">
+    
+    
+    </div>
+<style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<div class="d-print-none">
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+</div>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'page_helpful', {
+      'event_category': 'Helpful',
+      'event_label': window.location.pathname,
+      'value': value
+    });
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback( 100 );
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+<br />
+</div>
+
+          </main>
+        </div>
+      </div>
+      <footer class="td-footer row d-print-none">
+  <div class="container-fluid">
+    <div class="row mx-md-2">
+      <div class="td-footer__left col-6 col-sm-4 order-sm-1">
+        
+      </div><div class="td-footer__right col-6 col-sm-4 order-sm-3">
+        <ul class="td-footer__links-list">
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="GitHub" aria-label="GitHub">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="Discussions" aria-label="Discussions">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb/discussions" aria-label="Discussions">
+      <i class="fas fa-comments"></i>
+    </a>
+  </li>
+  
+</ul>
+
+      </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
+        <span class="td-footer__copyright">&copy;
+    2026
+    <span class="td-footer__authors">ThunderDB Contributors</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><p class="td-footer__about mt-2"><a href="/docs/about/">About ThunderDB</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script src="/docs/js/main.js"></script>
+<script defer src="/docs/js/click-to-copy.js" crossorigin="anonymous"></script>
+<script src='/docs/js/tabpane-persist.js'></script>
+
+  </body>
+</html>

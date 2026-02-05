@@ -1,0 +1,1390 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
+  <head><script src="/docs/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=docs/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/docs/favicons/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/docs/favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/docs/favicons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/docs/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="/docs/favicons/favicon-256.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/docs/favicons/apple-touch-icon.png">
+<link rel="manifest" href="/docs/favicons/site.webmanifest">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="msapplication-TileColor" content="#0D0D0D">
+
+<title>Testing | ThunderDB Documentation</title>
+<meta name="description" content="Comprehensive guide to ThunderDB&#39;s testing strategy -- unit tests, integration tests, ACID compliance tests, chaos tests, property-based tests, benchmarks, and CI/CD pipeline.">
+<meta property="og:url" content="http://localhost:1313/docs/docs/contributor/testing/">
+  <meta property="og:site_name" content="ThunderDB Documentation">
+  <meta property="og:title" content="Testing">
+  <meta property="og:description" content="Comprehensive guide to ThunderDB&#39;s testing strategy -- unit tests, integration tests, ACID compliance tests, chaos tests, property-based tests, benchmarks, and CI/CD pipeline.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+
+  <meta itemprop="name" content="Testing">
+  <meta itemprop="description" content="Comprehensive guide to ThunderDB&#39;s testing strategy -- unit tests, integration tests, ACID compliance tests, chaos tests, property-based tests, benchmarks, and CI/CD pipeline.">
+  <meta itemprop="wordCount" content="3512">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Testing">
+  <meta name="twitter:description" content="Comprehensive guide to ThunderDB&#39;s testing strategy -- unit tests, integration tests, ACID compliance tests, chaos tests, property-based tests, benchmarks, and CI/CD pipeline.">
+<link href="/docs/scss/main.css" rel="stylesheet">
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+  crossorigin="anonymous"></script>
+<script defer
+  src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
+  integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
+  crossorigin="anonymous"></script>
+
+  </head>
+  <body class="td-section">
+    <header>
+      <nav class="td-navbar js-navbar-scroll" data-bs-theme="dark">
+<div class="td-navbar-container container-fluid flex-column flex-md-row">
+  <a class="navbar-brand" href="/docs/"><span class="navbar-brand__logo navbar-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="300" height="64"><defs><symbol id="b" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#331500" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FF6B00"/><rect width="4.8" height=".6" rx=".55" fill="#FA4" opacity=".5"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#F83" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#930" opacity=".35"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D50"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,200,100,0.3)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FC8" opacity=".55"/></symbol><symbol id="c" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#4D3000" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FA0"/><rect width="4.8" height=".6" rx=".55" fill="#FD6" opacity=".55"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#FB3" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#960" opacity=".3"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D80"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,230,150,0.35)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FE9" opacity=".6"/></symbol></defs><use href="#b" x="35" y="2" width="5" height="5"/><use href="#b" x="41" y="2" width="5" height="5"/><use href="#b" x="29" y="8" width="5" height="5"/><use href="#b" x="35" y="8" width="5" height="5"/><use href="#b" x="23" y="14" width="5" height="5"/><use href="#b" x="29" y="14" width="5" height="5"/><use href="#b" x="17" y="20" width="5" height="5"/><use href="#b" x="23" y="20" width="5" height="5"/><use href="#c" x="5" y="26" width="5" height="5"/><use href="#c" x="11" y="26" width="5" height="5"/><use href="#c" x="17" y="26" width="5" height="5"/><use href="#c" x="23" y="26" width="5" height="5"/><use href="#c" x="29" y="26" width="5" height="5"/><use href="#c" x="35" y="26" width="5" height="5"/><use href="#c" x="41" y="26" width="5" height="5"/><use href="#c" x="47" y="26" width="5" height="5"/><use href="#b" x="35" y="32" width="5" height="5"/><use href="#b" x="41" y="32" width="5" height="5"/><use href="#b" x="29" y="38" width="5" height="5"/><use href="#b" x="35" y="38" width="5" height="5"/><use href="#b" x="23" y="44" width="5" height="5"/><use href="#b" x="29" y="44" width="5" height="5"/><use href="#b" x="17" y="50" width="5" height="5"/><use href="#b" x="23" y="50" width="5" height="5"/><use href="#b" x="11" y="56" width="5" height="5"/><use href="#b" x="17" y="56" width="5" height="5"/><text x="66" y="43" font-family="'SF Mono','Fira Code','Consolas','Courier New',monospace" font-size="27" font-weight="900" letter-spacing=".5"><tspan fill="#FFF">Thunder</tspan><tspan fill="#FF6B00">DB</tspan></text></svg></span><span class="navbar-brand__name">ThunderDB Documentation</span></a>
+  <div class="td-navbar-nav-scroll td-navbar-nav-scroll--indicator" id="main_navbar">
+    <div class="scroll-indicator scroll-left"></div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/"><span>Documentation</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/architecture/"><span>Architecture</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/developer/api-reference/"><span>API Reference</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/about/"><span>About</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/thunderdb/thunderdb" target="_blank" rel="noopener"><i class='fab fa-github'></i><span>GitHub</span></a>
+      </li>
+      </ul>
+    <div class="scroll-indicator scroll-right"></div>
+  </div>
+  <div class="d-none d-lg-block td-navbar__search">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+  </div>
+</div>
+</nav>
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main" data-bs-spy="scroll" data-bs-target=".td-toc" data-bs-root-margin="0px 0px -10%">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+  <script>
+    $(function() {
+    $("#td-section-nav a").removeClass("active");
+    $("#td-section-nav #m-docsdocscontributortesting").addClass("active");
+    $("#td-section-nav #m-docsdocscontributortesting-li span").addClass("td-sidebar-nav-active-item");
+    $("#td-section-nav #m-docsdocscontributortesting").parents("li").addClass("active-path");
+    $("#td-section-nav li.active-path").addClass("show");
+    $("#td-section-nav li.active-path").children("input").prop('checked', true);
+    $("#td-section-nav #m-docsdocscontributortesting-li").siblings("li").addClass("show");
+    $("#td-section-nav #m-docsdocscontributortesting-li").children("ul").children("li").addClass("show");
+    $("#td-sidebar-menu").toggleClass("d-none");
+    });
+  </script>
+  <div id="td-sidebar-menu" class="td-sidebar__inner d-none">
+  <form class="td-sidebar__search d-flex align-items-center">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+    <button class="btn btn-link td-sidebar__toggle" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  <nav class="td-sidebar-nav collapse foldable-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocs-li">
+    <a href="/docs/docs/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docsdocs"><span class="">Documentation</span></a>
+    <ul class="ul-1">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsgetting-started-li">
+    <input type="checkbox" id="m-docsdocsgetting-started-check"/>
+    <label for="m-docsdocsgetting-started-check"><a href="/docs/docs/getting-started/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsgetting-started"><span class="">Getting Started</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsarchitecture-li">
+    <input type="checkbox" id="m-docsdocsarchitecture-check"/>
+    <label for="m-docsdocsarchitecture-check"><a href="/docs/docs/architecture/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsarchitecture"><span class="">Architecture</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsdeveloper-li">
+    <input type="checkbox" id="m-docsdocsdeveloper-check"/>
+    <label for="m-docsdocsdeveloper-check"><a href="/docs/docs/developer/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloper"><span class="">Developer Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperapi-reference-li">
+    <input type="checkbox" id="m-docsdocsdeveloperapi-reference-check"/>
+    <label for="m-docsdocsdeveloperapi-reference-check"><a href="/docs/docs/developer/api-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperapi-reference"><span class="">API Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersql-reference-li">
+    <input type="checkbox" id="m-docsdocsdevelopersql-reference-check"/>
+    <label for="m-docsdocsdevelopersql-reference-check"><a href="/docs/docs/developer/sql-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersql-reference"><span class="">SQL Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersdk-li">
+    <input type="checkbox" id="m-docsdocsdevelopersdk-check"/>
+    <label for="m-docsdocsdevelopersdk-check"><a href="/docs/docs/developer/sdk/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersdk"><span class="">SDKs &amp; Drivers</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperexamples-li">
+    <input type="checkbox" id="m-docsdocsdeveloperexamples-check"/>
+    <label for="m-docsdocsdeveloperexamples-check"><a href="/docs/docs/developer/examples/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperexamples"><span class="">Examples &amp; Use Cases</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsadministrator-li">
+    <input type="checkbox" id="m-docsdocsadministrator-check"/>
+    <label for="m-docsdocsadministrator-check"><a href="/docs/docs/administrator/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministrator"><span class="">Administrator Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratordeployment-li">
+    <input type="checkbox" id="m-docsdocsadministratordeployment-check"/>
+    <label for="m-docsdocsadministratordeployment-check"><a href="/docs/docs/administrator/deployment/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratordeployment"><span class="">Deployment</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorconfiguration-li">
+    <input type="checkbox" id="m-docsdocsadministratorconfiguration-check"/>
+    <label for="m-docsdocsadministratorconfiguration-check"><a href="/docs/docs/administrator/configuration/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorconfiguration"><span class="">Configuration</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratormonitoring-li">
+    <input type="checkbox" id="m-docsdocsadministratormonitoring-check"/>
+    <label for="m-docsdocsadministratormonitoring-check"><a href="/docs/docs/administrator/monitoring/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratormonitoring"><span class="">Monitoring</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorbackup-recovery-li">
+    <input type="checkbox" id="m-docsdocsadministratorbackup-recovery-check"/>
+    <label for="m-docsdocsadministratorbackup-recovery-check"><a href="/docs/docs/administrator/backup-recovery/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorbackup-recovery"><span class="">Backup &amp; Recovery</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorsecurity-li">
+    <input type="checkbox" id="m-docsdocsadministratorsecurity-check"/>
+    <label for="m-docsdocsadministratorsecurity-check"><a href="/docs/docs/administrator/security/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorsecurity"><span class="">Security</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratortroubleshooting-li">
+    <input type="checkbox" id="m-docsdocsadministratortroubleshooting-check"/>
+    <label for="m-docsdocsadministratortroubleshooting-check"><a href="/docs/docs/administrator/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratortroubleshooting"><span class="">Troubleshooting</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocscontributor-li">
+    <input type="checkbox" id="m-docsdocscontributor-check"/>
+    <label for="m-docsdocscontributor-check"><a href="/docs/docs/contributor/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributor"><span class="">Contributor Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributordevelopment-setup-li">
+    <input type="checkbox" id="m-docsdocscontributordevelopment-setup-check"/>
+    <label for="m-docsdocscontributordevelopment-setup-check"><a href="/docs/docs/contributor/development-setup/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributordevelopment-setup"><span class="">Development Setup</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorcodebase-guide-li">
+    <input type="checkbox" id="m-docsdocscontributorcodebase-guide-check"/>
+    <label for="m-docsdocscontributorcodebase-guide-check"><a href="/docs/docs/contributor/codebase-guide/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorcodebase-guide"><span class="">Codebase Guide</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributortesting-li">
+    <input type="checkbox" id="m-docsdocscontributortesting-check"/>
+    <label for="m-docsdocscontributortesting-check"><a href="/docs/docs/contributor/testing/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributortesting"><span class="">Testing</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorrelease-process-li">
+    <input type="checkbox" id="m-docsdocscontributorrelease-process-check"/>
+    <label for="m-docsdocscontributorrelease-process-check"><a href="/docs/docs/contributor/release-process/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorrelease-process"><span class="">Release Process</span></a></label>
+    
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
+<a href="https://github.com/thunderdb/thunderdb/tree/main/content/docs/contributor/testing/_index.md" class="td-page-meta--view td-page-meta__view" target="_blank" rel="noopener"><i class="fa-solid fa-file-lines fa-fw"></i> View page source</a>
+  <a href="https://github.com/thunderdb/thunderdb/edit/main/content/docs/contributor/testing/_index.md" class="td-page-meta--edit td-page-meta__edit" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Edit this page</a>
+  <a href="https://github.com/thunderdb/thunderdb/new/main/content/docs/contributor/testing?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child td-page-meta__child" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Create child page</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new?title=Testing" class="td-page-meta--issue td-page-meta__issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create documentation issue</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new" class="td-page-meta--project td-page-meta__project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create project issue</a>
+  
+</div>
+
+            <div class="td-toc" data-proofer-ignore>
+<div class="td-toc-title">
+      <span class="td-toc-title__text">On this page</span>
+      <a class="td-toc-title__link" title="Top of page" href="#"></a>
+    </div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#testing-philosophy">Testing Philosophy</a></li>
+    <li><a href="#test-organization">Test Organization</a></li>
+    <li><a href="#unit-tests">Unit Tests</a>
+      <ul>
+        <li><a href="#running-unit-tests">Running Unit Tests</a></li>
+        <li><a href="#unit-test-example">Unit Test Example</a></li>
+        <li><a href="#unit-test-conventions">Unit Test Conventions</a></li>
+      </ul>
+    </li>
+    <li><a href="#integration-tests">Integration Tests</a>
+      <ul>
+        <li><a href="#key-integration-test-files">Key Integration Test Files</a></li>
+        <li><a href="#running-integration-tests">Running Integration Tests</a></li>
+      </ul>
+    </li>
+    <li><a href="#property-based-tests">Property-Based Tests</a>
+      <ul>
+        <li><a href="#example-btree-property-tests">Example: B+Tree Property Tests</a></li>
+        <li><a href="#running-property-based-tests">Running Property-Based Tests</a></li>
+      </ul>
+    </li>
+    <li><a href="#load-tests">Load Tests</a>
+      <ul>
+        <li><a href="#running-load-tests">Running Load Tests</a></li>
+      </ul>
+    </li>
+    <li><a href="#benchmarks">Benchmarks</a>
+      <ul>
+        <li><a href="#example-benchmark">Example Benchmark</a></li>
+        <li><a href="#running-benchmarks">Running Benchmarks</a></li>
+        <li><a href="#benchmark-files">Benchmark Files</a></li>
+      </ul>
+    </li>
+    <li><a href="#test-coverage">Test Coverage</a>
+      <ul>
+        <li><a href="#measuring-coverage">Measuring Coverage</a></li>
+        <li><a href="#coverage-targets">Coverage Targets</a></li>
+      </ul>
+    </li>
+    <li><a href="#writing-new-tests">Writing New Tests</a>
+      <ul>
+        <li><a href="#test-file-placement">Test File Placement</a></li>
+        <li><a href="#test-fixtures-and-utilities">Test Fixtures and Utilities</a></li>
+        <li><a href="#assertions">Assertions</a></li>
+        <li><a href="#async-test-pattern">Async Test Pattern</a></li>
+        <li><a href="#test-naming-conventions">Test Naming Conventions</a></li>
+      </ul>
+    </li>
+    <li><a href="#cicd-pipeline">CI/CD Pipeline</a>
+      <ul>
+        <li><a href="#pipeline-stages">Pipeline Stages</a></li>
+        <li><a href="#ci-configuration">CI Configuration</a></li>
+        <li><a href="#required-checks">Required Checks</a></li>
+        <li><a href="#running-the-full-ci-locally">Running the Full CI Locally</a></li>
+      </ul>
+    </li>
+    <li><a href="#debugging-test-failures">Debugging Test Failures</a>
+      <ul>
+        <li><a href="#viewing-test-output">Viewing Test Output</a></li>
+        <li><a href="#enabling-trace-logging-in-tests">Enabling Trace Logging in Tests</a></li>
+        <li><a href="#reproducing-flaky-tests">Reproducing Flaky Tests</a></li>
+        <li><a href="#using-a-debugger">Using a Debugger</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+
+            
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/">Documentation</a></li>
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/contributor/">Contributor Guide</a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    Testing</li>
+  </ol>
+</nav>
+<div class="td-content">
+	<h1>Testing</h1>
+  <div class="lead">Comprehensive guide to ThunderDB&rsquo;s testing strategy &ndash; unit tests, integration tests, ACID compliance tests, chaos tests, property-based tests, benchmarks, and CI/CD pipeline.</div>
+	<header class="article-meta">
+		
+</header>
+	<h1 id="testing">Testing</h1>
+<p>ThunderDB maintains a rigorous testing strategy to ensure correctness, reliability, and performance across all 14 crates. This guide covers every aspect of testing: how tests are organized, how to run them, how to write new tests, and how the CI/CD pipeline enforces quality standards.</p>
+<h2 id="testing-philosophy">Testing Philosophy</h2>
+<p>ThunderDB follows these testing principles:</p>
+<ol>
+<li><strong>Correctness is non-negotiable.</strong> A database must never lose data, return wrong results, or violate ACID properties. Tests verify these guarantees exhaustively.</li>
+<li><strong>Test at multiple levels.</strong> Unit tests verify individual functions, integration tests verify component interactions, and end-to-end tests verify the full system.</li>
+<li><strong>Automate everything.</strong> Every test runs in CI. Manual testing procedures are documented but not relied upon as the sole quality gate.</li>
+<li><strong>Test failure modes.</strong> A database must handle crashes, network partitions, disk failures, and malformed input gracefully. Chaos tests verify resilience.</li>
+<li><strong>Benchmark continuously.</strong> Performance regressions are caught early through automated benchmarks.</li>
+</ol>
+<h2 id="test-organization">Test Organization</h2>
+<p>Tests are organized following Rust conventions:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>thunder-storage/
+</span></span><span style="display:flex;"><span>+-- src/
+</span></span><span style="display:flex;"><span>|   +-- wal.rs          # Contains #[cfg(test)] mod tests { ... }
+</span></span><span style="display:flex;"><span>|   +-- btree.rs        # Contains #[cfg(test)] mod tests { ... }
+</span></span><span style="display:flex;"><span>|   +-- ...
+</span></span><span style="display:flex;"><span>+-- tests/
+</span></span><span style="display:flex;"><span>|   +-- acid_compliance.rs   # Integration tests
+</span></span><span style="display:flex;"><span>|   +-- recovery_tests.rs    # Integration tests
+</span></span><span style="display:flex;"><span>+-- benches/
+</span></span><span style="display:flex;"><span>    +-- btree_bench.rs       # Criterion benchmarks
+</span></span><span style="display:flex;"><span>    +-- wal_bench.rs         # Criterion benchmarks
+</span></span></code></pre></div><ul>
+<li><strong>Unit tests</strong> live inside each source file within a <code>#[cfg(test)] mod tests</code> block.</li>
+<li><strong>Integration tests</strong> live in the <code>tests/</code> directory of each crate.</li>
+<li><strong>Benchmarks</strong> live in the <code>benches/</code> directory of each crate.</li>
+</ul>
+<h2 id="unit-tests">Unit Tests</h2>
+<p>Unit tests verify the correctness of individual functions, methods, and modules in isolation.</p>
+<h3 id="running-unit-tests">Running Unit Tests</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Run all unit tests across the workspace</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> --lib
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run unit tests for a specific crate</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-storage --lib
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run unit tests matching a name pattern</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-storage --lib btree::tests::
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run with output (println! and tracing output visible)</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-storage --lib -- --nocapture
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run a single test by exact name</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-storage --lib btree::tests::test_insert_and_lookup -- --exact
+</span></span></code></pre></div><h3 id="unit-test-example">Unit Test Example</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#6272a4">// thunder-storage/src/btree.rs
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[cfg(test)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">mod</span> tests {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">use</span> <span style="color:#ff79c6">super</span>::<span style="color:#ff79c6">*</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">use</span> <span style="color:#ff79c6">crate</span>::buffer::BufferPool;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">use</span> tempfile::TempDir;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">/// Helper to create a B+Tree backed by a temporary directory
+</span></span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">setup_btree</span>() -&gt; (BTree, TempDir) {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> dir <span style="color:#ff79c6">=</span> TempDir::new().unwrap();
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> buffer_pool <span style="color:#ff79c6">=</span> BufferPool::new(<span style="color:#bd93f9">1024</span>, dir.path());
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> btree <span style="color:#ff79c6">=</span> BTree::new(buffer_pool, KeyType::Int64);
+</span></span><span style="display:flex;"><span>        (btree, dir)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">#[test]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">test_insert_and_lookup</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> (<span style="color:#ff79c6">mut</span> btree, _dir) <span style="color:#ff79c6">=</span> setup_btree();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">// Insert 1000 key-value pairs
+</span></span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> <span style="color:#bd93f9">0</span><span style="color:#ff79c6">..</span><span style="color:#bd93f9">1000</span><span style="color:#ff79c6">i64</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#8be9fd;font-style:italic">let</span> key <span style="color:#ff79c6">=</span> Key::Int64(i);
+</span></span><span style="display:flex;"><span>            <span style="color:#8be9fd;font-style:italic">let</span> value <span style="color:#ff79c6">=</span> Value::Int64(i <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">10</span>);
+</span></span><span style="display:flex;"><span>            btree.insert(<span style="color:#ff79c6">&amp;</span>key, <span style="color:#ff79c6">&amp;</span>value).unwrap();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">// Verify all values are retrievable
+</span></span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> <span style="color:#bd93f9">0</span><span style="color:#ff79c6">..</span><span style="color:#bd93f9">1000</span><span style="color:#ff79c6">i64</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#8be9fd;font-style:italic">let</span> key <span style="color:#ff79c6">=</span> Key::Int64(i);
+</span></span><span style="display:flex;"><span>            <span style="color:#8be9fd;font-style:italic">let</span> result <span style="color:#ff79c6">=</span> btree.get(<span style="color:#ff79c6">&amp;</span>key).unwrap();
+</span></span><span style="display:flex;"><span>            <span style="color:#50fa7b">assert_eq!</span>(result, <span style="color:#8be9fd;font-style:italic">Some</span>(Value::Int64(i <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">10</span>)));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">// Verify non-existent key returns None
+</span></span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">assert_eq!</span>(btree.get(<span style="color:#ff79c6">&amp;</span>Key::Int64(<span style="color:#bd93f9">9999</span>)).unwrap(), <span style="color:#8be9fd;font-style:italic">None</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">#[test]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">test_range_scan</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> (<span style="color:#ff79c6">mut</span> btree, _dir) <span style="color:#ff79c6">=</span> setup_btree();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> <span style="color:#bd93f9">0</span><span style="color:#ff79c6">..</span><span style="color:#bd93f9">100</span><span style="color:#ff79c6">i64</span> {
+</span></span><span style="display:flex;"><span>            btree.insert(<span style="color:#ff79c6">&amp;</span>Key::Int64(i), <span style="color:#ff79c6">&amp;</span>Value::Int64(i)).unwrap();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">// Scan range [10, 20)
+</span></span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> results: <span style="color:#8be9fd;font-style:italic">Vec</span><span style="color:#ff79c6">&lt;</span>_<span style="color:#ff79c6">&gt;</span> <span style="color:#ff79c6">=</span> btree
+</span></span><span style="display:flex;"><span>            .range_scan(<span style="color:#ff79c6">&amp;</span>Key::Int64(<span style="color:#bd93f9">10</span>), <span style="color:#ff79c6">&amp;</span>Key::Int64(<span style="color:#bd93f9">20</span>))
+</span></span><span style="display:flex;"><span>            .unwrap()
+</span></span><span style="display:flex;"><span>            .collect();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">assert_eq!</span>(results.len(), <span style="color:#bd93f9">10</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">assert_eq!</span>(results[<span style="color:#bd93f9">0</span>].<span style="color:#bd93f9">0</span>, Key::Int64(<span style="color:#bd93f9">10</span>));
+</span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">assert_eq!</span>(results[<span style="color:#bd93f9">9</span>].<span style="color:#bd93f9">0</span>, Key::Int64(<span style="color:#bd93f9">19</span>));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">#[test]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">test_delete</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> (<span style="color:#ff79c6">mut</span> btree, _dir) <span style="color:#ff79c6">=</span> setup_btree();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        btree.insert(<span style="color:#ff79c6">&amp;</span>Key::Int64(<span style="color:#bd93f9">42</span>), <span style="color:#ff79c6">&amp;</span>Value::Int64(<span style="color:#bd93f9">100</span>)).unwrap();
+</span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">assert_eq!</span>(btree.get(<span style="color:#ff79c6">&amp;</span>Key::Int64(<span style="color:#bd93f9">42</span>)).unwrap(), <span style="color:#8be9fd;font-style:italic">Some</span>(Value::Int64(<span style="color:#bd93f9">100</span>)));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        btree.delete(<span style="color:#ff79c6">&amp;</span>Key::Int64(<span style="color:#bd93f9">42</span>)).unwrap();
+</span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">assert_eq!</span>(btree.get(<span style="color:#ff79c6">&amp;</span>Key::Int64(<span style="color:#bd93f9">42</span>)).unwrap(), <span style="color:#8be9fd;font-style:italic">None</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="unit-test-conventions">Unit Test Conventions</h3>
+<ul>
+<li><strong>Test function names</strong> should describe the scenario being tested: <code>test_insert_and_lookup</code>, <code>test_concurrent_writes_do_not_lose_data</code>, <code>test_recovery_after_crash</code>.</li>
+<li><strong>One assertion per logical check.</strong> Multiple assertions are fine if they verify different aspects of the same operation.</li>
+<li><strong>Use helper functions</strong> to reduce boilerplate. Common setup patterns should be extracted into <code>setup_*</code> functions.</li>
+<li><strong>Test edge cases:</strong> empty inputs, maximum sizes, boundary values, concurrent access.</li>
+<li><strong>Temporary resources:</strong> Use <code>tempfile::TempDir</code> for temporary directories and <code>tempfile::NamedTempFile</code> for temporary files. These are automatically cleaned up when dropped.</li>
+</ul>
+<h2 id="integration-tests">Integration Tests</h2>
+<p>Integration tests verify that multiple components work correctly together. They live in the <code>tests/</code> directory of each crate and have access to the crate&rsquo;s public API (but not internal modules).</p>
+<h3 id="key-integration-test-files">Key Integration Test Files</h3>
+<h4 id="acid-compliance-tests">ACID Compliance Tests</h4>
+<p><strong>File:</strong> <code>thunder-storage/tests/acid_compliance.rs</code></p>
+<p>These tests verify that ThunderDB correctly implements ACID properties:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#6272a4">// thunder-storage/tests/acid_compliance.rs
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">/// Verify atomicity: a transaction either fully commits or fully aborts.
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">/// No partial results should ever be visible.
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[test]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">test_atomicity_all_or_nothing</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> db <span style="color:#ff79c6">=</span> TestDatabase::new();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Begin a transaction that performs multiple writes
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> txn <span style="color:#ff79c6">=</span> db.begin().unwrap();
+</span></span><span style="display:flex;"><span>    txn.execute(<span style="color:#f1fa8c">&#34;INSERT INTO accounts VALUES (1, &#39;Alice&#39;, 1000)&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>    txn.execute(<span style="color:#f1fa8c">&#34;INSERT INTO accounts VALUES (2, &#39;Bob&#39;, 2000)&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Abort the transaction
+</span></span></span><span style="display:flex;"><span>    txn.abort().unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Verify neither row is visible
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> result <span style="color:#ff79c6">=</span> db.query(<span style="color:#f1fa8c">&#34;SELECT COUNT(*) FROM accounts&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">assert_eq!</span>(result.rows[<span style="color:#bd93f9">0</span>].get_i64(<span style="color:#bd93f9">0</span>), <span style="color:#bd93f9">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">/// Verify consistency: constraints are enforced even under concurrent access.
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[test]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">test_consistency_constraints_enforced</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> db <span style="color:#ff79c6">=</span> TestDatabase::new();
+</span></span><span style="display:flex;"><span>    db.execute(<span style="color:#f1fa8c">&#34;CREATE TABLE accounts (id INT PRIMARY KEY, balance INT CHECK (balance &gt;= 0))&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>    db.execute(<span style="color:#f1fa8c">&#34;INSERT INTO accounts VALUES (1, 1000)&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Attempt to violate the CHECK constraint
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> result <span style="color:#ff79c6">=</span> db.execute(<span style="color:#f1fa8c">&#34;UPDATE accounts SET balance = -1 WHERE id = 1&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">assert!</span>(result.is_err());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Verify balance is unchanged
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> row <span style="color:#ff79c6">=</span> db.query(<span style="color:#f1fa8c">&#34;SELECT balance FROM accounts WHERE id = 1&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">assert_eq!</span>(row.rows[<span style="color:#bd93f9">0</span>].get_i64(<span style="color:#bd93f9">0</span>), <span style="color:#bd93f9">1000</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">/// Verify isolation: concurrent transactions do not see each other&#39;s uncommitted changes.
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[test]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">test_isolation_snapshot</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> db <span style="color:#ff79c6">=</span> TestDatabase::new();
+</span></span><span style="display:flex;"><span>    db.execute(<span style="color:#f1fa8c">&#34;CREATE TABLE counter (id INT PRIMARY KEY, value INT)&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>    db.execute(<span style="color:#f1fa8c">&#34;INSERT INTO counter VALUES (1, 0)&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> txn1 <span style="color:#ff79c6">=</span> db.begin().unwrap();
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> txn2 <span style="color:#ff79c6">=</span> db.begin().unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// txn1 updates the value
+</span></span></span><span style="display:flex;"><span>    txn1.execute(<span style="color:#f1fa8c">&#34;UPDATE counter SET value = 42 WHERE id = 1&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// txn2 should still see the old value (snapshot isolation)
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> result <span style="color:#ff79c6">=</span> txn2.query(<span style="color:#f1fa8c">&#34;SELECT value FROM counter WHERE id = 1&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">assert_eq!</span>(result.rows[<span style="color:#bd93f9">0</span>].get_i64(<span style="color:#bd93f9">0</span>), <span style="color:#bd93f9">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    txn1.commit().unwrap();
+</span></span><span style="display:flex;"><span>    txn2.commit().unwrap();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">/// Verify durability: committed data survives server restart.
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[test]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">test_durability_survives_restart</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> dir <span style="color:#ff79c6">=</span> TempDir::new().unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Write data and commit
+</span></span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> db <span style="color:#ff79c6">=</span> TestDatabase::with_dir(dir.path());
+</span></span><span style="display:flex;"><span>        db.execute(<span style="color:#f1fa8c">&#34;CREATE TABLE persist (id INT PRIMARY KEY, data TEXT)&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>        db.execute(<span style="color:#f1fa8c">&#34;INSERT INTO persist VALUES (1, &#39;important data&#39;)&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>        db.shutdown().unwrap();  <span style="color:#6272a4">// graceful shutdown with WAL flush
+</span></span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Restart and verify data is present
+</span></span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> db <span style="color:#ff79c6">=</span> TestDatabase::with_dir(dir.path());
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> result <span style="color:#ff79c6">=</span> db.query(<span style="color:#f1fa8c">&#34;SELECT data FROM persist WHERE id = 1&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">assert_eq!</span>(result.rows[<span style="color:#bd93f9">0</span>].get_str(<span style="color:#bd93f9">0</span>), <span style="color:#f1fa8c">&#34;important data&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="api-integration-tests">API Integration Tests</h4>
+<p><strong>File:</strong> <code>thunder-api/tests/integration_test.rs</code></p>
+<p>Tests the full API stack from HTTP request to response:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#6272a4">// thunder-api/tests/integration_test.rs
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">use</span> reqwest::Client;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">use</span> thunder_server::TestServer;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[tokio::test]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">test_rest_api_crud</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> server <span style="color:#ff79c6">=</span> TestServer::start().<span style="color:#ff79c6">await</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> client <span style="color:#ff79c6">=</span> Client::new();
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> base_url <span style="color:#ff79c6">=</span> server.rest_url();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Create a table
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> resp <span style="color:#ff79c6">=</span> client.post(<span style="color:#50fa7b">format!</span>(<span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">/api/v1/execute&#34;</span>, base_url))
+</span></span><span style="display:flex;"><span>        .json(<span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">json!</span>({
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;sql&#34;</span>: <span style="color:#f1fa8c">&#34;CREATE TABLE users (id INT PRIMARY KEY, name TEXT, email TEXT)&#34;</span>
+</span></span><span style="display:flex;"><span>        }))
+</span></span><span style="display:flex;"><span>        .send().<span style="color:#ff79c6">await</span>.unwrap();
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">assert_eq!</span>(resp.status(), <span style="color:#bd93f9">200</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Insert a row
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> resp <span style="color:#ff79c6">=</span> client.post(<span style="color:#50fa7b">format!</span>(<span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">/api/v1/execute&#34;</span>, base_url))
+</span></span><span style="display:flex;"><span>        .json(<span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">json!</span>({
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;sql&#34;</span>: <span style="color:#f1fa8c">&#34;INSERT INTO users VALUES (1, &#39;Alice&#39;, &#39;alice@example.com&#39;)&#34;</span>
+</span></span><span style="display:flex;"><span>        }))
+</span></span><span style="display:flex;"><span>        .send().<span style="color:#ff79c6">await</span>.unwrap();
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">assert_eq!</span>(resp.status(), <span style="color:#bd93f9">200</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Query the row
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> resp <span style="color:#ff79c6">=</span> client.post(<span style="color:#50fa7b">format!</span>(<span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">/api/v1/query&#34;</span>, base_url))
+</span></span><span style="display:flex;"><span>        .json(<span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">json!</span>({ <span style="color:#f1fa8c">&#34;sql&#34;</span>: <span style="color:#f1fa8c">&#34;SELECT * FROM users WHERE id = 1&#34;</span> }))
+</span></span><span style="display:flex;"><span>        .send().<span style="color:#ff79c6">await</span>.unwrap();
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">assert_eq!</span>(resp.status(), <span style="color:#bd93f9">200</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> body: <span style="color:#50fa7b">serde_json</span>::Value <span style="color:#ff79c6">=</span> resp.json().<span style="color:#ff79c6">await</span>.unwrap();
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">assert_eq!</span>(body[<span style="color:#f1fa8c">&#34;rows&#34;</span>][<span style="color:#bd93f9">0</span>][<span style="color:#f1fa8c">&#34;name&#34;</span>], <span style="color:#f1fa8c">&#34;Alice&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[tokio::test]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">test_grpc_api_query</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> server <span style="color:#ff79c6">=</span> TestServer::start().<span style="color:#ff79c6">await</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> <span style="color:#ff79c6">mut</span> client <span style="color:#ff79c6">=</span> ThunderGrpcClient::connect(server.grpc_url()).<span style="color:#ff79c6">await</span>.unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> response <span style="color:#ff79c6">=</span> client.execute_query(QueryRequest {
+</span></span><span style="display:flex;"><span>        sql: <span style="color:#f1fa8c">&#34;SELECT 1 + 1 AS result&#34;</span>.to_string(),
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">..</span><span style="color:#8be9fd;font-style:italic">Default</span>::default()
+</span></span><span style="display:flex;"><span>    }).<span style="color:#ff79c6">await</span>.unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">assert_eq!</span>(response.rows[<span style="color:#bd93f9">0</span>].values[<span style="color:#bd93f9">0</span>], Value::Int64(<span style="color:#bd93f9">2</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[tokio::test]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">test_postgres_wire_protocol</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> server <span style="color:#ff79c6">=</span> TestServer::start().<span style="color:#ff79c6">await</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Connect using the tokio-postgres client
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> (client, connection) <span style="color:#ff79c6">=</span> tokio_postgres::connect(
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">format!</span>(<span style="color:#f1fa8c">&#34;host=localhost port=</span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c"> user=admin dbname=thunderdb&#34;</span>, server.pg_port()),
+</span></span><span style="display:flex;"><span>        tokio_postgres::NoTls,
+</span></span><span style="display:flex;"><span>    ).<span style="color:#ff79c6">await</span>.unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    tokio::spawn(connection);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> rows <span style="color:#ff79c6">=</span> client.query(<span style="color:#f1fa8c">&#34;SELECT 42 AS answer&#34;</span>, <span style="color:#ff79c6">&amp;</span>[]).<span style="color:#ff79c6">await</span>.unwrap();
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">assert_eq!</span>(rows[<span style="color:#bd93f9">0</span>].get::<span style="color:#ff79c6">&lt;</span>_, <span style="color:#8be9fd">i32</span><span style="color:#ff79c6">&gt;</span>(<span style="color:#bd93f9">0</span>), <span style="color:#bd93f9">42</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="chaos-tests">Chaos Tests</h4>
+<p><strong>File:</strong> <code>thunder-server/tests/chaos_tests.rs</code></p>
+<p>Tests that verify ThunderDB handles failure conditions correctly:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#6272a4">// thunder-server/tests/chaos_tests.rs
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">/// Test that the database recovers correctly after a simulated crash
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">/// (process killed without graceful shutdown).
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[test]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">test_crash_recovery</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> dir <span style="color:#ff79c6">=</span> TempDir::new().unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Phase 1: Write data, then simulate a crash
+</span></span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> db <span style="color:#ff79c6">=</span> TestDatabase::with_dir(dir.path());
+</span></span><span style="display:flex;"><span>        db.execute(<span style="color:#f1fa8c">&#34;CREATE TABLE crash_test (id INT PRIMARY KEY, value INT)&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> <span style="color:#bd93f9">0</span><span style="color:#ff79c6">..</span><span style="color:#bd93f9">1000</span> {
+</span></span><span style="display:flex;"><span>            db.execute(<span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">format!</span>(<span style="color:#f1fa8c">&#34;INSERT INTO crash_test VALUES (</span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">, </span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">)&#34;</span>, i, i <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">10</span>)).unwrap();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">// Simulate crash: drop without graceful shutdown
+</span></span></span><span style="display:flex;"><span>        <span style="color:#6272a4">// The WAL has been written but the data files may be inconsistent
+</span></span></span><span style="display:flex;"><span>        db.simulate_crash();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Phase 2: Restart and verify ARIES recovery
+</span></span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> db <span style="color:#ff79c6">=</span> TestDatabase::with_dir(dir.path());
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> result <span style="color:#ff79c6">=</span> db.query(<span style="color:#f1fa8c">&#34;SELECT COUNT(*) FROM crash_test&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">assert_eq!</span>(result.rows[<span style="color:#bd93f9">0</span>].get_i64(<span style="color:#bd93f9">0</span>), <span style="color:#bd93f9">1000</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">// Verify all values are correct
+</span></span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> <span style="color:#bd93f9">0</span><span style="color:#ff79c6">..</span><span style="color:#bd93f9">1000</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#8be9fd;font-style:italic">let</span> result <span style="color:#ff79c6">=</span> db.query(<span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">format!</span>(
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;SELECT value FROM crash_test WHERE id = </span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">&#34;</span>, i
+</span></span><span style="display:flex;"><span>            )).unwrap();
+</span></span><span style="display:flex;"><span>            <span style="color:#50fa7b">assert_eq!</span>(result.rows[<span style="color:#bd93f9">0</span>].get_i64(<span style="color:#bd93f9">0</span>), i <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">10</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">/// Test that the cluster handles node failure and re-joining correctly.
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[test]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">test_node_failure_and_rejoin</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> cluster <span style="color:#ff79c6">=</span> TestCluster::new(<span style="color:#bd93f9">3</span>);  <span style="color:#6272a4">// 3-node cluster
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Write data
+</span></span></span><span style="display:flex;"><span>    cluster.node(<span style="color:#bd93f9">0</span>).execute(<span style="color:#f1fa8c">&#34;CREATE TABLE replicated (id INT PRIMARY KEY, value TEXT)&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>    cluster.node(<span style="color:#bd93f9">0</span>).execute(<span style="color:#f1fa8c">&#34;INSERT INTO replicated VALUES (1, &#39;hello&#39;)&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Wait for replication
+</span></span></span><span style="display:flex;"><span>    cluster.wait_for_replication().unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Kill node 2
+</span></span></span><span style="display:flex;"><span>    cluster.kill_node(<span style="color:#bd93f9">2</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Verify reads still work on remaining nodes
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> result <span style="color:#ff79c6">=</span> cluster.node(<span style="color:#bd93f9">0</span>).query(<span style="color:#f1fa8c">&#34;SELECT value FROM replicated WHERE id = 1&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">assert_eq!</span>(result.rows[<span style="color:#bd93f9">0</span>].get_str(<span style="color:#bd93f9">0</span>), <span style="color:#f1fa8c">&#34;hello&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Write more data with node 2 down
+</span></span></span><span style="display:flex;"><span>    cluster.node(<span style="color:#bd93f9">0</span>).execute(<span style="color:#f1fa8c">&#34;INSERT INTO replicated VALUES (2, &#39;world&#39;)&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Restart node 2
+</span></span></span><span style="display:flex;"><span>    cluster.restart_node(<span style="color:#bd93f9">2</span>);
+</span></span><span style="display:flex;"><span>    cluster.wait_for_replication().unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Verify node 2 has caught up with all data
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> result <span style="color:#ff79c6">=</span> cluster.node(<span style="color:#bd93f9">2</span>).query(<span style="color:#f1fa8c">&#34;SELECT COUNT(*) FROM replicated&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">assert_eq!</span>(result.rows[<span style="color:#bd93f9">0</span>].get_i64(<span style="color:#bd93f9">0</span>), <span style="color:#bd93f9">2</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">/// Test behavior under network partition.
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[test]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">test_network_partition</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> cluster <span style="color:#ff79c6">=</span> TestCluster::new(<span style="color:#bd93f9">5</span>);  <span style="color:#6272a4">// 5-node cluster
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    cluster.node(<span style="color:#bd93f9">0</span>).execute(<span style="color:#f1fa8c">&#34;CREATE TABLE partition_test (id INT PRIMARY KEY)&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Partition: nodes [0,1] cannot communicate with nodes [2,3,4]
+</span></span></span><span style="display:flex;"><span>    cluster.create_partition(<span style="color:#ff79c6">&amp;</span>[<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">1</span>], <span style="color:#ff79c6">&amp;</span>[<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// The minority partition (nodes 0,1) should not be able to commit writes
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> result <span style="color:#ff79c6">=</span> cluster.node(<span style="color:#bd93f9">0</span>).execute(<span style="color:#f1fa8c">&#34;INSERT INTO partition_test VALUES (1)&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">assert!</span>(result.is_err()); <span style="color:#6272a4">// Should fail or timeout
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// The majority partition (nodes 2,3,4) should elect a new leader and accept writes
+</span></span></span><span style="display:flex;"><span>    cluster.node(<span style="color:#bd93f9">2</span>).execute(<span style="color:#f1fa8c">&#34;INSERT INTO partition_test VALUES (2)&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Heal the partition
+</span></span></span><span style="display:flex;"><span>    cluster.heal_partition();
+</span></span><span style="display:flex;"><span>    cluster.wait_for_replication().unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// All nodes should converge on the same state
+</span></span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> <span style="color:#bd93f9">0</span><span style="color:#ff79c6">..</span><span style="color:#bd93f9">5</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> result <span style="color:#ff79c6">=</span> cluster.node(i).query(<span style="color:#f1fa8c">&#34;SELECT COUNT(*) FROM partition_test&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">assert_eq!</span>(result.rows[<span style="color:#bd93f9">0</span>].get_i64(<span style="color:#bd93f9">0</span>), <span style="color:#bd93f9">1</span>); <span style="color:#6272a4">// Only the majority write succeeded
+</span></span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">/// Test behavior under disk full conditions.
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[test]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">test_disk_full</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> dir <span style="color:#ff79c6">=</span> TempDir::new().unwrap();
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> db <span style="color:#ff79c6">=</span> TestDatabase::with_dir(dir.path());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    db.execute(<span style="color:#f1fa8c">&#34;CREATE TABLE disk_test (id INT PRIMARY KEY, data TEXT)&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Simulate disk full by setting a size limit on the test directory
+</span></span></span><span style="display:flex;"><span>    db.set_disk_limit(<span style="color:#bd93f9">1024</span> <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">1024</span>); <span style="color:#6272a4">// 1MB limit
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Insert data until disk is full
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> <span style="color:#ff79c6">mut</span> succeeded <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> <span style="color:#bd93f9">0</span><span style="color:#ff79c6">..</span><span style="color:#bd93f9">100_000</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">match</span> db.execute(<span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">format!</span>(
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;INSERT INTO disk_test VALUES (</span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">, &#39;</span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">&#39;)&#34;</span>, i, <span style="color:#f1fa8c">&#34;x&#34;</span>.repeat(<span style="color:#bd93f9">1000</span>)
+</span></span><span style="display:flex;"><span>        )) {
+</span></span><span style="display:flex;"><span>            <span style="color:#8be9fd;font-style:italic">Ok</span>(_) <span style="color:#ff79c6">=&gt;</span> succeeded <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#8be9fd;font-style:italic">Err</span>(e) <span style="color:#ff79c6">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#6272a4">// Should get a clear &#34;disk full&#34; error, not corruption
+</span></span></span><span style="display:flex;"><span>                <span style="color:#50fa7b">assert!</span>(e.to_string().contains(<span style="color:#f1fa8c">&#34;disk full&#34;</span>) <span style="color:#ff79c6">||</span>
+</span></span><span style="display:flex;"><span>                        e.to_string().contains(<span style="color:#f1fa8c">&#34;no space&#34;</span>));
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Verify that successfully committed data is still readable
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> result <span style="color:#ff79c6">=</span> db.query(<span style="color:#f1fa8c">&#34;SELECT COUNT(*) FROM disk_test&#34;</span>).unwrap();
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">assert_eq!</span>(result.rows[<span style="color:#bd93f9">0</span>].get_i64(<span style="color:#bd93f9">0</span>), succeeded);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="running-integration-tests">Running Integration Tests</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Run all integration tests</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> --test <span style="color:#f1fa8c">&#39;*&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run integration tests for a specific crate</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-storage --test acid_compliance
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run a specific integration test function</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-server --test chaos_tests test_crash_recovery
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run with verbose output</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-api --test integration_test -- --nocapture
+</span></span></code></pre></div><h2 id="property-based-tests">Property-Based Tests</h2>
+<p>ThunderDB uses the <code>proptest</code> crate for property-based testing. Instead of testing specific examples, property-based tests verify that invariants hold across randomly generated inputs.</p>
+<h3 id="example-btree-property-tests">Example: B+Tree Property Tests</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#6272a4">// thunder-storage/src/btree.rs (within #[cfg(test)] block)
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">use</span> proptest::prelude::<span style="color:#ff79c6">*</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">proptest!</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">/// Property: Every key that is inserted can be retrieved.
+</span></span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">#[test]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">prop_insert_then_get</span>(
+</span></span><span style="display:flex;"><span>        keys <span style="color:#ff79c6">in</span> prop::collection::vec(any::<span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">i64</span><span style="color:#ff79c6">&gt;</span>(), <span style="color:#bd93f9">1</span><span style="color:#ff79c6">..</span><span style="color:#bd93f9">1000</span>)
+</span></span><span style="display:flex;"><span>    ) {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> (<span style="color:#ff79c6">mut</span> btree, _dir) <span style="color:#ff79c6">=</span> setup_btree();
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> unique_keys: <span style="color:#8be9fd;font-style:italic">Vec</span><span style="color:#ff79c6">&lt;</span>_<span style="color:#ff79c6">&gt;</span> <span style="color:#ff79c6">=</span> keys.into_iter().collect::<span style="color:#ff79c6">&lt;</span>std::collections::HashSet<span style="color:#ff79c6">&lt;</span>_<span style="color:#ff79c6">&gt;&gt;</span>()
+</span></span><span style="display:flex;"><span>            .into_iter().collect();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span> <span style="color:#ff79c6">&amp;</span>key <span style="color:#ff79c6">in</span> <span style="color:#ff79c6">&amp;</span>unique_keys {
+</span></span><span style="display:flex;"><span>            btree.insert(<span style="color:#ff79c6">&amp;</span>Key::Int64(key), <span style="color:#ff79c6">&amp;</span>Value::Int64(key <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">2</span>)).unwrap();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span> <span style="color:#ff79c6">&amp;</span>key <span style="color:#ff79c6">in</span> <span style="color:#ff79c6">&amp;</span>unique_keys {
+</span></span><span style="display:flex;"><span>            <span style="color:#8be9fd;font-style:italic">let</span> result <span style="color:#ff79c6">=</span> btree.get(<span style="color:#ff79c6">&amp;</span>Key::Int64(key)).unwrap();
+</span></span><span style="display:flex;"><span>            <span style="color:#50fa7b">prop_assert_eq!</span>(result, <span style="color:#8be9fd;font-style:italic">Some</span>(Value::Int64(key <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">2</span>)));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">/// Property: The tree is always sorted (range scan returns keys in order).
+</span></span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">#[test]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">prop_sorted_order</span>(
+</span></span><span style="display:flex;"><span>        keys <span style="color:#ff79c6">in</span> prop::collection::vec(any::<span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">i64</span><span style="color:#ff79c6">&gt;</span>(), <span style="color:#bd93f9">1</span><span style="color:#ff79c6">..</span><span style="color:#bd93f9">500</span>)
+</span></span><span style="display:flex;"><span>    ) {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> (<span style="color:#ff79c6">mut</span> btree, _dir) <span style="color:#ff79c6">=</span> setup_btree();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span> <span style="color:#ff79c6">&amp;</span>key <span style="color:#ff79c6">in</span> <span style="color:#ff79c6">&amp;</span>keys {
+</span></span><span style="display:flex;"><span>            <span style="color:#8be9fd;font-style:italic">let</span> _ <span style="color:#ff79c6">=</span> btree.insert(<span style="color:#ff79c6">&amp;</span>Key::Int64(key), <span style="color:#ff79c6">&amp;</span>Value::Int64(key));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> results: <span style="color:#8be9fd;font-style:italic">Vec</span><span style="color:#ff79c6">&lt;</span>_<span style="color:#ff79c6">&gt;</span> <span style="color:#ff79c6">=</span> btree.full_scan().unwrap().collect();
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span> window <span style="color:#ff79c6">in</span> results.windows(<span style="color:#bd93f9">2</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#50fa7b">prop_assert!</span>(window[<span style="color:#bd93f9">0</span>].<span style="color:#bd93f9">0</span> <span style="color:#ff79c6">&lt;=</span> window[<span style="color:#bd93f9">1</span>].<span style="color:#bd93f9">0</span>, <span style="color:#f1fa8c">&#34;Keys must be sorted&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">/// Property: Deleting a key makes it unretrievable.
+</span></span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">#[test]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">prop_delete_removes_key</span>(
+</span></span><span style="display:flex;"><span>        keys <span style="color:#ff79c6">in</span> prop::collection::vec(any::<span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">i64</span><span style="color:#ff79c6">&gt;</span>(), <span style="color:#bd93f9">1</span><span style="color:#ff79c6">..</span><span style="color:#bd93f9">200</span>),
+</span></span><span style="display:flex;"><span>        delete_idx <span style="color:#ff79c6">in</span> any::<span style="color:#ff79c6">&lt;</span>prop::sample::Index<span style="color:#ff79c6">&gt;</span>(),
+</span></span><span style="display:flex;"><span>    ) {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> (<span style="color:#ff79c6">mut</span> btree, _dir) <span style="color:#ff79c6">=</span> setup_btree();
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> unique_keys: <span style="color:#8be9fd;font-style:italic">Vec</span><span style="color:#ff79c6">&lt;</span>_<span style="color:#ff79c6">&gt;</span> <span style="color:#ff79c6">=</span> keys.into_iter().collect::<span style="color:#ff79c6">&lt;</span>std::collections::HashSet<span style="color:#ff79c6">&lt;</span>_<span style="color:#ff79c6">&gt;&gt;</span>()
+</span></span><span style="display:flex;"><span>            .into_iter().collect();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> unique_keys.is_empty() {
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">Ok</span>(());
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span> <span style="color:#ff79c6">&amp;</span>key <span style="color:#ff79c6">in</span> <span style="color:#ff79c6">&amp;</span>unique_keys {
+</span></span><span style="display:flex;"><span>            btree.insert(<span style="color:#ff79c6">&amp;</span>Key::Int64(key), <span style="color:#ff79c6">&amp;</span>Value::Int64(key)).unwrap();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> delete_key <span style="color:#ff79c6">=</span> unique_keys[delete_idx.index(unique_keys.len())];
+</span></span><span style="display:flex;"><span>        btree.delete(<span style="color:#ff79c6">&amp;</span>Key::Int64(delete_key)).unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">prop_assert_eq!</span>(btree.get(<span style="color:#ff79c6">&amp;</span>Key::Int64(delete_key)).unwrap(), <span style="color:#8be9fd;font-style:italic">None</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="running-property-based-tests">Running Property-Based Tests</h3>
+<p>Property-based tests are part of the regular test suite and run with <code>cargo test</code>. They use a default of 256 test cases per property. For more thorough testing:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Run with more test cases</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">PROPTEST_CASES</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">10000</span> cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-storage -- prop_
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run with a specific seed (for reproducing failures)</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">PROPTEST_SEED</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">12345</span> cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-storage -- prop_insert_then_get
+</span></span></code></pre></div><p>When a property test fails, <code>proptest</code> automatically shrinks the failing input to the smallest reproduction case and prints the seed for deterministic replay.</p>
+<h2 id="load-tests">Load Tests</h2>
+<p><strong>File:</strong> <code>thunder-api/tests/load_test.rs</code></p>
+<p>Load tests measure throughput and latency under sustained workloads:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#6272a4">// thunder-api/tests/load_test.rs
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">/// Test sustained query throughput under concurrent load.
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[tokio::test]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[ignore]</span> <span style="color:#6272a4">// Run only when explicitly requested: cargo test -- --ignored
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">test_concurrent_query_throughput</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> server <span style="color:#ff79c6">=</span> TestServer::start().<span style="color:#ff79c6">await</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Setup: create table and populate with data
+</span></span></span><span style="display:flex;"><span>    setup_test_data(<span style="color:#ff79c6">&amp;</span>server, <span style="color:#bd93f9">100_000</span>).<span style="color:#ff79c6">await</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> num_clients <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">50</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> queries_per_client <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1000</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> start <span style="color:#ff79c6">=</span> Instant::now();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> handles: <span style="color:#8be9fd;font-style:italic">Vec</span><span style="color:#ff79c6">&lt;</span>_<span style="color:#ff79c6">&gt;</span> <span style="color:#ff79c6">=</span> (<span style="color:#bd93f9">0</span><span style="color:#ff79c6">..</span>num_clients).map(<span style="color:#ff79c6">|</span>_<span style="color:#ff79c6">|</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> url <span style="color:#ff79c6">=</span> server.rest_url();
+</span></span><span style="display:flex;"><span>        tokio::spawn(<span style="color:#ff79c6">async</span> <span style="color:#ff79c6">move</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#8be9fd;font-style:italic">let</span> client <span style="color:#ff79c6">=</span> Client::new();
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">for</span> _ <span style="color:#ff79c6">in</span> <span style="color:#bd93f9">0</span><span style="color:#ff79c6">..</span>queries_per_client {
+</span></span><span style="display:flex;"><span>                <span style="color:#8be9fd;font-style:italic">let</span> id <span style="color:#ff79c6">=</span> rand::random::<span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">u64</span><span style="color:#ff79c6">&gt;</span>() <span style="color:#ff79c6">%</span> <span style="color:#bd93f9">100_000</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#8be9fd;font-style:italic">let</span> resp <span style="color:#ff79c6">=</span> client.post(<span style="color:#50fa7b">format!</span>(<span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">/api/v1/query&#34;</span>, url))
+</span></span><span style="display:flex;"><span>                    .json(<span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">json!</span>({
+</span></span><span style="display:flex;"><span>                        <span style="color:#f1fa8c">&#34;sql&#34;</span>: <span style="color:#50fa7b">format</span><span style="color:#ff79c6">!</span>(<span style="color:#f1fa8c">&#34;SELECT * FROM load_test WHERE id = {}&#34;</span>, id)
+</span></span><span style="display:flex;"><span>                    }))
+</span></span><span style="display:flex;"><span>                    .send().<span style="color:#ff79c6">await</span>.unwrap();
+</span></span><span style="display:flex;"><span>                <span style="color:#50fa7b">assert_eq!</span>(resp.status(), <span style="color:#bd93f9">200</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>    }).collect();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> handle <span style="color:#ff79c6">in</span> handles {
+</span></span><span style="display:flex;"><span>        handle.<span style="color:#ff79c6">await</span>.unwrap();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> elapsed <span style="color:#ff79c6">=</span> start.elapsed();
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> total_queries <span style="color:#ff79c6">=</span> num_clients <span style="color:#ff79c6">*</span> queries_per_client;
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> qps <span style="color:#ff79c6">=</span> total_queries <span style="color:#ff79c6">as</span> <span style="color:#8be9fd">f64</span> <span style="color:#ff79c6">/</span> elapsed.as_secs_f64();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">println!</span>(<span style="color:#f1fa8c">&#34;Load test results:&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">println!</span>(<span style="color:#f1fa8c">&#34;  Total queries: </span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">&#34;</span>, total_queries);
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">println!</span>(<span style="color:#f1fa8c">&#34;  Duration: </span><span style="color:#f1fa8c">{:?}</span><span style="color:#f1fa8c">&#34;</span>, elapsed);
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">println!</span>(<span style="color:#f1fa8c">&#34;  Throughput: </span><span style="color:#f1fa8c">{:.0}</span><span style="color:#f1fa8c"> queries/sec&#34;</span>, qps);
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">println!</span>(<span style="color:#f1fa8c">&#34;  Avg latency: </span><span style="color:#f1fa8c">{:.2}</span><span style="color:#f1fa8c">ms&#34;</span>, elapsed.as_millis() <span style="color:#ff79c6">as</span> <span style="color:#8be9fd">f64</span> <span style="color:#ff79c6">/</span> total_queries <span style="color:#ff79c6">as</span> <span style="color:#8be9fd">f64</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Assert minimum performance thresholds
+</span></span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">assert!</span>(qps <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">1000.0</span>, <span style="color:#f1fa8c">&#34;Expected at least 1000 QPS, got {:.0}&#34;</span>, qps);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">/// Test write throughput under concurrent load.
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[tokio::test]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[ignore]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">test_concurrent_write_throughput</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> server <span style="color:#ff79c6">=</span> TestServer::start().<span style="color:#ff79c6">await</span>;
+</span></span><span style="display:flex;"><span>    server.execute(<span style="color:#f1fa8c">&#34;CREATE TABLE write_test (id INT PRIMARY KEY, value TEXT)&#34;</span>).<span style="color:#ff79c6">await</span>.unwrap();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> num_writers <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">20</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> writes_per_writer <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">5000</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> start <span style="color:#ff79c6">=</span> Instant::now();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> handles: <span style="color:#8be9fd;font-style:italic">Vec</span><span style="color:#ff79c6">&lt;</span>_<span style="color:#ff79c6">&gt;</span> <span style="color:#ff79c6">=</span> (<span style="color:#bd93f9">0</span><span style="color:#ff79c6">..</span>num_writers).map(<span style="color:#ff79c6">|</span>writer_id<span style="color:#ff79c6">|</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> url <span style="color:#ff79c6">=</span> server.rest_url();
+</span></span><span style="display:flex;"><span>        tokio::spawn(<span style="color:#ff79c6">async</span> <span style="color:#ff79c6">move</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#8be9fd;font-style:italic">let</span> client <span style="color:#ff79c6">=</span> Client::new();
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> <span style="color:#bd93f9">0</span><span style="color:#ff79c6">..</span>writes_per_writer {
+</span></span><span style="display:flex;"><span>                <span style="color:#8be9fd;font-style:italic">let</span> id <span style="color:#ff79c6">=</span> writer_id <span style="color:#ff79c6">*</span> writes_per_writer <span style="color:#ff79c6">+</span> i;
+</span></span><span style="display:flex;"><span>                <span style="color:#8be9fd;font-style:italic">let</span> resp <span style="color:#ff79c6">=</span> client.post(<span style="color:#50fa7b">format!</span>(<span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">/api/v1/execute&#34;</span>, url))
+</span></span><span style="display:flex;"><span>                    .json(<span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">json!</span>({
+</span></span><span style="display:flex;"><span>                        <span style="color:#f1fa8c">&#34;sql&#34;</span>: <span style="color:#50fa7b">format</span><span style="color:#ff79c6">!</span>(<span style="color:#f1fa8c">&#34;INSERT INTO write_test VALUES ({}, &#39;data_{}&#39;)&#34;</span>, id, id)
+</span></span><span style="display:flex;"><span>                    }))
+</span></span><span style="display:flex;"><span>                    .send().<span style="color:#ff79c6">await</span>.unwrap();
+</span></span><span style="display:flex;"><span>                <span style="color:#50fa7b">assert_eq!</span>(resp.status(), <span style="color:#bd93f9">200</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>    }).collect();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> handle <span style="color:#ff79c6">in</span> handles {
+</span></span><span style="display:flex;"><span>        handle.<span style="color:#ff79c6">await</span>.unwrap();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> elapsed <span style="color:#ff79c6">=</span> start.elapsed();
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> total_writes <span style="color:#ff79c6">=</span> num_writers <span style="color:#ff79c6">*</span> writes_per_writer;
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> wps <span style="color:#ff79c6">=</span> total_writes <span style="color:#ff79c6">as</span> <span style="color:#8be9fd">f64</span> <span style="color:#ff79c6">/</span> elapsed.as_secs_f64();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">println!</span>(<span style="color:#f1fa8c">&#34;Write throughput: </span><span style="color:#f1fa8c">{:.0}</span><span style="color:#f1fa8c"> writes/sec&#34;</span>, wps);
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">assert!</span>(wps <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">500.0</span>, <span style="color:#f1fa8c">&#34;Expected at least 500 writes/sec, got {:.0}&#34;</span>, wps);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="running-load-tests">Running Load Tests</h3>
+<p>Load tests are marked with <code>#[ignore]</code> so they do not run during normal <code>cargo test</code>. Run them explicitly:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Run all load tests</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-api --test load_test -- --ignored --nocapture
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run a specific load test</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-api --test load_test test_concurrent_query_throughput -- --ignored --nocapture
+</span></span></code></pre></div><h2 id="benchmarks">Benchmarks</h2>
+<p>ThunderDB uses the <code>criterion</code> crate for statistically rigorous micro-benchmarks. Benchmarks live in the <code>benches/</code> directory of each crate.</p>
+<h3 id="example-benchmark">Example Benchmark</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#6272a4">// thunder-storage/benches/btree_bench.rs
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">use</span> criterion::{criterion_group, criterion_main, Criterion, BenchmarkId, BatchSize};
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">use</span> thunder_storage::btree::{BTree, Key, Value};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">bench_btree_insert</span>(c: <span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">mut</span> Criterion) {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> <span style="color:#ff79c6">mut</span> group <span style="color:#ff79c6">=</span> c.benchmark_group(<span style="color:#f1fa8c">&#34;btree_insert&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> size <span style="color:#ff79c6">in</span> [<span style="color:#bd93f9">100</span>, <span style="color:#bd93f9">1_000</span>, <span style="color:#bd93f9">10_000</span>, <span style="color:#bd93f9">100_000</span>] {
+</span></span><span style="display:flex;"><span>        group.bench_with_input(
+</span></span><span style="display:flex;"><span>            BenchmarkId::from_parameter(size),
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&amp;</span>size,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">|</span>b, <span style="color:#ff79c6">&amp;</span>size<span style="color:#ff79c6">|</span> {
+</span></span><span style="display:flex;"><span>                b.iter_batched(
+</span></span><span style="display:flex;"><span>                    <span style="color:#ff79c6">||</span> setup_btree(),  <span style="color:#6272a4">// setup
+</span></span></span><span style="display:flex;"><span>                    <span style="color:#ff79c6">|</span>(<span style="color:#ff79c6">mut</span> btree, _dir)<span style="color:#ff79c6">|</span> {
+</span></span><span style="display:flex;"><span>                        <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> <span style="color:#bd93f9">0</span><span style="color:#ff79c6">..</span>size {
+</span></span><span style="display:flex;"><span>                            btree.insert(<span style="color:#ff79c6">&amp;</span>Key::Int64(i), <span style="color:#ff79c6">&amp;</span>Value::Int64(i)).unwrap();
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    },
+</span></span><span style="display:flex;"><span>                    BatchSize::SmallInput,
+</span></span><span style="display:flex;"><span>                );
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    group.finish();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">bench_btree_point_lookup</span>(c: <span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">mut</span> Criterion) {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> <span style="color:#ff79c6">mut</span> group <span style="color:#ff79c6">=</span> c.benchmark_group(<span style="color:#f1fa8c">&#34;btree_point_lookup&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> size <span style="color:#ff79c6">in</span> [<span style="color:#bd93f9">1_000</span>, <span style="color:#bd93f9">10_000</span>, <span style="color:#bd93f9">100_000</span>] {
+</span></span><span style="display:flex;"><span>        group.bench_with_input(
+</span></span><span style="display:flex;"><span>            BenchmarkId::from_parameter(size),
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&amp;</span>size,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">|</span>b, <span style="color:#ff79c6">&amp;</span>size<span style="color:#ff79c6">|</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#8be9fd;font-style:italic">let</span> (<span style="color:#ff79c6">mut</span> btree, _dir) <span style="color:#ff79c6">=</span> setup_btree();
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> <span style="color:#bd93f9">0</span><span style="color:#ff79c6">..</span>size {
+</span></span><span style="display:flex;"><span>                    btree.insert(<span style="color:#ff79c6">&amp;</span>Key::Int64(i), <span style="color:#ff79c6">&amp;</span>Value::Int64(i)).unwrap();
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#8be9fd;font-style:italic">let</span> <span style="color:#ff79c6">mut</span> rng <span style="color:#ff79c6">=</span> rand::thread_rng();
+</span></span><span style="display:flex;"><span>                b.iter(<span style="color:#ff79c6">||</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#8be9fd;font-style:italic">let</span> key <span style="color:#ff79c6">=</span> Key::Int64(rng.gen_range(<span style="color:#bd93f9">0</span><span style="color:#ff79c6">..</span>size));
+</span></span><span style="display:flex;"><span>                    btree.get(<span style="color:#ff79c6">&amp;</span>key).unwrap()
+</span></span><span style="display:flex;"><span>                });
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    group.finish();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">bench_btree_range_scan</span>(c: <span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">mut</span> Criterion) {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> <span style="color:#ff79c6">mut</span> group <span style="color:#ff79c6">=</span> c.benchmark_group(<span style="color:#f1fa8c">&#34;btree_range_scan&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> (<span style="color:#ff79c6">mut</span> btree, _dir) <span style="color:#ff79c6">=</span> setup_btree();
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> <span style="color:#bd93f9">0</span><span style="color:#ff79c6">..</span><span style="color:#bd93f9">100_000</span><span style="color:#ff79c6">i64</span> {
+</span></span><span style="display:flex;"><span>        btree.insert(<span style="color:#ff79c6">&amp;</span>Key::Int64(i), <span style="color:#ff79c6">&amp;</span>Value::Int64(i)).unwrap();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> range_size <span style="color:#ff79c6">in</span> [<span style="color:#bd93f9">10</span>, <span style="color:#bd93f9">100</span>, <span style="color:#bd93f9">1_000</span>, <span style="color:#bd93f9">10_000</span>] {
+</span></span><span style="display:flex;"><span>        group.bench_with_input(
+</span></span><span style="display:flex;"><span>            BenchmarkId::from_parameter(range_size),
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&amp;</span>range_size,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">|</span>b, <span style="color:#ff79c6">&amp;</span>range_size<span style="color:#ff79c6">|</span> {
+</span></span><span style="display:flex;"><span>                b.iter(<span style="color:#ff79c6">||</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#8be9fd;font-style:italic">let</span> start <span style="color:#ff79c6">=</span> Key::Int64(<span style="color:#bd93f9">50_000</span>);
+</span></span><span style="display:flex;"><span>                    <span style="color:#8be9fd;font-style:italic">let</span> end <span style="color:#ff79c6">=</span> Key::Int64(<span style="color:#bd93f9">50_000</span> <span style="color:#ff79c6">+</span> range_size);
+</span></span><span style="display:flex;"><span>                    <span style="color:#8be9fd;font-style:italic">let</span> _results: <span style="color:#8be9fd;font-style:italic">Vec</span><span style="color:#ff79c6">&lt;</span>_<span style="color:#ff79c6">&gt;</span> <span style="color:#ff79c6">=</span> btree.range_scan(<span style="color:#ff79c6">&amp;</span>start, <span style="color:#ff79c6">&amp;</span>end).unwrap().collect();
+</span></span><span style="display:flex;"><span>                });
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    group.finish();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">criterion_group!</span>(benches, bench_btree_insert, bench_btree_point_lookup, bench_btree_range_scan);
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">criterion_main!</span>(benches);
+</span></span></code></pre></div><h3 id="running-benchmarks">Running Benchmarks</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Run all benchmarks</span>
+</span></span><span style="display:flex;"><span>cargo bench
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run benchmarks for a specific crate</span>
+</span></span><span style="display:flex;"><span>cargo bench -p thunder-storage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run a specific benchmark</span>
+</span></span><span style="display:flex;"><span>cargo bench -p thunder-storage -- btree_point_lookup
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Generate HTML reports (criterion automatically creates these in target/criterion/)</span>
+</span></span><span style="display:flex;"><span>cargo bench -p thunder-storage
+</span></span><span style="display:flex;"><span>open target/criterion/report/index.html
+</span></span></code></pre></div><h3 id="benchmark-files">Benchmark Files</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Crate</th>
+          <th>Benchmark File</th>
+          <th>What It Measures</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>thunder-storage</code></td>
+          <td><code>benches/btree_bench.rs</code></td>
+          <td>B+Tree insert, lookup, range scan throughput</td>
+      </tr>
+      <tr>
+          <td><code>thunder-storage</code></td>
+          <td><code>benches/wal_bench.rs</code></td>
+          <td>WAL write throughput, group commit latency</td>
+      </tr>
+      <tr>
+          <td><code>thunder-storage</code></td>
+          <td><code>benches/compression_bench.rs</code></td>
+          <td>Compression/decompression speed and ratios</td>
+      </tr>
+      <tr>
+          <td><code>thunder-query</code></td>
+          <td><code>benches/executor_bench.rs</code></td>
+          <td>Query execution throughput for various query types</td>
+      </tr>
+      <tr>
+          <td><code>thunder-query</code></td>
+          <td><code>benches/vectorized_bench.rs</code></td>
+          <td>Vectorized vs. row-at-a-time execution</td>
+      </tr>
+      <tr>
+          <td><code>thunder-protocol</code></td>
+          <td><code>benches/protocol_bench.rs</code></td>
+          <td>Protocol encoding/decoding throughput</td>
+      </tr>
+      <tr>
+          <td><code>thunder-sql</code></td>
+          <td><code>benches/parser_bench.rs</code></td>
+          <td>SQL parsing throughput</td>
+      </tr>
+      <tr>
+          <td><code>thunder-sql</code></td>
+          <td><code>benches/optimizer_bench.rs</code></td>
+          <td>Query optimization time for various plan shapes</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="test-coverage">Test Coverage</h2>
+<h3 id="measuring-coverage">Measuring Coverage</h3>
+<p>Use <code>cargo-tarpaulin</code> to measure test coverage:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Install tarpaulin</span>
+</span></span><span style="display:flex;"><span>cargo install cargo-tarpaulin
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run coverage for the entire workspace</span>
+</span></span><span style="display:flex;"><span>cargo tarpaulin --workspace --out Html
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run coverage for a specific crate</span>
+</span></span><span style="display:flex;"><span>cargo tarpaulin -p thunder-storage --out Html
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Generate Lcov output for CI integration</span>
+</span></span><span style="display:flex;"><span>cargo tarpaulin --workspace --out Lcov --output-dir coverage/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># View the HTML report</span>
+</span></span><span style="display:flex;"><span>open tarpaulin-report.html
+</span></span></code></pre></div><h3 id="coverage-targets">Coverage Targets</h3>
+<p>ThunderDB aims for the following coverage targets:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Category</th>
+          <th>Target</th>
+          <th>Rationale</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>thunder-common</code></td>
+          <td>90%+</td>
+          <td>Foundational types must be thoroughly tested</td>
+      </tr>
+      <tr>
+          <td><code>thunder-storage</code></td>
+          <td>85%+</td>
+          <td>Storage correctness is critical for data integrity</td>
+      </tr>
+      <tr>
+          <td><code>thunder-txn</code></td>
+          <td>85%+</td>
+          <td>Transaction correctness ensures ACID properties</td>
+      </tr>
+      <tr>
+          <td><code>thunder-sql</code></td>
+          <td>80%+</td>
+          <td>SQL parsing and optimization have many edge cases</td>
+      </tr>
+      <tr>
+          <td><code>thunder-query</code></td>
+          <td>80%+</td>
+          <td>Query execution correctness ensures correct results</td>
+      </tr>
+      <tr>
+          <td><code>thunder-protocol</code></td>
+          <td>75%+</td>
+          <td>Protocol compatibility requires testing many message types</td>
+      </tr>
+      <tr>
+          <td><code>thunder-api</code></td>
+          <td>70%+</td>
+          <td>API tests cover handler logic and serialization</td>
+      </tr>
+      <tr>
+          <td>Overall workspace</td>
+          <td>80%+</td>
+          <td>Comprehensive coverage across all crates</td>
+      </tr>
+  </tbody>
+</table>
+<p>Coverage numbers are tracked in CI and reported on each pull request.</p>
+<h2 id="writing-new-tests">Writing New Tests</h2>
+<h3 id="test-file-placement">Test File Placement</h3>
+<ul>
+<li><strong>Unit test:</strong> Add a <code>#[test]</code> function inside the <code>#[cfg(test)] mod tests</code> block in the relevant source file.</li>
+<li><strong>Integration test:</strong> Create or add to a file in the <code>tests/</code> directory of the relevant crate.</li>
+<li><strong>Benchmark:</strong> Create or add to a file in the <code>benches/</code> directory of the relevant crate.</li>
+</ul>
+<h3 id="test-fixtures-and-utilities">Test Fixtures and Utilities</h3>
+<p>ThunderDB provides shared test utilities in several locations:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#6272a4">// thunder-common/src/test_utils.rs (compiled only in test mode)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[cfg(test)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">mod</span> test_utils {
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">/// Create a temporary database for testing
+</span></span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">create_test_db</span>() -&gt; <span style="color:#50fa7b">TestDatabase</span> { <span style="color:#6272a4">/* ... */</span> }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">/// Generate random rows for testing
+</span></span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">random_rows</span>(count: <span style="color:#8be9fd">usize</span>, schema: <span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">Schema</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Vec</span><span style="color:#ff79c6">&lt;</span>Row<span style="color:#ff79c6">&gt;</span> { <span style="color:#6272a4">/* ... */</span> }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">/// Assert that two result sets are equivalent (order-independent)
+</span></span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">assert_result_sets_equal</span>(a: <span style="color:#ff79c6">&amp;</span>[Row], b: <span style="color:#ff79c6">&amp;</span>[Row]) { <span style="color:#6272a4">/* ... */</span> }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="assertions">Assertions</h3>
+<p>Use these assertion patterns:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#6272a4">// Standard assertions
+</span></span></span><span style="display:flex;"><span><span style="color:#50fa7b">assert_eq!</span>(actual, expected);
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">assert_ne!</span>(actual, unexpected);
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">assert!</span>(condition, <span style="color:#f1fa8c">&#34;descriptive message: {}&#34;</span>, context);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Result assertions
+</span></span></span><span style="display:flex;"><span><span style="color:#50fa7b">assert!</span>(result.is_ok(), <span style="color:#f1fa8c">&#34;Expected Ok, got {:?}&#34;</span>, result);
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">assert!</span>(result.is_err(), <span style="color:#f1fa8c">&#34;Expected Err, got {:?}&#34;</span>, result);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// For proptest
+</span></span></span><span style="display:flex;"><span><span style="color:#50fa7b">prop_assert_eq!</span>(actual, expected);
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">prop_assert!</span>(condition);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Custom assertion for approximate floating-point comparison
+</span></span></span><span style="display:flex;"><span><span style="color:#50fa7b">assert!</span>((actual <span style="color:#ff79c6">-</span> expected).abs() <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">1e-6</span>, <span style="color:#f1fa8c">&#34;Values differ: {} vs {}&#34;</span>, actual, expected);
+</span></span></code></pre></div><h3 id="async-test-pattern">Async Test Pattern</h3>
+<p>For async tests, use the <code>#[tokio::test]</code> attribute:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#ff79c6">#[tokio::test]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">test_async_operation</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> server <span style="color:#ff79c6">=</span> TestServer::start().<span style="color:#ff79c6">await</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> result <span style="color:#ff79c6">=</span> server.query(<span style="color:#f1fa8c">&#34;SELECT 1&#34;</span>).<span style="color:#ff79c6">await</span>.unwrap();
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">assert_eq!</span>(result.rows[<span style="color:#bd93f9">0</span>].get_i64(<span style="color:#bd93f9">0</span>), <span style="color:#bd93f9">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// For tests that need a multi-threaded runtime
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[tokio::test(flavor = </span><span style="color:#f1fa8c">&#34;multi_thread&#34;</span><span style="color:#ff79c6">, worker_threads = 4)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">test_concurrent_operations</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// ...
+</span></span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="test-naming-conventions">Test Naming Conventions</h3>
+<p>Follow these naming patterns:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>test_{operation}                        # Basic operation test
+</span></span><span style="display:flex;"><span>test_{operation}_{condition}            # Operation under specific condition
+</span></span><span style="display:flex;"><span>test_{operation}_{expected_outcome}     # Operation with expected outcome
+</span></span><span style="display:flex;"><span>test_{component}_{scenario}             # Component-specific scenario
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Examples:
+</span></span><span style="display:flex;"><span>test_insert_single_row
+</span></span><span style="display:flex;"><span>test_insert_duplicate_key_returns_error
+</span></span><span style="display:flex;"><span>test_btree_split_at_capacity
+</span></span><span style="display:flex;"><span>test_wal_recovery_after_crash
+</span></span><span style="display:flex;"><span>test_mvcc_snapshot_isolation
+</span></span><span style="display:flex;"><span>test_postgres_protocol_ssl_handshake
+</span></span></code></pre></div><h2 id="cicd-pipeline">CI/CD Pipeline</h2>
+<p>ThunderDB uses a comprehensive CI/CD pipeline that runs on every push and pull request.</p>
+<h3 id="pipeline-stages">Pipeline Stages</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> Stage <span style="color:#bd93f9">1</span>: Format <span style="color:#ff79c6">&amp;</span> Lint (parallel) <span style="color:#ff79c6">--------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>  cargo fmt <span style="color:#ff79c6">--</span> <span style="color:#ff79c6">--</span>check                        <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>  cargo clippy <span style="color:#ff79c6">--</span>all<span style="color:#ff79c6">-</span>targets <span style="color:#ff79c6">--</span> <span style="color:#ff79c6">-</span>D warnings   <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+----------------------------------------------+</span>
+</span></span><span style="display:flex;"><span>                     <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> Stage <span style="color:#bd93f9">2</span>: Build (sequential) <span style="color:#ff79c6">---------------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>  cargo build <span style="color:#ff79c6">--</span>all<span style="color:#ff79c6">-</span>targets                    <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+----------------------------------------------+</span>
+</span></span><span style="display:flex;"><span>                     <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> Stage <span style="color:#bd93f9">3</span>: Test (parallel) <span style="color:#ff79c6">------------------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>  cargo test <span style="color:#ff79c6">--</span>lib          (unit tests)      <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>  cargo test <span style="color:#ff79c6">--</span>test <span style="color:#f1fa8c">&#39;*&#39;</span>     (integration)     <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>  cargo test <span style="color:#ff79c6">--</span>doc          (doc tests)       <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+----------------------------------------------+</span>
+</span></span><span style="display:flex;"><span>                     <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> Stage <span style="color:#bd93f9">4</span>: Coverage (sequential) <span style="color:#ff79c6">------------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>  cargo tarpaulin <span style="color:#ff79c6">--</span>workspace                 <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>  Upload coverage report                      <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+----------------------------------------------+</span>
+</span></span><span style="display:flex;"><span>                     <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> Stage <span style="color:#bd93f9">5</span>: Benchmark (on main only) <span style="color:#ff79c6">---------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>  cargo bench                                 <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>  Compare with baseline                       <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>  Alert on regressions                        <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+----------------------------------------------+</span>
+</span></span></code></pre></div><h3 id="ci-configuration">CI Configuration</h3>
+<p>The pipeline is defined in <code>.github/workflows/ci.yml</code>:</p>
+<ul>
+<li><strong>Trigger:</strong> Runs on every push to <code>main</code> and on every pull request.</li>
+<li><strong>Matrix:</strong> Tests on Linux (Ubuntu latest), macOS (latest), with the minimum supported Rust version (MSRV) and the latest stable Rust.</li>
+<li><strong>Caching:</strong> Cargo registry and target directories are cached for faster builds.</li>
+<li><strong>Timeout:</strong> Individual jobs have a 30-minute timeout.</li>
+</ul>
+<h3 id="required-checks">Required Checks</h3>
+<p>The following checks must pass before a pull request can be merged:</p>
+<ol>
+<li><code>cargo fmt -- --check</code> &ndash; Code is properly formatted</li>
+<li><code>cargo clippy --all-targets --all-features -- -D warnings</code> &ndash; No clippy warnings</li>
+<li><code>cargo test</code> &ndash; All tests pass</li>
+<li><code>cargo test --doc</code> &ndash; All doc tests pass</li>
+<li>Coverage does not decrease below thresholds</li>
+<li>No performance regressions detected in benchmarks (main branch only)</li>
+</ol>
+<h3 id="running-the-full-ci-locally">Running the Full CI Locally</h3>
+<p>Before pushing, you can run the same checks that CI will execute:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Run all CI checks locally</span>
+</span></span><span style="display:flex;"><span>cargo fmt -- --check <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>cargo clippy --all-targets --all-features -- -D warnings <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> --doc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Or use the test script which does all of the above</span>
+</span></span><span style="display:flex;"><span>./scripts/run_tests.sh
+</span></span></code></pre></div><h2 id="debugging-test-failures">Debugging Test Failures</h2>
+<h3 id="viewing-test-output">Viewing Test Output</h3>
+<p>By default, Rust captures stdout/stderr from passing tests. To see all output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> -- --nocapture
+</span></span></code></pre></div><h3 id="enabling-trace-logging-in-tests">Enabling Trace Logging in Tests</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Enable debug logging for a specific module</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">RUST_LOG</span><span style="color:#ff79c6">=</span>thunder_storage::wal<span style="color:#ff79c6">=</span>debug cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-storage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Enable trace logging for everything</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">RUST_LOG</span><span style="color:#ff79c6">=</span>trace cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-storage -- --nocapture
+</span></span></code></pre></div><h3 id="reproducing-flaky-tests">Reproducing Flaky Tests</h3>
+<p>If a test fails intermittently:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Run the test repeatedly to reproduce</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">for</span> i in <span style="color:#ff79c6">$(</span>seq <span style="color:#bd93f9">1</span> 100<span style="color:#ff79c6">)</span>; <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>    cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-storage test_concurrent_writes <span style="color:#ff79c6">||</span> <span style="color:#8be9fd;font-style:italic">break</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">done</span>
+</span></span></code></pre></div><h3 id="using-a-debugger">Using a Debugger</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Build tests without running them</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-storage --no-run
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Find the test binary</span>
+</span></span><span style="display:flex;"><span>ls target/debug/deps/thunder_storage-*
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run under a debugger</span>
+</span></span><span style="display:flex;"><span>lldb target/debug/deps/thunder_storage-abc123 -- test_name
+</span></span></code></pre></div>
+	<div class="section-index">
+    
+    
+    </div>
+<style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<div class="d-print-none">
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+</div>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'page_helpful', {
+      'event_category': 'Helpful',
+      'event_label': window.location.pathname,
+      'value': value
+    });
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback( 100 );
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+<br />
+</div>
+
+          </main>
+        </div>
+      </div>
+      <footer class="td-footer row d-print-none">
+  <div class="container-fluid">
+    <div class="row mx-md-2">
+      <div class="td-footer__left col-6 col-sm-4 order-sm-1">
+        
+      </div><div class="td-footer__right col-6 col-sm-4 order-sm-3">
+        <ul class="td-footer__links-list">
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="GitHub" aria-label="GitHub">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="Discussions" aria-label="Discussions">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb/discussions" aria-label="Discussions">
+      <i class="fas fa-comments"></i>
+    </a>
+  </li>
+  
+</ul>
+
+      </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
+        <span class="td-footer__copyright">&copy;
+    2026
+    <span class="td-footer__authors">ThunderDB Contributors</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><p class="td-footer__about mt-2"><a href="/docs/about/">About ThunderDB</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script src="/docs/js/main.js"></script>
+<script defer src="/docs/js/click-to-copy.js" crossorigin="anonymous"></script>
+<script src='/docs/js/tabpane-persist.js'></script>
+
+  </body>
+</html>

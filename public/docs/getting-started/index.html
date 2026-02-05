@@ -1,0 +1,1151 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
+  <head><script src="/docs/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=docs/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/docs/favicons/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/docs/favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/docs/favicons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/docs/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="/docs/favicons/favicon-256.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/docs/favicons/apple-touch-icon.png">
+<link rel="manifest" href="/docs/favicons/site.webmanifest">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="msapplication-TileColor" content="#0D0D0D">
+
+<title>Getting Started | ThunderDB Documentation</title>
+<meta name="description" content="Get ThunderDB up and running in minutes. Install, connect, and run your first queries.">
+<meta property="og:url" content="http://localhost:1313/docs/docs/getting-started/">
+  <meta property="og:site_name" content="ThunderDB Documentation">
+  <meta property="og:title" content="Getting Started">
+  <meta property="og:description" content="Get ThunderDB up and running in minutes. Install, connect, and run your first queries.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+
+  <meta itemprop="name" content="Getting Started">
+  <meta itemprop="description" content="Get ThunderDB up and running in minutes. Install, connect, and run your first queries.">
+  <meta itemprop="wordCount" content="2725">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Getting Started">
+  <meta name="twitter:description" content="Get ThunderDB up and running in minutes. Install, connect, and run your first queries.">
+<link href="/docs/scss/main.css" rel="stylesheet">
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+  crossorigin="anonymous"></script>
+<script defer
+  src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
+  integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
+  crossorigin="anonymous"></script>
+
+  </head>
+  <body class="td-section">
+    <header>
+      <nav class="td-navbar js-navbar-scroll" data-bs-theme="dark">
+<div class="td-navbar-container container-fluid flex-column flex-md-row">
+  <a class="navbar-brand" href="/docs/"><span class="navbar-brand__logo navbar-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="300" height="64"><defs><symbol id="b" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#331500" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FF6B00"/><rect width="4.8" height=".6" rx=".55" fill="#FA4" opacity=".5"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#F83" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#930" opacity=".35"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D50"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,200,100,0.3)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FC8" opacity=".55"/></symbol><symbol id="c" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#4D3000" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FA0"/><rect width="4.8" height=".6" rx=".55" fill="#FD6" opacity=".55"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#FB3" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#960" opacity=".3"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D80"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,230,150,0.35)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FE9" opacity=".6"/></symbol></defs><use href="#b" x="35" y="2" width="5" height="5"/><use href="#b" x="41" y="2" width="5" height="5"/><use href="#b" x="29" y="8" width="5" height="5"/><use href="#b" x="35" y="8" width="5" height="5"/><use href="#b" x="23" y="14" width="5" height="5"/><use href="#b" x="29" y="14" width="5" height="5"/><use href="#b" x="17" y="20" width="5" height="5"/><use href="#b" x="23" y="20" width="5" height="5"/><use href="#c" x="5" y="26" width="5" height="5"/><use href="#c" x="11" y="26" width="5" height="5"/><use href="#c" x="17" y="26" width="5" height="5"/><use href="#c" x="23" y="26" width="5" height="5"/><use href="#c" x="29" y="26" width="5" height="5"/><use href="#c" x="35" y="26" width="5" height="5"/><use href="#c" x="41" y="26" width="5" height="5"/><use href="#c" x="47" y="26" width="5" height="5"/><use href="#b" x="35" y="32" width="5" height="5"/><use href="#b" x="41" y="32" width="5" height="5"/><use href="#b" x="29" y="38" width="5" height="5"/><use href="#b" x="35" y="38" width="5" height="5"/><use href="#b" x="23" y="44" width="5" height="5"/><use href="#b" x="29" y="44" width="5" height="5"/><use href="#b" x="17" y="50" width="5" height="5"/><use href="#b" x="23" y="50" width="5" height="5"/><use href="#b" x="11" y="56" width="5" height="5"/><use href="#b" x="17" y="56" width="5" height="5"/><text x="66" y="43" font-family="'SF Mono','Fira Code','Consolas','Courier New',monospace" font-size="27" font-weight="900" letter-spacing=".5"><tspan fill="#FFF">Thunder</tspan><tspan fill="#FF6B00">DB</tspan></text></svg></span><span class="navbar-brand__name">ThunderDB Documentation</span></a>
+  <div class="td-navbar-nav-scroll td-navbar-nav-scroll--indicator" id="main_navbar">
+    <div class="scroll-indicator scroll-left"></div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/"><span>Documentation</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/architecture/"><span>Architecture</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/developer/api-reference/"><span>API Reference</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/about/"><span>About</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/thunderdb/thunderdb" target="_blank" rel="noopener"><i class='fab fa-github'></i><span>GitHub</span></a>
+      </li>
+      </ul>
+    <div class="scroll-indicator scroll-right"></div>
+  </div>
+  <div class="d-none d-lg-block td-navbar__search">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+  </div>
+</div>
+</nav>
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main" data-bs-spy="scroll" data-bs-target=".td-toc" data-bs-root-margin="0px 0px -10%">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+  <script>
+    $(function() {
+    $("#td-section-nav a").removeClass("active");
+    $("#td-section-nav #m-docsdocsgetting-started").addClass("active");
+    $("#td-section-nav #m-docsdocsgetting-started-li span").addClass("td-sidebar-nav-active-item");
+    $("#td-section-nav #m-docsdocsgetting-started").parents("li").addClass("active-path");
+    $("#td-section-nav li.active-path").addClass("show");
+    $("#td-section-nav li.active-path").children("input").prop('checked', true);
+    $("#td-section-nav #m-docsdocsgetting-started-li").siblings("li").addClass("show");
+    $("#td-section-nav #m-docsdocsgetting-started-li").children("ul").children("li").addClass("show");
+    $("#td-sidebar-menu").toggleClass("d-none");
+    });
+  </script>
+  <div id="td-sidebar-menu" class="td-sidebar__inner d-none">
+  <form class="td-sidebar__search d-flex align-items-center">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+    <button class="btn btn-link td-sidebar__toggle" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  <nav class="td-sidebar-nav collapse foldable-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocs-li">
+    <a href="/docs/docs/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docsdocs"><span class="">Documentation</span></a>
+    <ul class="ul-1">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsgetting-started-li">
+    <input type="checkbox" id="m-docsdocsgetting-started-check"/>
+    <label for="m-docsdocsgetting-started-check"><a href="/docs/docs/getting-started/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsgetting-started"><span class="">Getting Started</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsarchitecture-li">
+    <input type="checkbox" id="m-docsdocsarchitecture-check"/>
+    <label for="m-docsdocsarchitecture-check"><a href="/docs/docs/architecture/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsarchitecture"><span class="">Architecture</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsdeveloper-li">
+    <input type="checkbox" id="m-docsdocsdeveloper-check"/>
+    <label for="m-docsdocsdeveloper-check"><a href="/docs/docs/developer/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloper"><span class="">Developer Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperapi-reference-li">
+    <input type="checkbox" id="m-docsdocsdeveloperapi-reference-check"/>
+    <label for="m-docsdocsdeveloperapi-reference-check"><a href="/docs/docs/developer/api-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperapi-reference"><span class="">API Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersql-reference-li">
+    <input type="checkbox" id="m-docsdocsdevelopersql-reference-check"/>
+    <label for="m-docsdocsdevelopersql-reference-check"><a href="/docs/docs/developer/sql-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersql-reference"><span class="">SQL Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersdk-li">
+    <input type="checkbox" id="m-docsdocsdevelopersdk-check"/>
+    <label for="m-docsdocsdevelopersdk-check"><a href="/docs/docs/developer/sdk/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersdk"><span class="">SDKs &amp; Drivers</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperexamples-li">
+    <input type="checkbox" id="m-docsdocsdeveloperexamples-check"/>
+    <label for="m-docsdocsdeveloperexamples-check"><a href="/docs/docs/developer/examples/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperexamples"><span class="">Examples &amp; Use Cases</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsadministrator-li">
+    <input type="checkbox" id="m-docsdocsadministrator-check"/>
+    <label for="m-docsdocsadministrator-check"><a href="/docs/docs/administrator/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministrator"><span class="">Administrator Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratordeployment-li">
+    <input type="checkbox" id="m-docsdocsadministratordeployment-check"/>
+    <label for="m-docsdocsadministratordeployment-check"><a href="/docs/docs/administrator/deployment/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratordeployment"><span class="">Deployment</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorconfiguration-li">
+    <input type="checkbox" id="m-docsdocsadministratorconfiguration-check"/>
+    <label for="m-docsdocsadministratorconfiguration-check"><a href="/docs/docs/administrator/configuration/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorconfiguration"><span class="">Configuration</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratormonitoring-li">
+    <input type="checkbox" id="m-docsdocsadministratormonitoring-check"/>
+    <label for="m-docsdocsadministratormonitoring-check"><a href="/docs/docs/administrator/monitoring/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratormonitoring"><span class="">Monitoring</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorbackup-recovery-li">
+    <input type="checkbox" id="m-docsdocsadministratorbackup-recovery-check"/>
+    <label for="m-docsdocsadministratorbackup-recovery-check"><a href="/docs/docs/administrator/backup-recovery/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorbackup-recovery"><span class="">Backup &amp; Recovery</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorsecurity-li">
+    <input type="checkbox" id="m-docsdocsadministratorsecurity-check"/>
+    <label for="m-docsdocsadministratorsecurity-check"><a href="/docs/docs/administrator/security/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorsecurity"><span class="">Security</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratortroubleshooting-li">
+    <input type="checkbox" id="m-docsdocsadministratortroubleshooting-check"/>
+    <label for="m-docsdocsadministratortroubleshooting-check"><a href="/docs/docs/administrator/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratortroubleshooting"><span class="">Troubleshooting</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocscontributor-li">
+    <input type="checkbox" id="m-docsdocscontributor-check"/>
+    <label for="m-docsdocscontributor-check"><a href="/docs/docs/contributor/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributor"><span class="">Contributor Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributordevelopment-setup-li">
+    <input type="checkbox" id="m-docsdocscontributordevelopment-setup-check"/>
+    <label for="m-docsdocscontributordevelopment-setup-check"><a href="/docs/docs/contributor/development-setup/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributordevelopment-setup"><span class="">Development Setup</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorcodebase-guide-li">
+    <input type="checkbox" id="m-docsdocscontributorcodebase-guide-check"/>
+    <label for="m-docsdocscontributorcodebase-guide-check"><a href="/docs/docs/contributor/codebase-guide/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorcodebase-guide"><span class="">Codebase Guide</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributortesting-li">
+    <input type="checkbox" id="m-docsdocscontributortesting-check"/>
+    <label for="m-docsdocscontributortesting-check"><a href="/docs/docs/contributor/testing/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributortesting"><span class="">Testing</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorrelease-process-li">
+    <input type="checkbox" id="m-docsdocscontributorrelease-process-check"/>
+    <label for="m-docsdocscontributorrelease-process-check"><a href="/docs/docs/contributor/release-process/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorrelease-process"><span class="">Release Process</span></a></label>
+    
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
+<a href="https://github.com/thunderdb/thunderdb/tree/main/content/docs/getting-started/_index.md" class="td-page-meta--view td-page-meta__view" target="_blank" rel="noopener"><i class="fa-solid fa-file-lines fa-fw"></i> View page source</a>
+  <a href="https://github.com/thunderdb/thunderdb/edit/main/content/docs/getting-started/_index.md" class="td-page-meta--edit td-page-meta__edit" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Edit this page</a>
+  <a href="https://github.com/thunderdb/thunderdb/new/main/content/docs/getting-started?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child td-page-meta__child" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Create child page</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new?title=Getting%20Started" class="td-page-meta--issue td-page-meta__issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create documentation issue</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new" class="td-page-meta--project td-page-meta__project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create project issue</a>
+  
+</div>
+
+            <div class="td-toc" data-proofer-ignore>
+<div class="td-toc-title">
+      <span class="td-toc-title__text">On this page</span>
+      <a class="td-toc-title__link" title="Top of page" href="#"></a>
+    </div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#prerequisites">Prerequisites</a>
+      <ul>
+        <li><a href="#option-a-build-from-source">Option A: Build from Source</a></li>
+        <li><a href="#option-b-docker">Option B: Docker</a></li>
+        <li><a href="#option-c-pre-built-packages">Option C: Pre-built Packages</a></li>
+      </ul>
+    </li>
+    <li><a href="#installation">Installation</a>
+      <ul>
+        <li><a href="#method-1-build-from-source">Method 1: Build from Source</a></li>
+        <li><a href="#method-2-docker">Method 2: Docker</a></li>
+        <li><a href="#method-3-docker-compose-recommended-for-development">Method 3: Docker Compose (Recommended for Development)</a></li>
+        <li><a href="#method-4-debian--ubuntu-package">Method 4: Debian / Ubuntu Package</a></li>
+      </ul>
+    </li>
+    <li><a href="#starting-the-server">Starting the Server</a></li>
+    <li><a href="#connecting-to-thunderdb">Connecting to ThunderDB</a>
+      <ul>
+        <li><a href="#connect-via-postgresql-protocol-psql">Connect via PostgreSQL Protocol (psql)</a></li>
+        <li><a href="#connect-via-mysql-protocol-mysql-client">Connect via MySQL Protocol (mysql client)</a></li>
+        <li><a href="#connect-via-redis-protocol-redis-cli">Connect via Redis Protocol (redis-cli)</a></li>
+        <li><a href="#connect-via-rest-api-curl">Connect via REST API (curl)</a></li>
+      </ul>
+    </li>
+    <li><a href="#your-first-queries">Your First Queries</a>
+      <ul>
+        <li><a href="#create-a-table">Create a Table</a></li>
+        <li><a href="#insert-data">Insert Data</a></li>
+        <li><a href="#query-data-oltp">Query Data (OLTP)</a></li>
+        <li><a href="#analytical-queries-olap">Analytical Queries (OLAP)</a></li>
+      </ul>
+    </li>
+    <li><a href="#vector-search">Vector Search</a>
+      <ul>
+        <li><a href="#create-a-vector-table">Create a Vector Table</a></li>
+        <li><a href="#insert-vector-data">Insert Vector Data</a></li>
+        <li><a href="#similarity-search">Similarity Search</a></li>
+        <li><a href="#vector-search-via-rest-api">Vector Search via REST API</a></li>
+      </ul>
+    </li>
+    <li><a href="#change-data-capture-cdc">Change Data Capture (CDC)</a>
+      <ul>
+        <li><a href="#sync-from-an-external-postgresql">Sync from an External PostgreSQL</a></li>
+        <li><a href="#monitoring-cdc-lag">Monitoring CDC Lag</a></li>
+      </ul>
+    </li>
+    <li><a href="#foreign-data-wrappers-fdw">Foreign Data Wrappers (FDW)</a>
+      <ul>
+        <li><a href="#query-an-external-mysql-database">Query an External MySQL Database</a></li>
+        <li><a href="#query-an-external-postgresql-database-via-fdw">Query an External PostgreSQL Database via FDW</a></li>
+      </ul>
+    </li>
+    <li><a href="#docker-compose-full-multi-protocol-example">Docker Compose: Full Multi-Protocol Example</a></li>
+    <li><a href="#verifying-your-installation">Verifying Your Installation</a></li>
+    <li><a href="#next-steps">Next Steps</a></li>
+  </ul>
+</nav>
+  </div>
+
+            
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/">Documentation</a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    Getting Started</li>
+  </ol>
+</nav>
+<div class="td-content">
+	<h1>Getting Started</h1>
+  <div class="lead">Get ThunderDB up and running in minutes. Install, connect, and run your first queries.</div>
+	<header class="article-meta">
+		
+</header>
+	<p>This guide walks you through installing ThunderDB, starting the server, connecting with
+multiple protocols, running your first SQL queries, performing vector similarity search,
+setting up Change Data Capture (CDC), and querying external databases through Foreign
+Data Wrappers (FDW).</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Before you begin, make sure you have one of the following environments ready:</p>
+<h3 id="option-a-build-from-source">Option A: Build from Source</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Requirement</th>
+          <th>Minimum Version</th>
+          <th>Notes</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Rust toolchain</strong></td>
+          <td>1.75+</td>
+          <td>Install via <a href="https://rustup.rs/">rustup</a></td>
+      </tr>
+      <tr>
+          <td><strong>Cargo</strong></td>
+          <td>Bundled with Rust</td>
+          <td>Rust&rsquo;s package manager</td>
+      </tr>
+      <tr>
+          <td><strong>CMake</strong></td>
+          <td>3.20+</td>
+          <td>Required for native dependency builds</td>
+      </tr>
+      <tr>
+          <td><strong>Clang / GCC</strong></td>
+          <td>Clang 14+ or GCC 11+</td>
+          <td>C/C++ compiler for linked libraries</td>
+      </tr>
+      <tr>
+          <td><strong>OpenSSL</strong></td>
+          <td>1.1.1+</td>
+          <td>TLS support (or use <code>vendored-openssl</code> feature)</td>
+      </tr>
+      <tr>
+          <td><strong>protoc</strong></td>
+          <td>3.15+</td>
+          <td>Protocol Buffers compiler for gRPC</td>
+      </tr>
+      <tr>
+          <td><strong>Git</strong></td>
+          <td>2.x</td>
+          <td>To clone the repository</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="option-b-docker">Option B: Docker</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Requirement</th>
+          <th>Minimum Version</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Docker</strong></td>
+          <td>20.10+</td>
+      </tr>
+      <tr>
+          <td><strong>Docker Compose</strong></td>
+          <td>2.0+ (V2 plugin)</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="option-c-pre-built-packages">Option C: Pre-built Packages</h3>
+<p>Pre-built <code>.deb</code> and <code>.rpm</code> packages are available on the
+<a href="https://github.com/thunderdb/thunderdb/releases">GitHub Releases</a> page for
+Ubuntu 22.04+, Debian 12+, and RHEL 9+ / Fedora 38+.</p>
+<hr>
+<h2 id="installation">Installation</h2>
+<h3 id="method-1-build-from-source">Method 1: Build from Source</h3>
+<p>Clone the repository and build an optimized release binary:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Clone the repository</span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/thunderdb/thunderdb.git
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">cd</span> thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Build a release binary (optimized, may take 5-10 minutes on first build)</span>
+</span></span><span style="display:flex;"><span>cargo build --release
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># The binary is located at:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   target/release/thunderdb-server</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   target/release/thunderdb-cli</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># (Optional) Install system-wide</span>
+</span></span><span style="display:flex;"><span>sudo cp target/release/thunderdb-server /usr/local/bin/
+</span></span><span style="display:flex;"><span>sudo cp target/release/thunderdb-cli /usr/local/bin/
+</span></span></code></pre></div><p>To build with all optional features enabled (vector search, CDC, FDW, full-text search):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cargo build --release --features <span style="color:#f1fa8c">&#34;vector,cdc,fdw,fts&#34;</span>
+</span></span></code></pre></div><h3 id="method-2-docker">Method 2: Docker</h3>
+<p>Pull the official image and start a container:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Pull the latest image</span>
+</span></span><span style="display:flex;"><span>docker pull thunderdb/thunderdb:latest
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run with default settings, exposing all protocol ports</span>
+</span></span><span style="display:flex;"><span>docker run -d <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --name thunderdb <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 5432:5432 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 3306:3306 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 6379:6379 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 8088:8088 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 9090:9090 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -v thunderdb-data:/var/lib/thunderdb <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  thunderdb/thunderdb:latest
+</span></span></code></pre></div><h3 id="method-3-docker-compose-recommended-for-development">Method 3: Docker Compose (Recommended for Development)</h3>
+<p>Create a <code>docker-compose.yml</code> file with the full multi-port setup:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#ff79c6">version</span>: <span style="color:#f1fa8c">&#34;3.9&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">thunderdb</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">image</span>: thunderdb/thunderdb:latest
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">container_name</span>: thunderdb
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">restart</span>: unless-stopped
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">ports</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#6272a4"># PostgreSQL wire protocol</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;5432:5432&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#6272a4"># MySQL wire protocol</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;3306:3306&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#6272a4"># Redis / RESP protocol</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;6379:6379&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#6272a4"># REST / HTTP API</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;8088:8088&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#6272a4"># gRPC API</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;9090:9090&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#6272a4"># Prometheus metrics</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;9100:9100&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">volumes</span>:
+</span></span><span style="display:flex;"><span>      - thunderdb-data:/var/lib/thunderdb
+</span></span><span style="display:flex;"><span>      - ./thunderdb.toml:/etc/thunderdb/thunderdb.toml:ro
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">THUNDERDB_LOG_LEVEL</span>: info
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">THUNDERDB_DATA_DIR</span>: /var/lib/thunderdb
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">THUNDERDB_ADMIN_PASSWORD</span>: <span style="color:#f1fa8c">&#34;${THUNDERDB_ADMIN_PASSWORD:-thunderdb}&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">healthcheck</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">test</span>: [<span style="color:#f1fa8c">&#34;CMD&#34;</span>, <span style="color:#f1fa8c">&#34;thunderdb-cli&#34;</span>, <span style="color:#f1fa8c">&#34;ping&#34;</span>]
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">interval</span>: 10s
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">timeout</span>: 5s
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">retries</span>: <span style="color:#bd93f9">5</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">volumes</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">thunderdb-data</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">driver</span>: local
+</span></span></code></pre></div><p>Start the stack:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker-compose up -d
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Check the logs</span>
+</span></span><span style="display:flex;"><span>docker-compose logs -f thunderdb
+</span></span></code></pre></div><h3 id="method-4-debian--ubuntu-package">Method 4: Debian / Ubuntu Package</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Download the latest .deb package</span>
+</span></span><span style="display:flex;"><span>curl -LO https://github.com/thunderdb/thunderdb/releases/latest/download/thunderdb_amd64.deb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Install the package</span>
+</span></span><span style="display:flex;"><span>sudo dpkg -i thunderdb_amd64.deb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># The package installs:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   /usr/bin/thunderdb-server</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   /usr/bin/thunderdb-cli</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   /etc/thunderdb/thunderdb.toml   (default config)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   /lib/systemd/system/thunderdb.service</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Enable and start the service</span>
+</span></span><span style="display:flex;"><span>sudo systemctl <span style="color:#8be9fd;font-style:italic">enable</span> thunderdb
+</span></span><span style="display:flex;"><span>sudo systemctl start thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Check status</span>
+</span></span><span style="display:flex;"><span>sudo systemctl status thunderdb
+</span></span></code></pre></div><hr>
+<h2 id="starting-the-server">Starting the Server</h2>
+<p>If you built from source, start the server with the default configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Start with default settings (listens on all default ports)</span>
+</span></span><span style="display:flex;"><span>thunderdb-server
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Or specify a custom configuration file</span>
+</span></span><span style="display:flex;"><span>thunderdb-server --config /path/to/thunderdb.toml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Or set individual options via CLI flags</span>
+</span></span><span style="display:flex;"><span>thunderdb-server <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --data-dir /var/lib/thunderdb <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --pg-port <span style="color:#bd93f9">5432</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --mysql-port <span style="color:#bd93f9">3306</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --redis-port <span style="color:#bd93f9">6379</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --http-port <span style="color:#bd93f9">8088</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --grpc-port <span style="color:#bd93f9">9090</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --log-level info
+</span></span></code></pre></div><p>You should see output similar to:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#bd93f9">2026</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">02</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">05</span>T10:<span style="color:#bd93f9">00</span>:<span style="color:#bd93f9">00.000</span>Z  INFO thunderdb::server: Starting ThunderDB v0<span style="color:#ff79c6">.</span><span style="color:#bd93f9">1.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">2026</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">02</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">05</span>T10:<span style="color:#bd93f9">00</span>:<span style="color:#bd93f9">00.010</span>Z  INFO thunderdb::storage: Opening data directory: <span style="color:#ff79c6">/</span><span style="color:#ff79c6">var</span><span style="color:#ff79c6">/</span>lib<span style="color:#ff79c6">/</span>thunderdb
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">2026</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">02</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">05</span>T10:<span style="color:#bd93f9">00</span>:<span style="color:#bd93f9">00.050</span>Z  INFO thunderdb::protocol::pg: PostgreSQL protocol listening on <span style="color:#bd93f9">0.0</span><span style="color:#ff79c6">.</span><span style="color:#bd93f9">0.0</span>:<span style="color:#bd93f9">5432</span>
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">2026</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">02</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">05</span>T10:<span style="color:#bd93f9">00</span>:<span style="color:#bd93f9">00.051</span>Z  INFO thunderdb::protocol::mysql: MySQL protocol listening on <span style="color:#bd93f9">0.0</span><span style="color:#ff79c6">.</span><span style="color:#bd93f9">0.0</span>:<span style="color:#bd93f9">3306</span>
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">2026</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">02</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">05</span>T10:<span style="color:#bd93f9">00</span>:<span style="color:#bd93f9">00.052</span>Z  INFO thunderdb::protocol::redis: Redis<span style="color:#ff79c6">/</span>RESP protocol listening on <span style="color:#bd93f9">0.0</span><span style="color:#ff79c6">.</span><span style="color:#bd93f9">0.0</span>:<span style="color:#bd93f9">6379</span>
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">2026</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">02</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">05</span>T10:<span style="color:#bd93f9">00</span>:<span style="color:#bd93f9">00.053</span>Z  INFO thunderdb::api::http: REST API listening on <span style="color:#bd93f9">0.0</span><span style="color:#ff79c6">.</span><span style="color:#bd93f9">0.0</span>:<span style="color:#bd93f9">8088</span>
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">2026</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">02</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">05</span>T10:<span style="color:#bd93f9">00</span>:<span style="color:#bd93f9">00.054</span>Z  INFO thunderdb::api::grpc: gRPC API listening on <span style="color:#bd93f9">0.0</span><span style="color:#ff79c6">.</span><span style="color:#bd93f9">0.0</span>:<span style="color:#bd93f9">9090</span>
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">2026</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">02</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">05</span>T10:<span style="color:#bd93f9">00</span>:<span style="color:#bd93f9">00.055</span>Z  INFO thunderdb::server: ThunderDB is ready to accept connections
+</span></span></code></pre></div><hr>
+<h2 id="connecting-to-thunderdb">Connecting to ThunderDB</h2>
+<p>ThunderDB speaks multiple wire protocols simultaneously. You can connect with
+whichever client you prefer.</p>
+<h3 id="connect-via-postgresql-protocol-psql">Connect via PostgreSQL Protocol (psql)</h3>
+<p>ThunderDB implements the PostgreSQL wire protocol on port <strong>5432</strong> (default).
+Any PostgreSQL-compatible client or driver works out of the box.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Connect using psql</span>
+</span></span><span style="display:flex;"><span>psql -h localhost -p <span style="color:#bd93f9">5432</span> -U thunderdb -d default
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># You will see:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># psql (16.1, server ThunderDB 0.1.0)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Type &#34;help&#34; for help.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># default=&gt;</span>
+</span></span></code></pre></div><p>If you set a custom admin password, provide it when prompted:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>psql -h localhost -p <span style="color:#bd93f9">5432</span> -U thunderdb -d default -W
+</span></span></code></pre></div><h3 id="connect-via-mysql-protocol-mysql-client">Connect via MySQL Protocol (mysql client)</h3>
+<p>ThunderDB implements the MySQL wire protocol on port <strong>3306</strong> (default).
+Standard MySQL clients and connectors work without modification.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Connect using the mysql client</span>
+</span></span><span style="display:flex;"><span>mysql -h 127.0.0.1 -P <span style="color:#bd93f9">3306</span> -u thunderdb -p --database<span style="color:#ff79c6">=</span>default
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># You will see:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Welcome to ThunderDB v0.1.0 (MySQL protocol mode)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Server version: 8.0.32-ThunderDB</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># mysql&gt;</span>
+</span></span></code></pre></div><h3 id="connect-via-redis-protocol-redis-cli">Connect via Redis Protocol (redis-cli)</h3>
+<p>ThunderDB implements a subset of the Redis/RESP protocol on port <strong>6379</strong> (default).
+You can use <code>redis-cli</code> or any Redis client library.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Connect using redis-cli</span>
+</span></span><span style="display:flex;"><span>redis-cli -h localhost -p <span style="color:#bd93f9">6379</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Test the connection</span>
+</span></span><span style="display:flex;"><span>127.0.0.1:6379&gt; PING
+</span></span><span style="display:flex;"><span>PONG
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Set and get a key</span>
+</span></span><span style="display:flex;"><span>127.0.0.1:6379&gt; SET greeting <span style="color:#f1fa8c">&#34;Hello from ThunderDB&#34;</span>
+</span></span><span style="display:flex;"><span>OK
+</span></span><span style="display:flex;"><span>127.0.0.1:6379&gt; GET greeting
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;Hello from ThunderDB&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># You can also run SQL through the Redis protocol</span>
+</span></span><span style="display:flex;"><span>127.0.0.1:6379&gt; THUNDERDB.QUERY <span style="color:#f1fa8c">&#34;SELECT 1 + 1 AS result&#34;</span>
+</span></span><span style="display:flex;"><span>1<span style="color:#ff79c6">)</span> 1<span style="color:#ff79c6">)</span> <span style="color:#f1fa8c">&#34;result&#34;</span>
+</span></span><span style="display:flex;"><span>   2<span style="color:#ff79c6">)</span> <span style="color:#f1fa8c">&#34;2&#34;</span>
+</span></span></code></pre></div><h3 id="connect-via-rest-api-curl">Connect via REST API (curl)</h3>
+<p>ThunderDB exposes a REST API on port <strong>8088</strong> (default) for HTTP-based access.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Health check</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/api/v1/health
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># {&#34;status&#34;:&#34;ok&#34;,&#34;version&#34;:&#34;0.1.0&#34;,&#34;uptime_seconds&#34;:42}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run a query</span>
+</span></span><span style="display:flex;"><span>curl -X POST http://localhost:8088/api/v1/query <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -H <span style="color:#f1fa8c">&#34;Content-Type: application/json&#34;</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -d <span style="color:#f1fa8c">&#39;{&#34;sql&#34;: &#34;SELECT 1 + 1 AS result&#34;}&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Response:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># {</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   &#34;columns&#34;: [&#34;result&#34;],</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   &#34;rows&#34;: [[2]],</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   &#34;execution_time_ms&#34;: 0.12</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># }</span>
+</span></span></code></pre></div><hr>
+<h2 id="your-first-queries">Your First Queries</h2>
+<p>Now that you are connected, let us create some tables, insert data, and run queries.
+The examples below use <code>psql</code>, but the SQL is identical across all protocols.</p>
+<h3 id="create-a-table">Create a Table</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Create a simple users table
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> users (
+</span></span><span style="display:flex;"><span>    id          <span style="color:#8be9fd;font-style:italic">BIGINT</span> <span style="color:#ff79c6">PRIMARY</span> <span style="color:#ff79c6">KEY</span> AUTO_INCREMENT,
+</span></span><span style="display:flex;"><span>    username    <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">255</span>) <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span> <span style="color:#ff79c6">UNIQUE</span>,
+</span></span><span style="display:flex;"><span>    email       <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">255</span>) <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span>,
+</span></span><span style="display:flex;"><span>    full_name   <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">255</span>),
+</span></span><span style="display:flex;"><span>    created_at  <span style="color:#ff79c6">TIMESTAMP</span> <span style="color:#ff79c6">DEFAULT</span> <span style="color:#ff79c6">CURRENT_TIMESTAMP</span>,
+</span></span><span style="display:flex;"><span>    is_active   <span style="color:#8be9fd;font-style:italic">BOOLEAN</span> <span style="color:#ff79c6">DEFAULT</span> <span style="color:#ff79c6">TRUE</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Create an orders table with a foreign key
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> orders (
+</span></span><span style="display:flex;"><span>    id          <span style="color:#8be9fd;font-style:italic">BIGINT</span> <span style="color:#ff79c6">PRIMARY</span> <span style="color:#ff79c6">KEY</span> AUTO_INCREMENT,
+</span></span><span style="display:flex;"><span>    user_id     <span style="color:#8be9fd;font-style:italic">BIGINT</span> <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span> <span style="color:#ff79c6">REFERENCES</span> users(id),
+</span></span><span style="display:flex;"><span>    product     <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">255</span>) <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span>,
+</span></span><span style="display:flex;"><span>    quantity    <span style="color:#8be9fd;font-style:italic">INT</span> <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span> <span style="color:#ff79c6">DEFAULT</span> <span style="color:#bd93f9">1</span>,
+</span></span><span style="display:flex;"><span>    price       <span style="color:#8be9fd;font-style:italic">DECIMAL</span>(<span style="color:#bd93f9">10</span>, <span style="color:#bd93f9">2</span>) <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span>,
+</span></span><span style="display:flex;"><span>    status      <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">50</span>) <span style="color:#ff79c6">DEFAULT</span> <span style="color:#f1fa8c">&#39;pending&#39;</span>,
+</span></span><span style="display:flex;"><span>    ordered_at  <span style="color:#ff79c6">TIMESTAMP</span> <span style="color:#ff79c6">DEFAULT</span> <span style="color:#ff79c6">CURRENT_TIMESTAMP</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Create an index for faster lookups
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">INDEX</span> idx_orders_user_id <span style="color:#ff79c6">ON</span> orders(user_id);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">INDEX</span> idx_orders_status <span style="color:#ff79c6">ON</span> orders(status);
+</span></span></code></pre></div><h3 id="insert-data">Insert Data</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Insert users
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> users (username, email, full_name) <span style="color:#ff79c6">VALUES</span>
+</span></span><span style="display:flex;"><span>    (<span style="color:#f1fa8c">&#39;alice&#39;</span>,   <span style="color:#f1fa8c">&#39;alice@example.com&#39;</span>,   <span style="color:#f1fa8c">&#39;Alice Johnson&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#f1fa8c">&#39;bob&#39;</span>,     <span style="color:#f1fa8c">&#39;bob@example.com&#39;</span>,     <span style="color:#f1fa8c">&#39;Bob Smith&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#f1fa8c">&#39;charlie&#39;</span>, <span style="color:#f1fa8c">&#39;charlie@example.com&#39;</span>, <span style="color:#f1fa8c">&#39;Charlie Brown&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#f1fa8c">&#39;diana&#39;</span>,   <span style="color:#f1fa8c">&#39;diana@example.com&#39;</span>,   <span style="color:#f1fa8c">&#39;Diana Prince&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#f1fa8c">&#39;eve&#39;</span>,     <span style="color:#f1fa8c">&#39;eve@example.com&#39;</span>,     <span style="color:#f1fa8c">&#39;Eve Wilson&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Insert orders
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> orders (user_id, product, quantity, price, status) <span style="color:#ff79c6">VALUES</span>
+</span></span><span style="display:flex;"><span>    (<span style="color:#bd93f9">1</span>, <span style="color:#f1fa8c">&#39;Mechanical Keyboard&#39;</span>,  <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">149</span>.<span style="color:#bd93f9">99</span>, <span style="color:#f1fa8c">&#39;shipped&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#bd93f9">1</span>, <span style="color:#f1fa8c">&#39;USB-C Hub&#39;</span>,            <span style="color:#bd93f9">2</span>,  <span style="color:#bd93f9">39</span>.<span style="color:#bd93f9">99</span>, <span style="color:#f1fa8c">&#39;delivered&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#bd93f9">2</span>, <span style="color:#f1fa8c">&#39;27&#34; Monitor&#39;</span>,          <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">449</span>.<span style="color:#bd93f9">99</span>, <span style="color:#f1fa8c">&#39;pending&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#bd93f9">3</span>, <span style="color:#f1fa8c">&#39;Wireless Mouse&#39;</span>,       <span style="color:#bd93f9">1</span>,  <span style="color:#bd93f9">29</span>.<span style="color:#bd93f9">99</span>, <span style="color:#f1fa8c">&#39;shipped&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#bd93f9">3</span>, <span style="color:#f1fa8c">&#39;Laptop Stand&#39;</span>,         <span style="color:#bd93f9">1</span>,  <span style="color:#bd93f9">59</span>.<span style="color:#bd93f9">99</span>, <span style="color:#f1fa8c">&#39;delivered&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#bd93f9">4</span>, <span style="color:#f1fa8c">&#39;Webcam HD&#39;</span>,            <span style="color:#bd93f9">1</span>,  <span style="color:#bd93f9">79</span>.<span style="color:#bd93f9">99</span>, <span style="color:#f1fa8c">&#39;pending&#39;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#bd93f9">5</span>, <span style="color:#f1fa8c">&#39;Noise-Cancel Headset&#39;</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">199</span>.<span style="color:#bd93f9">99</span>, <span style="color:#f1fa8c">&#39;shipped&#39;</span>);
+</span></span></code></pre></div><h3 id="query-data-oltp">Query Data (OLTP)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Simple SELECT
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> users <span style="color:#ff79c6">WHERE</span> is_active <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">TRUE</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- JOIN query
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    u.username,
+</span></span><span style="display:flex;"><span>    u.full_name,
+</span></span><span style="display:flex;"><span>    o.product,
+</span></span><span style="display:flex;"><span>    o.price,
+</span></span><span style="display:flex;"><span>    o.status
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> users u
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">JOIN</span> orders o <span style="color:#ff79c6">ON</span> u.id <span style="color:#ff79c6">=</span> o.user_id
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> o.status <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;shipped&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> o.price <span style="color:#ff79c6">DESC</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Result:
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- +----------+---------------+------------------------+--------+---------+
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- | username | full_name     | product                | price  | status  |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- +----------+---------------+------------------------+--------+---------+
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- | eve      | Eve Wilson    | Noise-Cancel Headset   | 199.99 | shipped |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- | alice    | Alice Johnson | Mechanical Keyboard    | 149.99 | shipped |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- | charlie  | Charlie Brown | Wireless Mouse         |  29.99 | shipped |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- +----------+---------------+------------------------+--------+---------+
+</span></span></span></code></pre></div><h3 id="analytical-queries-olap">Analytical Queries (OLAP)</h3>
+<p>ThunderDB handles analytical workloads in the same engine. Queries that scan large
+volumes of data automatically use the columnar store and vectorized execution.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Revenue by user
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    u.username,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">COUNT</span>(o.id) <span style="color:#ff79c6">AS</span> total_orders,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">SUM</span>(o.price <span style="color:#ff79c6">*</span> o.quantity) <span style="color:#ff79c6">AS</span> total_spent,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">AVG</span>(o.price) <span style="color:#ff79c6">AS</span> avg_order_value
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> users u
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">JOIN</span> orders o <span style="color:#ff79c6">ON</span> u.id <span style="color:#ff79c6">=</span> o.user_id
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> u.username
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> total_spent <span style="color:#ff79c6">DESC</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Result:
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- +----------+--------------+-------------+-----------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- | username | total_orders | total_spent | avg_order_value |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- +----------+--------------+-------------+-----------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- | bob      |            1 |      449.99 |          449.99 |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- | alice    |            2 |      229.97 |           94.99 |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- | eve      |            1 |      199.99 |          199.99 |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- | charlie  |            2 |       89.98 |           44.99 |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- | diana    |            1 |       79.99 |           79.99 |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- +----------+--------------+-------------+-----------------+
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Order status distribution
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    status,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">COUNT</span>(<span style="color:#ff79c6">*</span>) <span style="color:#ff79c6">AS</span> order_count,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">SUM</span>(price <span style="color:#ff79c6">*</span> quantity) <span style="color:#ff79c6">AS</span> total_revenue,
+</span></span><span style="display:flex;"><span>    ROUND(<span style="color:#bd93f9">100</span>.<span style="color:#bd93f9">0</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">COUNT</span>(<span style="color:#ff79c6">*</span>) <span style="color:#ff79c6">/</span> <span style="color:#ff79c6">SUM</span>(<span style="color:#ff79c6">COUNT</span>(<span style="color:#ff79c6">*</span>)) OVER (), <span style="color:#bd93f9">2</span>) <span style="color:#ff79c6">AS</span> pct
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> orders
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> status
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> order_count <span style="color:#ff79c6">DESC</span>;
+</span></span></code></pre></div><hr>
+<h2 id="vector-search">Vector Search</h2>
+<p>ThunderDB has built-in support for vector embeddings and similarity search,
+making it ideal for AI/ML workloads, RAG pipelines, and semantic search.</p>
+<h3 id="create-a-vector-table">Create a Vector Table</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Create a documents table with a 384-dimensional embedding column
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> documents (
+</span></span><span style="display:flex;"><span>    id        <span style="color:#8be9fd;font-style:italic">BIGINT</span> <span style="color:#ff79c6">PRIMARY</span> <span style="color:#ff79c6">KEY</span> AUTO_INCREMENT,
+</span></span><span style="display:flex;"><span>    title     <span style="color:#8be9fd;font-style:italic">VARCHAR</span>(<span style="color:#bd93f9">512</span>) <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span>,
+</span></span><span style="display:flex;"><span>    content   <span style="color:#8be9fd;font-style:italic">TEXT</span>,
+</span></span><span style="display:flex;"><span>    embedding VECTOR(<span style="color:#bd93f9">384</span>) <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">NULL</span>,
+</span></span><span style="display:flex;"><span>    metadata  JSONB
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Create an HNSW index for fast approximate nearest-neighbor search
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">INDEX</span> idx_documents_embedding
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">ON</span> documents
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">USING</span> HNSW (embedding vector_cosine_ops)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">WITH</span> (m <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">16</span>, ef_construction <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">200</span>);
+</span></span></code></pre></div><h3 id="insert-vector-data">Insert Vector Data</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Insert documents with embeddings (truncated for readability)
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- In practice, embeddings come from a model like sentence-transformers
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> documents (title, content, embedding, metadata) <span style="color:#ff79c6">VALUES</span>
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;Introduction to ThunderDB&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;ThunderDB is a distributed HTAP database written in Rust...&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;[0.12, -0.03, 0.88, 0.45, ...]&#39;</span>::VECTOR(<span style="color:#bd93f9">384</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;{&#34;category&#34;: &#34;database&#34;, &#34;author&#34;: &#34;docs-team&#34;}&#39;</span>
+</span></span><span style="display:flex;"><span>),
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;Vector Search Tutorial&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;Learn how to use vector similarity search in ThunderDB...&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;[0.09, 0.77, -0.12, 0.33, ...]&#39;</span>::VECTOR(<span style="color:#bd93f9">384</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;{&#34;category&#34;: &#34;tutorial&#34;, &#34;author&#34;: &#34;docs-team&#34;}&#39;</span>
+</span></span><span style="display:flex;"><span>),
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;Rust Performance Guide&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;Understanding zero-cost abstractions and memory safety...&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;[0.55, 0.01, 0.34, -0.22, ...]&#39;</span>::VECTOR(<span style="color:#bd93f9">384</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;{&#34;category&#34;: &#34;programming&#34;, &#34;author&#34;: &#34;community&#34;}&#39;</span>
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><h3 id="similarity-search">Similarity Search</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Find the 5 most similar documents to a query vector
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- using cosine distance
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    id,
+</span></span><span style="display:flex;"><span>    title,
+</span></span><span style="display:flex;"><span>    content,
+</span></span><span style="display:flex;"><span>    embedding <span style="color:#ff79c6">&lt;=&gt;</span> <span style="color:#f1fa8c">&#39;[0.10, 0.75, -0.08, 0.30, ...]&#39;</span>::VECTOR(<span style="color:#bd93f9">384</span>) <span style="color:#ff79c6">AS</span> distance
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> documents
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> embedding <span style="color:#ff79c6">&lt;=&gt;</span> <span style="color:#f1fa8c">&#39;[0.10, 0.75, -0.08, 0.30, ...]&#39;</span>::VECTOR(<span style="color:#bd93f9">384</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">LIMIT</span> <span style="color:#bd93f9">5</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Result:
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- +----+----------------------------+------------------------------------------+----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- | id | title                      | content                                  | distance |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- +----+----------------------------+------------------------------------------+----------+
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- |  2 | Vector Search Tutorial     | Learn how to use vector similarity se... |   0.0312 |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- |  1 | Introduction to ThunderDB  | ThunderDB is a distributed HTAP data... |   0.2145 |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- |  3 | Rust Performance Guide     | Understanding zero-cost abstractions... |   0.5678 |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- +----+----------------------------+------------------------------------------+----------+
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Filtered similarity search with metadata
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    title,
+</span></span><span style="display:flex;"><span>    embedding <span style="color:#ff79c6">&lt;=&gt;</span> <span style="color:#f1fa8c">&#39;[0.10, 0.75, -0.08, 0.30, ...]&#39;</span>::VECTOR(<span style="color:#bd93f9">384</span>) <span style="color:#ff79c6">AS</span> distance
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> documents
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> metadata<span style="color:#ff79c6">-&gt;&gt;</span><span style="color:#f1fa8c">&#39;category&#39;</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;tutorial&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> embedding <span style="color:#ff79c6">&lt;=&gt;</span> <span style="color:#f1fa8c">&#39;[0.10, 0.75, -0.08, 0.30, ...]&#39;</span>::VECTOR(<span style="color:#bd93f9">384</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">LIMIT</span> <span style="color:#bd93f9">10</span>;
+</span></span></code></pre></div><h3 id="vector-search-via-rest-api">Vector Search via REST API</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X POST http://localhost:8088/api/v1/query <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -H <span style="color:#f1fa8c">&#34;Content-Type: application/json&#34;</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -d <span style="color:#f1fa8c">&#39;{
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    &#34;sql&#34;: &#34;SELECT title, embedding &lt;=&gt; $1::VECTOR(384) AS distance FROM documents ORDER BY distance LIMIT 5&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    &#34;params&#34;: [&#34;[0.10, 0.75, -0.08, 0.30, ...]&#34;]
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">  }&#39;</span>
+</span></span></code></pre></div><hr>
+<h2 id="change-data-capture-cdc">Change Data Capture (CDC)</h2>
+<p>ThunderDB can act as a CDC consumer, continuously replicating data from external
+databases into ThunderDB. This lets you add HTAP and vector search capabilities
+on top of your existing primary database without modifying your application.</p>
+<h3 id="sync-from-an-external-postgresql">Sync from an External PostgreSQL</h3>
+<p>First, ensure the source PostgreSQL instance has logical replication enabled:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#6272a4"># In postgresql.conf on the source database</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">wal_level</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">logical</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">max_replication_slots</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">max_wal_senders</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">4</span>
+</span></span></code></pre></div><p>Then, in ThunderDB, create a CDC subscription:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Create a CDC source pointing to the external PostgreSQL
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> CDC <span style="color:#ff79c6">SOURCE</span> pg_source
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">TYPE</span> POSTGRES
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">CONNECTION</span> <span style="color:#f1fa8c">&#39;host=pg-primary.example.com port=5432 dbname=myapp user=replicator password=secret&#39;</span>
+</span></span><span style="display:flex;"><span>    PUBLICATION <span style="color:#f1fa8c">&#39;thunderdb_pub&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Create a subscription that syncs specific tables
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> CDC SUBSCRIPTION sync_users
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">FROM</span> <span style="color:#ff79c6">SOURCE</span> pg_source
+</span></span><span style="display:flex;"><span>    TABLES (<span style="color:#ff79c6">public</span>.users, <span style="color:#ff79c6">public</span>.orders)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">INTO</span> <span style="color:#ff79c6">SCHEMA</span> synced
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">WITH</span> (
+</span></span><span style="display:flex;"><span>        snapshot <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">TRUE</span>,           <span style="color:#6272a4">-- initial full snapshot
+</span></span></span><span style="display:flex;"><span>        slot_name <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;thunderdb_slot&#39;</span>,
+</span></span><span style="display:flex;"><span>        create_slot <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">TRUE</span>
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Check subscription status
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> thunderdb_cdc.subscriptions;
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- +------------+-----------+--------+------------------+---------------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- | name       | source    | status | tables           | last_lsn            |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- +------------+-----------+--------+------------------+---------------------+
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- | sync_users | pg_source | active | users, orders    | 0/16B3748           |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- +------------+-----------+--------+------------------+---------------------+
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Query the synced data — it stays up-to-date in near real-time
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> synced.users <span style="color:#ff79c6">LIMIT</span> <span style="color:#bd93f9">5</span>;
+</span></span></code></pre></div><h3 id="monitoring-cdc-lag">Monitoring CDC Lag</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Check replication lag
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    subscription_name,
+</span></span><span style="display:flex;"><span>    source_lsn,
+</span></span><span style="display:flex;"><span>    applied_lsn,
+</span></span><span style="display:flex;"><span>    lag_bytes,
+</span></span><span style="display:flex;"><span>    lag_seconds
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> thunderdb_cdc.replication_status;
+</span></span></code></pre></div><hr>
+<h2 id="foreign-data-wrappers-fdw">Foreign Data Wrappers (FDW)</h2>
+<p>ThunderDB supports Foreign Data Wrappers that let you query external databases
+directly from ThunderDB SQL, without copying data. This is useful for ad-hoc
+cross-database joins and federation.</p>
+<h3 id="query-an-external-mysql-database">Query an External MySQL Database</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Create a foreign server definition
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">FOREIGN</span> SERVER mysql_erp
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">TYPE</span> MYSQL
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">OPTIONS</span> (
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">host</span> <span style="color:#f1fa8c">&#39;mysql-erp.example.com&#39;</span>,
+</span></span><span style="display:flex;"><span>        port <span style="color:#f1fa8c">&#39;3306&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">database</span> <span style="color:#f1fa8c">&#39;erp&#39;</span>
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Create user mapping for authentication
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">USER</span> MAPPING <span style="color:#ff79c6">FOR</span> thunderdb
+</span></span><span style="display:flex;"><span>    SERVER mysql_erp
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">OPTIONS</span> (
+</span></span><span style="display:flex;"><span>        username <span style="color:#f1fa8c">&#39;readonly_user&#39;</span>,
+</span></span><span style="display:flex;"><span>        password <span style="color:#f1fa8c">&#39;secret&#39;</span>
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Import foreign tables from the remote schema
+</span></span></span><span style="display:flex;"><span>IMPORT <span style="color:#ff79c6">FOREIGN</span> <span style="color:#ff79c6">SCHEMA</span> erp
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">FROM</span> SERVER mysql_erp
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">INTO</span> <span style="color:#ff79c6">SCHEMA</span> erp_remote;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Now query the remote MySQL tables as if they were local
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    p.product_name,
+</span></span><span style="display:flex;"><span>    p.sku,
+</span></span><span style="display:flex;"><span>    p.price
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> erp_remote.products p
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> p.category <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;Electronics&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> p.price <span style="color:#ff79c6">DESC</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">LIMIT</span> <span style="color:#bd93f9">10</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Cross-database JOIN: local ThunderDB table + remote MySQL table
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    o.id <span style="color:#ff79c6">AS</span> order_id,
+</span></span><span style="display:flex;"><span>    o.product,
+</span></span><span style="display:flex;"><span>    o.price <span style="color:#ff79c6">AS</span> our_price,
+</span></span><span style="display:flex;"><span>    rp.price <span style="color:#ff79c6">AS</span> erp_price,
+</span></span><span style="display:flex;"><span>    o.price <span style="color:#ff79c6">-</span> rp.price <span style="color:#ff79c6">AS</span> price_diff
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> orders o
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">JOIN</span> erp_remote.products rp <span style="color:#ff79c6">ON</span> o.product <span style="color:#ff79c6">=</span> rp.product_name
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> price_diff <span style="color:#ff79c6">DESC</span>;
+</span></span></code></pre></div><h3 id="query-an-external-postgresql-database-via-fdw">Query an External PostgreSQL Database via FDW</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">FOREIGN</span> SERVER pg_analytics
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">TYPE</span> POSTGRES
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">OPTIONS</span> (
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">host</span> <span style="color:#f1fa8c">&#39;pg-analytics.example.com&#39;</span>,
+</span></span><span style="display:flex;"><span>        port <span style="color:#f1fa8c">&#39;5432&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">database</span> <span style="color:#f1fa8c">&#39;analytics&#39;</span>
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">USER</span> MAPPING <span style="color:#ff79c6">FOR</span> thunderdb
+</span></span><span style="display:flex;"><span>    SERVER pg_analytics
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">OPTIONS</span> (
+</span></span><span style="display:flex;"><span>        username <span style="color:#f1fa8c">&#39;reader&#39;</span>,
+</span></span><span style="display:flex;"><span>        password <span style="color:#f1fa8c">&#39;secret&#39;</span>
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>IMPORT <span style="color:#ff79c6">FOREIGN</span> <span style="color:#ff79c6">SCHEMA</span> <span style="color:#ff79c6">public</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">FROM</span> SERVER pg_analytics
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">INTO</span> <span style="color:#ff79c6">SCHEMA</span> analytics_remote;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Federated query across ThunderDB local data and remote PostgreSQL
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span>
+</span></span><span style="display:flex;"><span>    u.username,
+</span></span><span style="display:flex;"><span>    a.page_views,
+</span></span><span style="display:flex;"><span>    a.session_duration_avg
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> users u
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">JOIN</span> analytics_remote.user_analytics a <span style="color:#ff79c6">ON</span> u.id <span style="color:#ff79c6">=</span> a.user_id
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> a.page_views <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">100</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> a.page_views <span style="color:#ff79c6">DESC</span>;
+</span></span></code></pre></div><hr>
+<h2 id="docker-compose-full-multi-protocol-example">Docker Compose: Full Multi-Protocol Example</h2>
+<p>Here is a complete <code>docker-compose.yml</code> that sets up ThunderDB alongside
+a source PostgreSQL (for CDC) and a source MySQL (for FDW), demonstrating
+the full integration capabilities:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#ff79c6">version</span>: <span style="color:#f1fa8c">&#34;3.9&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># ── ThunderDB ──────────────────────────────────────────────</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">thunderdb</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">image</span>: thunderdb/thunderdb:latest
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">container_name</span>: thunderdb
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">restart</span>: unless-stopped
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;5432:5432&#34;</span>     <span style="color:#6272a4"># PostgreSQL protocol</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;3306:3306&#34;</span>     <span style="color:#6272a4"># MySQL protocol</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;6379:6379&#34;</span>     <span style="color:#6272a4"># Redis / RESP protocol</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;8088:8088&#34;</span>     <span style="color:#6272a4"># REST API</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;9090:9090&#34;</span>     <span style="color:#6272a4"># gRPC API</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;9100:9100&#34;</span>     <span style="color:#6272a4"># Prometheus metrics</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">volumes</span>:
+</span></span><span style="display:flex;"><span>      - thunderdb-data:/var/lib/thunderdb
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">THUNDERDB_LOG_LEVEL</span>: info
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">THUNDERDB_ADMIN_PASSWORD</span>: thunderdb
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">depends_on</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">pg-source</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">condition</span>: service_healthy
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">mysql-source</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">condition</span>: service_healthy
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">healthcheck</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">test</span>: [<span style="color:#f1fa8c">&#34;CMD&#34;</span>, <span style="color:#f1fa8c">&#34;thunderdb-cli&#34;</span>, <span style="color:#f1fa8c">&#34;ping&#34;</span>]
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">interval</span>: 10s
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">timeout</span>: 5s
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">retries</span>: <span style="color:#bd93f9">5</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># ── Source PostgreSQL (for CDC demo) ───────────────────────</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">pg-source</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">image</span>: postgres:16
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">container_name</span>: pg-source
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">restart</span>: unless-stopped
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;5433:5432&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">POSTGRES_USER</span>: appuser
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">POSTGRES_PASSWORD</span>: appsecret
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">POSTGRES_DB</span>: myapp
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">command</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;postgres&#34;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;-c&#34;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;wal_level=logical&#34;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;-c&#34;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;max_replication_slots=4&#34;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;-c&#34;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;max_wal_senders=4&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">healthcheck</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">test</span>: [<span style="color:#f1fa8c">&#34;CMD-SHELL&#34;</span>, <span style="color:#f1fa8c">&#34;pg_isready -U appuser -d myapp&#34;</span>]
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">interval</span>: 5s
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">timeout</span>: 3s
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">retries</span>: <span style="color:#bd93f9">5</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># ── Source MySQL (for FDW demo) ────────────────────────────</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">mysql-source</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">image</span>: mysql:8.0
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">container_name</span>: mysql-source
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">restart</span>: unless-stopped
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;3307:3306&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">MYSQL_ROOT_PASSWORD</span>: rootsecret
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">MYSQL_DATABASE</span>: erp
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">MYSQL_USER</span>: readonly_user
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">MYSQL_PASSWORD</span>: secret
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">healthcheck</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">test</span>: [<span style="color:#f1fa8c">&#34;CMD&#34;</span>, <span style="color:#f1fa8c">&#34;mysqladmin&#34;</span>, <span style="color:#f1fa8c">&#34;ping&#34;</span>, <span style="color:#f1fa8c">&#34;-h&#34;</span>, <span style="color:#f1fa8c">&#34;localhost&#34;</span>]
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">interval</span>: 5s
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">timeout</span>: 3s
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">retries</span>: <span style="color:#bd93f9">5</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">volumes</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">thunderdb-data</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">driver</span>: local
+</span></span></code></pre></div><p>Start everything:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Start the full stack</span>
+</span></span><span style="display:flex;"><span>docker-compose up -d
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Wait for all services to be healthy</span>
+</span></span><span style="display:flex;"><span>docker-compose ps
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Connect to ThunderDB via psql</span>
+</span></span><span style="display:flex;"><span>psql -h localhost -p <span style="color:#bd93f9">5432</span> -U thunderdb -d default
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Connect to ThunderDB via mysql client</span>
+</span></span><span style="display:flex;"><span>mysql -h 127.0.0.1 -P <span style="color:#bd93f9">3306</span> -u thunderdb -p --database<span style="color:#ff79c6">=</span>default
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Connect to ThunderDB via redis-cli</span>
+</span></span><span style="display:flex;"><span>redis-cli -h localhost -p <span style="color:#bd93f9">6379</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Hit the REST API</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/api/v1/health
+</span></span></code></pre></div><hr>
+<h2 id="verifying-your-installation">Verifying Your Installation</h2>
+<p>Run the built-in self-check to make sure everything is working:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Using the CLI tool</span>
+</span></span><span style="display:flex;"><span>thunderdb-cli doctor
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Expected output:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># [OK] Storage engine initialized</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># [OK] PostgreSQL protocol on :5432</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># [OK] MySQL protocol on :3306</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># [OK] Redis protocol on :6379</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># [OK] REST API on :8088</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># [OK] gRPC API on :9090</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># [OK] Vector index support available</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># [OK] CDC module loaded</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># [OK] FDW module loaded</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># All checks passed.</span>
+</span></span></code></pre></div><p>Or via SQL:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Show server version and build info
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> thunderdb_version();
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- ThunderDB 0.1.0 (rustc 1.78.0, release, linux-x86_64)
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Show enabled features
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> thunderdb_features();
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- +----------------+---------+
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- | feature        | enabled |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- +----------------+---------+
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- | vector_search  | true    |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- | cdc            | true    |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- | fdw            | true    |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- | full_text      | true    |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- | columnar_store | true    |
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">-- +----------------+---------+
+</span></span></span></code></pre></div><hr>
+<h2 id="next-steps">Next Steps</h2>
+<p>Now that you have ThunderDB running and have executed your first queries,
+explore the rest of the documentation:</p>
+<ul>
+<li><strong><a href="../architecture/">Architecture</a></strong> &ndash; Understand how ThunderDB&rsquo;s distributed
+engine, storage layers, consensus protocol, and query optimizer work together.</li>
+<li><strong><a href="../developer/sql-reference/">SQL Reference</a></strong> &ndash; Complete reference for all
+supported SQL statements, data types, functions, and operators.</li>
+<li><strong><a href="../developer/api-reference/">API Reference</a></strong> &ndash; REST, gRPC, GraphQL, and
+WebSocket API documentation with request/response examples.</li>
+<li><strong><a href="../developer/sdk/">SDK Guide</a></strong> &ndash; Client libraries for Python, Go, Java,
+Node.js, and Rust with code samples.</li>
+<li><strong><a href="../administrator/configuration/">Configuration</a></strong> &ndash; Tune ThunderDB for your
+workload with detailed configuration reference.</li>
+<li><strong><a href="../administrator/deployment/">Deployment</a></strong> &ndash; Production deployment guides
+for Kubernetes, bare-metal, and cloud-managed environments.</li>
+<li><strong><a href="../administrator/monitoring/">Monitoring</a></strong> &ndash; Set up Prometheus metrics,
+Grafana dashboards, and alerting for your ThunderDB cluster.</li>
+<li><strong><a href="../developer/examples/">Examples</a></strong> &ndash; End-to-end application examples
+including RAG pipelines, real-time dashboards, and multi-protocol microservices.</li>
+</ul>
+
+	<div class="section-index">
+    
+    
+    </div>
+<style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<div class="d-print-none">
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+</div>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'page_helpful', {
+      'event_category': 'Helpful',
+      'event_label': window.location.pathname,
+      'value': value
+    });
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback( 100 );
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+<br />
+</div>
+
+          </main>
+        </div>
+      </div>
+      <footer class="td-footer row d-print-none">
+  <div class="container-fluid">
+    <div class="row mx-md-2">
+      <div class="td-footer__left col-6 col-sm-4 order-sm-1">
+        
+      </div><div class="td-footer__right col-6 col-sm-4 order-sm-3">
+        <ul class="td-footer__links-list">
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="GitHub" aria-label="GitHub">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="Discussions" aria-label="Discussions">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb/discussions" aria-label="Discussions">
+      <i class="fas fa-comments"></i>
+    </a>
+  </li>
+  
+</ul>
+
+      </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
+        <span class="td-footer__copyright">&copy;
+    2026
+    <span class="td-footer__authors">ThunderDB Contributors</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><p class="td-footer__about mt-2"><a href="/docs/about/">About ThunderDB</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script src="/docs/js/main.js"></script>
+<script defer src="/docs/js/click-to-copy.js" crossorigin="anonymous"></script>
+<script src='/docs/js/tabpane-persist.js'></script>
+
+  </body>
+</html>

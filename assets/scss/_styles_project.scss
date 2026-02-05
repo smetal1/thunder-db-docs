@@ -1,0 +1,639 @@
+// ═══════════════════════════════════════════════════════
+// ThunderDB — Full Dark Theme + Orange Accent
+// ═══════════════════════════════════════════════════════
+
+// ── Color tokens ────────────────────────────────────────
+$dark-bg:      #0D0D0D;
+$dark-surface: #141414;
+$dark-card:    #1a1a1a;
+$dark-raised:  #222222;
+$dark-border:  #2a2a2a;
+$dark-border2: #333333;
+$text-primary: #E0E0E0;
+$text-muted:   #888888;
+$orange:       #FF6B00;
+$orange-light: #FF9933;
+$amber:        #FFAA00;
+
+// ── Base ────────────────────────────────────────────────
+body {
+  background-color: $dark-bg !important;
+  color: $text-primary !important;
+}
+
+// ── Force ALL text light on dark background ─────────────
+// Nuclear override — no element should ever render black/dark text
+*:not(.btn):not(.badge):not(a):not(code):not(.feature-card__icon i):not(.nav-link):not(.fas):not(.fab):not(.far) {
+  color: $text-primary;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.display-1, .display-2, .display-3, .display-4 {
+  color: #F5F5F5 !important;
+}
+
+p, li, dd, dt, span, div, label, figcaption, small,
+blockquote, caption, summary, address, pre,
+.lead, .text-muted, .text-body, td, th {
+  color: $text-primary !important;
+}
+
+// Table header override — orange on dark
+.td-content table th {
+  color: $orange !important;
+}
+
+a,
+.btn,
+.nav-link,
+.td-sidebar-link,
+.card,
+.alert {
+  transition: all 0.2s ease;
+}
+
+// ── Navbar ──────────────────────────────────────────────
+.td-navbar {
+  background: rgba(13, 13, 13, 0.94) !important;
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(90deg, $orange, $amber, $orange) 1;
+  box-shadow: 0 2px 20px rgba(255, 107, 0, 0.1),
+              0 0 60px rgba(255, 170, 0, 0.03);
+}
+
+.td-navbar .navbar-brand__name {
+  display: none;
+}
+
+.td-navbar .nav-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+
+  &:hover,
+  &.active {
+    color: $orange !important;
+  }
+}
+
+// ── Hero / Cover ────────────────────────────────────────
+.td-cover-block {
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 40%, rgba(255, 107, 0, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 60%, rgba(255, 170, 0, 0.05) 0%, transparent 70%),
+    linear-gradient(160deg, #0D0D0D 0%, #1a1000 35%, #1a1205 55%, #0D0D0D 100%);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        0deg, transparent, transparent 23px,
+        rgba(255, 107, 0, 0.04) 23px, rgba(255, 107, 0, 0.04) 24px
+      ),
+      repeating-linear-gradient(
+        90deg, transparent, transparent 23px,
+        rgba(255, 107, 0, 0.04) 23px, rgba(255, 107, 0, 0.04) 24px
+      );
+    pointer-events: none;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 15%;
+    right: 8%;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 107, 0, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  h1 {
+    color: #fff;
+    text-shadow: 0 0 50px rgba(255, 107, 0, 0.25);
+  }
+
+  .lead {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .btn-lg {
+    border-radius: 6px;
+    font-weight: 600;
+    padding: 0.65rem 1.6rem;
+    letter-spacing: 0.3px;
+  }
+}
+
+// ── Main content area ───────────────────────────────────
+.td-main main,
+.td-main {
+  background: $dark-bg;
+}
+
+.td-content {
+  color: $text-primary;
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #F5F5F5;
+  }
+
+  h2 {
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid $dark-border;
+
+    &:first-of-type {
+      border-top: none;
+      margin-top: 1.5rem;
+    }
+  }
+
+  h3 {
+    margin-top: 1.75rem;
+  }
+
+  p, li {
+    color: $text-primary;
+  }
+
+  strong {
+    color: #F0F0F0;
+  }
+}
+
+// ── Links ───────────────────────────────────────────────
+.td-content a {
+  color: $orange;
+  text-decoration-color: rgba(255, 107, 0, 0.3);
+
+  &:hover {
+    color: $orange-light;
+    text-decoration-color: $orange-light;
+  }
+}
+
+// ── Buttons ─────────────────────────────────────────────
+.btn-primary {
+  background: linear-gradient(135deg, $orange 0%, $amber 100%);
+  border: none;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(255, 107, 0, 0.3);
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(135deg, #E06000 0%, #EE9900 100%);
+    box-shadow: 0 4px 20px rgba(255, 107, 0, 0.4);
+    transform: translateY(-1px);
+    color: #fff;
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 4px rgba(255, 107, 0, 0.25);
+  }
+}
+
+.btn-secondary {
+  background: $dark-raised;
+  border: 1px solid $dark-border2;
+  color: $text-primary;
+
+  &:hover {
+    background: $dark-border2;
+    border-color: #444;
+    color: #fff;
+  }
+}
+
+.btn-outline-primary {
+  border-color: $orange;
+  color: $orange;
+
+  &:hover {
+    background: rgba(255, 107, 0, 0.1);
+    border-color: $orange-light;
+    color: $orange-light;
+    box-shadow: 0 0 12px rgba(255, 107, 0, 0.15);
+  }
+}
+
+// ── Code blocks ─────────────────────────────────────────
+.highlight {
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  border: 1px solid $dark-border;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+  pre {
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    border-left: 3px solid $orange;
+    background: #0a0a0a;
+    color: $text-primary;
+  }
+}
+
+code:not([class]) {
+  background-color: $dark-raised;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  font-size: 0.875em;
+  color: $amber;
+  border: 1px solid $dark-border;
+}
+
+// ── Tables ──────────────────────────────────────────────
+.td-content table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+  th {
+    background: linear-gradient(135deg, $dark-card 0%, $dark-raised 100%);
+    color: $orange;
+    padding: 0.8rem;
+    border-bottom: 2px solid $orange;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
+  }
+
+  td {
+    padding: 0.65rem 0.8rem;
+    border-bottom: 1px solid $dark-border;
+    color: $text-primary;
+    background: $dark-surface;
+  }
+
+  tbody tr:nth-child(even) td {
+    background: $dark-card;
+  }
+
+  tr:hover td {
+    background: $dark-raised;
+  }
+}
+
+// ── Sidebar ─────────────────────────────────────────────
+.td-sidebar,
+.td-sidebar-nav {
+  background: $dark-bg;
+}
+
+.td-sidebar-nav {
+  .td-sidebar-link {
+    font-size: 0.9rem;
+    border-radius: 4px;
+    color: #b0b0b0;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background-color: rgba(255, 107, 0, 0.06);
+      color: $orange;
+    }
+
+    &.active {
+      font-weight: 600;
+      color: $orange;
+      background-color: rgba(255, 107, 0, 0.1);
+      border-left: 3px solid $amber;
+      padding-left: 0.5rem;
+    }
+  }
+}
+
+// ── Architecture diagrams ───────────────────────────────
+.architecture-diagram {
+  background: $dark-surface;
+  border: 1px solid $dark-border;
+  border-left: 3px solid $orange;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+
+  pre {
+    margin: 0;
+    background: transparent;
+    font-family: 'Fira Code', 'Source Code Pro', monospace;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: $text-primary;
+  }
+}
+
+// ── Feature section / cards ─────────────────────────────
+.td-box {
+  background: $dark-bg;
+  color: $text-primary;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.td-box--features {
+  .feature-icon {
+    font-size: 2.5rem;
+    color: $orange;
+    margin-bottom: 1rem;
+    transition: color 0.2s ease;
+  }
+}
+
+.td-box--dark {
+  background: $dark-surface;
+}
+
+.card {
+  background: $dark-card;
+  border: 1px solid $dark-border;
+  color: $text-primary;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 107, 0, 0.08);
+    border-color: $dark-border2;
+  }
+}
+
+// ── Lead section ────────────────────────────────────────
+.td-box--primary {
+  background: $dark-surface !important;
+  color: $text-primary !important;
+
+  * {
+    color: $text-primary !important;
+  }
+}
+
+// ── Catch-all dark overrides ────────────────────────────
+.td-box,
+.td-box--dark,
+.td-box--primary,
+.td-main,
+.td-content,
+.td-sidebar,
+.td-toc,
+.td-footer {
+  color: $text-primary;
+
+  p, li, span, div, dd, dt, label, figcaption, small, blockquote {
+    color: $text-primary;
+  }
+
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: #F5F5F5;
+  }
+}
+
+// Feature section text
+.td-box--dark {
+  background: $dark-surface !important;
+
+  .h3, .h4, h3, h4 {
+    color: #F5F5F5 !important;
+  }
+
+  p, span, .lead {
+    color: $text-primary !important;
+  }
+}
+
+// ── Alerts ──────────────────────────────────────────────
+.alert {
+  border-radius: 8px;
+  border-left: 4px solid;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  background: $dark-card;
+  color: $text-primary;
+
+  &.alert-info {
+    border-left-color: $amber;
+    background: rgba(255, 170, 0, 0.06);
+  }
+
+  &.alert-warning {
+    border-left-color: $warning;
+    background: rgba(255, 204, 0, 0.06);
+  }
+
+  &.alert-danger {
+    border-left-color: $danger;
+    background: rgba(255, 68, 68, 0.06);
+  }
+}
+
+// ── Footer ──────────────────────────────────────────────
+.td-footer {
+  background: #080808;
+  border-top: 2px solid transparent;
+  border-image: linear-gradient(90deg, $orange, $amber, $orange) 1;
+  color: #bbb !important;
+
+  * {
+    color: #bbb;
+  }
+
+  a {
+    color: $orange !important;
+
+    &:hover {
+      color: $orange-light !important;
+    }
+  }
+}
+
+// ── Search ──────────────────────────────────────────────
+.td-search-input {
+  background: $dark-card;
+  border-color: $dark-border2;
+  color: $text-primary;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+
+  &::placeholder {
+    color: $text-muted;
+  }
+
+  &:focus {
+    background: $dark-raised;
+    border-color: $orange;
+    color: #fff;
+    box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.12),
+                0 0 12px rgba(255, 107, 0, 0.06);
+  }
+}
+
+// ── TOC (right sidebar) ────────────────────────────────
+.td-toc {
+  background: $dark-bg;
+
+  a {
+    color: $text-muted;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: $orange;
+    }
+  }
+}
+
+// ── Breadcrumbs ─────────────────────────────────────────
+.breadcrumb {
+  background: transparent;
+}
+
+.breadcrumb-item {
+  color: $text-muted;
+
+  a {
+    color: $orange;
+
+    &:hover {
+      color: $orange-light;
+    }
+  }
+
+  + .breadcrumb-item::before {
+    color: #555;
+  }
+}
+
+// ── Pagination / page nav ───────────────────────────────
+.page-link {
+  background: $dark-card;
+  border-color: $dark-border;
+  color: $text-primary;
+
+  &:hover {
+    background: $dark-raised;
+    border-color: $orange;
+    color: $orange;
+  }
+}
+
+// ── Scrollbar (webkit) ──────────────────────────────────
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $dark-surface;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $dark-border2;
+  border-radius: 4px;
+
+  &:hover {
+    background: $orange;
+  }
+}
+
+// ── Selection ───────────────────────────────────────────
+::selection {
+  background: rgba(255, 107, 0, 0.25);
+  color: #fff;
+}
+
+// ── Badges ──────────────────────────────────────────────
+.badge {
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+// ── Taxonomy / tag list ─────────────────────────────────
+.taxonomy-terms-cloud a {
+  color: $orange;
+}
+
+// ── Feedback widget ─────────────────────────────────────
+.td-feedback {
+  background: $dark-surface;
+  border-color: $dark-border;
+}
+
+// ── Feature cards ───────────────────────────────────────
+.features-section {
+  background: $dark-bg;
+  padding: 4rem 0;
+}
+
+.feature-card {
+  background: $dark-card;
+  border: 1px solid $dark-border;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  height: 100%;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  position: relative;
+  overflow: hidden;
+
+  // Subtle top accent line
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, $orange, $amber);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(255, 107, 0, 0.12),
+                0 4px 12px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 107, 0, 0.3);
+
+    &::before {
+      opacity: 1;
+    }
+
+    .feature-card__icon {
+      color: $amber;
+      text-shadow: 0 0 20px rgba(255, 170, 0, 0.3);
+    }
+  }
+
+  &__icon {
+    font-size: 2.5rem;
+    color: $orange;
+    margin-bottom: 1.2rem;
+    transition: all 0.25s ease;
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #F5F5F5 !important;
+    margin-bottom: 0.75rem;
+  }
+
+  &__text {
+    font-size: 0.95rem;
+    color: #b0b0b0 !important;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+}
+
+// ── Print adjustments ───────────────────────────────────
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+}

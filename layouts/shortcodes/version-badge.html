@@ -1,0 +1,7 @@
+{{ $version := .Get "version" | default "0.1.0" }}
+{{ $status := .Get "status" | default "stable" }}
+{{ $color := "primary" }}
+{{ if eq $status "beta" }}{{ $color = "warning" }}{{ end }}
+{{ if eq $status "alpha" }}{{ $color = "danger" }}{{ end }}
+{{ if eq $status "planned" }}{{ $color = "secondary" }}{{ end }}
+<span class="badge bg-{{ $color }}">v{{ $version }} {{ $status }}</span>

@@ -1,0 +1,1305 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
+  <head><script src="/docs/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=docs/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/docs/favicons/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/docs/favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/docs/favicons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/docs/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="/docs/favicons/favicon-256.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/docs/favicons/apple-touch-icon.png">
+<link rel="manifest" href="/docs/favicons/site.webmanifest">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="msapplication-TileColor" content="#0D0D0D">
+
+<title>Deployment | ThunderDB Documentation</title>
+<meta name="description" content="Deploy ThunderDB from source, Docker, Kubernetes, or system packages. Set up single-node and multi-node clusters.">
+<meta property="og:url" content="http://localhost:1313/docs/docs/administrator/deployment/">
+  <meta property="og:site_name" content="ThunderDB Documentation">
+  <meta property="og:title" content="Deployment">
+  <meta property="og:description" content="Deploy ThunderDB from source, Docker, Kubernetes, or system packages. Set up single-node and multi-node clusters.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+
+  <meta itemprop="name" content="Deployment">
+  <meta itemprop="description" content="Deploy ThunderDB from source, Docker, Kubernetes, or system packages. Set up single-node and multi-node clusters.">
+  <meta itemprop="wordCount" content="2291">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Deployment">
+  <meta name="twitter:description" content="Deploy ThunderDB from source, Docker, Kubernetes, or system packages. Set up single-node and multi-node clusters.">
+<link href="/docs/scss/main.css" rel="stylesheet">
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+  crossorigin="anonymous"></script>
+<script defer
+  src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
+  integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
+  crossorigin="anonymous"></script>
+
+  </head>
+  <body class="td-section">
+    <header>
+      <nav class="td-navbar js-navbar-scroll" data-bs-theme="dark">
+<div class="td-navbar-container container-fluid flex-column flex-md-row">
+  <a class="navbar-brand" href="/docs/"><span class="navbar-brand__logo navbar-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="300" height="64"><defs><symbol id="b" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#331500" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FF6B00"/><rect width="4.8" height=".6" rx=".55" fill="#FA4" opacity=".5"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#F83" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#930" opacity=".35"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D50"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,200,100,0.3)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FC8" opacity=".55"/></symbol><symbol id="c" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#4D3000" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FA0"/><rect width="4.8" height=".6" rx=".55" fill="#FD6" opacity=".55"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#FB3" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#960" opacity=".3"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D80"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,230,150,0.35)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FE9" opacity=".6"/></symbol></defs><use href="#b" x="35" y="2" width="5" height="5"/><use href="#b" x="41" y="2" width="5" height="5"/><use href="#b" x="29" y="8" width="5" height="5"/><use href="#b" x="35" y="8" width="5" height="5"/><use href="#b" x="23" y="14" width="5" height="5"/><use href="#b" x="29" y="14" width="5" height="5"/><use href="#b" x="17" y="20" width="5" height="5"/><use href="#b" x="23" y="20" width="5" height="5"/><use href="#c" x="5" y="26" width="5" height="5"/><use href="#c" x="11" y="26" width="5" height="5"/><use href="#c" x="17" y="26" width="5" height="5"/><use href="#c" x="23" y="26" width="5" height="5"/><use href="#c" x="29" y="26" width="5" height="5"/><use href="#c" x="35" y="26" width="5" height="5"/><use href="#c" x="41" y="26" width="5" height="5"/><use href="#c" x="47" y="26" width="5" height="5"/><use href="#b" x="35" y="32" width="5" height="5"/><use href="#b" x="41" y="32" width="5" height="5"/><use href="#b" x="29" y="38" width="5" height="5"/><use href="#b" x="35" y="38" width="5" height="5"/><use href="#b" x="23" y="44" width="5" height="5"/><use href="#b" x="29" y="44" width="5" height="5"/><use href="#b" x="17" y="50" width="5" height="5"/><use href="#b" x="23" y="50" width="5" height="5"/><use href="#b" x="11" y="56" width="5" height="5"/><use href="#b" x="17" y="56" width="5" height="5"/><text x="66" y="43" font-family="'SF Mono','Fira Code','Consolas','Courier New',monospace" font-size="27" font-weight="900" letter-spacing=".5"><tspan fill="#FFF">Thunder</tspan><tspan fill="#FF6B00">DB</tspan></text></svg></span><span class="navbar-brand__name">ThunderDB Documentation</span></a>
+  <div class="td-navbar-nav-scroll td-navbar-nav-scroll--indicator" id="main_navbar">
+    <div class="scroll-indicator scroll-left"></div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/"><span>Documentation</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/architecture/"><span>Architecture</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/developer/api-reference/"><span>API Reference</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/about/"><span>About</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/thunderdb/thunderdb" target="_blank" rel="noopener"><i class='fab fa-github'></i><span>GitHub</span></a>
+      </li>
+      </ul>
+    <div class="scroll-indicator scroll-right"></div>
+  </div>
+  <div class="d-none d-lg-block td-navbar__search">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+  </div>
+</div>
+</nav>
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main" data-bs-spy="scroll" data-bs-target=".td-toc" data-bs-root-margin="0px 0px -10%">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+  <script>
+    $(function() {
+    $("#td-section-nav a").removeClass("active");
+    $("#td-section-nav #m-docsdocsadministratordeployment").addClass("active");
+    $("#td-section-nav #m-docsdocsadministratordeployment-li span").addClass("td-sidebar-nav-active-item");
+    $("#td-section-nav #m-docsdocsadministratordeployment").parents("li").addClass("active-path");
+    $("#td-section-nav li.active-path").addClass("show");
+    $("#td-section-nav li.active-path").children("input").prop('checked', true);
+    $("#td-section-nav #m-docsdocsadministratordeployment-li").siblings("li").addClass("show");
+    $("#td-section-nav #m-docsdocsadministratordeployment-li").children("ul").children("li").addClass("show");
+    $("#td-sidebar-menu").toggleClass("d-none");
+    });
+  </script>
+  <div id="td-sidebar-menu" class="td-sidebar__inner d-none">
+  <form class="td-sidebar__search d-flex align-items-center">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+    <button class="btn btn-link td-sidebar__toggle" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  <nav class="td-sidebar-nav collapse foldable-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocs-li">
+    <a href="/docs/docs/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docsdocs"><span class="">Documentation</span></a>
+    <ul class="ul-1">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsgetting-started-li">
+    <input type="checkbox" id="m-docsdocsgetting-started-check"/>
+    <label for="m-docsdocsgetting-started-check"><a href="/docs/docs/getting-started/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsgetting-started"><span class="">Getting Started</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsarchitecture-li">
+    <input type="checkbox" id="m-docsdocsarchitecture-check"/>
+    <label for="m-docsdocsarchitecture-check"><a href="/docs/docs/architecture/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsarchitecture"><span class="">Architecture</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsdeveloper-li">
+    <input type="checkbox" id="m-docsdocsdeveloper-check"/>
+    <label for="m-docsdocsdeveloper-check"><a href="/docs/docs/developer/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloper"><span class="">Developer Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperapi-reference-li">
+    <input type="checkbox" id="m-docsdocsdeveloperapi-reference-check"/>
+    <label for="m-docsdocsdeveloperapi-reference-check"><a href="/docs/docs/developer/api-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperapi-reference"><span class="">API Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersql-reference-li">
+    <input type="checkbox" id="m-docsdocsdevelopersql-reference-check"/>
+    <label for="m-docsdocsdevelopersql-reference-check"><a href="/docs/docs/developer/sql-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersql-reference"><span class="">SQL Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersdk-li">
+    <input type="checkbox" id="m-docsdocsdevelopersdk-check"/>
+    <label for="m-docsdocsdevelopersdk-check"><a href="/docs/docs/developer/sdk/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersdk"><span class="">SDKs &amp; Drivers</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperexamples-li">
+    <input type="checkbox" id="m-docsdocsdeveloperexamples-check"/>
+    <label for="m-docsdocsdeveloperexamples-check"><a href="/docs/docs/developer/examples/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperexamples"><span class="">Examples &amp; Use Cases</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsadministrator-li">
+    <input type="checkbox" id="m-docsdocsadministrator-check"/>
+    <label for="m-docsdocsadministrator-check"><a href="/docs/docs/administrator/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministrator"><span class="">Administrator Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratordeployment-li">
+    <input type="checkbox" id="m-docsdocsadministratordeployment-check"/>
+    <label for="m-docsdocsadministratordeployment-check"><a href="/docs/docs/administrator/deployment/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratordeployment"><span class="">Deployment</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorconfiguration-li">
+    <input type="checkbox" id="m-docsdocsadministratorconfiguration-check"/>
+    <label for="m-docsdocsadministratorconfiguration-check"><a href="/docs/docs/administrator/configuration/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorconfiguration"><span class="">Configuration</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratormonitoring-li">
+    <input type="checkbox" id="m-docsdocsadministratormonitoring-check"/>
+    <label for="m-docsdocsadministratormonitoring-check"><a href="/docs/docs/administrator/monitoring/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratormonitoring"><span class="">Monitoring</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorbackup-recovery-li">
+    <input type="checkbox" id="m-docsdocsadministratorbackup-recovery-check"/>
+    <label for="m-docsdocsadministratorbackup-recovery-check"><a href="/docs/docs/administrator/backup-recovery/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorbackup-recovery"><span class="">Backup &amp; Recovery</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorsecurity-li">
+    <input type="checkbox" id="m-docsdocsadministratorsecurity-check"/>
+    <label for="m-docsdocsadministratorsecurity-check"><a href="/docs/docs/administrator/security/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorsecurity"><span class="">Security</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratortroubleshooting-li">
+    <input type="checkbox" id="m-docsdocsadministratortroubleshooting-check"/>
+    <label for="m-docsdocsadministratortroubleshooting-check"><a href="/docs/docs/administrator/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratortroubleshooting"><span class="">Troubleshooting</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocscontributor-li">
+    <input type="checkbox" id="m-docsdocscontributor-check"/>
+    <label for="m-docsdocscontributor-check"><a href="/docs/docs/contributor/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributor"><span class="">Contributor Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributordevelopment-setup-li">
+    <input type="checkbox" id="m-docsdocscontributordevelopment-setup-check"/>
+    <label for="m-docsdocscontributordevelopment-setup-check"><a href="/docs/docs/contributor/development-setup/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributordevelopment-setup"><span class="">Development Setup</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorcodebase-guide-li">
+    <input type="checkbox" id="m-docsdocscontributorcodebase-guide-check"/>
+    <label for="m-docsdocscontributorcodebase-guide-check"><a href="/docs/docs/contributor/codebase-guide/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorcodebase-guide"><span class="">Codebase Guide</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributortesting-li">
+    <input type="checkbox" id="m-docsdocscontributortesting-check"/>
+    <label for="m-docsdocscontributortesting-check"><a href="/docs/docs/contributor/testing/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributortesting"><span class="">Testing</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorrelease-process-li">
+    <input type="checkbox" id="m-docsdocscontributorrelease-process-check"/>
+    <label for="m-docsdocscontributorrelease-process-check"><a href="/docs/docs/contributor/release-process/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorrelease-process"><span class="">Release Process</span></a></label>
+    
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
+<a href="https://github.com/thunderdb/thunderdb/tree/main/content/docs/administrator/deployment/_index.md" class="td-page-meta--view td-page-meta__view" target="_blank" rel="noopener"><i class="fa-solid fa-file-lines fa-fw"></i> View page source</a>
+  <a href="https://github.com/thunderdb/thunderdb/edit/main/content/docs/administrator/deployment/_index.md" class="td-page-meta--edit td-page-meta__edit" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Edit this page</a>
+  <a href="https://github.com/thunderdb/thunderdb/new/main/content/docs/administrator/deployment?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child td-page-meta__child" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Create child page</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new?title=Deployment" class="td-page-meta--issue td-page-meta__issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create documentation issue</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new" class="td-page-meta--project td-page-meta__project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create project issue</a>
+  
+</div>
+
+            <div class="td-toc" data-proofer-ignore>
+<div class="td-toc-title">
+      <span class="td-toc-title__text">On this page</span>
+      <a class="td-toc-title__link" title="Top of page" href="#"></a>
+    </div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#building-from-source">Building from Source</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#build">Build</a></li>
+        <li><a href="#verify-the-build">Verify the Build</a></li>
+        <li><a href="#run">Run</a></li>
+        <li><a href="#build-options">Build Options</a></li>
+      </ul>
+    </li>
+    <li><a href="#docker">Docker</a>
+      <ul>
+        <li><a href="#dockerfile">Dockerfile</a></li>
+        <li><a href="#building-the-docker-image">Building the Docker Image</a></li>
+        <li><a href="#running-with-docker">Running with Docker</a></li>
+        <li><a href="#docker-compose">Docker Compose</a></li>
+      </ul>
+    </li>
+    <li><a href="#kubernetes">Kubernetes</a>
+      <ul>
+        <li><a href="#namespace">Namespace</a></li>
+        <li><a href="#configmap">ConfigMap</a></li>
+        <li><a href="#statefulset">StatefulSet</a></li>
+        <li><a href="#service-definitions">Service Definitions</a></li>
+        <li><a href="#deploy-to-kubernetes">Deploy to Kubernetes</a></li>
+        <li><a href="#horizontal-scaling">Horizontal Scaling</a></li>
+      </ul>
+    </li>
+    <li><a href="#debian-package">Debian Package</a>
+      <ul>
+        <li><a href="#building-the-package">Building the Package</a></li>
+        <li><a href="#installing">Installing</a></li>
+        <li><a href="#package-contents">Package Contents</a></li>
+        <li><a href="#uninstalling">Uninstalling</a></li>
+      </ul>
+    </li>
+    <li><a href="#systemd-service">systemd Service</a>
+      <ul>
+        <li><a href="#service-file">Service File</a></li>
+        <li><a href="#managing-the-service">Managing the Service</a></li>
+        <li><a href="#configuration-reload">Configuration Reload</a></li>
+      </ul>
+    </li>
+    <li><a href="#multi-node-cluster-setup">Multi-Node Cluster Setup</a>
+      <ul>
+        <li><a href="#using-the-cluster-script">Using the Cluster Script</a></li>
+        <li><a href="#manual-cluster-configuration">Manual Cluster Configuration</a></li>
+        <li><a href="#starting-the-cluster">Starting the Cluster</a></li>
+        <li><a href="#cluster-parameters">Cluster Parameters</a></li>
+        <li><a href="#verifying-the-cluster">Verifying the Cluster</a></li>
+      </ul>
+    </li>
+    <li><a href="#production-deployment-checklist">Production Deployment Checklist</a></li>
+  </ul>
+</nav>
+  </div>
+
+            
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/">Documentation</a></li>
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/administrator/">Administrator Guide</a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    Deployment</li>
+  </ol>
+</nav>
+<div class="td-content">
+	<h1>Deployment</h1>
+  <div class="lead">Deploy ThunderDB from source, Docker, Kubernetes, or system packages. Set up single-node and multi-node clusters.</div>
+	<header class="article-meta">
+		
+</header>
+	<h1 id="deployment">Deployment</h1>
+<p>This guide covers all supported methods for deploying ThunderDB, from building from source for development to running production-grade Kubernetes clusters.</p>
+<hr>
+<h2 id="building-from-source">Building from Source</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li><strong>Rust</strong> 1.75 or later (install via <a href="https://rustup.rs/">rustup</a>)</li>
+<li><strong>Cargo</strong> (included with Rust)</li>
+<li><strong>C/C++ compiler</strong>: GCC 9+ or Clang 12+ (required for native dependencies)</li>
+<li><strong>CMake</strong> 3.16+ (required for building RocksDB bindings)</li>
+<li><strong>Protocol Buffers compiler</strong> (<code>protoc</code>) 3.15+ (required for gRPC code generation)</li>
+<li><strong>OpenSSL</strong> development headers (for TLS support)</li>
+<li><strong>Git</strong> (for cloning the repository)</li>
+</ul>
+<p>On Ubuntu/Debian:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get update
+</span></span><span style="display:flex;"><span>sudo apt-get install -y build-essential cmake protobuf-compiler libssl-dev pkg-config git
+</span></span><span style="display:flex;"><span>curl --proto <span style="color:#f1fa8c">&#39;=https&#39;</span> --tlsv1.2 -sSf https://sh.rustup.rs | sh
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">source</span> <span style="color:#8be9fd;font-style:italic">$HOME</span>/.cargo/env
+</span></span></code></pre></div><p>On macOS:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>brew install cmake protobuf openssl pkg-config
+</span></span><span style="display:flex;"><span>curl --proto <span style="color:#f1fa8c">&#39;=https&#39;</span> --tlsv1.2 -sSf https://sh.rustup.rs | sh
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">source</span> <span style="color:#8be9fd;font-style:italic">$HOME</span>/.cargo/env
+</span></span></code></pre></div><h3 id="build">Build</h3>
+<p>Clone the repository and build in release mode:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/thunderdb/thunderdb.git
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">cd</span> thunderdb
+</span></span><span style="display:flex;"><span>cargo build --release
+</span></span></code></pre></div><p>The optimized binary is produced at:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>target/release/thunderdb
+</span></span></code></pre></div><h3 id="verify-the-build">Verify the Build</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./target/release/thunderdb --version
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># ThunderDB 0.1.0 (rustc 1.75.0, built 2026-01-15)</span>
+</span></span></code></pre></div><h3 id="run">Run</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./target/release/thunderdb --config config/thunderdb.toml
+</span></span></code></pre></div><p>If no configuration file is specified, ThunderDB starts with default settings (single-node, all ports on localhost).</p>
+<h3 id="build-options">Build Options</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Flag</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>--release</code></td>
+          <td>Optimized build with LTO (recommended for production)</td>
+      </tr>
+      <tr>
+          <td><code>--features tls</code></td>
+          <td>Enable TLS support (enabled by default)</td>
+      </tr>
+      <tr>
+          <td><code>--features simd</code></td>
+          <td>Enable SIMD-accelerated operations</td>
+      </tr>
+      <tr>
+          <td><code>--features jemalloc</code></td>
+          <td>Use jemalloc allocator (recommended for production)</td>
+      </tr>
+      <tr>
+          <td><code>--no-default-features</code></td>
+          <td>Disable all optional features</td>
+      </tr>
+  </tbody>
+</table>
+<p>Example with all production features:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cargo build --release --features <span style="color:#f1fa8c">&#34;tls,simd,jemalloc&#34;</span>
+</span></span></code></pre></div><hr>
+<h2 id="docker">Docker</h2>
+<h3 id="dockerfile">Dockerfile</h3>
+<p>ThunderDB uses a multi-stage build to produce a minimal production image:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#6272a4"># Stage 1: Build</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> <span style="color:#f1fa8c">rust:1.75-bookworm</span> <span style="color:#ff79c6">AS</span> <span style="color:#f1fa8c">builder</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">RUN</span> apt-get update <span style="color:#ff79c6">&amp;&amp;</span> apt-get install -y <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    cmake protobuf-compiler libssl-dev pkg-config <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&amp;&amp;</span> rm -rf /var/lib/apt/lists/*
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WORKDIR</span> <span style="color:#f1fa8c">/usr/src/thunderdb</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> . .
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">RUN</span> cargo build --release --features <span style="color:#f1fa8c">&#34;tls,jemalloc&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Stage 2: Runtime</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> <span style="color:#f1fa8c">debian:bookworm-slim</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">RUN</span> apt-get update <span style="color:#ff79c6">&amp;&amp;</span> apt-get install -y <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    libssl3 ca-certificates <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&amp;&amp;</span> rm -rf /var/lib/apt/lists/* <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&amp;&amp;</span> groupadd -r thunder <span style="color:#ff79c6">&amp;&amp;</span> useradd -r -g thunder thunder <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&amp;&amp;</span> mkdir -p /var/lib/thunderdb/data /var/lib/thunderdb/wal /var/log/thunderdb /etc/thunderdb <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&amp;&amp;</span> chown -R thunder:thunder /var/lib/thunderdb /var/log/thunderdb /etc/thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>builder /usr/src/thunderdb/target/release/thunderdb /usr/local/bin/thunderdb
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>builder /usr/src/thunderdb/config/thunderdb.toml /etc/thunderdb/thunderdb.toml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">USER</span> <span style="color:#f1fa8c">thunder</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">EXPOSE</span> <span style="color:#f1fa8c">5432</span> <span style="color:#bd93f9">3306</span> <span style="color:#bd93f9">6379</span> <span style="color:#bd93f9">8088</span> <span style="color:#bd93f9">9090</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">VOLUME</span> [<span style="color:#f1fa8c">&#34;/var/lib/thunderdb/data&#34;</span>, <span style="color:#f1fa8c">&#34;/var/lib/thunderdb/wal&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ENTRYPOINT</span> [<span style="color:#f1fa8c">&#34;thunderdb&#34;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">CMD</span> [<span style="color:#f1fa8c">&#34;--config&#34;</span>, <span style="color:#f1fa8c">&#34;/etc/thunderdb/thunderdb.toml&#34;</span>]
+</span></span></code></pre></div><h3 id="building-the-docker-image">Building the Docker Image</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker build -t thunderdb:latest .
+</span></span></code></pre></div><h3 id="running-with-docker">Running with Docker</h3>
+<p><strong>Basic single-node:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --name thunderdb <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 5432:5432 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 3306:3306 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 6379:6379 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 8088:8088 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 9090:9090 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -v thunderdb-data:/var/lib/thunderdb/data <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -v thunderdb-wal:/var/lib/thunderdb/wal <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  thunderdb:latest
+</span></span></code></pre></div><p><strong>With custom configuration:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --name thunderdb <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 5432:5432 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 3306:3306 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 6379:6379 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 8088:8088 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 9090:9090 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -v thunderdb-data:/var/lib/thunderdb/data <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -v thunderdb-wal:/var/lib/thunderdb/wal <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -v <span style="color:#ff79c6">$(</span><span style="color:#8be9fd;font-style:italic">pwd</span><span style="color:#ff79c6">)</span>/my-config.toml:/etc/thunderdb/thunderdb.toml:ro <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  thunderdb:latest
+</span></span></code></pre></div><p><strong>With environment variable overrides:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -d <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --name thunderdb <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 5432:5432 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 3306:3306 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 6379:6379 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 8088:8088 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -p 9090:9090 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -e <span style="color:#8be9fd;font-style:italic">THUNDERDB_LOG_LEVEL</span><span style="color:#ff79c6">=</span>info <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -e <span style="color:#8be9fd;font-style:italic">THUNDERDB_SUPERUSER_PASSWORD_HASH</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;argon2:...&#34;</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -v thunderdb-data:/var/lib/thunderdb/data <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  -v thunderdb-wal:/var/lib/thunderdb/wal <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  thunderdb:latest
+</span></span></code></pre></div><h3 id="docker-compose">Docker Compose</h3>
+<p>Create a <code>docker-compose.yml</code> for a complete single-node deployment with monitoring:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#ff79c6">version</span>: <span style="color:#f1fa8c">&#34;3.8&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">thunderdb</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">image</span>: thunderdb:latest
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">build</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">context</span>: .
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">dockerfile</span>: Dockerfile
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">container_name</span>: thunderdb
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">restart</span>: unless-stopped
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;5432:5432&#34;</span>   <span style="color:#6272a4"># PostgreSQL wire protocol</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;3306:3306&#34;</span>   <span style="color:#6272a4"># MySQL wire protocol</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;6379:6379&#34;</span>   <span style="color:#6272a4"># RESP (Redis) wire protocol</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;8088:8088&#34;</span>   <span style="color:#6272a4"># HTTP API + Admin endpoints</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;9090:9090&#34;</span>   <span style="color:#6272a4"># gRPC</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">volumes</span>:
+</span></span><span style="display:flex;"><span>      - thunderdb-data:/var/lib/thunderdb/data
+</span></span><span style="display:flex;"><span>      - thunderdb-wal:/var/lib/thunderdb/wal
+</span></span><span style="display:flex;"><span>      - ./config/thunderdb.toml:/etc/thunderdb/thunderdb.toml:ro
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">THUNDERDB_LOG_LEVEL</span>: info
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">THUNDERDB_DATA_DIR</span>: /var/lib/thunderdb/data
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">THUNDERDB_WAL_DIR</span>: /var/lib/thunderdb/wal
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">healthcheck</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">test</span>: [<span style="color:#f1fa8c">&#34;CMD&#34;</span>, <span style="color:#f1fa8c">&#34;curl&#34;</span>, <span style="color:#f1fa8c">&#34;-f&#34;</span>, <span style="color:#f1fa8c">&#34;http://localhost:8088/admin/health&#34;</span>]
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">interval</span>: 10s
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">timeout</span>: 5s
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">retries</span>: <span style="color:#bd93f9">5</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">start_period</span>: 30s
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">deploy</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">resources</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">limits</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">cpus</span>: <span style="color:#f1fa8c">&#34;4&#34;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">memory</span>: 8G
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">reservations</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">cpus</span>: <span style="color:#f1fa8c">&#34;2&#34;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">memory</span>: 4G
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">prometheus</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">image</span>: prom/prometheus:latest
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">container_name</span>: thunderdb-prometheus
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">restart</span>: unless-stopped
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;9091:9090&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">volumes</span>:
+</span></span><span style="display:flex;"><span>      - ./deploy/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+</span></span><span style="display:flex;"><span>      - prometheus-data:/prometheus
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">depends_on</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">thunderdb</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">condition</span>: service_healthy
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">grafana</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">image</span>: grafana/grafana:latest
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">container_name</span>: thunderdb-grafana
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">restart</span>: unless-stopped
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;3000:3000&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">volumes</span>:
+</span></span><span style="display:flex;"><span>      - ./deploy/grafana/provisioning:/etc/grafana/provisioning:ro
+</span></span><span style="display:flex;"><span>      - ./deploy/grafana/dashboards:/var/lib/grafana/dashboards:ro
+</span></span><span style="display:flex;"><span>      - grafana-data:/var/lib/grafana
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">GF_SECURITY_ADMIN_PASSWORD</span>: admin
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - prometheus
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">volumes</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">thunderdb-data</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">driver</span>: local
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">thunderdb-wal</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">driver</span>: local
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">prometheus-data</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">driver</span>: local
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">grafana-data</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">driver</span>: local
+</span></span></code></pre></div><p>Start the stack:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose up -d
+</span></span></code></pre></div><p>Verify all services are healthy:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose ps
+</span></span><span style="display:flex;"><span>docker compose logs thunderdb
+</span></span></code></pre></div><hr>
+<h2 id="kubernetes">Kubernetes</h2>
+<p>ThunderDB provides production-ready Kubernetes manifests for deploying a distributed cluster. All manifests are located in <code>deploy/k8s/</code>.</p>
+<h3 id="namespace">Namespace</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#6272a4"># deploy/k8s/namespace.yaml</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">apiVersion</span>: v1
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">kind</span>: Namespace
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">name</span>: thunderdb
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">app</span>: thunderdb
+</span></span></code></pre></div><h3 id="configmap">ConfigMap</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#6272a4"># deploy/k8s/configmap.yaml</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">apiVersion</span>: v1
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">kind</span>: ConfigMap
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">name</span>: thunderdb-config
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">namespace</span>: thunderdb
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">app</span>: thunderdb
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">data</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">thunderdb.toml</span>: |<span style="color:#f1fa8c">
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    [node]
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    node_id = 0  # Overridden per pod via environment variable
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    [network]
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    listen_addr = &#34;0.0.0.0&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    pg_port = 5432
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    mysql_port = 3306
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    resp_port = 6379
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    http_port = 8088
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    grpc_port = 9090
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    [storage]
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    data_dir = &#34;/var/lib/thunderdb/data&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    wal_dir = &#34;/var/lib/thunderdb/wal&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    buffer_pool_size = &#34;2GB&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    wal_buffer_size = &#34;64MB&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    page_size = &#34;16KB&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    checkpoint_interval = &#34;60s&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    compaction_threads = 4
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    direct_io = true
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    compression = true
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    compression_algorithm = &#34;Lz4&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    max_wal_size = &#34;2GB&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    sync_commit = true
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    [cluster]
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    cluster_name = &#34;thunderdb-k8s&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    raft_election_timeout = &#34;1s&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    raft_heartbeat_interval = &#34;100ms&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    replication_factor = 3
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    max_region_size = &#34;256MB&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    min_region_size = &#34;64MB&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    auto_balance = true
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    [security]
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    authentication_enabled = true
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    tls_enabled = false  # Handled by Kubernetes service mesh or ingress
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    [logging]
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    level = &#34;info&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    format = &#34;json&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    slow_query_enabled = true
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    slow_query_threshold = &#34;1s&#34;</span>
+</span></span></code></pre></div><h3 id="statefulset">StatefulSet</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#6272a4"># deploy/k8s/statefulset.yaml</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">apiVersion</span>: apps/v1
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">kind</span>: StatefulSet
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">name</span>: thunderdb
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">namespace</span>: thunderdb
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">app</span>: thunderdb
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">serviceName</span>: thunderdb-headless
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">replicas</span>: <span style="color:#bd93f9">3</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">podManagementPolicy</span>: Parallel
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">app</span>: thunderdb
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">template</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">labels</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">app</span>: thunderdb
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">annotations</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">prometheus.io/scrape</span>: <span style="color:#f1fa8c">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">prometheus.io/port</span>: <span style="color:#f1fa8c">&#34;8088&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">prometheus.io/path</span>: <span style="color:#f1fa8c">&#34;/admin/metrics&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">terminationGracePeriodSeconds</span>: <span style="color:#bd93f9">60</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">securityContext</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">runAsUser</span>: <span style="color:#bd93f9">1000</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">runAsGroup</span>: <span style="color:#bd93f9">1000</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">fsGroup</span>: <span style="color:#bd93f9">1000</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">initContainers</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#ff79c6">name</span>: init-config
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">image</span>: busybox:1.36
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">command</span>:
+</span></span><span style="display:flex;"><span>            - sh
+</span></span><span style="display:flex;"><span>            - -c
+</span></span><span style="display:flex;"><span>            - |<span style="color:#f1fa8c">
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">              # Extract ordinal index from hostname (e.g., thunderdb-0 -&gt; 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">              ORDINAL=$(echo $HOSTNAME | rev | cut -d&#39;-&#39; -f1 | rev)
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">              echo &#34;Node ID: $ORDINAL&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">              # Generate peer list
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">              PEERS=&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">              for i in $(seq 0 2); do
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                if [ $i -ne $ORDINAL ]; then
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                  PEERS=&#34;${PEERS}thunderdb-${i}.thunderdb-headless.thunderdb.svc.cluster.local:9090,&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                fi
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">              done
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">              PEERS=$(echo $PEERS | sed &#39;s/,$//&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">              echo &#34;THUNDERDB_NODE_ID=$ORDINAL&#34; &gt; /etc/thunderdb/env
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">              echo &#34;THUNDERDB_CLUSTER_PEERS=$PEERS&#34; &gt;&gt; /etc/thunderdb/env</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">volumeMounts</span>:
+</span></span><span style="display:flex;"><span>            - <span style="color:#ff79c6">name</span>: config-env
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">mountPath</span>: /etc/thunderdb
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">containers</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#ff79c6">name</span>: thunderdb
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">image</span>: thunderdb:latest
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">imagePullPolicy</span>: IfNotPresent
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">ports</span>:
+</span></span><span style="display:flex;"><span>            - <span style="color:#ff79c6">name</span>: pg
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">containerPort</span>: <span style="color:#bd93f9">5432</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">protocol</span>: TCP
+</span></span><span style="display:flex;"><span>            - <span style="color:#ff79c6">name</span>: mysql
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">containerPort</span>: <span style="color:#bd93f9">3306</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">protocol</span>: TCP
+</span></span><span style="display:flex;"><span>            - <span style="color:#ff79c6">name</span>: resp
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">containerPort</span>: <span style="color:#bd93f9">6379</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">protocol</span>: TCP
+</span></span><span style="display:flex;"><span>            - <span style="color:#ff79c6">name</span>: http
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">containerPort</span>: <span style="color:#bd93f9">8088</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">protocol</span>: TCP
+</span></span><span style="display:flex;"><span>            - <span style="color:#ff79c6">name</span>: grpc
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">containerPort</span>: <span style="color:#bd93f9">9090</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">protocol</span>: TCP
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">envFrom</span>:
+</span></span><span style="display:flex;"><span>            - <span style="color:#ff79c6">configMapRef</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">name</span>: thunderdb-env
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">optional</span>: <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">env</span>:
+</span></span><span style="display:flex;"><span>            - <span style="color:#ff79c6">name</span>: THUNDERDB_DATA_DIR
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">value</span>: /var/lib/thunderdb/data
+</span></span><span style="display:flex;"><span>            - <span style="color:#ff79c6">name</span>: THUNDERDB_WAL_DIR
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">value</span>: /var/lib/thunderdb/wal
+</span></span><span style="display:flex;"><span>            - <span style="color:#ff79c6">name</span>: THUNDERDB_SUPERUSER_PASSWORD_HASH
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">valueFrom</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">secretKeyRef</span>:
+</span></span><span style="display:flex;"><span>                  <span style="color:#ff79c6">name</span>: thunderdb-secrets
+</span></span><span style="display:flex;"><span>                  <span style="color:#ff79c6">key</span>: superuser-password-hash
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">readinessProbe</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">httpGet</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">path</span>: /admin/ready
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">port</span>: http
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">initialDelaySeconds</span>: <span style="color:#bd93f9">10</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">periodSeconds</span>: <span style="color:#bd93f9">5</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">timeoutSeconds</span>: <span style="color:#bd93f9">3</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">failureThreshold</span>: <span style="color:#bd93f9">3</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">livenessProbe</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">httpGet</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">path</span>: /admin/live
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">port</span>: http
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">initialDelaySeconds</span>: <span style="color:#bd93f9">30</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">periodSeconds</span>: <span style="color:#bd93f9">10</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">timeoutSeconds</span>: <span style="color:#bd93f9">5</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">failureThreshold</span>: <span style="color:#bd93f9">5</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">startupProbe</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">httpGet</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">path</span>: /admin/health
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">port</span>: http
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">initialDelaySeconds</span>: <span style="color:#bd93f9">5</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">periodSeconds</span>: <span style="color:#bd93f9">5</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">failureThreshold</span>: <span style="color:#bd93f9">30</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">resources</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">requests</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">cpu</span>: <span style="color:#f1fa8c">&#34;2&#34;</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">memory</span>: 4Gi
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">limits</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">cpu</span>: <span style="color:#f1fa8c">&#34;4&#34;</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">memory</span>: 8Gi
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">volumeMounts</span>:
+</span></span><span style="display:flex;"><span>            - <span style="color:#ff79c6">name</span>: data
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">mountPath</span>: /var/lib/thunderdb/data
+</span></span><span style="display:flex;"><span>            - <span style="color:#ff79c6">name</span>: wal
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">mountPath</span>: /var/lib/thunderdb/wal
+</span></span><span style="display:flex;"><span>            - <span style="color:#ff79c6">name</span>: config
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">mountPath</span>: /etc/thunderdb/thunderdb.toml
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">subPath</span>: thunderdb.toml
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">readOnly</span>: <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>            - <span style="color:#ff79c6">name</span>: config-env
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">mountPath</span>: /etc/thunderdb/env
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">subPath</span>: env
+</span></span><span style="display:flex;"><span>              <span style="color:#ff79c6">readOnly</span>: <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">volumes</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#ff79c6">name</span>: config
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">configMap</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">name</span>: thunderdb-config
+</span></span><span style="display:flex;"><span>        - <span style="color:#ff79c6">name</span>: config-env
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">emptyDir</span>: {}
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">volumeClaimTemplates</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">name</span>: data
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">labels</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">app</span>: thunderdb
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">spec</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">accessModes</span>: [<span style="color:#f1fa8c">&#34;ReadWriteOnce&#34;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">storageClassName</span>: fast-ssd
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">resources</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">requests</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">storage</span>: 100Gi
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">name</span>: wal
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">labels</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">app</span>: thunderdb
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">spec</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">accessModes</span>: [<span style="color:#f1fa8c">&#34;ReadWriteOnce&#34;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">storageClassName</span>: fast-ssd
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">resources</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">requests</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">storage</span>: 50Gi
+</span></span></code></pre></div><h3 id="service-definitions">Service Definitions</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#6272a4"># deploy/k8s/service.yaml</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Headless service for StatefulSet DNS resolution</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">apiVersion</span>: v1
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">kind</span>: Service
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">name</span>: thunderdb-headless
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">namespace</span>: thunderdb
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">app</span>: thunderdb
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">clusterIP</span>: None
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">app</span>: thunderdb
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">ports</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: pg
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">port</span>: <span style="color:#bd93f9">5432</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">targetPort</span>: pg
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: mysql
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">port</span>: <span style="color:#bd93f9">3306</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">targetPort</span>: mysql
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: resp
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">port</span>: <span style="color:#bd93f9">6379</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">targetPort</span>: resp
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: http
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">port</span>: <span style="color:#bd93f9">8088</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">targetPort</span>: http
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: grpc
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">port</span>: <span style="color:#bd93f9">9090</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">targetPort</span>: grpc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># ClusterIP service for internal client access</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">apiVersion</span>: v1
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">kind</span>: Service
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">name</span>: thunderdb
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">namespace</span>: thunderdb
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">app</span>: thunderdb
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">type</span>: ClusterIP
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">app</span>: thunderdb
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">ports</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: pg
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">port</span>: <span style="color:#bd93f9">5432</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">targetPort</span>: pg
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: mysql
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">port</span>: <span style="color:#bd93f9">3306</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">targetPort</span>: mysql
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: resp
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">port</span>: <span style="color:#bd93f9">6379</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">targetPort</span>: resp
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: http
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">port</span>: <span style="color:#bd93f9">8088</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">targetPort</span>: http
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: grpc
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">port</span>: <span style="color:#bd93f9">9090</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">targetPort</span>: grpc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># LoadBalancer service for external client access (optional)</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">apiVersion</span>: v1
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">kind</span>: Service
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">name</span>: thunderdb-external
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">namespace</span>: thunderdb
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">app</span>: thunderdb
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">annotations</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">service.beta.kubernetes.io/aws-load-balancer-type</span>: <span style="color:#f1fa8c">&#34;nlb&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">type</span>: LoadBalancer
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">app</span>: thunderdb
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">ports</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: pg
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">port</span>: <span style="color:#bd93f9">5432</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">targetPort</span>: pg
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: mysql
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">port</span>: <span style="color:#bd93f9">3306</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">targetPort</span>: mysql
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: http
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">port</span>: <span style="color:#bd93f9">8088</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">targetPort</span>: http
+</span></span></code></pre></div><h3 id="deploy-to-kubernetes">Deploy to Kubernetes</h3>
+<p>Apply all manifests using kustomize:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -k deploy/k8s/
+</span></span></code></pre></div><p>Or apply individually:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f deploy/k8s/namespace.yaml
+</span></span><span style="display:flex;"><span>kubectl apply -f deploy/k8s/configmap.yaml
+</span></span><span style="display:flex;"><span>kubectl apply -f deploy/k8s/secrets.yaml
+</span></span><span style="display:flex;"><span>kubectl apply -f deploy/k8s/statefulset.yaml
+</span></span><span style="display:flex;"><span>kubectl apply -f deploy/k8s/service.yaml
+</span></span></code></pre></div><p>Verify the deployment:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl -n thunderdb get pods -w
+</span></span><span style="display:flex;"><span>kubectl -n thunderdb get svc
+</span></span><span style="display:flex;"><span>kubectl -n thunderdb logs thunderdb-0
+</span></span></code></pre></div><h3 id="horizontal-scaling">Horizontal Scaling</h3>
+<p>ThunderDB uses Raft consensus, so scaling considerations differ from stateless applications:</p>
+<ul>
+<li><strong>Scaling up</strong>: Add replicas to the StatefulSet and update the peer configuration. New nodes join the cluster automatically and begin receiving region replicas.</li>
+<li><strong>Scaling down</strong>: Remove nodes gracefully by draining regions first. Never scale below the <code>replication_factor</code> (default: 3).</li>
+<li><strong>Odd replica counts</strong>: Always use an odd number of replicas (3, 5, 7) for Raft quorum. A 3-node cluster tolerates 1 failure; a 5-node cluster tolerates 2.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Scale to 5 replicas</span>
+</span></span><span style="display:flex;"><span>kubectl -n thunderdb scale statefulset thunderdb --replicas<span style="color:#ff79c6">=</span><span style="color:#bd93f9">5</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Verify all pods are running and ready</span>
+</span></span><span style="display:flex;"><span>kubectl -n thunderdb get pods
+</span></span></code></pre></div><p>After scaling, verify cluster membership:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl http://thunderdb.thunderdb.svc:8088/admin/cluster/members
+</span></span></code></pre></div><hr>
+<h2 id="debian-package">Debian Package</h2>
+<h3 id="building-the-package">Building the Package</h3>
+<p>ThunderDB includes a script to build Debian packages:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./scripts/build-deb.sh
+</span></span></code></pre></div><p>This produces a <code>.deb</code> file in the <code>target/debian/</code> directory:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>target/debian/thunderdb_0.1.0_amd64.deb
+</span></span></code></pre></div><h3 id="installing">Installing</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dpkg -i thunderdb_0.1.0_amd64.deb
+</span></span></code></pre></div><p>If there are dependency issues:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get install -f
+</span></span></code></pre></div><h3 id="package-contents">Package Contents</h3>
+<p>The Debian package installs the following:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Path</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>/usr/local/bin/thunderdb</code></td>
+          <td>ThunderDB binary</td>
+      </tr>
+      <tr>
+          <td><code>/etc/thunderdb/thunderdb.toml</code></td>
+          <td>Default configuration file</td>
+      </tr>
+      <tr>
+          <td><code>/lib/systemd/system/thunderdb.service</code></td>
+          <td>systemd service file</td>
+      </tr>
+      <tr>
+          <td><code>/var/lib/thunderdb/data/</code></td>
+          <td>Data directory</td>
+      </tr>
+      <tr>
+          <td><code>/var/lib/thunderdb/wal/</code></td>
+          <td>WAL directory</td>
+      </tr>
+      <tr>
+          <td><code>/var/log/thunderdb/</code></td>
+          <td>Log directory</td>
+      </tr>
+  </tbody>
+</table>
+<p>The package also creates the <code>thunder</code> system user and group.</p>
+<h3 id="uninstalling">Uninstalling</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dpkg -r thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># To also remove configuration and data:</span>
+</span></span><span style="display:flex;"><span>sudo dpkg -P thunderdb
+</span></span></code></pre></div><hr>
+<h2 id="systemd-service">systemd Service</h2>
+<p>ThunderDB ships with a systemd service file for production Linux deployments.</p>
+<h3 id="service-file">Service File</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#6272a4"># /lib/systemd/system/thunderdb.service</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">[Unit]</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">Description</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">ThunderDB Distributed HTAP Database</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">Documentation</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">https://thunderdb.io/docs</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">After</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">network-online.target</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">Wants</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">network-online.target</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">StartLimitIntervalSec</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">60</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">StartLimitBurst</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">[Service]</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">Type</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">notify</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">User</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">thunder</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">Group</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">thunder</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">ExecStart</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">/usr/local/bin/thunderdb --config /etc/thunderdb/thunderdb.toml</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">ExecReload</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">/bin/kill -HUP $MAINPID</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">Restart</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">on-failure</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">RestartSec</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">5s</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">TimeoutStartSec</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">120</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">TimeoutStopSec</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">60</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Security hardening</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">NoNewPrivileges</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">yes</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">ProtectSystem</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">strict</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">ProtectHome</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">yes</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">PrivateTmp</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">yes</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">PrivateDevices</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">yes</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">ProtectKernelTunables</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">yes</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">ProtectKernelModules</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">yes</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">ProtectControlGroups</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">yes</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">ReadWritePaths</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">/var/lib/thunderdb /var/log/thunderdb</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Resource limits</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">LimitNOFILE</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">65535</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">LimitNPROC</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">65535</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">LimitMEMLOCK</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">infinity</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Logging</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">StandardOutput</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">journal</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">StandardError</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">journal</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">SyslogIdentifier</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">thunderdb</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">[Install]</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">WantedBy</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">multi-user.target</span>
+</span></span></code></pre></div><h3 id="managing-the-service">Managing the Service</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Reload systemd after installing or modifying the service file</span>
+</span></span><span style="display:flex;"><span>sudo systemctl daemon-reload
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Start ThunderDB</span>
+</span></span><span style="display:flex;"><span>sudo systemctl start thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Stop ThunderDB</span>
+</span></span><span style="display:flex;"><span>sudo systemctl stop thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Restart ThunderDB</span>
+</span></span><span style="display:flex;"><span>sudo systemctl restart thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Enable ThunderDB to start on boot</span>
+</span></span><span style="display:flex;"><span>sudo systemctl <span style="color:#8be9fd;font-style:italic">enable</span> thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Disable auto-start on boot</span>
+</span></span><span style="display:flex;"><span>sudo systemctl disable thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Check service status</span>
+</span></span><span style="display:flex;"><span>sudo systemctl status thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># View logs</span>
+</span></span><span style="display:flex;"><span>sudo journalctl -u thunderdb -f
+</span></span><span style="display:flex;"><span>sudo journalctl -u thunderdb --since <span style="color:#f1fa8c">&#34;1 hour ago&#34;</span>
+</span></span></code></pre></div><h3 id="configuration-reload">Configuration Reload</h3>
+<p>ThunderDB supports hot-reloading certain configuration parameters without a full restart:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl reload thunderdb
+</span></span></code></pre></div><p>Hot-reloadable parameters include log level, slow query threshold, and connection limits. Changes to storage engine or cluster settings require a full restart.</p>
+<hr>
+<h2 id="multi-node-cluster-setup">Multi-Node Cluster Setup</h2>
+<h3 id="using-the-cluster-script">Using the Cluster Script</h3>
+<p>ThunderDB provides a convenience script for setting up multi-node clusters:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./scripts/cluster.sh --nodes <span style="color:#bd93f9">3</span> --data-dir /var/lib/thunderdb
+</span></span></code></pre></div><p>This script generates configuration files for each node and provides the commands to start them.</p>
+<h3 id="manual-cluster-configuration">Manual Cluster Configuration</h3>
+<p>For production clusters, configure each node manually.</p>
+<p><strong>Node 1 (<code>thunderdb-1.toml</code>):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[node]
+</span></span><span style="display:flex;"><span>node_id = <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[network]
+</span></span><span style="display:flex;"><span>listen_addr = <span style="color:#f1fa8c">&#34;10.0.1.1&#34;</span>
+</span></span><span style="display:flex;"><span>pg_port = <span style="color:#bd93f9">5432</span>
+</span></span><span style="display:flex;"><span>mysql_port = <span style="color:#bd93f9">3306</span>
+</span></span><span style="display:flex;"><span>resp_port = <span style="color:#bd93f9">6379</span>
+</span></span><span style="display:flex;"><span>http_port = <span style="color:#bd93f9">8088</span>
+</span></span><span style="display:flex;"><span>grpc_port = <span style="color:#bd93f9">9090</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[storage]
+</span></span><span style="display:flex;"><span>data_dir = <span style="color:#f1fa8c">&#34;/var/lib/thunderdb/data&#34;</span>
+</span></span><span style="display:flex;"><span>wal_dir = <span style="color:#f1fa8c">&#34;/var/lib/thunderdb/wal&#34;</span>
+</span></span><span style="display:flex;"><span>buffer_pool_size = <span style="color:#f1fa8c">&#34;4GB&#34;</span>
+</span></span><span style="display:flex;"><span>wal_buffer_size = <span style="color:#f1fa8c">&#34;64MB&#34;</span>
+</span></span><span style="display:flex;"><span>page_size = <span style="color:#f1fa8c">&#34;16KB&#34;</span>
+</span></span><span style="display:flex;"><span>checkpoint_interval = <span style="color:#f1fa8c">&#34;60s&#34;</span>
+</span></span><span style="display:flex;"><span>compaction_threads = <span style="color:#bd93f9">4</span>
+</span></span><span style="display:flex;"><span>direct_io = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>compression = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>compression_algorithm = <span style="color:#f1fa8c">&#34;Lz4&#34;</span>
+</span></span><span style="display:flex;"><span>max_wal_size = <span style="color:#f1fa8c">&#34;2GB&#34;</span>
+</span></span><span style="display:flex;"><span>sync_commit = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[cluster]
+</span></span><span style="display:flex;"><span>cluster_name = <span style="color:#f1fa8c">&#34;production&#34;</span>
+</span></span><span style="display:flex;"><span>peers = [
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;10.0.1.2:9090&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;10.0.1.3:9090&#34;</span>
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>raft_election_timeout = <span style="color:#f1fa8c">&#34;1s&#34;</span>
+</span></span><span style="display:flex;"><span>raft_heartbeat_interval = <span style="color:#f1fa8c">&#34;100ms&#34;</span>
+</span></span><span style="display:flex;"><span>replication_factor = <span style="color:#bd93f9">3</span>
+</span></span><span style="display:flex;"><span>max_region_size = <span style="color:#f1fa8c">&#34;256MB&#34;</span>
+</span></span><span style="display:flex;"><span>min_region_size = <span style="color:#f1fa8c">&#34;64MB&#34;</span>
+</span></span><span style="display:flex;"><span>auto_balance = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[security]
+</span></span><span style="display:flex;"><span>authentication_enabled = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>tls_enabled = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>tls_cert_path = <span style="color:#f1fa8c">&#34;/etc/thunderdb/tls/server.crt&#34;</span>
+</span></span><span style="display:flex;"><span>tls_key_path = <span style="color:#f1fa8c">&#34;/etc/thunderdb/tls/server.key&#34;</span>
+</span></span><span style="display:flex;"><span>superuser = <span style="color:#f1fa8c">&#34;admin&#34;</span>
+</span></span><span style="display:flex;"><span>superuser_password = <span style="color:#f1fa8c">&#34;change-me-in-production&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[logging]
+</span></span><span style="display:flex;"><span>level = <span style="color:#f1fa8c">&#34;info&#34;</span>
+</span></span><span style="display:flex;"><span>format = <span style="color:#f1fa8c">&#34;json&#34;</span>
+</span></span><span style="display:flex;"><span>slow_query_enabled = <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>slow_query_threshold = <span style="color:#f1fa8c">&#34;1s&#34;</span>
+</span></span></code></pre></div><p><strong>Node 2 (<code>thunderdb-2.toml</code>):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[node]
+</span></span><span style="display:flex;"><span>node_id = <span style="color:#bd93f9">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[network]
+</span></span><span style="display:flex;"><span>listen_addr = <span style="color:#f1fa8c">&#34;10.0.1.2&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># ... same ports as node 1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[cluster]
+</span></span><span style="display:flex;"><span>cluster_name = <span style="color:#f1fa8c">&#34;production&#34;</span>
+</span></span><span style="display:flex;"><span>peers = [
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;10.0.1.1:9090&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;10.0.1.3:9090&#34;</span>
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># ... same cluster settings</span>
+</span></span></code></pre></div><p><strong>Node 3 (<code>thunderdb-3.toml</code>):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[node]
+</span></span><span style="display:flex;"><span>node_id = <span style="color:#bd93f9">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[network]
+</span></span><span style="display:flex;"><span>listen_addr = <span style="color:#f1fa8c">&#34;10.0.1.3&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># ... same ports as node 1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[cluster]
+</span></span><span style="display:flex;"><span>cluster_name = <span style="color:#f1fa8c">&#34;production&#34;</span>
+</span></span><span style="display:flex;"><span>peers = [
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;10.0.1.1:9090&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;10.0.1.2:9090&#34;</span>
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># ... same cluster settings</span>
+</span></span></code></pre></div><h3 id="starting-the-cluster">Starting the Cluster</h3>
+<p>Start nodes in any order. Raft handles leader election automatically:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># On node 1</span>
+</span></span><span style="display:flex;"><span>./thunderdb --config /etc/thunderdb/thunderdb-1.toml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># On node 2</span>
+</span></span><span style="display:flex;"><span>./thunderdb --config /etc/thunderdb/thunderdb-2.toml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># On node 3</span>
+</span></span><span style="display:flex;"><span>./thunderdb --config /etc/thunderdb/thunderdb-3.toml
+</span></span></code></pre></div><h3 id="cluster-parameters">Cluster Parameters</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Parameter</th>
+          <th>Default</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>cluster_name</code></td>
+          <td><code>&quot;default&quot;</code></td>
+          <td>Cluster identifier. All nodes in a cluster must share the same name.</td>
+      </tr>
+      <tr>
+          <td><code>peers</code></td>
+          <td><code>[]</code></td>
+          <td>List of peer addresses in <code>host:grpc_port</code> format.</td>
+      </tr>
+      <tr>
+          <td><code>raft_election_timeout</code></td>
+          <td><code>&quot;1s&quot;</code></td>
+          <td>Time a follower waits before starting an election. Increase for high-latency networks.</td>
+      </tr>
+      <tr>
+          <td><code>raft_heartbeat_interval</code></td>
+          <td><code>&quot;100ms&quot;</code></td>
+          <td>Interval between leader heartbeats. Must be less than <code>raft_election_timeout</code>.</td>
+      </tr>
+      <tr>
+          <td><code>replication_factor</code></td>
+          <td><code>3</code></td>
+          <td>Number of replicas for each region. Cannot exceed the number of nodes.</td>
+      </tr>
+      <tr>
+          <td><code>max_region_size</code></td>
+          <td><code>&quot;256MB&quot;</code></td>
+          <td>Regions are split when they exceed this size.</td>
+      </tr>
+      <tr>
+          <td><code>min_region_size</code></td>
+          <td><code>&quot;64MB&quot;</code></td>
+          <td>Regions are merged when they fall below this size.</td>
+      </tr>
+      <tr>
+          <td><code>auto_balance</code></td>
+          <td><code>true</code></td>
+          <td>Automatically balance regions across nodes.</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="verifying-the-cluster">Verifying the Cluster</h3>
+<p>After all nodes are running, verify cluster health:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Check cluster membership</span>
+</span></span><span style="display:flex;"><span>curl http://10.0.1.1:8088/admin/cluster/members
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Check Raft status</span>
+</span></span><span style="display:flex;"><span>curl http://10.0.1.1:8088/admin/cluster/raft
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Check region distribution</span>
+</span></span><span style="display:flex;"><span>curl http://10.0.1.1:8088/admin/cluster/regions
+</span></span></code></pre></div><p>Expected output for a healthy 3-node cluster:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&#34;cluster_name&#34;</span>: <span style="color:#f1fa8c">&#34;production&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&#34;members&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {<span style="color:#ff79c6">&#34;node_id&#34;</span>: <span style="color:#bd93f9">1</span>, <span style="color:#ff79c6">&#34;addr&#34;</span>: <span style="color:#f1fa8c">&#34;10.0.1.1:9090&#34;</span>, <span style="color:#ff79c6">&#34;role&#34;</span>: <span style="color:#f1fa8c">&#34;leader&#34;</span>, <span style="color:#ff79c6">&#34;status&#34;</span>: <span style="color:#f1fa8c">&#34;healthy&#34;</span>},
+</span></span><span style="display:flex;"><span>    {<span style="color:#ff79c6">&#34;node_id&#34;</span>: <span style="color:#bd93f9">2</span>, <span style="color:#ff79c6">&#34;addr&#34;</span>: <span style="color:#f1fa8c">&#34;10.0.1.2:9090&#34;</span>, <span style="color:#ff79c6">&#34;role&#34;</span>: <span style="color:#f1fa8c">&#34;follower&#34;</span>, <span style="color:#ff79c6">&#34;status&#34;</span>: <span style="color:#f1fa8c">&#34;healthy&#34;</span>},
+</span></span><span style="display:flex;"><span>    {<span style="color:#ff79c6">&#34;node_id&#34;</span>: <span style="color:#bd93f9">3</span>, <span style="color:#ff79c6">&#34;addr&#34;</span>: <span style="color:#f1fa8c">&#34;10.0.1.3:9090&#34;</span>, <span style="color:#ff79c6">&#34;role&#34;</span>: <span style="color:#f1fa8c">&#34;follower&#34;</span>, <span style="color:#ff79c6">&#34;status&#34;</span>: <span style="color:#f1fa8c">&#34;healthy&#34;</span>}
+</span></span><span style="display:flex;"><span>  ],
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&#34;leader_id&#34;</span>: <span style="color:#bd93f9">1</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&#34;term&#34;</span>: <span style="color:#bd93f9">1</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&#34;replication_factor&#34;</span>: <span style="color:#bd93f9">3</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h2 id="production-deployment-checklist">Production Deployment Checklist</h2>
+<p>Before going to production, verify the following:</p>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Hardware</strong>: SSD storage, adequate RAM (see <a href="/docs/docs/administrator/configuration/">Configuration</a>)</li>
+<li><input disabled="" type="checkbox"> <strong>OS tuning</strong>: File descriptor limits (<code>ulimit -n 65535</code>), disable swap, set <code>vm.swappiness=1</code></li>
+<li><input disabled="" type="checkbox"> <strong>Storage</strong>: Separate disks/volumes for data and WAL directories</li>
+<li><input disabled="" type="checkbox"> <strong>Network</strong>: All required ports open between cluster nodes; firewall rules for client access</li>
+<li><input disabled="" type="checkbox"> <strong>Security</strong>: TLS enabled, authentication enabled, superuser password changed, audit logging on</li>
+<li><input disabled="" type="checkbox"> <strong>Monitoring</strong>: Prometheus scraping metrics, Grafana dashboards deployed, alerting configured</li>
+<li><input disabled="" type="checkbox"> <strong>Backups</strong>: Automated backup schedule configured, recovery procedure tested</li>
+<li><input disabled="" type="checkbox"> <strong>Configuration</strong>: <code>sync_commit = true</code>, <code>direct_io = true</code>, appropriate buffer pool size</li>
+<li><input disabled="" type="checkbox"> <strong>Cluster</strong>: Odd number of nodes, <code>replication_factor</code> matches cluster size, peers configured correctly</li>
+<li><input disabled="" type="checkbox"> <strong>systemd</strong>: Service enabled, resource limits set, auto-restart configured</li>
+</ul>
+
+	<div class="section-index">
+    
+    
+    </div>
+<style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<div class="d-print-none">
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+</div>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'page_helpful', {
+      'event_category': 'Helpful',
+      'event_label': window.location.pathname,
+      'value': value
+    });
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback( 100 );
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+<br />
+</div>
+
+          </main>
+        </div>
+      </div>
+      <footer class="td-footer row d-print-none">
+  <div class="container-fluid">
+    <div class="row mx-md-2">
+      <div class="td-footer__left col-6 col-sm-4 order-sm-1">
+        
+      </div><div class="td-footer__right col-6 col-sm-4 order-sm-3">
+        <ul class="td-footer__links-list">
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="GitHub" aria-label="GitHub">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="Discussions" aria-label="Discussions">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb/discussions" aria-label="Discussions">
+      <i class="fas fa-comments"></i>
+    </a>
+  </li>
+  
+</ul>
+
+      </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
+        <span class="td-footer__copyright">&copy;
+    2026
+    <span class="td-footer__authors">ThunderDB Contributors</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><p class="td-footer__about mt-2"><a href="/docs/about/">About ThunderDB</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script src="/docs/js/main.js"></script>
+<script defer src="/docs/js/click-to-copy.js" crossorigin="anonymous"></script>
+<script src='/docs/js/tabpane-persist.js'></script>
+
+  </body>
+</html>

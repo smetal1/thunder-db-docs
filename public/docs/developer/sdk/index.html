@@ -1,0 +1,1563 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
+  <head><script src="/docs/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=docs/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/docs/favicons/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/docs/favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/docs/favicons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/docs/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="/docs/favicons/favicon-256.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/docs/favicons/apple-touch-icon.png">
+<link rel="manifest" href="/docs/favicons/site.webmanifest">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="msapplication-TileColor" content="#0D0D0D">
+
+<title>SDKs &amp; Drivers | ThunderDB Documentation</title>
+<meta name="description" content="Connect to ThunderDB using the native Rust client, standard PostgreSQL/MySQL drivers, or Redis clients in Python, Node.js, Go, and Rust.">
+<meta property="og:url" content="http://localhost:1313/docs/docs/developer/sdk/">
+  <meta property="og:site_name" content="ThunderDB Documentation">
+  <meta property="og:title" content="SDKs & Drivers">
+  <meta property="og:description" content="Connect to ThunderDB using the native Rust client, standard PostgreSQL/MySQL drivers, or Redis clients in Python, Node.js, Go, and Rust.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+
+  <meta itemprop="name" content="SDKs & Drivers">
+  <meta itemprop="description" content="Connect to ThunderDB using the native Rust client, standard PostgreSQL/MySQL drivers, or Redis clients in Python, Node.js, Go, and Rust.">
+  <meta itemprop="wordCount" content="3277">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SDKs & Drivers">
+  <meta name="twitter:description" content="Connect to ThunderDB using the native Rust client, standard PostgreSQL/MySQL drivers, or Redis clients in Python, Node.js, Go, and Rust.">
+<link href="/docs/scss/main.css" rel="stylesheet">
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+  crossorigin="anonymous"></script>
+<script defer
+  src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
+  integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
+  crossorigin="anonymous"></script>
+
+  </head>
+  <body class="td-section">
+    <header>
+      <nav class="td-navbar js-navbar-scroll" data-bs-theme="dark">
+<div class="td-navbar-container container-fluid flex-column flex-md-row">
+  <a class="navbar-brand" href="/docs/"><span class="navbar-brand__logo navbar-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="300" height="64"><defs><symbol id="b" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#331500" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FF6B00"/><rect width="4.8" height=".6" rx=".55" fill="#FA4" opacity=".5"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#F83" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#930" opacity=".35"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D50"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,200,100,0.3)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FC8" opacity=".55"/></symbol><symbol id="c" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#4D3000" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FA0"/><rect width="4.8" height=".6" rx=".55" fill="#FD6" opacity=".55"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#FB3" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#960" opacity=".3"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D80"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,230,150,0.35)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FE9" opacity=".6"/></symbol></defs><use href="#b" x="35" y="2" width="5" height="5"/><use href="#b" x="41" y="2" width="5" height="5"/><use href="#b" x="29" y="8" width="5" height="5"/><use href="#b" x="35" y="8" width="5" height="5"/><use href="#b" x="23" y="14" width="5" height="5"/><use href="#b" x="29" y="14" width="5" height="5"/><use href="#b" x="17" y="20" width="5" height="5"/><use href="#b" x="23" y="20" width="5" height="5"/><use href="#c" x="5" y="26" width="5" height="5"/><use href="#c" x="11" y="26" width="5" height="5"/><use href="#c" x="17" y="26" width="5" height="5"/><use href="#c" x="23" y="26" width="5" height="5"/><use href="#c" x="29" y="26" width="5" height="5"/><use href="#c" x="35" y="26" width="5" height="5"/><use href="#c" x="41" y="26" width="5" height="5"/><use href="#c" x="47" y="26" width="5" height="5"/><use href="#b" x="35" y="32" width="5" height="5"/><use href="#b" x="41" y="32" width="5" height="5"/><use href="#b" x="29" y="38" width="5" height="5"/><use href="#b" x="35" y="38" width="5" height="5"/><use href="#b" x="23" y="44" width="5" height="5"/><use href="#b" x="29" y="44" width="5" height="5"/><use href="#b" x="17" y="50" width="5" height="5"/><use href="#b" x="23" y="50" width="5" height="5"/><use href="#b" x="11" y="56" width="5" height="5"/><use href="#b" x="17" y="56" width="5" height="5"/><text x="66" y="43" font-family="'SF Mono','Fira Code','Consolas','Courier New',monospace" font-size="27" font-weight="900" letter-spacing=".5"><tspan fill="#FFF">Thunder</tspan><tspan fill="#FF6B00">DB</tspan></text></svg></span><span class="navbar-brand__name">ThunderDB Documentation</span></a>
+  <div class="td-navbar-nav-scroll td-navbar-nav-scroll--indicator" id="main_navbar">
+    <div class="scroll-indicator scroll-left"></div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/"><span>Documentation</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/architecture/"><span>Architecture</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/developer/api-reference/"><span>API Reference</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/about/"><span>About</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/thunderdb/thunderdb" target="_blank" rel="noopener"><i class='fab fa-github'></i><span>GitHub</span></a>
+      </li>
+      </ul>
+    <div class="scroll-indicator scroll-right"></div>
+  </div>
+  <div class="d-none d-lg-block td-navbar__search">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+  </div>
+</div>
+</nav>
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main" data-bs-spy="scroll" data-bs-target=".td-toc" data-bs-root-margin="0px 0px -10%">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+  <script>
+    $(function() {
+    $("#td-section-nav a").removeClass("active");
+    $("#td-section-nav #m-docsdocsdevelopersdk").addClass("active");
+    $("#td-section-nav #m-docsdocsdevelopersdk-li span").addClass("td-sidebar-nav-active-item");
+    $("#td-section-nav #m-docsdocsdevelopersdk").parents("li").addClass("active-path");
+    $("#td-section-nav li.active-path").addClass("show");
+    $("#td-section-nav li.active-path").children("input").prop('checked', true);
+    $("#td-section-nav #m-docsdocsdevelopersdk-li").siblings("li").addClass("show");
+    $("#td-section-nav #m-docsdocsdevelopersdk-li").children("ul").children("li").addClass("show");
+    $("#td-sidebar-menu").toggleClass("d-none");
+    });
+  </script>
+  <div id="td-sidebar-menu" class="td-sidebar__inner d-none">
+  <form class="td-sidebar__search d-flex align-items-center">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+    <button class="btn btn-link td-sidebar__toggle" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  <nav class="td-sidebar-nav collapse foldable-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocs-li">
+    <a href="/docs/docs/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docsdocs"><span class="">Documentation</span></a>
+    <ul class="ul-1">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsgetting-started-li">
+    <input type="checkbox" id="m-docsdocsgetting-started-check"/>
+    <label for="m-docsdocsgetting-started-check"><a href="/docs/docs/getting-started/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsgetting-started"><span class="">Getting Started</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsarchitecture-li">
+    <input type="checkbox" id="m-docsdocsarchitecture-check"/>
+    <label for="m-docsdocsarchitecture-check"><a href="/docs/docs/architecture/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsarchitecture"><span class="">Architecture</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsdeveloper-li">
+    <input type="checkbox" id="m-docsdocsdeveloper-check"/>
+    <label for="m-docsdocsdeveloper-check"><a href="/docs/docs/developer/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloper"><span class="">Developer Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperapi-reference-li">
+    <input type="checkbox" id="m-docsdocsdeveloperapi-reference-check"/>
+    <label for="m-docsdocsdeveloperapi-reference-check"><a href="/docs/docs/developer/api-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperapi-reference"><span class="">API Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersql-reference-li">
+    <input type="checkbox" id="m-docsdocsdevelopersql-reference-check"/>
+    <label for="m-docsdocsdevelopersql-reference-check"><a href="/docs/docs/developer/sql-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersql-reference"><span class="">SQL Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersdk-li">
+    <input type="checkbox" id="m-docsdocsdevelopersdk-check"/>
+    <label for="m-docsdocsdevelopersdk-check"><a href="/docs/docs/developer/sdk/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersdk"><span class="">SDKs &amp; Drivers</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperexamples-li">
+    <input type="checkbox" id="m-docsdocsdeveloperexamples-check"/>
+    <label for="m-docsdocsdeveloperexamples-check"><a href="/docs/docs/developer/examples/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperexamples"><span class="">Examples &amp; Use Cases</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsadministrator-li">
+    <input type="checkbox" id="m-docsdocsadministrator-check"/>
+    <label for="m-docsdocsadministrator-check"><a href="/docs/docs/administrator/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministrator"><span class="">Administrator Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratordeployment-li">
+    <input type="checkbox" id="m-docsdocsadministratordeployment-check"/>
+    <label for="m-docsdocsadministratordeployment-check"><a href="/docs/docs/administrator/deployment/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratordeployment"><span class="">Deployment</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorconfiguration-li">
+    <input type="checkbox" id="m-docsdocsadministratorconfiguration-check"/>
+    <label for="m-docsdocsadministratorconfiguration-check"><a href="/docs/docs/administrator/configuration/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorconfiguration"><span class="">Configuration</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratormonitoring-li">
+    <input type="checkbox" id="m-docsdocsadministratormonitoring-check"/>
+    <label for="m-docsdocsadministratormonitoring-check"><a href="/docs/docs/administrator/monitoring/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratormonitoring"><span class="">Monitoring</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorbackup-recovery-li">
+    <input type="checkbox" id="m-docsdocsadministratorbackup-recovery-check"/>
+    <label for="m-docsdocsadministratorbackup-recovery-check"><a href="/docs/docs/administrator/backup-recovery/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorbackup-recovery"><span class="">Backup &amp; Recovery</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorsecurity-li">
+    <input type="checkbox" id="m-docsdocsadministratorsecurity-check"/>
+    <label for="m-docsdocsadministratorsecurity-check"><a href="/docs/docs/administrator/security/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorsecurity"><span class="">Security</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratortroubleshooting-li">
+    <input type="checkbox" id="m-docsdocsadministratortroubleshooting-check"/>
+    <label for="m-docsdocsadministratortroubleshooting-check"><a href="/docs/docs/administrator/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratortroubleshooting"><span class="">Troubleshooting</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocscontributor-li">
+    <input type="checkbox" id="m-docsdocscontributor-check"/>
+    <label for="m-docsdocscontributor-check"><a href="/docs/docs/contributor/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributor"><span class="">Contributor Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributordevelopment-setup-li">
+    <input type="checkbox" id="m-docsdocscontributordevelopment-setup-check"/>
+    <label for="m-docsdocscontributordevelopment-setup-check"><a href="/docs/docs/contributor/development-setup/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributordevelopment-setup"><span class="">Development Setup</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorcodebase-guide-li">
+    <input type="checkbox" id="m-docsdocscontributorcodebase-guide-check"/>
+    <label for="m-docsdocscontributorcodebase-guide-check"><a href="/docs/docs/contributor/codebase-guide/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorcodebase-guide"><span class="">Codebase Guide</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributortesting-li">
+    <input type="checkbox" id="m-docsdocscontributortesting-check"/>
+    <label for="m-docsdocscontributortesting-check"><a href="/docs/docs/contributor/testing/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributortesting"><span class="">Testing</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorrelease-process-li">
+    <input type="checkbox" id="m-docsdocscontributorrelease-process-check"/>
+    <label for="m-docsdocscontributorrelease-process-check"><a href="/docs/docs/contributor/release-process/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorrelease-process"><span class="">Release Process</span></a></label>
+    
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
+<a href="https://github.com/thunderdb/thunderdb/tree/main/content/docs/developer/sdk/_index.md" class="td-page-meta--view td-page-meta__view" target="_blank" rel="noopener"><i class="fa-solid fa-file-lines fa-fw"></i> View page source</a>
+  <a href="https://github.com/thunderdb/thunderdb/edit/main/content/docs/developer/sdk/_index.md" class="td-page-meta--edit td-page-meta__edit" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Edit this page</a>
+  <a href="https://github.com/thunderdb/thunderdb/new/main/content/docs/developer/sdk?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child td-page-meta__child" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Create child page</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new?title=SDKs%20&amp;%20Drivers" class="td-page-meta--issue td-page-meta__issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create documentation issue</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new" class="td-page-meta--project td-page-meta__project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create project issue</a>
+  
+</div>
+
+            <div class="td-toc" data-proofer-ignore>
+<div class="td-toc-title">
+      <span class="td-toc-title__text">On this page</span>
+      <a class="td-toc-title__link" title="Top of page" href="#"></a>
+    </div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#driver-compatibility-matrix">Driver Compatibility Matrix</a></li>
+    <li><a href="#native-rust-client-thunder-client">Native Rust Client (<code>thunder-client</code>)</a>
+      <ul>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#connecting">Connecting</a></li>
+        <li><a href="#connection-pooling">Connection Pooling</a></li>
+        <li><a href="#cluster-aware-connection">Cluster-Aware Connection</a></li>
+        <li><a href="#queries-and-parameterized-statements">Queries and Parameterized Statements</a></li>
+        <li><a href="#prepared-statements">Prepared Statements</a></li>
+        <li><a href="#transactions">Transactions</a></li>
+        <li><a href="#vector-operations">Vector Operations</a></li>
+        <li><a href="#cdc-stream-subscription">CDC Stream Subscription</a></li>
+      </ul>
+    </li>
+    <li><a href="#postgresql-drivers">PostgreSQL Drivers</a>
+      <ul>
+        <li><a href="#python-psycopg2">Python (psycopg2)</a></li>
+        <li><a href="#python-asyncpg--async">Python (asyncpg &ndash; async)</a></li>
+        <li><a href="#nodejs-node-postgres--pg">Node.js (node-postgres / pg)</a></li>
+        <li><a href="#go-pgx">Go (pgx)</a></li>
+        <li><a href="#rust-tokio-postgres">Rust (tokio-postgres)</a></li>
+      </ul>
+    </li>
+    <li><a href="#mysql-drivers">MySQL Drivers</a>
+      <ul>
+        <li><a href="#python-mysql-connector-python">Python (mysql-connector-python)</a></li>
+        <li><a href="#nodejs-mysql2">Node.js (mysql2)</a></li>
+        <li><a href="#go-go-sql-drivermysql">Go (go-sql-driver/mysql)</a></li>
+      </ul>
+    </li>
+    <li><a href="#redis-clients">Redis Clients</a>
+      <ul>
+        <li><a href="#python-redis-py">Python (redis-py)</a></li>
+        <li><a href="#nodejs-ioredis">Node.js (ioredis)</a></li>
+        <li><a href="#go-go-redis">Go (go-redis)</a></li>
+      </ul>
+    </li>
+    <li><a href="#connection-string-reference">Connection String Reference</a>
+      <ul>
+        <li><a href="#postgresql-format">PostgreSQL Format</a></li>
+        <li><a href="#mysql-format">MySQL Format</a></li>
+        <li><a href="#redis-format">Redis Format</a></li>
+      </ul>
+    </li>
+    <li><a href="#best-practices">Best Practices</a></li>
+  </ul>
+</nav>
+  </div>
+
+            
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/">Documentation</a></li>
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/developer/">Developer Guide</a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    SDKs &amp; Drivers</li>
+  </ol>
+</nav>
+<div class="td-content">
+	<h1>SDKs &amp; Drivers</h1>
+  <div class="lead">Connect to ThunderDB using the native Rust client, standard PostgreSQL/MySQL drivers, or Redis clients in Python, Node.js, Go, and Rust.</div>
+	<header class="article-meta">
+		
+</header>
+	<h1 id="sdks--drivers">SDKs &amp; Drivers</h1>
+<p>ThunderDB implements the PostgreSQL, MySQL, and Redis (RESP) wire protocols natively. This means you can use any standard driver for these databases to connect to ThunderDB with zero modifications. ThunderDB also ships a native Rust client crate with additional features like connection pooling, cluster-aware routing, and vector type support.</p>
+<hr>
+<h2 id="driver-compatibility-matrix">Driver Compatibility Matrix</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Language</th>
+          <th>PostgreSQL Driver</th>
+          <th>MySQL Driver</th>
+          <th>Redis Client</th>
+          <th>Native Client</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Rust</strong></td>
+          <td><code>tokio-postgres</code></td>
+          <td><code>mysql_async</code></td>
+          <td><code>redis</code> crate</td>
+          <td><code>thunder-client</code></td>
+      </tr>
+      <tr>
+          <td><strong>Python</strong></td>
+          <td><code>psycopg2</code> / <code>asyncpg</code></td>
+          <td><code>mysql-connector-python</code></td>
+          <td><code>redis-py</code></td>
+          <td>&ndash;</td>
+      </tr>
+      <tr>
+          <td><strong>Node.js</strong></td>
+          <td><code>node-postgres</code> (pg)</td>
+          <td><code>mysql2</code></td>
+          <td><code>ioredis</code></td>
+          <td>&ndash;</td>
+      </tr>
+      <tr>
+          <td><strong>Go</strong></td>
+          <td><code>pgx</code> / <code>lib/pq</code></td>
+          <td><code>go-sql-driver/mysql</code></td>
+          <td><code>go-redis</code></td>
+          <td>&ndash;</td>
+      </tr>
+      <tr>
+          <td><strong>Java</strong></td>
+          <td>JDBC (PostgreSQL)</td>
+          <td>JDBC (MySQL)</td>
+          <td>Jedis / Lettuce</td>
+          <td>&ndash;</td>
+      </tr>
+      <tr>
+          <td><strong>C#/.NET</strong></td>
+          <td>Npgsql</td>
+          <td>MySqlConnector</td>
+          <td>StackExchange.Redis</td>
+          <td>&ndash;</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="native-rust-client-thunder-client">Native Rust Client (<code>thunder-client</code>)</h2>
+<p>The <code>thunder-client</code> crate provides the most feature-complete integration with ThunderDB, including cluster-aware connection routing, automatic failover, native vector type support, and CDC stream subscriptions.</p>
+<h3 id="installation">Installation</h3>
+<p>Add to your <code>Cargo.toml</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[dependencies]
+</span></span><span style="display:flex;"><span>thunder-client = <span style="color:#f1fa8c">&#34;0.9&#34;</span>
+</span></span><span style="display:flex;"><span>tokio = { version = <span style="color:#f1fa8c">&#34;1&#34;</span>, features = [<span style="color:#f1fa8c">&#34;full&#34;</span>] }
+</span></span></code></pre></div><h3 id="connecting">Connecting</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#ff79c6">use</span> thunder_client::{ClientBuilder, Client};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[tokio::main]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">main</span>() -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>(), thunder_client::Error<span style="color:#ff79c6">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Simple connection
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> client <span style="color:#ff79c6">=</span> ClientBuilder::new()
+</span></span><span style="display:flex;"><span>        .host(<span style="color:#f1fa8c">&#34;localhost&#34;</span>)
+</span></span><span style="display:flex;"><span>        .port(<span style="color:#bd93f9">5432</span>)
+</span></span><span style="display:flex;"><span>        .user(<span style="color:#f1fa8c">&#34;thunder&#34;</span>)
+</span></span><span style="display:flex;"><span>        .password(<span style="color:#f1fa8c">&#34;secret&#34;</span>)
+</span></span><span style="display:flex;"><span>        .database(<span style="color:#f1fa8c">&#34;myapp&#34;</span>)
+</span></span><span style="display:flex;"><span>        .build()
+</span></span><span style="display:flex;"><span>        .<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">println!</span>(<span style="color:#f1fa8c">&#34;Connected to ThunderDB </span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">&#34;</span>, client.server_version());
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">Ok</span>(())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="connection-pooling">Connection Pooling</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#ff79c6">use</span> thunder_client::{ClientBuilder, PoolConfig};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[tokio::main]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">main</span>() -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>(), thunder_client::Error<span style="color:#ff79c6">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> client <span style="color:#ff79c6">=</span> ClientBuilder::new()
+</span></span><span style="display:flex;"><span>        .host(<span style="color:#f1fa8c">&#34;localhost&#34;</span>)
+</span></span><span style="display:flex;"><span>        .port(<span style="color:#bd93f9">5432</span>)
+</span></span><span style="display:flex;"><span>        .user(<span style="color:#f1fa8c">&#34;thunder&#34;</span>)
+</span></span><span style="display:flex;"><span>        .password(<span style="color:#f1fa8c">&#34;secret&#34;</span>)
+</span></span><span style="display:flex;"><span>        .database(<span style="color:#f1fa8c">&#34;myapp&#34;</span>)
+</span></span><span style="display:flex;"><span>        .pool(PoolConfig {
+</span></span><span style="display:flex;"><span>            min_connections: <span style="color:#bd93f9">5</span>,
+</span></span><span style="display:flex;"><span>            max_connections: <span style="color:#bd93f9">50</span>,
+</span></span><span style="display:flex;"><span>            idle_timeout: <span style="color:#50fa7b">std</span>::time::Duration::from_secs(<span style="color:#bd93f9">300</span>),
+</span></span><span style="display:flex;"><span>            max_lifetime: <span style="color:#50fa7b">std</span>::time::Duration::from_secs(<span style="color:#bd93f9">3600</span>),
+</span></span><span style="display:flex;"><span>            acquire_timeout: <span style="color:#50fa7b">std</span>::time::Duration::from_secs(<span style="color:#bd93f9">5</span>),
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>        .build()
+</span></span><span style="display:flex;"><span>        .<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Connections are automatically managed by the pool
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> rows <span style="color:#ff79c6">=</span> client.query(<span style="color:#f1fa8c">&#34;SELECT COUNT(*) FROM users&#34;</span>, <span style="color:#ff79c6">&amp;</span>[]).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">println!</span>(<span style="color:#f1fa8c">&#34;User count: </span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">&#34;</span>, rows[<span style="color:#bd93f9">0</span>].get::<span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">i64</span><span style="color:#ff79c6">&gt;</span>(<span style="color:#bd93f9">0</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">Ok</span>(())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="cluster-aware-connection">Cluster-Aware Connection</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#ff79c6">use</span> thunder_client::{ClientBuilder, ClusterConfig};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[tokio::main]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">main</span>() -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>(), thunder_client::Error<span style="color:#ff79c6">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> client <span style="color:#ff79c6">=</span> ClientBuilder::new()
+</span></span><span style="display:flex;"><span>        .cluster(ClusterConfig {
+</span></span><span style="display:flex;"><span>            seeds: <span style="color:#50fa7b">vec</span><span style="color:#ff79c6">!</span>[
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;10.0.1.10:5432&#34;</span>.to_string(),
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;10.0.1.11:5432&#34;</span>.to_string(),
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;10.0.2.10:5432&#34;</span>.to_string(),
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#6272a4">// Route reads to followers, writes to leader
+</span></span></span><span style="display:flex;"><span>            read_preference: <span style="color:#50fa7b">thunder_client</span>::ReadPreference::Follower,
+</span></span><span style="display:flex;"><span>            <span style="color:#6272a4">// Automatically retry on failover
+</span></span></span><span style="display:flex;"><span>            auto_retry: <span style="color:#50fa7b">true</span>,
+</span></span><span style="display:flex;"><span>            max_retries: <span style="color:#bd93f9">3</span>,
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>        .user(<span style="color:#f1fa8c">&#34;thunder&#34;</span>)
+</span></span><span style="display:flex;"><span>        .password(<span style="color:#f1fa8c">&#34;secret&#34;</span>)
+</span></span><span style="display:flex;"><span>        .database(<span style="color:#f1fa8c">&#34;myapp&#34;</span>)
+</span></span><span style="display:flex;"><span>        .build()
+</span></span><span style="display:flex;"><span>        .<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// This query is automatically routed to a follower
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> rows <span style="color:#ff79c6">=</span> client.query(<span style="color:#f1fa8c">&#34;SELECT * FROM users LIMIT 10&#34;</span>, <span style="color:#ff79c6">&amp;</span>[]).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// This statement is automatically routed to the leader
+</span></span></span><span style="display:flex;"><span>    client.execute(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;INSERT INTO users (name, email) VALUES ($1, $2)&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&amp;</span>[<span style="color:#ff79c6">&amp;</span><span style="color:#f1fa8c">&#34;Alice&#34;</span>, <span style="color:#ff79c6">&amp;</span><span style="color:#f1fa8c">&#34;alice@example.com&#34;</span>],
+</span></span><span style="display:flex;"><span>    ).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">Ok</span>(())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="queries-and-parameterized-statements">Queries and Parameterized Statements</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#ff79c6">use</span> thunder_client::Client;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">query_examples</span>(client: <span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">Client</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>(), thunder_client::Error<span style="color:#ff79c6">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Simple query
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> rows <span style="color:#ff79c6">=</span> client.query(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;SELECT id, name, email FROM users WHERE active = $1&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&amp;</span>[<span style="color:#ff79c6">&amp;</span><span style="color:#ff79c6">true</span>],
+</span></span><span style="display:flex;"><span>    ).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> row <span style="color:#ff79c6">in</span> <span style="color:#ff79c6">&amp;</span>rows {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> id: <span style="color:#8be9fd">i64</span> <span style="color:#ff79c6">=</span> row.get(<span style="color:#f1fa8c">&#34;id&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> name: <span style="color:#8be9fd;font-style:italic">String</span> <span style="color:#ff79c6">=</span> row.get(<span style="color:#f1fa8c">&#34;name&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> email: <span style="color:#8be9fd;font-style:italic">String</span> <span style="color:#ff79c6">=</span> row.get(<span style="color:#f1fa8c">&#34;email&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">println!</span>(<span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">: </span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c"> &lt;</span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">&gt;&#34;</span>, id, name, email);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Query returning a single row
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> row <span style="color:#ff79c6">=</span> client.query_one(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;SELECT COUNT(*) AS total FROM orders WHERE customer_id = $1&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&amp;</span>[<span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">42_</span><span style="color:#ff79c6">i64</span>],
+</span></span><span style="display:flex;"><span>    ).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> total: <span style="color:#8be9fd">i64</span> <span style="color:#ff79c6">=</span> row.get(<span style="color:#f1fa8c">&#34;total&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">println!</span>(<span style="color:#f1fa8c">&#34;Order count: </span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">&#34;</span>, total);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Execute (INSERT/UPDATE/DELETE) returning affected rows
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> affected <span style="color:#ff79c6">=</span> client.execute(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;UPDATE users SET active = false WHERE last_login &lt; now() - INTERVAL &#39;90 days&#39;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&amp;</span>[],
+</span></span><span style="display:flex;"><span>    ).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">println!</span>(<span style="color:#f1fa8c">&#34;Deactivated </span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c"> users&#34;</span>, affected);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">Ok</span>(())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="prepared-statements">Prepared Statements</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#ff79c6">use</span> thunder_client::Client;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">prepared_example</span>(client: <span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">Client</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>(), thunder_client::Error<span style="color:#ff79c6">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Prepare a statement once
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> stmt <span style="color:#ff79c6">=</span> client.prepare(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;SELECT id, name, price FROM products WHERE category = $1 AND price &lt; $2&#34;</span>
+</span></span><span style="display:flex;"><span>    ).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Execute multiple times with different parameters
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> electronics <span style="color:#ff79c6">=</span> client.query_prepared(<span style="color:#ff79c6">&amp;</span>stmt, <span style="color:#ff79c6">&amp;</span>[<span style="color:#ff79c6">&amp;</span><span style="color:#f1fa8c">&#34;electronics&#34;</span>, <span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">500.0_</span><span style="color:#ff79c6">f64</span>]).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> books <span style="color:#ff79c6">=</span> client.query_prepared(<span style="color:#ff79c6">&amp;</span>stmt, <span style="color:#ff79c6">&amp;</span>[<span style="color:#ff79c6">&amp;</span><span style="color:#f1fa8c">&#34;books&#34;</span>, <span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">30.0_</span><span style="color:#ff79c6">f64</span>]).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">println!</span>(<span style="color:#f1fa8c">&#34;Found </span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c"> electronics, </span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c"> books&#34;</span>, electronics.len(), books.len());
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">Ok</span>(())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="transactions">Transactions</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#ff79c6">use</span> thunder_client::{Client, IsolationLevel};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">transaction_example</span>(client: <span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">Client</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>(), thunder_client::Error<span style="color:#ff79c6">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Begin a transaction
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> txn <span style="color:#ff79c6">=</span> client.begin()
+</span></span><span style="display:flex;"><span>        .isolation_level(IsolationLevel::Serializable)
+</span></span><span style="display:flex;"><span>        .start()
+</span></span><span style="display:flex;"><span>        .<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Execute statements within the transaction
+</span></span></span><span style="display:flex;"><span>    txn.execute(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;UPDATE accounts SET balance = balance - $1 WHERE id = $2&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&amp;</span>[<span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">100.0_</span><span style="color:#ff79c6">f64</span>, <span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">1_</span><span style="color:#ff79c6">i64</span>],
+</span></span><span style="display:flex;"><span>    ).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    txn.execute(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;UPDATE accounts SET balance = balance + $1 WHERE id = $2&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&amp;</span>[<span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">100.0_</span><span style="color:#ff79c6">f64</span>, <span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">2_</span><span style="color:#ff79c6">i64</span>],
+</span></span><span style="display:flex;"><span>    ).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    txn.execute(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;INSERT INTO transfers (from_id, to_id, amount) VALUES ($1, $2, $3)&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&amp;</span>[<span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">1_</span><span style="color:#ff79c6">i64</span>, <span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">2_</span><span style="color:#ff79c6">i64</span>, <span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">100.0_</span><span style="color:#ff79c6">f64</span>],
+</span></span><span style="display:flex;"><span>    ).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Commit the transaction
+</span></span></span><span style="display:flex;"><span>    txn.commit().<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">println!</span>(<span style="color:#f1fa8c">&#34;Transfer committed successfully&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Using savepoints
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> txn <span style="color:#ff79c6">=</span> client.begin().start().<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>    txn.execute(<span style="color:#f1fa8c">&#34;INSERT INTO orders (customer_id, total) VALUES ($1, $2)&#34;</span>, <span style="color:#ff79c6">&amp;</span>[<span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">42_</span><span style="color:#ff79c6">i64</span>, <span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">299.99_</span><span style="color:#ff79c6">f64</span>]).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> sp <span style="color:#ff79c6">=</span> txn.savepoint(<span style="color:#f1fa8c">&#34;before_items&#34;</span>).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Try something risky
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> result <span style="color:#ff79c6">=</span> txn.execute(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;INSERT INTO order_items (order_id, product_id, quantity) VALUES ($1, $2, $3)&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&amp;</span>[<span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">1_</span><span style="color:#ff79c6">i64</span>, <span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">999_</span><span style="color:#ff79c6">i64</span>, <span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">1_</span><span style="color:#ff79c6">i32</span>],
+</span></span><span style="display:flex;"><span>    ).<span style="color:#ff79c6">await</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> result.is_err() {
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">// Roll back to the savepoint
+</span></span></span><span style="display:flex;"><span>        sp.rollback().<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">// Try with a different product
+</span></span></span><span style="display:flex;"><span>        txn.execute(
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;INSERT INTO order_items (order_id, product_id, quantity) VALUES ($1, $2, $3)&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&amp;</span>[<span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">1_</span><span style="color:#ff79c6">i64</span>, <span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">42_</span><span style="color:#ff79c6">i64</span>, <span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">1_</span><span style="color:#ff79c6">i32</span>],
+</span></span><span style="display:flex;"><span>        ).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    txn.commit().<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">Ok</span>(())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="vector-operations">Vector Operations</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#ff79c6">use</span> thunder_client::{Client, Vector};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">vector_examples</span>(client: <span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">Client</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>(), thunder_client::Error<span style="color:#ff79c6">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Insert a vector
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> embedding <span style="color:#ff79c6">=</span> Vector::from(<span style="color:#50fa7b">vec!</span>[<span style="color:#bd93f9">0.1_</span><span style="color:#ff79c6">f32</span>, <span style="color:#ff79c6">-</span><span style="color:#bd93f9">0.23</span>, <span style="color:#bd93f9">0.98</span>, <span style="color:#bd93f9">0.45</span>, <span style="color:#bd93f9">0.67</span>]);
+</span></span><span style="display:flex;"><span>    client.execute(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;INSERT INTO documents (id, title, embedding) VALUES ($1, $2, $3)&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&amp;</span>[<span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">1_</span><span style="color:#ff79c6">i64</span>, <span style="color:#ff79c6">&amp;</span><span style="color:#f1fa8c">&#34;Quantum Computing&#34;</span>, <span style="color:#ff79c6">&amp;</span>embedding],
+</span></span><span style="display:flex;"><span>    ).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Similarity search
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> query_vec <span style="color:#ff79c6">=</span> Vector::from(<span style="color:#50fa7b">vec!</span>[<span style="color:#bd93f9">0.15_</span><span style="color:#ff79c6">f32</span>, <span style="color:#ff79c6">-</span><span style="color:#bd93f9">0.20</span>, <span style="color:#bd93f9">0.95</span>, <span style="color:#bd93f9">0.50</span>, <span style="color:#bd93f9">0.60</span>]);
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> results <span style="color:#ff79c6">=</span> client.query(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;SELECT id, title, embedding &lt;-&gt; $1 AS distance
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">         FROM documents
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">         ORDER BY embedding &lt;-&gt; $1
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">         LIMIT 10&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&amp;</span>[<span style="color:#ff79c6">&amp;</span>query_vec],
+</span></span><span style="display:flex;"><span>    ).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> row <span style="color:#ff79c6">in</span> <span style="color:#ff79c6">&amp;</span>results {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> id: <span style="color:#8be9fd">i64</span> <span style="color:#ff79c6">=</span> row.get(<span style="color:#f1fa8c">&#34;id&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> title: <span style="color:#8be9fd;font-style:italic">String</span> <span style="color:#ff79c6">=</span> row.get(<span style="color:#f1fa8c">&#34;title&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> distance: <span style="color:#8be9fd">f64</span> <span style="color:#ff79c6">=</span> row.get(<span style="color:#f1fa8c">&#34;distance&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">println!</span>(<span style="color:#f1fa8c">&#34;[</span><span style="color:#f1fa8c">{:.4}</span><span style="color:#f1fa8c">] </span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c"> - </span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">&#34;</span>, distance, id, title);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">Ok</span>(())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="cdc-stream-subscription">CDC Stream Subscription</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#ff79c6">use</span> thunder_client::{Client, CdcEvent};
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">use</span> futures::StreamExt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">cdc_example</span>(client: <span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">Client</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>(), thunder_client::Error<span style="color:#ff79c6">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Subscribe to changes on the orders table
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> <span style="color:#ff79c6">mut</span> stream <span style="color:#ff79c6">=</span> client.subscribe_cdc(<span style="color:#f1fa8c">&#34;orders&#34;</span>)
+</span></span><span style="display:flex;"><span>        .events(<span style="color:#50fa7b">vec!</span>[<span style="color:#f1fa8c">&#34;insert&#34;</span>, <span style="color:#f1fa8c">&#34;update&#34;</span>])
+</span></span><span style="display:flex;"><span>        .filter(<span style="color:#f1fa8c">&#34;total &gt; 100&#34;</span>)
+</span></span><span style="display:flex;"><span>        .start()
+</span></span><span style="display:flex;"><span>        .<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Process events as they arrive
+</span></span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">while</span> <span style="color:#8be9fd;font-style:italic">let</span> <span style="color:#8be9fd;font-style:italic">Some</span>(event) <span style="color:#ff79c6">=</span> stream.next().<span style="color:#ff79c6">await</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> event <span style="color:#ff79c6">=</span> event<span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">match</span> event {
+</span></span><span style="display:flex;"><span>            CdcEvent::Insert { table, row, lsn, <span style="color:#ff79c6">..</span> } <span style="color:#ff79c6">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#50fa7b">println!</span>(<span style="color:#f1fa8c">&#34;New order in </span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">: </span><span style="color:#f1fa8c">{:?}</span><span style="color:#f1fa8c"> (LSN: </span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">)&#34;</span>, table, row, lsn);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            CdcEvent::Update { table, old_row, new_row, changed_columns, <span style="color:#ff79c6">..</span> } <span style="color:#ff79c6">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#50fa7b">println!</span>(<span style="color:#f1fa8c">&#34;Updated order in </span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">: </span><span style="color:#f1fa8c">{:?}</span><span style="color:#f1fa8c"> -&gt; </span><span style="color:#f1fa8c">{:?}</span><span style="color:#f1fa8c"> (changed: </span><span style="color:#f1fa8c">{:?}</span><span style="color:#f1fa8c">)&#34;</span>,
+</span></span><span style="display:flex;"><span>                    table, old_row, new_row, changed_columns);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            _ <span style="color:#ff79c6">=&gt;</span> {}
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">Ok</span>(())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h2 id="postgresql-drivers">PostgreSQL Drivers</h2>
+<p>Because ThunderDB speaks the PostgreSQL wire protocol, any PostgreSQL driver connects without modifications. Below are examples for popular languages.</p>
+<h3 id="python-psycopg2">Python (psycopg2)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install psycopg2-binary
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> psycopg2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Connect to ThunderDB via PostgreSQL protocol</span>
+</span></span><span style="display:flex;"><span>conn <span style="color:#ff79c6">=</span> psycopg2<span style="color:#ff79c6">.</span>connect(
+</span></span><span style="display:flex;"><span>    host<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;localhost&#34;</span>,
+</span></span><span style="display:flex;"><span>    port<span style="color:#ff79c6">=</span><span style="color:#bd93f9">5432</span>,
+</span></span><span style="display:flex;"><span>    user<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;thunder&#34;</span>,
+</span></span><span style="display:flex;"><span>    password<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;secret&#34;</span>,
+</span></span><span style="display:flex;"><span>    dbname<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;myapp&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Create a table</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">with</span> conn<span style="color:#ff79c6">.</span>cursor() <span style="color:#ff79c6">as</span> cur:
+</span></span><span style="display:flex;"><span>    cur<span style="color:#ff79c6">.</span>execute(<span style="color:#f1fa8c">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        CREATE TABLE IF NOT EXISTS users (
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            id BIGINT PRIMARY KEY,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            name VARCHAR(255) NOT NULL,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            email VARCHAR(255) UNIQUE NOT NULL,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            active BOOLEAN DEFAULT true,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            created_at TIMESTAMPTZ DEFAULT now()
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        )
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    &#34;&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>    conn<span style="color:#ff79c6">.</span>commit()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Insert data</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">with</span> conn<span style="color:#ff79c6">.</span>cursor() <span style="color:#ff79c6">as</span> cur:
+</span></span><span style="display:flex;"><span>    cur<span style="color:#ff79c6">.</span>execute(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;INSERT INTO users (id, name, email) VALUES (</span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c">, </span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c">, </span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c">)&#34;</span>,
+</span></span><span style="display:flex;"><span>        (<span style="color:#bd93f9">1</span>, <span style="color:#f1fa8c">&#34;Alice Johnson&#34;</span>, <span style="color:#f1fa8c">&#34;alice@example.com&#34;</span>)
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    conn<span style="color:#ff79c6">.</span>commit()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Batch insert</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">with</span> conn<span style="color:#ff79c6">.</span>cursor() <span style="color:#ff79c6">as</span> cur:
+</span></span><span style="display:flex;"><span>    users <span style="color:#ff79c6">=</span> [
+</span></span><span style="display:flex;"><span>        (<span style="color:#bd93f9">2</span>, <span style="color:#f1fa8c">&#34;Bob Smith&#34;</span>, <span style="color:#f1fa8c">&#34;bob@example.com&#34;</span>),
+</span></span><span style="display:flex;"><span>        (<span style="color:#bd93f9">3</span>, <span style="color:#f1fa8c">&#34;Carol White&#34;</span>, <span style="color:#f1fa8c">&#34;carol@example.com&#34;</span>),
+</span></span><span style="display:flex;"><span>        (<span style="color:#bd93f9">4</span>, <span style="color:#f1fa8c">&#34;Dave Brown&#34;</span>, <span style="color:#f1fa8c">&#34;dave@example.com&#34;</span>),
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>    cur<span style="color:#ff79c6">.</span>executemany(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;INSERT INTO users (id, name, email) VALUES (</span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c">, </span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c">, </span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c">)&#34;</span>,
+</span></span><span style="display:flex;"><span>        users
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    conn<span style="color:#ff79c6">.</span>commit()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Query data</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">with</span> conn<span style="color:#ff79c6">.</span>cursor() <span style="color:#ff79c6">as</span> cur:
+</span></span><span style="display:flex;"><span>    cur<span style="color:#ff79c6">.</span>execute(<span style="color:#f1fa8c">&#34;SELECT id, name, email FROM users WHERE active = </span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c">&#34;</span>, (<span style="color:#ff79c6">True</span>,))
+</span></span><span style="display:flex;"><span>    rows <span style="color:#ff79c6">=</span> cur<span style="color:#ff79c6">.</span>fetchall()
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> row <span style="color:#ff79c6">in</span> rows:
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">f</span><span style="color:#f1fa8c">&#34;User </span><span style="color:#f1fa8c">{</span>row[<span style="color:#bd93f9">0</span>]<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">: </span><span style="color:#f1fa8c">{</span>row[<span style="color:#bd93f9">1</span>]<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c"> &lt;</span><span style="color:#f1fa8c">{</span>row[<span style="color:#bd93f9">2</span>]<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&gt;&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Transactions</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">try</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">with</span> conn<span style="color:#ff79c6">.</span>cursor() <span style="color:#ff79c6">as</span> cur:
+</span></span><span style="display:flex;"><span>        cur<span style="color:#ff79c6">.</span>execute(<span style="color:#f1fa8c">&#34;UPDATE accounts SET balance = balance - 100 WHERE id = 1&#34;</span>)
+</span></span><span style="display:flex;"><span>        cur<span style="color:#ff79c6">.</span>execute(<span style="color:#f1fa8c">&#34;UPDATE accounts SET balance = balance + 100 WHERE id = 2&#34;</span>)
+</span></span><span style="display:flex;"><span>        conn<span style="color:#ff79c6">.</span>commit()
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">except</span> Exception <span style="color:#ff79c6">as</span> e:
+</span></span><span style="display:flex;"><span>    conn<span style="color:#ff79c6">.</span>rollback()
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">f</span><span style="color:#f1fa8c">&#34;Transaction failed: </span><span style="color:#f1fa8c">{</span>e<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>conn<span style="color:#ff79c6">.</span>close()
+</span></span></code></pre></div><h3 id="python-asyncpg--async">Python (asyncpg &ndash; async)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install asyncpg
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> asyncio
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> asyncpg
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">main</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># Create a connection pool</span>
+</span></span><span style="display:flex;"><span>    pool <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">await</span> asyncpg<span style="color:#ff79c6">.</span>create_pool(
+</span></span><span style="display:flex;"><span>        host<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;localhost&#34;</span>,
+</span></span><span style="display:flex;"><span>        port<span style="color:#ff79c6">=</span><span style="color:#bd93f9">5432</span>,
+</span></span><span style="display:flex;"><span>        user<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;thunder&#34;</span>,
+</span></span><span style="display:flex;"><span>        password<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;secret&#34;</span>,
+</span></span><span style="display:flex;"><span>        database<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;myapp&#34;</span>,
+</span></span><span style="display:flex;"><span>        min_size<span style="color:#ff79c6">=</span><span style="color:#bd93f9">5</span>,
+</span></span><span style="display:flex;"><span>        max_size<span style="color:#ff79c6">=</span><span style="color:#bd93f9">20</span>,
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># Query with pool</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">async</span> <span style="color:#ff79c6">with</span> pool<span style="color:#ff79c6">.</span>acquire() <span style="color:#ff79c6">as</span> conn:
+</span></span><span style="display:flex;"><span>        rows <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">await</span> conn<span style="color:#ff79c6">.</span>fetch(
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;SELECT id, name, email FROM users WHERE active = $1&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">True</span>
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span> row <span style="color:#ff79c6">in</span> rows:
+</span></span><span style="display:flex;"><span>            <span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">f</span><span style="color:#f1fa8c">&#34;User </span><span style="color:#f1fa8c">{</span>row[<span style="color:#f1fa8c">&#39;id&#39;</span>]<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">: </span><span style="color:#f1fa8c">{</span>row[<span style="color:#f1fa8c">&#39;name&#39;</span>]<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c"> &lt;</span><span style="color:#f1fa8c">{</span>row[<span style="color:#f1fa8c">&#39;email&#39;</span>]<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&gt;&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># Transaction</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">async</span> <span style="color:#ff79c6">with</span> pool<span style="color:#ff79c6">.</span>acquire() <span style="color:#ff79c6">as</span> conn:
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">async</span> <span style="color:#ff79c6">with</span> conn<span style="color:#ff79c6">.</span>transaction():
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">await</span> conn<span style="color:#ff79c6">.</span>execute(
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;UPDATE accounts SET balance = balance - $1 WHERE id = $2&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#bd93f9">100</span>, <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>            )
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">await</span> conn<span style="color:#ff79c6">.</span>execute(
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;UPDATE accounts SET balance = balance + $1 WHERE id = $2&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#bd93f9">100</span>, <span style="color:#bd93f9">2</span>
+</span></span><span style="display:flex;"><span>            )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">await</span> pool<span style="color:#ff79c6">.</span>close()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>asyncio<span style="color:#ff79c6">.</span>run(main())
+</span></span></code></pre></div><h3 id="nodejs-node-postgres--pg">Node.js (node-postgres / pg)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npm install pg
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#ff79c6">const</span> { Pool } <span style="color:#ff79c6">=</span> require(<span style="color:#f1fa8c">&#39;pg&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Create connection pool
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">const</span> pool <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Pool({
+</span></span><span style="display:flex;"><span>  host<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;localhost&#39;</span>,
+</span></span><span style="display:flex;"><span>  port<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">5432</span>,
+</span></span><span style="display:flex;"><span>  user<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;thunder&#39;</span>,
+</span></span><span style="display:flex;"><span>  password<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;secret&#39;</span>,
+</span></span><span style="display:flex;"><span>  database<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;myapp&#39;</span>,
+</span></span><span style="display:flex;"><span>  max<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">20</span>,
+</span></span><span style="display:flex;"><span>  idleTimeoutMillis<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">30000</span>,
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#8be9fd;font-style:italic">function</span> main() {
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Create a table
+</span></span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">await</span> pool.query(<span style="color:#f1fa8c">`
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    CREATE TABLE IF NOT EXISTS users (
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">      id BIGINT PRIMARY KEY,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">      name VARCHAR(255) NOT NULL,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">      email VARCHAR(255) UNIQUE NOT NULL,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">      active BOOLEAN DEFAULT true,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">      created_at TIMESTAMPTZ DEFAULT now()
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    )
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">  `</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Insert data with parameterized query
+</span></span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">await</span> pool.query(
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;INSERT INTO users (id, name, email) VALUES ($1, $2, $3)&#39;</span>,
+</span></span><span style="display:flex;"><span>    [<span style="color:#bd93f9">1</span>, <span style="color:#f1fa8c">&#39;Alice Johnson&#39;</span>, <span style="color:#f1fa8c">&#39;alice@example.com&#39;</span>]
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Query data
+</span></span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">const</span> result <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">await</span> pool.query(
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;SELECT id, name, email FROM users WHERE active = $1&#39;</span>,
+</span></span><span style="display:flex;"><span>    [<span style="color:#ff79c6">true</span>]
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">for</span> (<span style="color:#ff79c6">const</span> row <span style="color:#ff79c6">of</span> result.rows) {
+</span></span><span style="display:flex;"><span>    console.log(<span style="color:#f1fa8c">`User </span><span style="color:#f1fa8c">${</span>row.id<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">: </span><span style="color:#f1fa8c">${</span>row.name<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c"> &lt;</span><span style="color:#f1fa8c">${</span>row.email<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&gt;`</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Transaction
+</span></span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">const</span> client <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">await</span> pool.connect();
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">await</span> client.query(<span style="color:#f1fa8c">&#39;BEGIN&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">await</span> client.query(
+</span></span><span style="display:flex;"><span>      <span style="color:#f1fa8c">&#39;UPDATE accounts SET balance = balance - $1 WHERE id = $2&#39;</span>,
+</span></span><span style="display:flex;"><span>      [<span style="color:#bd93f9">100</span>, <span style="color:#bd93f9">1</span>]
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">await</span> client.query(
+</span></span><span style="display:flex;"><span>      <span style="color:#f1fa8c">&#39;UPDATE accounts SET balance = balance + $1 WHERE id = $2&#39;</span>,
+</span></span><span style="display:flex;"><span>      [<span style="color:#bd93f9">100</span>, <span style="color:#bd93f9">2</span>]
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">await</span> client.query(<span style="color:#f1fa8c">&#39;COMMIT&#39;</span>);
+</span></span><span style="display:flex;"><span>    console.log(<span style="color:#f1fa8c">&#39;Transfer committed&#39;</span>);
+</span></span><span style="display:flex;"><span>  } <span style="color:#ff79c6">catch</span> (e) {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">await</span> client.query(<span style="color:#f1fa8c">&#39;ROLLBACK&#39;</span>);
+</span></span><span style="display:flex;"><span>    console.error(<span style="color:#f1fa8c">&#39;Transaction failed:&#39;</span>, e.message);
+</span></span><span style="display:flex;"><span>  } <span style="color:#ff79c6">finally</span> {
+</span></span><span style="display:flex;"><span>    client.release();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">await</span> pool.end();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>main().<span style="color:#ff79c6">catch</span>(console.error);
+</span></span></code></pre></div><h3 id="go-pgx">Go (pgx)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go get github.com/jackc/pgx/v5
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;github.com/jackc/pgx/v5&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;github.com/jackc/pgx/v5/pgxpool&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+</span></span><span style="display:flex;"><span>    ctx <span style="color:#ff79c6">:=</span> context.<span style="color:#50fa7b">Background</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Create connection pool</span>
+</span></span><span style="display:flex;"><span>    poolConfig, err <span style="color:#ff79c6">:=</span> pgxpool.<span style="color:#50fa7b">ParseConfig</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;postgresql://thunder:secret@localhost:5432/myapp?pool_max_conns=20&#34;</span>,
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    pool, err <span style="color:#ff79c6">:=</span> pgxpool.<span style="color:#50fa7b">NewWithConfig</span>(ctx, poolConfig)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">defer</span> pool.<span style="color:#50fa7b">Close</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Create a table</span>
+</span></span><span style="display:flex;"><span>    _, err = pool.<span style="color:#50fa7b">Exec</span>(ctx, <span style="color:#f1fa8c">`
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        CREATE TABLE IF NOT EXISTS users (
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            id BIGINT PRIMARY KEY,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            name VARCHAR(255) NOT NULL,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            email VARCHAR(255) UNIQUE NOT NULL,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            active BOOLEAN DEFAULT true,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            created_at TIMESTAMPTZ DEFAULT now()
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        )
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    `</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Insert data</span>
+</span></span><span style="display:flex;"><span>    _, err = pool.<span style="color:#50fa7b">Exec</span>(ctx,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;INSERT INTO users (id, name, email) VALUES ($1, $2, $3)&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#bd93f9">1</span>, <span style="color:#f1fa8c">&#34;Alice Johnson&#34;</span>, <span style="color:#f1fa8c">&#34;alice@example.com&#34;</span>,
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Query data</span>
+</span></span><span style="display:flex;"><span>    rows, err <span style="color:#ff79c6">:=</span> pool.<span style="color:#50fa7b">Query</span>(ctx,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;SELECT id, name, email FROM users WHERE active = $1&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">true</span>,
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">defer</span> rows.<span style="color:#50fa7b">Close</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> rows.<span style="color:#50fa7b">Next</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">var</span> id <span style="color:#8be9fd">int64</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">var</span> name, email <span style="color:#8be9fd">string</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">:=</span> rows.<span style="color:#50fa7b">Scan</span>(<span style="color:#ff79c6">&amp;</span>id, <span style="color:#ff79c6">&amp;</span>name, <span style="color:#ff79c6">&amp;</span>email); err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>            log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;User %d: %s &lt;%s&gt;\n&#34;</span>, id, name, email)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Transaction</span>
+</span></span><span style="display:flex;"><span>    tx, err <span style="color:#ff79c6">:=</span> pool.<span style="color:#50fa7b">Begin</span>(ctx)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">defer</span> tx.<span style="color:#50fa7b">Rollback</span>(ctx) <span style="color:#6272a4">// No-op if committed</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    _, err = tx.<span style="color:#50fa7b">Exec</span>(ctx,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;UPDATE accounts SET balance = balance - $1 WHERE id = $2&#34;</span>, <span style="color:#bd93f9">100</span>, <span style="color:#bd93f9">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    _, err = tx.<span style="color:#50fa7b">Exec</span>(ctx,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;UPDATE accounts SET balance = balance + $1 WHERE id = $2&#34;</span>, <span style="color:#bd93f9">100</span>, <span style="color:#bd93f9">2</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">:=</span> tx.<span style="color:#50fa7b">Commit</span>(ctx); err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Transfer committed&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="rust-tokio-postgres">Rust (tokio-postgres)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[dependencies]
+</span></span><span style="display:flex;"><span>tokio-postgres = <span style="color:#f1fa8c">&#34;0.7&#34;</span>
+</span></span><span style="display:flex;"><span>tokio = { version = <span style="color:#f1fa8c">&#34;1&#34;</span>, features = [<span style="color:#f1fa8c">&#34;full&#34;</span>] }
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#ff79c6">use</span> tokio_postgres::{NoTls, Error};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[tokio::main]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">main</span>() -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>(), Error<span style="color:#ff79c6">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Connect to ThunderDB via PostgreSQL protocol
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> (client, connection) <span style="color:#ff79c6">=</span> tokio_postgres::connect(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;host=localhost port=5432 user=thunder password=secret dbname=myapp&#34;</span>,
+</span></span><span style="display:flex;"><span>        NoTls,
+</span></span><span style="display:flex;"><span>    ).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Spawn the connection handler
+</span></span></span><span style="display:flex;"><span>    tokio::spawn(<span style="color:#ff79c6">async</span> <span style="color:#ff79c6">move</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">let</span> <span style="color:#8be9fd;font-style:italic">Err</span>(e) <span style="color:#ff79c6">=</span> connection.<span style="color:#ff79c6">await</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#50fa7b">eprintln!</span>(<span style="color:#f1fa8c">&#34;Connection error: </span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">&#34;</span>, e);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Create a table
+</span></span></span><span style="display:flex;"><span>    client.execute(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;CREATE TABLE IF NOT EXISTS users (
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            id BIGINT PRIMARY KEY,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            name VARCHAR(255) NOT NULL,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            email VARCHAR(255) UNIQUE NOT NULL,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            active BOOLEAN DEFAULT true,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            created_at TIMESTAMPTZ DEFAULT now()
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        )&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&amp;</span>[],
+</span></span><span style="display:flex;"><span>    ).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Insert data
+</span></span></span><span style="display:flex;"><span>    client.execute(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;INSERT INTO users (id, name, email) VALUES ($1, $2, $3)&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&amp;</span>[<span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">1_</span><span style="color:#ff79c6">i64</span>, <span style="color:#ff79c6">&amp;</span><span style="color:#f1fa8c">&#34;Alice Johnson&#34;</span>, <span style="color:#ff79c6">&amp;</span><span style="color:#f1fa8c">&#34;alice@example.com&#34;</span>],
+</span></span><span style="display:flex;"><span>    ).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Query data
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> rows <span style="color:#ff79c6">=</span> client.query(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;SELECT id, name, email FROM users WHERE active = $1&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&amp;</span>[<span style="color:#ff79c6">&amp;</span><span style="color:#ff79c6">true</span>],
+</span></span><span style="display:flex;"><span>    ).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> row <span style="color:#ff79c6">in</span> <span style="color:#ff79c6">&amp;</span>rows {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> id: <span style="color:#8be9fd">i64</span> <span style="color:#ff79c6">=</span> row.get(<span style="color:#bd93f9">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> name: <span style="color:#ff79c6">&amp;</span><span style="color:#8be9fd">str</span> <span style="color:#ff79c6">=</span> row.get(<span style="color:#bd93f9">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">let</span> email: <span style="color:#ff79c6">&amp;</span><span style="color:#8be9fd">str</span> <span style="color:#ff79c6">=</span> row.get(<span style="color:#bd93f9">2</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">println!</span>(<span style="color:#f1fa8c">&#34;User </span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">: </span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c"> &lt;</span><span style="color:#f1fa8c">{}</span><span style="color:#f1fa8c">&gt;&#34;</span>, id, name, email);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Transaction
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> txn <span style="color:#ff79c6">=</span> client.transaction().<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>    txn.execute(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;UPDATE accounts SET balance = balance - $1 WHERE id = $2&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&amp;</span>[<span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">100.0_</span><span style="color:#ff79c6">f64</span>, <span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">1_</span><span style="color:#ff79c6">i64</span>],
+</span></span><span style="display:flex;"><span>    ).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>    txn.execute(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;UPDATE accounts SET balance = balance + $1 WHERE id = $2&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&amp;</span>[<span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">100.0_</span><span style="color:#ff79c6">f64</span>, <span style="color:#ff79c6">&amp;</span><span style="color:#bd93f9">2_</span><span style="color:#ff79c6">i64</span>],
+</span></span><span style="display:flex;"><span>    ).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>    txn.commit().<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">println!</span>(<span style="color:#f1fa8c">&#34;Transfer committed&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">Ok</span>(())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h2 id="mysql-drivers">MySQL Drivers</h2>
+<p>ThunderDB implements the MySQL wire protocol, allowing any MySQL driver to connect.</p>
+<h3 id="python-mysql-connector-python">Python (mysql-connector-python)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install mysql-connector-python
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> mysql.connector
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Connect to ThunderDB via MySQL protocol</span>
+</span></span><span style="display:flex;"><span>conn <span style="color:#ff79c6">=</span> mysql<span style="color:#ff79c6">.</span>connector<span style="color:#ff79c6">.</span>connect(
+</span></span><span style="display:flex;"><span>    host<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;localhost&#34;</span>,
+</span></span><span style="display:flex;"><span>    port<span style="color:#ff79c6">=</span><span style="color:#bd93f9">3306</span>,
+</span></span><span style="display:flex;"><span>    user<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;thunder&#34;</span>,
+</span></span><span style="display:flex;"><span>    password<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;secret&#34;</span>,
+</span></span><span style="display:flex;"><span>    database<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;myapp&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cursor <span style="color:#ff79c6">=</span> conn<span style="color:#ff79c6">.</span>cursor()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Create a table</span>
+</span></span><span style="display:flex;"><span>cursor<span style="color:#ff79c6">.</span>execute(<span style="color:#f1fa8c">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    CREATE TABLE IF NOT EXISTS products (
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        id BIGINT PRIMARY KEY,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        name VARCHAR(255) NOT NULL,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        price DECIMAL(10,2) NOT NULL,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        category VARCHAR(100),
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        created_at TIMESTAMPTZ DEFAULT now()
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    )
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>conn<span style="color:#ff79c6">.</span>commit()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Insert data</span>
+</span></span><span style="display:flex;"><span>cursor<span style="color:#ff79c6">.</span>execute(
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;INSERT INTO products (id, name, price, category) VALUES (</span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c">, </span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c">, </span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c">, </span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c">)&#34;</span>,
+</span></span><span style="display:flex;"><span>    (<span style="color:#bd93f9">1</span>, <span style="color:#f1fa8c">&#34;Wireless Mouse&#34;</span>, <span style="color:#bd93f9">29.99</span>, <span style="color:#f1fa8c">&#34;electronics&#34;</span>)
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>conn<span style="color:#ff79c6">.</span>commit()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Batch insert</span>
+</span></span><span style="display:flex;"><span>products <span style="color:#ff79c6">=</span> [
+</span></span><span style="display:flex;"><span>    (<span style="color:#bd93f9">2</span>, <span style="color:#f1fa8c">&#34;USB-C Cable&#34;</span>, <span style="color:#bd93f9">12.99</span>, <span style="color:#f1fa8c">&#34;electronics&#34;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#bd93f9">3</span>, <span style="color:#f1fa8c">&#34;Python Cookbook&#34;</span>, <span style="color:#bd93f9">45.00</span>, <span style="color:#f1fa8c">&#34;books&#34;</span>),
+</span></span><span style="display:flex;"><span>    (<span style="color:#bd93f9">4</span>, <span style="color:#f1fa8c">&#34;Standing Desk&#34;</span>, <span style="color:#bd93f9">599.99</span>, <span style="color:#f1fa8c">&#34;furniture&#34;</span>),
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>cursor<span style="color:#ff79c6">.</span>executemany(
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;INSERT INTO products (id, name, price, category) VALUES (</span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c">, </span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c">, </span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c">, </span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c">)&#34;</span>,
+</span></span><span style="display:flex;"><span>    products
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>conn<span style="color:#ff79c6">.</span>commit()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Query data</span>
+</span></span><span style="display:flex;"><span>cursor<span style="color:#ff79c6">.</span>execute(
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;SELECT id, name, price FROM products WHERE category = </span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c"> ORDER BY price&#34;</span>,
+</span></span><span style="display:flex;"><span>    (<span style="color:#f1fa8c">&#34;electronics&#34;</span>,)
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">for</span> row <span style="color:#ff79c6">in</span> cursor<span style="color:#ff79c6">.</span>fetchall():
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">f</span><span style="color:#f1fa8c">&#34;Product </span><span style="color:#f1fa8c">{</span>row[<span style="color:#bd93f9">0</span>]<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">: </span><span style="color:#f1fa8c">{</span>row[<span style="color:#bd93f9">1</span>]<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c"> - $</span><span style="color:#f1fa8c">{</span>row[<span style="color:#bd93f9">2</span>]<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cursor<span style="color:#ff79c6">.</span>close()
+</span></span><span style="display:flex;"><span>conn<span style="color:#ff79c6">.</span>close()
+</span></span></code></pre></div><h3 id="nodejs-mysql2">Node.js (mysql2)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npm install mysql2
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#ff79c6">const</span> mysql <span style="color:#ff79c6">=</span> require(<span style="color:#f1fa8c">&#39;mysql2/promise&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#8be9fd;font-style:italic">function</span> main() {
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Create connection pool
+</span></span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">const</span> pool <span style="color:#ff79c6">=</span> mysql.createPool({
+</span></span><span style="display:flex;"><span>    host<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;localhost&#39;</span>,
+</span></span><span style="display:flex;"><span>    port<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">3306</span>,
+</span></span><span style="display:flex;"><span>    user<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;thunder&#39;</span>,
+</span></span><span style="display:flex;"><span>    password<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;secret&#39;</span>,
+</span></span><span style="display:flex;"><span>    database<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;myapp&#39;</span>,
+</span></span><span style="display:flex;"><span>    connectionLimit<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">20</span>,
+</span></span><span style="display:flex;"><span>    waitForConnections<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">true</span>,
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Create a table
+</span></span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">await</span> pool.query(<span style="color:#f1fa8c">`
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    CREATE TABLE IF NOT EXISTS products (
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">      id BIGINT PRIMARY KEY,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">      name VARCHAR(255) NOT NULL,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">      price DECIMAL(10,2) NOT NULL,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">      category VARCHAR(100),
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">      created_at TIMESTAMPTZ DEFAULT now()
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    )
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">  `</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Insert data with parameterized query
+</span></span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">await</span> pool.query(
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;INSERT INTO products (id, name, price, category) VALUES (?, ?, ?, ?)&#39;</span>,
+</span></span><span style="display:flex;"><span>    [<span style="color:#bd93f9">1</span>, <span style="color:#f1fa8c">&#39;Wireless Mouse&#39;</span>, <span style="color:#bd93f9">29.99</span>, <span style="color:#f1fa8c">&#39;electronics&#39;</span>]
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Query data
+</span></span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">const</span> [rows] <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">await</span> pool.query(
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;SELECT id, name, price FROM products WHERE category = ? ORDER BY price&#39;</span>,
+</span></span><span style="display:flex;"><span>    [<span style="color:#f1fa8c">&#39;electronics&#39;</span>]
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">for</span> (<span style="color:#ff79c6">const</span> row <span style="color:#ff79c6">of</span> rows) {
+</span></span><span style="display:flex;"><span>    console.log(<span style="color:#f1fa8c">`Product </span><span style="color:#f1fa8c">${</span>row.id<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">: </span><span style="color:#f1fa8c">${</span>row.name<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c"> - $</span><span style="color:#f1fa8c">${</span>row.price<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">`</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Transaction
+</span></span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">const</span> conn <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">await</span> pool.getConnection();
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">await</span> conn.beginTransaction();
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">await</span> conn.query(
+</span></span><span style="display:flex;"><span>      <span style="color:#f1fa8c">&#39;UPDATE accounts SET balance = balance - ? WHERE id = ?&#39;</span>, [<span style="color:#bd93f9">100</span>, <span style="color:#bd93f9">1</span>]
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">await</span> conn.query(
+</span></span><span style="display:flex;"><span>      <span style="color:#f1fa8c">&#39;UPDATE accounts SET balance = balance + ? WHERE id = ?&#39;</span>, [<span style="color:#bd93f9">100</span>, <span style="color:#bd93f9">2</span>]
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">await</span> conn.commit();
+</span></span><span style="display:flex;"><span>    console.log(<span style="color:#f1fa8c">&#39;Transfer committed&#39;</span>);
+</span></span><span style="display:flex;"><span>  } <span style="color:#ff79c6">catch</span> (e) {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">await</span> conn.rollback();
+</span></span><span style="display:flex;"><span>    console.error(<span style="color:#f1fa8c">&#39;Transaction failed:&#39;</span>, e.message);
+</span></span><span style="display:flex;"><span>  } <span style="color:#ff79c6">finally</span> {
+</span></span><span style="display:flex;"><span>    conn.release();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">await</span> pool.end();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>main().<span style="color:#ff79c6">catch</span>(console.error);
+</span></span></code></pre></div><h3 id="go-go-sql-drivermysql">Go (go-sql-driver/mysql)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go get github.com/go-sql-driver/mysql
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;database/sql&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    _ <span style="color:#f1fa8c">&#34;github.com/go-sql-driver/mysql&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Connect to ThunderDB via MySQL protocol</span>
+</span></span><span style="display:flex;"><span>    db, err <span style="color:#ff79c6">:=</span> sql.<span style="color:#50fa7b">Open</span>(<span style="color:#f1fa8c">&#34;mysql&#34;</span>, <span style="color:#f1fa8c">&#34;thunder:secret@tcp(localhost:3306)/myapp&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">defer</span> db.<span style="color:#50fa7b">Close</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    db.<span style="color:#50fa7b">SetMaxOpenConns</span>(<span style="color:#bd93f9">20</span>)
+</span></span><span style="display:flex;"><span>    db.<span style="color:#50fa7b">SetMaxIdleConns</span>(<span style="color:#bd93f9">5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Create a table</span>
+</span></span><span style="display:flex;"><span>    _, err = db.<span style="color:#50fa7b">Exec</span>(<span style="color:#f1fa8c">`
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        CREATE TABLE IF NOT EXISTS products (
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            id BIGINT PRIMARY KEY,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            name VARCHAR(255) NOT NULL,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            price DECIMAL(10,2) NOT NULL,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            category VARCHAR(100),
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            created_at TIMESTAMPTZ DEFAULT now()
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        )
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    `</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Insert data</span>
+</span></span><span style="display:flex;"><span>    _, err = db.<span style="color:#50fa7b">Exec</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;INSERT INTO products (id, name, price, category) VALUES (?, ?, ?, ?)&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#bd93f9">1</span>, <span style="color:#f1fa8c">&#34;Wireless Mouse&#34;</span>, <span style="color:#bd93f9">29.99</span>, <span style="color:#f1fa8c">&#34;electronics&#34;</span>,
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Query data</span>
+</span></span><span style="display:flex;"><span>    rows, err <span style="color:#ff79c6">:=</span> db.<span style="color:#50fa7b">Query</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;SELECT id, name, price FROM products WHERE category = ? ORDER BY price&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;electronics&#34;</span>,
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">defer</span> rows.<span style="color:#50fa7b">Close</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> rows.<span style="color:#50fa7b">Next</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">var</span> id <span style="color:#8be9fd">int64</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">var</span> name <span style="color:#8be9fd">string</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">var</span> price <span style="color:#8be9fd">float64</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">:=</span> rows.<span style="color:#50fa7b">Scan</span>(<span style="color:#ff79c6">&amp;</span>id, <span style="color:#ff79c6">&amp;</span>name, <span style="color:#ff79c6">&amp;</span>price); err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>            log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Product %d: %s - $%.2f\n&#34;</span>, id, name, price)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Transaction</span>
+</span></span><span style="display:flex;"><span>    tx, err <span style="color:#ff79c6">:=</span> db.<span style="color:#50fa7b">Begin</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    _, err = tx.<span style="color:#50fa7b">Exec</span>(<span style="color:#f1fa8c">&#34;UPDATE accounts SET balance = balance - ? WHERE id = ?&#34;</span>, <span style="color:#bd93f9">100</span>, <span style="color:#bd93f9">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        tx.<span style="color:#50fa7b">Rollback</span>()
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    _, err = tx.<span style="color:#50fa7b">Exec</span>(<span style="color:#f1fa8c">&#34;UPDATE accounts SET balance = balance + ? WHERE id = ?&#34;</span>, <span style="color:#bd93f9">100</span>, <span style="color:#bd93f9">2</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        tx.<span style="color:#50fa7b">Rollback</span>()
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">:=</span> tx.<span style="color:#50fa7b">Commit</span>(); err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Transfer committed&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h2 id="redis-clients">Redis Clients</h2>
+<p>ThunderDB implements the RESP (Redis Serialization Protocol), supporting common Redis commands for key-value operations, data structures, and pub/sub. You can use ThunderDB as a Redis-compatible cache with the bonus of SQL queryability over the cached data.</p>
+<h3 id="python-redis-py">Python (redis-py)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install redis
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> redis
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Connect to ThunderDB via Redis protocol</span>
+</span></span><span style="display:flex;"><span>r <span style="color:#ff79c6">=</span> redis<span style="color:#ff79c6">.</span>Redis(
+</span></span><span style="display:flex;"><span>    host<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;localhost&#34;</span>,
+</span></span><span style="display:flex;"><span>    port<span style="color:#ff79c6">=</span><span style="color:#bd93f9">6379</span>,
+</span></span><span style="display:flex;"><span>    password<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;secret&#34;</span>,
+</span></span><span style="display:flex;"><span>    decode_responses<span style="color:#ff79c6">=</span><span style="color:#ff79c6">True</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># String operations</span>
+</span></span><span style="display:flex;"><span>r<span style="color:#ff79c6">.</span>set(<span style="color:#f1fa8c">&#34;user:1:name&#34;</span>, <span style="color:#f1fa8c">&#34;Alice Johnson&#34;</span>)
+</span></span><span style="display:flex;"><span>r<span style="color:#ff79c6">.</span>set(<span style="color:#f1fa8c">&#34;user:1:email&#34;</span>, <span style="color:#f1fa8c">&#34;alice@example.com&#34;</span>)
+</span></span><span style="display:flex;"><span>r<span style="color:#ff79c6">.</span>setex(<span style="color:#f1fa8c">&#34;session:abc123&#34;</span>, <span style="color:#bd93f9">3600</span>, <span style="color:#f1fa8c">&#34;user:1&#34;</span>)  <span style="color:#6272a4"># Expires in 1 hour</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>name <span style="color:#ff79c6">=</span> r<span style="color:#ff79c6">.</span>get(<span style="color:#f1fa8c">&#34;user:1:name&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">f</span><span style="color:#f1fa8c">&#34;Name: </span><span style="color:#f1fa8c">{</span>name<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Hash operations</span>
+</span></span><span style="display:flex;"><span>r<span style="color:#ff79c6">.</span>hset(<span style="color:#f1fa8c">&#34;product:42&#34;</span>, mapping<span style="color:#ff79c6">=</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;Wireless Mouse&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;price&#34;</span>: <span style="color:#f1fa8c">&#34;29.99&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;category&#34;</span>: <span style="color:#f1fa8c">&#34;electronics&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;stock&#34;</span>: <span style="color:#f1fa8c">&#34;150&#34;</span>
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>product <span style="color:#ff79c6">=</span> r<span style="color:#ff79c6">.</span>hgetall(<span style="color:#f1fa8c">&#34;product:42&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">f</span><span style="color:#f1fa8c">&#34;Product: </span><span style="color:#f1fa8c">{</span>product<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># List operations (message queue pattern)</span>
+</span></span><span style="display:flex;"><span>r<span style="color:#ff79c6">.</span>lpush(<span style="color:#f1fa8c">&#34;task_queue&#34;</span>, <span style="color:#f1fa8c">&#34;process_order:1001&#34;</span>)
+</span></span><span style="display:flex;"><span>r<span style="color:#ff79c6">.</span>lpush(<span style="color:#f1fa8c">&#34;task_queue&#34;</span>, <span style="color:#f1fa8c">&#34;send_email:user:1&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>task <span style="color:#ff79c6">=</span> r<span style="color:#ff79c6">.</span>rpop(<span style="color:#f1fa8c">&#34;task_queue&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">f</span><span style="color:#f1fa8c">&#34;Next task: </span><span style="color:#f1fa8c">{</span>task<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Set operations</span>
+</span></span><span style="display:flex;"><span>r<span style="color:#ff79c6">.</span>sadd(<span style="color:#f1fa8c">&#34;user:1:tags&#34;</span>, <span style="color:#f1fa8c">&#34;premium&#34;</span>, <span style="color:#f1fa8c">&#34;early-adopter&#34;</span>, <span style="color:#f1fa8c">&#34;beta-tester&#34;</span>)
+</span></span><span style="display:flex;"><span>r<span style="color:#ff79c6">.</span>sadd(<span style="color:#f1fa8c">&#34;user:2:tags&#34;</span>, <span style="color:#f1fa8c">&#34;premium&#34;</span>, <span style="color:#f1fa8c">&#34;enterprise&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>common_tags <span style="color:#ff79c6">=</span> r<span style="color:#ff79c6">.</span>sinter(<span style="color:#f1fa8c">&#34;user:1:tags&#34;</span>, <span style="color:#f1fa8c">&#34;user:2:tags&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">f</span><span style="color:#f1fa8c">&#34;Common tags: </span><span style="color:#f1fa8c">{</span>common_tags<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Sorted set (leaderboard)</span>
+</span></span><span style="display:flex;"><span>r<span style="color:#ff79c6">.</span>zadd(<span style="color:#f1fa8c">&#34;leaderboard&#34;</span>, {<span style="color:#f1fa8c">&#34;alice&#34;</span>: <span style="color:#bd93f9">2500</span>, <span style="color:#f1fa8c">&#34;bob&#34;</span>: <span style="color:#bd93f9">1800</span>, <span style="color:#f1fa8c">&#34;carol&#34;</span>: <span style="color:#bd93f9">3200</span>})
+</span></span><span style="display:flex;"><span>top_players <span style="color:#ff79c6">=</span> r<span style="color:#ff79c6">.</span>zrevrange(<span style="color:#f1fa8c">&#34;leaderboard&#34;</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">2</span>, withscores<span style="color:#ff79c6">=</span><span style="color:#ff79c6">True</span>)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">f</span><span style="color:#f1fa8c">&#34;Top players: </span><span style="color:#f1fa8c">{</span>top_players<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Pub/Sub</span>
+</span></span><span style="display:flex;"><span>pubsub <span style="color:#ff79c6">=</span> r<span style="color:#ff79c6">.</span>pubsub()
+</span></span><span style="display:flex;"><span>pubsub<span style="color:#ff79c6">.</span>subscribe(<span style="color:#f1fa8c">&#34;order_events&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># In another thread/process:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># r.publish(&#34;order_events&#34;, &#39;{&#34;order_id&#34;: 1001, &#34;status&#34;: &#34;shipped&#34;}&#39;)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Pipeline (batch commands)</span>
+</span></span><span style="display:flex;"><span>pipe <span style="color:#ff79c6">=</span> r<span style="color:#ff79c6">.</span>pipeline()
+</span></span><span style="display:flex;"><span>pipe<span style="color:#ff79c6">.</span>set(<span style="color:#f1fa8c">&#34;counter:visits&#34;</span>, <span style="color:#bd93f9">0</span>)
+</span></span><span style="display:flex;"><span>pipe<span style="color:#ff79c6">.</span>incr(<span style="color:#f1fa8c">&#34;counter:visits&#34;</span>)
+</span></span><span style="display:flex;"><span>pipe<span style="color:#ff79c6">.</span>incr(<span style="color:#f1fa8c">&#34;counter:visits&#34;</span>)
+</span></span><span style="display:flex;"><span>pipe<span style="color:#ff79c6">.</span>incr(<span style="color:#f1fa8c">&#34;counter:visits&#34;</span>)
+</span></span><span style="display:flex;"><span>pipe<span style="color:#ff79c6">.</span>get(<span style="color:#f1fa8c">&#34;counter:visits&#34;</span>)
+</span></span><span style="display:flex;"><span>results <span style="color:#ff79c6">=</span> pipe<span style="color:#ff79c6">.</span>execute()
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">f</span><span style="color:#f1fa8c">&#34;Visit count: </span><span style="color:#f1fa8c">{</span>results[<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>]<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>)
+</span></span></code></pre></div><h3 id="nodejs-ioredis">Node.js (ioredis)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npm install ioredis
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#ff79c6">const</span> Redis <span style="color:#ff79c6">=</span> require(<span style="color:#f1fa8c">&#39;ioredis&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">async</span> <span style="color:#8be9fd;font-style:italic">function</span> main() {
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Connect to ThunderDB via Redis protocol
+</span></span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">const</span> redis <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Redis({
+</span></span><span style="display:flex;"><span>    host<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;localhost&#39;</span>,
+</span></span><span style="display:flex;"><span>    port<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">6379</span>,
+</span></span><span style="display:flex;"><span>    password<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;secret&#39;</span>,
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// String operations
+</span></span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">await</span> redis.set(<span style="color:#f1fa8c">&#39;user:1:name&#39;</span>, <span style="color:#f1fa8c">&#39;Alice Johnson&#39;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">await</span> redis.setex(<span style="color:#f1fa8c">&#39;session:abc123&#39;</span>, <span style="color:#bd93f9">3600</span>, <span style="color:#f1fa8c">&#39;user:1&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">const</span> name <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">await</span> redis.get(<span style="color:#f1fa8c">&#39;user:1:name&#39;</span>);
+</span></span><span style="display:flex;"><span>  console.log(<span style="color:#f1fa8c">`Name: </span><span style="color:#f1fa8c">${</span>name<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">`</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Hash operations
+</span></span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">await</span> redis.hset(<span style="color:#f1fa8c">&#39;product:42&#39;</span>, {
+</span></span><span style="display:flex;"><span>    name<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;Wireless Mouse&#39;</span>,
+</span></span><span style="display:flex;"><span>    price<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;29.99&#39;</span>,
+</span></span><span style="display:flex;"><span>    category<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;electronics&#39;</span>,
+</span></span><span style="display:flex;"><span>    stock<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;150&#39;</span>,
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">const</span> product <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">await</span> redis.hgetall(<span style="color:#f1fa8c">&#39;product:42&#39;</span>);
+</span></span><span style="display:flex;"><span>  console.log(<span style="color:#f1fa8c">&#39;Product:&#39;</span>, product);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Sorted set (leaderboard)
+</span></span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">await</span> redis.zadd(<span style="color:#f1fa8c">&#39;leaderboard&#39;</span>, <span style="color:#bd93f9">2500</span>, <span style="color:#f1fa8c">&#39;alice&#39;</span>, <span style="color:#bd93f9">1800</span>, <span style="color:#f1fa8c">&#39;bob&#39;</span>, <span style="color:#bd93f9">3200</span>, <span style="color:#f1fa8c">&#39;carol&#39;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">const</span> topPlayers <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">await</span> redis.zrevrange(<span style="color:#f1fa8c">&#39;leaderboard&#39;</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">2</span>, <span style="color:#f1fa8c">&#39;WITHSCORES&#39;</span>);
+</span></span><span style="display:flex;"><span>  console.log(<span style="color:#f1fa8c">&#39;Top players:&#39;</span>, topPlayers);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Pipeline
+</span></span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">const</span> pipeline <span style="color:#ff79c6">=</span> redis.pipeline();
+</span></span><span style="display:flex;"><span>  pipeline.set(<span style="color:#f1fa8c">&#39;counter:api_calls&#39;</span>, <span style="color:#bd93f9">0</span>);
+</span></span><span style="display:flex;"><span>  pipeline.incr(<span style="color:#f1fa8c">&#39;counter:api_calls&#39;</span>);
+</span></span><span style="display:flex;"><span>  pipeline.incr(<span style="color:#f1fa8c">&#39;counter:api_calls&#39;</span>);
+</span></span><span style="display:flex;"><span>  pipeline.incr(<span style="color:#f1fa8c">&#39;counter:api_calls&#39;</span>);
+</span></span><span style="display:flex;"><span>  pipeline.get(<span style="color:#f1fa8c">&#39;counter:api_calls&#39;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">const</span> results <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">await</span> pipeline.exec();
+</span></span><span style="display:flex;"><span>  console.log(<span style="color:#f1fa8c">&#39;API call count:&#39;</span>, results[results.length <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">1</span>][<span style="color:#bd93f9">1</span>]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Pub/Sub
+</span></span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">const</span> subscriber <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Redis({ host<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;localhost&#39;</span>, port<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">6379</span>, password<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;secret&#39;</span> });
+</span></span><span style="display:flex;"><span>  subscriber.subscribe(<span style="color:#f1fa8c">&#39;order_events&#39;</span>, (err) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> (err) console.error(<span style="color:#f1fa8c">&#39;Subscribe error:&#39;</span>, err);
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>  subscriber.on(<span style="color:#f1fa8c">&#39;message&#39;</span>, (channel, message) =&gt; {
+</span></span><span style="display:flex;"><span>    console.log(<span style="color:#f1fa8c">`[</span><span style="color:#f1fa8c">${</span>channel<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">] </span><span style="color:#f1fa8c">${</span>message<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">`</span>);
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Publish from main connection
+</span></span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">await</span> redis.publish(<span style="color:#f1fa8c">&#39;order_events&#39;</span>, JSON.stringify({
+</span></span><span style="display:flex;"><span>    order_id<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">1001</span>,
+</span></span><span style="display:flex;"><span>    status<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;shipped&#39;</span>,
+</span></span><span style="display:flex;"><span>  }));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Clean up
+</span></span></span><span style="display:flex;"><span>  subscriber.disconnect();
+</span></span><span style="display:flex;"><span>  redis.disconnect();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>main().<span style="color:#ff79c6">catch</span>(console.error);
+</span></span></code></pre></div><h3 id="go-go-redis">Go (go-redis)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go get github.com/redis/go-redis/v9
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;github.com/redis/go-redis/v9&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+</span></span><span style="display:flex;"><span>    ctx <span style="color:#ff79c6">:=</span> context.<span style="color:#50fa7b">Background</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Connect to ThunderDB via Redis protocol</span>
+</span></span><span style="display:flex;"><span>    rdb <span style="color:#ff79c6">:=</span> redis.<span style="color:#50fa7b">NewClient</span>(<span style="color:#ff79c6">&amp;</span>redis.Options{
+</span></span><span style="display:flex;"><span>        Addr:     <span style="color:#f1fa8c">&#34;localhost:6379&#34;</span>,
+</span></span><span style="display:flex;"><span>        Password: <span style="color:#f1fa8c">&#34;secret&#34;</span>,
+</span></span><span style="display:flex;"><span>        PoolSize: <span style="color:#bd93f9">20</span>,
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">defer</span> rdb.<span style="color:#50fa7b">Close</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// String operations</span>
+</span></span><span style="display:flex;"><span>    err <span style="color:#ff79c6">:=</span> rdb.<span style="color:#50fa7b">Set</span>(ctx, <span style="color:#f1fa8c">&#34;user:1:name&#34;</span>, <span style="color:#f1fa8c">&#34;Alice Johnson&#34;</span>, <span style="color:#bd93f9">0</span>).<span style="color:#50fa7b">Err</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    name, err <span style="color:#ff79c6">:=</span> rdb.<span style="color:#50fa7b">Get</span>(ctx, <span style="color:#f1fa8c">&#34;user:1:name&#34;</span>).<span style="color:#50fa7b">Result</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Name: %s\n&#34;</span>, name)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Hash operations</span>
+</span></span><span style="display:flex;"><span>    err = rdb.<span style="color:#50fa7b">HSet</span>(ctx, <span style="color:#f1fa8c">&#34;product:42&#34;</span>, <span style="color:#8be9fd;font-style:italic">map</span>[<span style="color:#8be9fd">string</span>]<span style="color:#8be9fd;font-style:italic">interface</span>{}{
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;name&#34;</span>:     <span style="color:#f1fa8c">&#34;Wireless Mouse&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;price&#34;</span>:    <span style="color:#f1fa8c">&#34;29.99&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;category&#34;</span>: <span style="color:#f1fa8c">&#34;electronics&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;stock&#34;</span>:    <span style="color:#f1fa8c">&#34;150&#34;</span>,
+</span></span><span style="display:flex;"><span>    }).<span style="color:#50fa7b">Err</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    product, err <span style="color:#ff79c6">:=</span> rdb.<span style="color:#50fa7b">HGetAll</span>(ctx, <span style="color:#f1fa8c">&#34;product:42&#34;</span>).<span style="color:#50fa7b">Result</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Product: %v\n&#34;</span>, product)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Sorted set (leaderboard)</span>
+</span></span><span style="display:flex;"><span>    rdb.<span style="color:#50fa7b">ZAdd</span>(ctx, <span style="color:#f1fa8c">&#34;leaderboard&#34;</span>,
+</span></span><span style="display:flex;"><span>        redis.Z{Score: <span style="color:#bd93f9">2500</span>, Member: <span style="color:#f1fa8c">&#34;alice&#34;</span>},
+</span></span><span style="display:flex;"><span>        redis.Z{Score: <span style="color:#bd93f9">1800</span>, Member: <span style="color:#f1fa8c">&#34;bob&#34;</span>},
+</span></span><span style="display:flex;"><span>        redis.Z{Score: <span style="color:#bd93f9">3200</span>, Member: <span style="color:#f1fa8c">&#34;carol&#34;</span>},
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    topPlayers, err <span style="color:#ff79c6">:=</span> rdb.<span style="color:#50fa7b">ZRevRangeWithScores</span>(ctx, <span style="color:#f1fa8c">&#34;leaderboard&#34;</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">2</span>).<span style="color:#50fa7b">Result</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> _, player <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> topPlayers {
+</span></span><span style="display:flex;"><span>        fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;%s: %.0f\n&#34;</span>, player.Member, player.Score)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Pipeline</span>
+</span></span><span style="display:flex;"><span>    pipe <span style="color:#ff79c6">:=</span> rdb.<span style="color:#50fa7b">Pipeline</span>()
+</span></span><span style="display:flex;"><span>    pipe.<span style="color:#50fa7b">Set</span>(ctx, <span style="color:#f1fa8c">&#34;counter:requests&#34;</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>)
+</span></span><span style="display:flex;"><span>    pipe.<span style="color:#50fa7b">Incr</span>(ctx, <span style="color:#f1fa8c">&#34;counter:requests&#34;</span>)
+</span></span><span style="display:flex;"><span>    pipe.<span style="color:#50fa7b">Incr</span>(ctx, <span style="color:#f1fa8c">&#34;counter:requests&#34;</span>)
+</span></span><span style="display:flex;"><span>    pipe.<span style="color:#50fa7b">Incr</span>(ctx, <span style="color:#f1fa8c">&#34;counter:requests&#34;</span>)
+</span></span><span style="display:flex;"><span>    getCmd <span style="color:#ff79c6">:=</span> pipe.<span style="color:#50fa7b">Get</span>(ctx, <span style="color:#f1fa8c">&#34;counter:requests&#34;</span>)
+</span></span><span style="display:flex;"><span>    _, err = pipe.<span style="color:#50fa7b">Exec</span>(ctx)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Request count: %s\n&#34;</span>, getCmd.<span style="color:#50fa7b">Val</span>())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Pub/Sub</span>
+</span></span><span style="display:flex;"><span>    pubsub <span style="color:#ff79c6">:=</span> rdb.<span style="color:#50fa7b">Subscribe</span>(ctx, <span style="color:#f1fa8c">&#34;order_events&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">defer</span> pubsub.<span style="color:#50fa7b">Close</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">go</span> <span style="color:#8be9fd;font-style:italic">func</span>() {
+</span></span><span style="display:flex;"><span>        ch <span style="color:#ff79c6">:=</span> pubsub.<span style="color:#50fa7b">Channel</span>()
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span> msg <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> ch {
+</span></span><span style="display:flex;"><span>            fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;[%s] %s\n&#34;</span>, msg.Channel, msg.Payload)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Publish</span>
+</span></span><span style="display:flex;"><span>    rdb.<span style="color:#50fa7b">Publish</span>(ctx, <span style="color:#f1fa8c">&#34;order_events&#34;</span>, <span style="color:#f1fa8c">`{&#34;order_id&#34;: 1001, &#34;status&#34;: &#34;shipped&#34;}`</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h2 id="connection-string-reference">Connection String Reference</h2>
+<p>ThunderDB accepts connection strings in the standard formats for each protocol:</p>
+<h3 id="postgresql-format">PostgreSQL Format</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>postgresql://thunder:secret@localhost:5432/myapp?sslmode=require&amp;connect_timeout=10
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th>Parameter</th>
+          <th>Description</th>
+          <th>Default</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>sslmode</code></td>
+          <td><code>disable</code>, <code>require</code>, <code>verify-ca</code>, <code>verify-full</code></td>
+          <td><code>disable</code></td>
+      </tr>
+      <tr>
+          <td><code>connect_timeout</code></td>
+          <td>Connection timeout in seconds</td>
+          <td><code>10</code></td>
+      </tr>
+      <tr>
+          <td><code>application_name</code></td>
+          <td>Application identifier for monitoring</td>
+          <td>&ndash;</td>
+      </tr>
+      <tr>
+          <td><code>options</code></td>
+          <td>Additional server options</td>
+          <td>&ndash;</td>
+      </tr>
+      <tr>
+          <td><code>target_session_attrs</code></td>
+          <td><code>read-write</code>, <code>read-only</code>, <code>any</code></td>
+          <td><code>any</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="mysql-format">MySQL Format</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>thunder:secret@tcp(localhost:3306)/myapp?tls=true&amp;timeout=10s
+</span></span></code></pre></div><h3 id="redis-format">Redis Format</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>redis://:secret@localhost:6379/0
+</span></span></code></pre></div><hr>
+<h2 id="best-practices">Best Practices</h2>
+<ol>
+<li><strong>Use connection pools</strong> &ndash; Always pool connections in production. Most drivers support this natively.</li>
+<li><strong>Use parameterized queries</strong> &ndash; Never concatenate user input into SQL strings. Use bind parameters (<code>$1</code>, <code>%s</code>, <code>?</code>) to prevent SQL injection.</li>
+<li><strong>Choose the right protocol</strong> &ndash; Use PostgreSQL for full SQL features, MySQL for compatibility with existing apps, Redis for caching workloads.</li>
+<li><strong>Set timeouts</strong> &ndash; Configure connection and query timeouts appropriate for your workload.</li>
+<li><strong>Handle transaction retries</strong> &ndash; When using <code>SERIALIZABLE</code> isolation, be prepared to retry transactions on serialization failures.</li>
+<li><strong>Close connections</strong> &ndash; Always close connections and release pool resources when done.</li>
+<li><strong>Use prepared statements</strong> &ndash; For repeated queries, prepared statements avoid repeated parsing and planning overhead.</li>
+<li><strong>Monitor connections</strong> &ndash; Watch <code>thunderdb_active_connections</code> metrics to ensure pools are properly sized.</li>
+</ol>
+
+	<div class="section-index">
+    
+    
+    </div>
+<style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<div class="d-print-none">
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+</div>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'page_helpful', {
+      'event_category': 'Helpful',
+      'event_label': window.location.pathname,
+      'value': value
+    });
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback( 100 );
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+<br />
+</div>
+
+          </main>
+        </div>
+      </div>
+      <footer class="td-footer row d-print-none">
+  <div class="container-fluid">
+    <div class="row mx-md-2">
+      <div class="td-footer__left col-6 col-sm-4 order-sm-1">
+        
+      </div><div class="td-footer__right col-6 col-sm-4 order-sm-3">
+        <ul class="td-footer__links-list">
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="GitHub" aria-label="GitHub">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="Discussions" aria-label="Discussions">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb/discussions" aria-label="Discussions">
+      <i class="fas fa-comments"></i>
+    </a>
+  </li>
+  
+</ul>
+
+      </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
+        <span class="td-footer__copyright">&copy;
+    2026
+    <span class="td-footer__authors">ThunderDB Contributors</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><p class="td-footer__about mt-2"><a href="/docs/about/">About ThunderDB</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script src="/docs/js/main.js"></script>
+<script defer src="/docs/js/click-to-copy.js" crossorigin="anonymous"></script>
+<script src='/docs/js/tabpane-persist.js'></script>
+
+  </body>
+</html>

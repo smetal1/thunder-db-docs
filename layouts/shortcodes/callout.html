@@ -1,0 +1,7 @@
+{{ $type := .Get "type" | default "info" }}
+<div class="alert alert-{{ $type }}" role="alert">
+{{ if eq $type "warning" }}<strong>Warning:</strong> {{ end }}
+{{ if eq $type "danger" }}<strong>Danger:</strong> {{ end }}
+{{ if eq $type "info" }}<strong>Note:</strong> {{ end }}
+{{ .Inner | markdownify }}
+</div>

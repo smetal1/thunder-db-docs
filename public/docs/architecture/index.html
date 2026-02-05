@@ -1,0 +1,1503 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
+  <head><script src="/docs/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=docs/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/docs/favicons/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/docs/favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/docs/favicons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/docs/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="/docs/favicons/favicon-256.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/docs/favicons/apple-touch-icon.png">
+<link rel="manifest" href="/docs/favicons/site.webmanifest">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="msapplication-TileColor" content="#0D0D0D">
+
+<title>Architecture | ThunderDB Documentation</title>
+<meta name="description" content="Deep dive into ThunderDB&#39;s system architecture, components, and design decisions.">
+<meta property="og:url" content="http://localhost:1313/docs/docs/architecture/">
+  <meta property="og:site_name" content="ThunderDB Documentation">
+  <meta property="og:title" content="Architecture">
+  <meta property="og:description" content="Deep dive into ThunderDB&#39;s system architecture, components, and design decisions.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+
+  <meta itemprop="name" content="Architecture">
+  <meta itemprop="description" content="Deep dive into ThunderDB&#39;s system architecture, components, and design decisions.">
+  <meta itemprop="wordCount" content="5681">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Architecture">
+  <meta name="twitter:description" content="Deep dive into ThunderDB&#39;s system architecture, components, and design decisions.">
+<link href="/docs/scss/main.css" rel="stylesheet">
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+  crossorigin="anonymous"></script>
+<script defer
+  src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
+  integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
+  crossorigin="anonymous"></script>
+
+  </head>
+  <body class="td-section">
+    <header>
+      <nav class="td-navbar js-navbar-scroll" data-bs-theme="dark">
+<div class="td-navbar-container container-fluid flex-column flex-md-row">
+  <a class="navbar-brand" href="/docs/"><span class="navbar-brand__logo navbar-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="300" height="64"><defs><symbol id="b" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#331500" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FF6B00"/><rect width="4.8" height=".6" rx=".55" fill="#FA4" opacity=".5"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#F83" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#930" opacity=".35"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D50"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,200,100,0.3)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FC8" opacity=".55"/></symbol><symbol id="c" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#4D3000" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FA0"/><rect width="4.8" height=".6" rx=".55" fill="#FD6" opacity=".55"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#FB3" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#960" opacity=".3"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D80"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,230,150,0.35)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FE9" opacity=".6"/></symbol></defs><use href="#b" x="35" y="2" width="5" height="5"/><use href="#b" x="41" y="2" width="5" height="5"/><use href="#b" x="29" y="8" width="5" height="5"/><use href="#b" x="35" y="8" width="5" height="5"/><use href="#b" x="23" y="14" width="5" height="5"/><use href="#b" x="29" y="14" width="5" height="5"/><use href="#b" x="17" y="20" width="5" height="5"/><use href="#b" x="23" y="20" width="5" height="5"/><use href="#c" x="5" y="26" width="5" height="5"/><use href="#c" x="11" y="26" width="5" height="5"/><use href="#c" x="17" y="26" width="5" height="5"/><use href="#c" x="23" y="26" width="5" height="5"/><use href="#c" x="29" y="26" width="5" height="5"/><use href="#c" x="35" y="26" width="5" height="5"/><use href="#c" x="41" y="26" width="5" height="5"/><use href="#c" x="47" y="26" width="5" height="5"/><use href="#b" x="35" y="32" width="5" height="5"/><use href="#b" x="41" y="32" width="5" height="5"/><use href="#b" x="29" y="38" width="5" height="5"/><use href="#b" x="35" y="38" width="5" height="5"/><use href="#b" x="23" y="44" width="5" height="5"/><use href="#b" x="29" y="44" width="5" height="5"/><use href="#b" x="17" y="50" width="5" height="5"/><use href="#b" x="23" y="50" width="5" height="5"/><use href="#b" x="11" y="56" width="5" height="5"/><use href="#b" x="17" y="56" width="5" height="5"/><text x="66" y="43" font-family="'SF Mono','Fira Code','Consolas','Courier New',monospace" font-size="27" font-weight="900" letter-spacing=".5"><tspan fill="#FFF">Thunder</tspan><tspan fill="#FF6B00">DB</tspan></text></svg></span><span class="navbar-brand__name">ThunderDB Documentation</span></a>
+  <div class="td-navbar-nav-scroll td-navbar-nav-scroll--indicator" id="main_navbar">
+    <div class="scroll-indicator scroll-left"></div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/"><span>Documentation</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/architecture/"><span>Architecture</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/developer/api-reference/"><span>API Reference</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/about/"><span>About</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/thunderdb/thunderdb" target="_blank" rel="noopener"><i class='fab fa-github'></i><span>GitHub</span></a>
+      </li>
+      </ul>
+    <div class="scroll-indicator scroll-right"></div>
+  </div>
+  <div class="d-none d-lg-block td-navbar__search">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+  </div>
+</div>
+</nav>
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main" data-bs-spy="scroll" data-bs-target=".td-toc" data-bs-root-margin="0px 0px -10%">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+  <script>
+    $(function() {
+    $("#td-section-nav a").removeClass("active");
+    $("#td-section-nav #m-docsdocsarchitecture").addClass("active");
+    $("#td-section-nav #m-docsdocsarchitecture-li span").addClass("td-sidebar-nav-active-item");
+    $("#td-section-nav #m-docsdocsarchitecture").parents("li").addClass("active-path");
+    $("#td-section-nav li.active-path").addClass("show");
+    $("#td-section-nav li.active-path").children("input").prop('checked', true);
+    $("#td-section-nav #m-docsdocsarchitecture-li").siblings("li").addClass("show");
+    $("#td-section-nav #m-docsdocsarchitecture-li").children("ul").children("li").addClass("show");
+    $("#td-sidebar-menu").toggleClass("d-none");
+    });
+  </script>
+  <div id="td-sidebar-menu" class="td-sidebar__inner d-none">
+  <form class="td-sidebar__search d-flex align-items-center">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+    <button class="btn btn-link td-sidebar__toggle" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  <nav class="td-sidebar-nav collapse foldable-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocs-li">
+    <a href="/docs/docs/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docsdocs"><span class="">Documentation</span></a>
+    <ul class="ul-1">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsgetting-started-li">
+    <input type="checkbox" id="m-docsdocsgetting-started-check"/>
+    <label for="m-docsdocsgetting-started-check"><a href="/docs/docs/getting-started/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsgetting-started"><span class="">Getting Started</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsarchitecture-li">
+    <input type="checkbox" id="m-docsdocsarchitecture-check"/>
+    <label for="m-docsdocsarchitecture-check"><a href="/docs/docs/architecture/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsarchitecture"><span class="">Architecture</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsdeveloper-li">
+    <input type="checkbox" id="m-docsdocsdeveloper-check"/>
+    <label for="m-docsdocsdeveloper-check"><a href="/docs/docs/developer/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloper"><span class="">Developer Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperapi-reference-li">
+    <input type="checkbox" id="m-docsdocsdeveloperapi-reference-check"/>
+    <label for="m-docsdocsdeveloperapi-reference-check"><a href="/docs/docs/developer/api-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperapi-reference"><span class="">API Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersql-reference-li">
+    <input type="checkbox" id="m-docsdocsdevelopersql-reference-check"/>
+    <label for="m-docsdocsdevelopersql-reference-check"><a href="/docs/docs/developer/sql-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersql-reference"><span class="">SQL Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersdk-li">
+    <input type="checkbox" id="m-docsdocsdevelopersdk-check"/>
+    <label for="m-docsdocsdevelopersdk-check"><a href="/docs/docs/developer/sdk/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersdk"><span class="">SDKs &amp; Drivers</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperexamples-li">
+    <input type="checkbox" id="m-docsdocsdeveloperexamples-check"/>
+    <label for="m-docsdocsdeveloperexamples-check"><a href="/docs/docs/developer/examples/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperexamples"><span class="">Examples &amp; Use Cases</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsadministrator-li">
+    <input type="checkbox" id="m-docsdocsadministrator-check"/>
+    <label for="m-docsdocsadministrator-check"><a href="/docs/docs/administrator/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministrator"><span class="">Administrator Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratordeployment-li">
+    <input type="checkbox" id="m-docsdocsadministratordeployment-check"/>
+    <label for="m-docsdocsadministratordeployment-check"><a href="/docs/docs/administrator/deployment/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratordeployment"><span class="">Deployment</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorconfiguration-li">
+    <input type="checkbox" id="m-docsdocsadministratorconfiguration-check"/>
+    <label for="m-docsdocsadministratorconfiguration-check"><a href="/docs/docs/administrator/configuration/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorconfiguration"><span class="">Configuration</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratormonitoring-li">
+    <input type="checkbox" id="m-docsdocsadministratormonitoring-check"/>
+    <label for="m-docsdocsadministratormonitoring-check"><a href="/docs/docs/administrator/monitoring/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratormonitoring"><span class="">Monitoring</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorbackup-recovery-li">
+    <input type="checkbox" id="m-docsdocsadministratorbackup-recovery-check"/>
+    <label for="m-docsdocsadministratorbackup-recovery-check"><a href="/docs/docs/administrator/backup-recovery/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorbackup-recovery"><span class="">Backup &amp; Recovery</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorsecurity-li">
+    <input type="checkbox" id="m-docsdocsadministratorsecurity-check"/>
+    <label for="m-docsdocsadministratorsecurity-check"><a href="/docs/docs/administrator/security/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorsecurity"><span class="">Security</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratortroubleshooting-li">
+    <input type="checkbox" id="m-docsdocsadministratortroubleshooting-check"/>
+    <label for="m-docsdocsadministratortroubleshooting-check"><a href="/docs/docs/administrator/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratortroubleshooting"><span class="">Troubleshooting</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocscontributor-li">
+    <input type="checkbox" id="m-docsdocscontributor-check"/>
+    <label for="m-docsdocscontributor-check"><a href="/docs/docs/contributor/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributor"><span class="">Contributor Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributordevelopment-setup-li">
+    <input type="checkbox" id="m-docsdocscontributordevelopment-setup-check"/>
+    <label for="m-docsdocscontributordevelopment-setup-check"><a href="/docs/docs/contributor/development-setup/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributordevelopment-setup"><span class="">Development Setup</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorcodebase-guide-li">
+    <input type="checkbox" id="m-docsdocscontributorcodebase-guide-check"/>
+    <label for="m-docsdocscontributorcodebase-guide-check"><a href="/docs/docs/contributor/codebase-guide/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorcodebase-guide"><span class="">Codebase Guide</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributortesting-li">
+    <input type="checkbox" id="m-docsdocscontributortesting-check"/>
+    <label for="m-docsdocscontributortesting-check"><a href="/docs/docs/contributor/testing/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributortesting"><span class="">Testing</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorrelease-process-li">
+    <input type="checkbox" id="m-docsdocscontributorrelease-process-check"/>
+    <label for="m-docsdocscontributorrelease-process-check"><a href="/docs/docs/contributor/release-process/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorrelease-process"><span class="">Release Process</span></a></label>
+    
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
+<a href="https://github.com/thunderdb/thunderdb/tree/main/content/docs/architecture/_index.md" class="td-page-meta--view td-page-meta__view" target="_blank" rel="noopener"><i class="fa-solid fa-file-lines fa-fw"></i> View page source</a>
+  <a href="https://github.com/thunderdb/thunderdb/edit/main/content/docs/architecture/_index.md" class="td-page-meta--edit td-page-meta__edit" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Edit this page</a>
+  <a href="https://github.com/thunderdb/thunderdb/new/main/content/docs/architecture?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child td-page-meta__child" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Create child page</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new?title=Architecture" class="td-page-meta--issue td-page-meta__issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create documentation issue</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new" class="td-page-meta--project td-page-meta__project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create project issue</a>
+  
+</div>
+
+            <div class="td-toc" data-proofer-ignore>
+<div class="td-toc-title">
+      <span class="td-toc-title__text">On this page</span>
+      <a class="td-toc-title__link" title="Top of page" href="#"></a>
+    </div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-system-overview">1. System Overview</a></li>
+    <li><a href="#2-crate-architecture">2. Crate Architecture</a>
+      <ul>
+        <li><a href="#dependency-graph">Dependency Graph</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-storage-engine">3. Storage Engine</a>
+      <ul>
+        <li><a href="#31-page-based-storage">3.1 Page-Based Storage</a></li>
+        <li><a href="#32-row-store-oltp-optimized">3.2 Row Store (OLTP-Optimized)</a></li>
+        <li><a href="#33-column-store-olap-optimized">3.3 Column Store (OLAP-Optimized)</a></li>
+        <li><a href="#34-fractured-mirror-htap-design">3.4 Fractured Mirror (HTAP Design)</a></li>
+        <li><a href="#35-btree-indexes">3.5 B+Tree Indexes</a></li>
+        <li><a href="#36-buffer-pool">3.6 Buffer Pool</a></li>
+        <li><a href="#37-wal-write-ahead-log">3.7 WAL (Write-Ahead Log)</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-transaction-processing">4. Transaction Processing</a>
+      <ul>
+        <li><a href="#41-mvcc-multi-version-concurrency-control">4.1 MVCC (Multi-Version Concurrency Control)</a></li>
+        <li><a href="#42-ccp-cooperative-concurrency-protocol">4.2 CCP (Cooperative Concurrency Protocol)</a></li>
+        <li><a href="#43-distributed-transactions-2pc">4.3 Distributed Transactions (2PC)</a></li>
+        <li><a href="#44-deadlock-detection">4.4 Deadlock Detection</a></li>
+        <li><a href="#45-isolation-levels">4.5 Isolation Levels</a></li>
+        <li><a href="#46-txnid-format">4.6 TxnId Format</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-query-processing-pipeline">5. Query Processing Pipeline</a>
+      <ul>
+        <li><a href="#51-parser">5.1 Parser</a></li>
+        <li><a href="#52-analyzer">5.2 Analyzer</a></li>
+        <li><a href="#53-optimizer">5.3 Optimizer</a></li>
+        <li><a href="#54-planner">5.4 Planner</a></li>
+        <li><a href="#55-execution">5.5 Execution</a></li>
+        <li><a href="#56-nlp--llm-integration">5.6 NLP &amp; LLM Integration</a></li>
+      </ul>
+    </li>
+    <li><a href="#6-distributed-architecture">6. Distributed Architecture</a>
+      <ul>
+        <li><a href="#61-raft-consensus">6.1 Raft Consensus</a></li>
+        <li><a href="#62-region-based-sharding">6.2 Region-Based Sharding</a></li>
+        <li><a href="#63-auto-rebalancing">6.3 Auto-Rebalancing</a></li>
+        <li><a href="#64-grpc-transport">6.4 gRPC Transport</a></li>
+      </ul>
+    </li>
+    <li><a href="#7-protocol-compatibility">7. Protocol Compatibility</a>
+      <ul>
+        <li><a href="#71-postgresql-v3-wire-protocol-54kb">7.1 PostgreSQL v3 Wire Protocol (54KB)</a></li>
+        <li><a href="#72-mysql-41-wire-protocol-36kb">7.2 MySQL 4.1+ Wire Protocol (36KB)</a></li>
+        <li><a href="#73-resp23-protocol-105kb">7.3 RESP2/3 Protocol (105KB)</a></li>
+      </ul>
+    </li>
+    <li><a href="#8-integration-layer">8. Integration Layer</a>
+      <ul>
+        <li><a href="#81-cdc-architecture-change-data-capture">8.1 CDC Architecture (Change Data Capture)</a></li>
+        <li><a href="#82-fdw-architecture-foreign-data-wrappers">8.2 FDW Architecture (Foreign Data Wrappers)</a></li>
+        <li><a href="#83-zero-downtime-migration">8.3 Zero-Downtime Migration</a></li>
+      </ul>
+    </li>
+    <li><a href="#9-data-flow-diagrams">9. Data Flow Diagrams</a>
+      <ul>
+        <li><a href="#91-query-execution-flow-read-path">9.1 Query Execution Flow (Read Path)</a></li>
+        <li><a href="#92-write-path">9.2 Write Path</a></li>
+        <li><a href="#93-cdc-flow">9.3 CDC Flow</a></li>
+        <li><a href="#94-distributed-query-flow">9.4 Distributed Query Flow</a></li>
+      </ul>
+    </li>
+    <li><a href="#10-design-decisions">10. Design Decisions</a>
+      <ul>
+        <li><a href="#101-why-rust">10.1 Why Rust?</a></li>
+        <li><a href="#102-why-htap">10.2 Why HTAP?</a></li>
+        <li><a href="#103-why-multi-protocol">10.3 Why Multi-Protocol?</a></li>
+        <li><a href="#104-why-companion-approach">10.4 Why Companion Approach?</a></li>
+      </ul>
+    </li>
+    <li><a href="#summary-of-key-metrics">Summary of Key Metrics</a></li>
+  </ul>
+</nav>
+  </div>
+
+            
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/">Documentation</a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    Architecture</li>
+  </ol>
+</nav>
+<div class="td-content">
+	<h1>Architecture</h1>
+  <div class="lead">Deep dive into ThunderDB&rsquo;s system architecture, components, and design decisions.</div>
+	<header class="article-meta">
+		
+</header>
+	<h2 id="1-system-overview">1. System Overview</h2>
+<p>ThunderDB is a distributed Hybrid Transactional/Analytical Processing (HTAP) database written entirely in Rust. The codebase spans approximately 75,600 lines of code organized across 14 crates, each responsible for a distinct subsystem. ThunderDB is designed to serve both OLTP and OLAP workloads from a single system, eliminating the need for separate databases and the ETL pipelines that connect them.</p>
+<p>The system follows a layered architecture where each layer has well-defined responsibilities and communicates with adjacent layers through clean interfaces. The following diagram illustrates the complete stack:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>+===========================================================================+
+</span></span><span style="display:flex;"><span>|                            CLIENT LAYER                                   |
+</span></span><span style="display:flex;"><span>|  +------------------+  +------------------+  +-------------------------+  |
+</span></span><span style="display:flex;"><span>|  | PostgreSQL/MySQL  |  |  Native Driver   |  |  MCP (Model Context    |  |
+</span></span><span style="display:flex;"><span>|  | Compatible Tools  |  |  (Rust Client)   |  |  Protocol)             |  |
+</span></span><span style="display:flex;"><span>|  +--------+---------+  +--------+---------+  +------------+------------+  |
+</span></span><span style="display:flex;"><span>+===========|======================|=========================|==============+
+</span></span><span style="display:flex;"><span>            |                      |                         |
+</span></span><span style="display:flex;"><span>+===========v======================v=========================v==============+
+</span></span><span style="display:flex;"><span>|                           PROTOCOL LAYER                                  |
+</span></span><span style="display:flex;"><span>|  +----------------+ +----------------+ +-----------+ +------------------+ |
+</span></span><span style="display:flex;"><span>|  | PostgreSQL v3  | | MySQL 4.1+     | | RESP2/3   | | Session Mgmt    | |
+</span></span><span style="display:flex;"><span>|  | Wire Protocol  | | Wire Protocol  | | (Redis)   | | Auth &amp; TLS      | |
+</span></span><span style="display:flex;"><span>|  | (54KB)         | | (36KB)         | | (105KB)   | | (41KB)          | |
+</span></span><span style="display:flex;"><span>|  +-------+--------+ +-------+--------+ +-----+-----+ +--------+--------+ |
+</span></span><span style="display:flex;"><span>+=========================================================================--+
+</span></span><span style="display:flex;"><span>            |                      |                |              |
+</span></span><span style="display:flex;"><span>+===========v======================v================v==============v========+
+</span></span><span style="display:flex;"><span>|                             API LAYER                                     |
+</span></span><span style="display:flex;"><span>|  +----------+ +----------+ +-----------+ +------------+ +---------------+ |
+</span></span><span style="display:flex;"><span>|  |  REST    | |  gRPC    | | GraphQL   | | WebSocket  | | Web Dashboard | |
+</span></span><span style="display:flex;"><span>|  |  (axum)  | |  (tonic) | | (async-   | | (live      | | (40KB)        | |
+</span></span><span style="display:flex;"><span>|  |          | |          | |  graphql) | |  queries)  | |               | |
+</span></span><span style="display:flex;"><span>|  +----+-----+ +----+-----+ +-----+-----+ +-----+------+ +------+-------+ |
+</span></span><span style="display:flex;"><span>+=======|============|==============|=============|===============|=========+
+</span></span><span style="display:flex;"><span>        |            |              |             |               |
+</span></span><span style="display:flex;"><span>+=======v============v==============v=============v===============v=========+
+</span></span><span style="display:flex;"><span>|                         INTEGRATION LAYER                                 |
+</span></span><span style="display:flex;"><span>|  +-----------------------------------+ +--------------------------------+ |
+</span></span><span style="display:flex;"><span>|  |  CDC (Change Data Capture)        | | FDW (Foreign Data Wrappers)    | |
+</span></span><span style="display:flex;"><span>|  |  - PostgreSQL (logical repl.)     | | - Query external PostgreSQL    | |
+</span></span><span style="display:flex;"><span>|  |  - MySQL (binlog)                 | | - Query external MySQL         | |
+</span></span><span style="display:flex;"><span>|  |  - MongoDB (change streams)       | | - Query external MongoDB       | |
+</span></span><span style="display:flex;"><span>|  |  - Redis (keyspace notifications) | | - Query external Redis         | |
+</span></span><span style="display:flex;"><span>|  +-----------------------------------+ | - Predicate pushdown           | |
+</span></span><span style="display:flex;"><span>|                                        +--------------------------------+ |
+</span></span><span style="display:flex;"><span>+===========================================================================+
+</span></span><span style="display:flex;"><span>            |                                          |
+</span></span><span style="display:flex;"><span>+===========v==========================================v====================+
+</span></span><span style="display:flex;"><span>|                            SQL LAYER                                      |
+</span></span><span style="display:flex;"><span>|  +----------+  +-----------+  +-----------+  +----------+  +-----------+  |
+</span></span><span style="display:flex;"><span>|  | Parser   |  | Analyzer  |  | Optimizer |  | Planner  |  | NLP / LLM |  |
+</span></span><span style="display:flex;"><span>|  | (sqlpar- |  | (semantic |  | (cost-    |  | (logical |  | (llama.   |  |
+</span></span><span style="display:flex;"><span>|  |  ser)    |  |  valid.)  |  |  based)   |  |  -&gt; phys)|  |  cpp)     |  |
+</span></span><span style="display:flex;"><span>|  +----+-----+  +-----+-----+  +-----+-----+  +----+-----+  +-----+-----+ |
+</span></span><span style="display:flex;"><span>+=======|==============|===============|==============|==============|======+
+</span></span><span style="display:flex;"><span>        |              |               |              |              |
+</span></span><span style="display:flex;"><span>+=======v==============v===============v==============v==============v======+
+</span></span><span style="display:flex;"><span>|                         EXECUTION LAYER                                   |
+</span></span><span style="display:flex;"><span>|  +------------------------+ +---------------------+ +-------------------+ |
+</span></span><span style="display:flex;"><span>|  | Vectorized Execution   | | Parallel Execution  | | Physical Plan     | |
+</span></span><span style="display:flex;"><span>|  | (33KB, 1024+ batches)  | | (35KB, multi-thread)| | Operators (38KB)  | |
+</span></span><span style="display:flex;"><span>|  +------------------------+ +---------------------+ +-------------------+ |
+</span></span><span style="display:flex;"><span>+===========================================================================+
+</span></span><span style="display:flex;"><span>            |
+</span></span><span style="display:flex;"><span>+===========v===============================================================+
+</span></span><span style="display:flex;"><span>|                        TRANSACTION LAYER                                  |
+</span></span><span style="display:flex;"><span>|  +---------+ +----------+ +----------+ +-------------+ +---------------+  |
+</span></span><span style="display:flex;"><span>|  |  MVCC   | |   CCP    | |   2PC    | |  Deadlock   | | Lock Manager  |  |
+</span></span><span style="display:flex;"><span>|  | Snapshot | | Optimis- | | Distrib. | |  Detection  | | (row/table/   |  |
+</span></span><span style="display:flex;"><span>|  | Isolat.  | | tic CC   | | Coord.   | | (wait-for)  | |  intent)      |  |
+</span></span><span style="display:flex;"><span>|  +---------+ +----------+ +----------+ +-------------+ +---------------+  |
+</span></span><span style="display:flex;"><span>+===========================================================================+
+</span></span><span style="display:flex;"><span>            |
+</span></span><span style="display:flex;"><span>+===========v===============================================================+
+</span></span><span style="display:flex;"><span>|                          STORAGE LAYER                                    |
+</span></span><span style="display:flex;"><span>|  +-----------+ +------------+ +-------------+ +-----------+ +-----------+ |
+</span></span><span style="display:flex;"><span>|  | Row Store | | Column     | | Vector      | | Buffer    | | WAL       | |
+</span></span><span style="display:flex;"><span>|  | (OLTP)    | | Store      | | Store       | | Pool      | | (ARIES)   | |
+</span></span><span style="display:flex;"><span>|  |           | | (OLAP)     | | (HNSW/IVF)  | | (LRU)     | |           | |
+</span></span><span style="display:flex;"><span>|  +-----------+ +------------+ +-------------+ +-----------+ +-----------+ |
+</span></span><span style="display:flex;"><span>|  +-----------+ +--------------+ +--------------------+                    |
+</span></span><span style="display:flex;"><span>|  | B+Tree    | | Page Manager | | Compression        |                    |
+</span></span><span style="display:flex;"><span>|  | Indexes   | | (16KB pages) | | (LZ4/Snappy/Zstd)  |                    |
+</span></span><span style="display:flex;"><span>|  +-----------+ +--------------+ +--------------------+                    |
+</span></span><span style="display:flex;"><span>+===========================================================================+
+</span></span><span style="display:flex;"><span>            |
+</span></span><span style="display:flex;"><span>+===========v===============================================================+
+</span></span><span style="display:flex;"><span>|                          CLUSTER LAYER                                    |
+</span></span><span style="display:flex;"><span>|  +----------+ +-------------+ +-------------+ +-----------+ +-----------+ |
+</span></span><span style="display:flex;"><span>|  | Raft     | | Region-     | | Replication | | Auto-     | | gRPC      | |
+</span></span><span style="display:flex;"><span>|  | Consen-  | | Based       | | (config.    | | Rebalance | | Transport | |
+</span></span><span style="display:flex;"><span>|  | sus      | | Sharding    | |  factor)    | |           | |           | |
+</span></span><span style="display:flex;"><span>|  +----------+ +-------------+ +-------------+ +-----------+ +-----------+ |
+</span></span><span style="display:flex;"><span>+===========================================================================+
+</span></span></code></pre></div><hr>
+<h2 id="2-crate-architecture">2. Crate Architecture</h2>
+<p>ThunderDB is organized into 14 Rust crates within a Cargo workspace. Each crate encapsulates a distinct subsystem with explicit dependency boundaries. This modularity allows independent development, testing, and potential future extraction of components.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Crate</th>
+          <th>Purpose</th>
+          <th>Key Details</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>thunder-common</code></td>
+          <td>Shared types and infrastructure</td>
+          <td><code>DatabaseId</code>, <code>TableId</code>, <code>ColumnId</code>, <code>RowId</code>, <code>PageId</code>, <code>TxnId</code>, and other strongly-typed identifiers. Configuration management, error hierarchy, RBAC (role-based access control), audit logging, and metrics collection (Prometheus-compatible).</td>
+      </tr>
+      <tr>
+          <td><code>thunder-storage</code></td>
+          <td>Storage engine</td>
+          <td>WAL with ARIES-style recovery (67KB), flash-optimized B+Tree with 256+ fanout (29KB), LRU buffer pool, row store, column store, compression (LZ4, Snappy, Zstd, RLE, Delta, Dictionary encoding), and page management with 16KB pages.</td>
+      </tr>
+      <tr>
+          <td><code>thunder-txn</code></td>
+          <td>Transaction management</td>
+          <td>MVCC snapshot isolation, CCP (Cooperative Concurrency Protocol) for optimistic concurrency, 2PC distributed transaction coordinator, hierarchical lock manager, and wait-for graph deadlock detection.</td>
+      </tr>
+      <tr>
+          <td><code>thunder-sql</code></td>
+          <td>SQL processing</td>
+          <td>PostgreSQL dialect parser via <code>sqlparser</code> crate, semantic analyzer, cost-based optimizer with rule transformations, logical and physical planner, NLP integration (38KB), LLM integration via llama.cpp (23KB), ML operations (28KB), UDF support, multi-dialect support (45KB).</td>
+      </tr>
+      <tr>
+          <td><code>thunder-query</code></td>
+          <td>Query execution</td>
+          <td>Executor engine (60KB), physical plan operators (38KB), vectorized execution with 1024+ row batches (33KB), parallel execution across multiple threads (35KB).</td>
+      </tr>
+      <tr>
+          <td><code>thunder-cluster</code></td>
+          <td>Distributed clustering</td>
+          <td>Raft consensus protocol, region-based sharding with range partitioning, membership management, health checking via heartbeats, configurable replication, gRPC-based inter-node transport.</td>
+      </tr>
+      <tr>
+          <td><code>thunder-protocol</code></td>
+          <td>Wire protocols</td>
+          <td>PostgreSQL v3 extended query protocol (54KB), MySQL 4.1+ binary protocol (36KB), RESP2/3 Redis protocol (105KB), session management (41KB), authentication (MD5, SCRAM-SHA-256, MySQL native password), TLS termination.</td>
+      </tr>
+      <tr>
+          <td><code>thunder-vector</code></td>
+          <td>Vector indexing</td>
+          <td>HNSW (Hierarchical Navigable Small World) and IVF (Inverted File Index) algorithms, multiple distance metrics (L2, cosine, inner product), scalar/product quantization, SIMD acceleration via <code>simsimd</code>.</td>
+      </tr>
+      <tr>
+          <td><code>thunder-api</code></td>
+          <td>API servers</td>
+          <td>REST via <code>axum</code>, gRPC via <code>tonic</code>, GraphQL via <code>async-graphql</code>, WebSocket for live query subscriptions, embedded web dashboard (40KB), JWT/API-key authentication, token-bucket rate limiting.</td>
+      </tr>
+      <tr>
+          <td><code>thunder-cdc</code></td>
+          <td>Change Data Capture</td>
+          <td>PostgreSQL logical replication decoding, MySQL binlog parsing, MongoDB change stream consumption, Redis keyspace notification listeners. Real-time ingestion from external sources.</td>
+      </tr>
+      <tr>
+          <td><code>thunder-fdw</code></td>
+          <td>Foreign Data Wrappers</td>
+          <td>Query federation across external PostgreSQL, MySQL, MongoDB, and Redis instances. Supports predicate pushdown, projection pruning, and cost estimation for remote tables.</td>
+      </tr>
+      <tr>
+          <td><code>thunder-server</code></td>
+          <td>Main server binary</td>
+          <td>Engine coordination, background workers (vacuum, checkpoint, statistics collection, region balancing), signal handling, graceful shutdown orchestration.</td>
+      </tr>
+      <tr>
+          <td><code>thunder-client</code></td>
+          <td>Native Rust client</td>
+          <td>Async connection pool (<code>bb8</code>-based), prepared statement caching, transaction helpers, automatic retry with exponential backoff, connection health monitoring.</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="dependency-graph">Dependency Graph</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>thunder-server
+</span></span><span style="display:flex;"><span>  +-- thunder-api
+</span></span><span style="display:flex;"><span>  |     +-- thunder-sql
+</span></span><span style="display:flex;"><span>  |     +-- thunder-query
+</span></span><span style="display:flex;"><span>  |     +-- thunder-common
+</span></span><span style="display:flex;"><span>  +-- thunder-protocol
+</span></span><span style="display:flex;"><span>  |     +-- thunder-sql
+</span></span><span style="display:flex;"><span>  |     +-- thunder-common
+</span></span><span style="display:flex;"><span>  +-- thunder-sql
+</span></span><span style="display:flex;"><span>  |     +-- thunder-query
+</span></span><span style="display:flex;"><span>  |     +-- thunder-txn
+</span></span><span style="display:flex;"><span>  |     +-- thunder-common
+</span></span><span style="display:flex;"><span>  +-- thunder-query
+</span></span><span style="display:flex;"><span>  |     +-- thunder-storage
+</span></span><span style="display:flex;"><span>  |     +-- thunder-txn
+</span></span><span style="display:flex;"><span>  |     +-- thunder-vector
+</span></span><span style="display:flex;"><span>  |     +-- thunder-common
+</span></span><span style="display:flex;"><span>  +-- thunder-txn
+</span></span><span style="display:flex;"><span>  |     +-- thunder-storage
+</span></span><span style="display:flex;"><span>  |     +-- thunder-common
+</span></span><span style="display:flex;"><span>  +-- thunder-storage
+</span></span><span style="display:flex;"><span>  |     +-- thunder-common
+</span></span><span style="display:flex;"><span>  +-- thunder-cluster
+</span></span><span style="display:flex;"><span>  |     +-- thunder-storage
+</span></span><span style="display:flex;"><span>  |     +-- thunder-txn
+</span></span><span style="display:flex;"><span>  |     +-- thunder-common
+</span></span><span style="display:flex;"><span>  +-- thunder-cdc
+</span></span><span style="display:flex;"><span>  |     +-- thunder-storage
+</span></span><span style="display:flex;"><span>  |     +-- thunder-common
+</span></span><span style="display:flex;"><span>  +-- thunder-fdw
+</span></span><span style="display:flex;"><span>  |     +-- thunder-sql
+</span></span><span style="display:flex;"><span>  |     +-- thunder-common
+</span></span><span style="display:flex;"><span>  +-- thunder-vector
+</span></span><span style="display:flex;"><span>        +-- thunder-storage
+</span></span><span style="display:flex;"><span>        +-- thunder-common
+</span></span></code></pre></div><hr>
+<h2 id="3-storage-engine">3. Storage Engine</h2>
+<p>The storage engine is the foundation of ThunderDB, responsible for durable, efficient data storage and retrieval. It implements a page-based architecture with both row-oriented and column-oriented storage, unified through the fractured mirror design.</p>
+<h3 id="31-page-based-storage">3.1 Page-Based Storage</h3>
+<p>All data in ThunderDB is organized into fixed-size <strong>16KB (16,384 byte) pages</strong>. Using a fixed page size simplifies buffer pool management, aligns with common OS page sizes and SSD block sizes, and allows direct I/O.</p>
+<p><strong>Page Header Format (25 bytes):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>+----------+----------+------+----------+----------------+------------+
+</span></span><span style="display:flex;"><span>|  PageId  |   LSN    | Type | Checksum | Free Space Ptr | Slot Count |
+</span></span><span style="display:flex;"><span>|  (8B)    |  (8B)    | (1B) |  (4B)    |     (2B)       |    (2B)    |
+</span></span><span style="display:flex;"><span>+----------+----------+------+----------+----------------+------------+
+</span></span><span style="display:flex;"><span> 0          8         16     17         21               23           25
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>PageId (8 bytes)       - Unique identifier for the page within the tablespace
+</span></span><span style="display:flex;"><span>LSN (8 bytes)          - Log Sequence Number of the last modification
+</span></span><span style="display:flex;"><span>Type (1 byte)          - Page type: 0x01=Data, 0x02=Index, 0x03=Overflow,
+</span></span><span style="display:flex;"><span>                         0x04=FreeSpaceMap, 0x05=ColumnSegment
+</span></span><span style="display:flex;"><span>Checksum (4 bytes)     - CRC32 checksum of the page contents for corruption detection
+</span></span><span style="display:flex;"><span>Free Space Ptr (2 bytes) - Offset to the start of free space within the page
+</span></span><span style="display:flex;"><span>Slot Count (2 bytes)   - Number of active slots (row pointers) in the page
+</span></span></code></pre></div><h3 id="32-row-store-oltp-optimized">3.2 Row Store (OLTP-Optimized)</h3>
+<p>The row store is the primary storage format for transactional workloads. It uses a <strong>slotted page</strong> layout where each page contains a header, a slot directory growing forward, and tuple data growing backward.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>+-----------------------------------------------------------------------+
+</span></span><span style="display:flex;"><span>|                         Page Header (25B)                             |
+</span></span><span style="display:flex;"><span>+-----------------------------------------------------------------------+
+</span></span><span style="display:flex;"><span>| Slot 0 | Slot 1 | Slot 2 | ... | Slot N |  ---&gt; free space &lt;---     |
+</span></span><span style="display:flex;"><span>| (off,  | (off,  | (off,  |     | (off,  |                           |
+</span></span><span style="display:flex;"><span>|  len,  |  len,  |  len,  |     |  len,  |                           |
+</span></span><span style="display:flex;"><span>|  flags)|  flags)|  flags)|     |  flags)|                           |
+</span></span><span style="display:flex;"><span>+-----------------------------------------------------------------------+
+</span></span><span style="display:flex;"><span>|                        FREE SPACE                                     |
+</span></span><span style="display:flex;"><span>+-----------------------------------------------------------------------+
+</span></span><span style="display:flex;"><span>|  Tuple N  |  ...  |  Tuple 2  |  Tuple 1  |  Tuple 0  |             |
+</span></span><span style="display:flex;"><span>|  (data)   |       |  (data)   |  (data)   |  (data)   |             |
+</span></span><span style="display:flex;"><span>+-----------------------------------------------------------------------+
+</span></span></code></pre></div><p>Each <strong>slot directory entry</strong> is 6 bytes: offset (2B) + length (2B) + flags (2B). Flags encode the tuple&rsquo;s visibility and state.</p>
+<p><strong>Tuple Header (per row):</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>Field</th>
+          <th>Size</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>xmin</code></td>
+          <td>8B</td>
+          <td>Transaction ID that created this tuple version</td>
+      </tr>
+      <tr>
+          <td><code>xmax</code></td>
+          <td>8B</td>
+          <td>Transaction ID that deleted/updated this tuple (0 if alive)</td>
+      </tr>
+      <tr>
+          <td><code>t_ctid</code></td>
+          <td>6B</td>
+          <td>Current tuple ID (page + slot), points to newer version on update</td>
+      </tr>
+      <tr>
+          <td><code>t_infomask</code></td>
+          <td>2B</td>
+          <td>Visibility flags, null bitmap indicator, HOT update flag</td>
+      </tr>
+      <tr>
+          <td><code>t_hoff</code></td>
+          <td>1B</td>
+          <td>Offset to user data (accounts for null bitmap)</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Key operations:</strong></p>
+<ul>
+<li><strong>In-place update</strong>: When possible (same-size or smaller tuple), the row is updated directly in the same slot, avoiding HOT chain creation.</li>
+<li><strong>Tombstone deletion</strong>: Rather than physically removing data, <code>xmax</code> is set to the deleting transaction&rsquo;s ID. The tuple becomes invisible to new snapshots.</li>
+<li><strong>Free space map (FSM)</strong>: A secondary structure tracks free space per page, enabling efficient insertion without scanning every page.</li>
+<li><strong>Vacuum</strong>: Background process reclaims space from dead tuples (those invisible to all active transactions), compacts pages, and updates the FSM.</li>
+</ul>
+<h3 id="33-column-store-olap-optimized">3.3 Column Store (OLAP-Optimized)</h3>
+<p>The column store is designed for analytical queries that scan large numbers of rows but only a few columns. Data is organized into <strong>column segments</strong>, each storing values for a single column of a row group.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>+----------------------------------------------------------------------+
+</span></span><span style="display:flex;"><span>|  Column Segment Header                                               |
+</span></span><span style="display:flex;"><span>|  - Column ID, Row Group ID, Row Count, Compression Type              |
+</span></span><span style="display:flex;"><span>|  - Min/Max values (zone map), Null Count, Distinct Count             |
+</span></span><span style="display:flex;"><span>+----------------------------------------------------------------------+
+</span></span><span style="display:flex;"><span>|  Null Bitmap (1 bit per row, RLE-compressed)                         |
+</span></span><span style="display:flex;"><span>+----------------------------------------------------------------------+
+</span></span><span style="display:flex;"><span>|  Compressed Data                                                     |
+</span></span><span style="display:flex;"><span>|  (LZ4 / Snappy / Zstd / RLE / Delta / Dictionary)                   |
+</span></span><span style="display:flex;"><span>+----------------------------------------------------------------------+
+</span></span><span style="display:flex;"><span>|  Optional: Dictionary Page (for dictionary encoding)                 |
+</span></span><span style="display:flex;"><span>+----------------------------------------------------------------------+
+</span></span></code></pre></div><p><strong>Compression strategies</strong> are chosen automatically based on column statistics:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Strategy</th>
+          <th>Best For</th>
+          <th>Ratio</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>LZ4</td>
+          <td>General purpose, fast decompression</td>
+          <td>2-4x</td>
+      </tr>
+      <tr>
+          <td>Snappy</td>
+          <td>Low-latency reads</td>
+          <td>1.5-3x</td>
+      </tr>
+      <tr>
+          <td>Zstd</td>
+          <td>High compression archival data</td>
+          <td>3-10x</td>
+      </tr>
+      <tr>
+          <td>RLE (Run-Length Encoding)</td>
+          <td>Low cardinality, sorted columns</td>
+          <td>10-100x</td>
+      </tr>
+      <tr>
+          <td>Delta Encoding</td>
+          <td>Timestamps, sequential integers</td>
+          <td>5-20x</td>
+      </tr>
+      <tr>
+          <td>Dictionary Encoding</td>
+          <td>String columns with &lt; 64K distinct values</td>
+          <td>3-15x</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Column statistics</strong> (zone maps) are maintained per segment and include min/max values, null count, and distinct count. These allow the query engine to skip entire segments during scans (segment elimination).</p>
+<h3 id="34-fractured-mirror-htap-design">3.4 Fractured Mirror (HTAP Design)</h3>
+<p>ThunderDB achieves HTAP by maintaining both row-oriented and column-oriented copies of data through a <strong>fractured mirror</strong> architecture. This avoids the traditional approach of ETL pipelines between separate OLTP and OLAP systems.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>                     +------ WRITE PATH ------+
+</span></span><span style="display:flex;"><span>                     |                        |
+</span></span><span style="display:flex;"><span>                     v                        |
+</span></span><span style="display:flex;"><span>               +-----------+                  |
+</span></span><span style="display:flex;"><span>               | Row Store |  &lt;-- primary     |
+</span></span><span style="display:flex;"><span>               | (OLTP)    |     for writes   |
+</span></span><span style="display:flex;"><span>               +-----+-----+                  |
+</span></span><span style="display:flex;"><span>                     |                        |
+</span></span><span style="display:flex;"><span>            async propagation                 |
+</span></span><span style="display:flex;"><span>            (background worker)               |
+</span></span><span style="display:flex;"><span>                     |                        |
+</span></span><span style="display:flex;"><span>                     v                        |
+</span></span><span style="display:flex;"><span>            +--------------+                  |
+</span></span><span style="display:flex;"><span>            | Column Store |  &lt;-- derived     |
+</span></span><span style="display:flex;"><span>            | (OLAP)       |     from rows    |
+</span></span><span style="display:flex;"><span>            +--------------+                  |
+</span></span><span style="display:flex;"><span>                                              |
+</span></span><span style="display:flex;"><span>  OLTP queries ---&gt; Row Store (latest data)   |
+</span></span><span style="display:flex;"><span>  OLAP queries ---&gt; Column Store (near-real-time, seconds of lag)
+</span></span></code></pre></div><p><strong>Propagation mechanism:</strong></p>
+<ol>
+<li>Writes always go to the row store first (the source of truth for transactions).</li>
+<li>A background worker reads committed changes from the WAL.</li>
+<li>Changes are batched into row groups (typically 64K-128K rows).</li>
+<li>Row groups are compressed column-by-column and written to the column store.</li>
+<li>Column statistics (zone maps) are updated.</li>
+<li>The propagation LSN is advanced, allowing old WAL segments to be recycled.</li>
+</ol>
+<p><strong>Consistency guarantee:</strong> The column store may lag behind the row store by a small window (typically seconds). OLAP queries that require absolute freshness can opt to fall back to the row store or merge results from both stores.</p>
+<h3 id="35-btree-indexes">3.5 B+Tree Indexes</h3>
+<p>ThunderDB uses <strong>flash-optimized B+Tree</strong> indexes with a high fanout of <strong>256+ keys per node</strong>, minimizing tree height and random I/O on SSDs.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>                         +------------------+
+</span></span><span style="display:flex;"><span>                         |   Root Node      |
+</span></span><span style="display:flex;"><span>                         | [K50 | K150]     |
+</span></span><span style="display:flex;"><span>                         +--/-------|---\---+
+</span></span><span style="display:flex;"><span>                        /           |        \
+</span></span><span style="display:flex;"><span>           +-----------+    +-------+-----+   +------------+
+</span></span><span style="display:flex;"><span>           | Internal  |    |  Internal   |   |  Internal  |
+</span></span><span style="display:flex;"><span>           | [K10|K30] |    | [K80|K120]  |   | [K180|K220]|
+</span></span><span style="display:flex;"><span>           +--/---|--\-+    +--/---|---\--+   +--/---|---\-+
+</span></span><span style="display:flex;"><span>          /    |    \      /    |      \     /    |      \
+</span></span><span style="display:flex;"><span>        +--+ +--+ +--+  +--+ +--+  +--+  +--+ +--+  +--+
+</span></span><span style="display:flex;"><span>        |L1| |L2| |L3|  |L4| |L5|  |L6|  |L7| |L8|  |L9|
+</span></span><span style="display:flex;"><span>        +--+-+--+-+--+--+--+-+--+--+--+--+--+-+--+--+--+
+</span></span><span style="display:flex;"><span>         &lt;-&gt;   &lt;-&gt;  &lt;-&gt;  &lt;-&gt;  &lt;-&gt;  &lt;-&gt;  &lt;-&gt;  &lt;-&gt;  &lt;-&gt;
+</span></span><span style="display:flex;"><span>               Doubly-linked leaf node chain
+</span></span></code></pre></div><p><strong>Key features:</strong></p>
+<ul>
+<li><strong>High fanout (256+):</strong> Reduces tree height to 2-3 levels for most datasets, meaning most lookups require at most 2-3 page reads.</li>
+<li><strong>Linked leaf nodes:</strong> Enable efficient range scans by following sibling pointers without traversing back up the tree.</li>
+<li><strong>Latch coupling (crabbing):</strong> Concurrent access uses a top-down latch coupling protocol: acquire child latch before releasing parent latch, ensuring structural consistency without holding the root latch during the entire operation.</li>
+<li><strong>Prefix compression:</strong> Common key prefixes within a node are stored once, increasing the effective fanout for string keys.</li>
+<li><strong>Bulk loading:</strong> Sorted data can be loaded bottom-up, constructing the tree from leaf level to root for optimal space utilization and minimal I/O.</li>
+</ul>
+<h3 id="36-buffer-pool">3.6 Buffer Pool</h3>
+<p>The buffer pool is an in-memory cache of disk pages that sits between the execution engine and the file system. All page accesses go through the buffer pool.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>  +---------------------------------------------------------------------+
+</span></span><span style="display:flex;"><span>  |                        Buffer Pool                                  |
+</span></span><span style="display:flex;"><span>  |  +--------+  +--------+  +--------+  +--------+  +--------+        |
+</span></span><span style="display:flex;"><span>  |  | Frame  |  | Frame  |  | Frame  |  | Frame  |  | Frame  |  ...   |
+</span></span><span style="display:flex;"><span>  |  | Page:5 |  | Page:12|  | Page:3 |  | Page:42|  | Page:7 |        |
+</span></span><span style="display:flex;"><span>  |  | Pin:2  |  | Pin:0  |  | Pin:1  |  | Pin:0  |  | Pin:3  |        |
+</span></span><span style="display:flex;"><span>  |  | Dirty:N|  | Dirty:Y|  | Dirty:N|  | Dirty:Y|  | Dirty:N|        |
+</span></span><span style="display:flex;"><span>  |  +--------+  +--------+  +--------+  +--------+  +--------+        |
+</span></span><span style="display:flex;"><span>  |                                                                     |
+</span></span><span style="display:flex;"><span>  |  Page Table (HashMap&lt;PageId, FrameId&gt;)                              |
+</span></span><span style="display:flex;"><span>  |  LRU List: [Frame 1] &lt;-&gt; [Frame 3] &lt;-&gt; ... &lt;-&gt; [Frame N]           |
+</span></span><span style="display:flex;"><span>  |  Free List: [Frame 6, Frame 9, ...]                                 |
+</span></span><span style="display:flex;"><span>  +---------------------------------------------------------------------+
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Eviction Policy</td>
+          <td>LRU (Least Recently Used); pinned pages are never evicted</td>
+      </tr>
+      <tr>
+          <td>Page Pinning</td>
+          <td>Reference-counted; a page is pinned while any thread holds a reference</td>
+      </tr>
+      <tr>
+          <td>Dirty Tracking</td>
+          <td>Pages modified in memory are marked dirty; flushed on eviction or checkpoint</td>
+      </tr>
+      <tr>
+          <td>Configurable Size</td>
+          <td>Default 256MB; tunable via <code>buffer_pool_size</code> in configuration</td>
+      </tr>
+      <tr>
+          <td>Pre-fetching</td>
+          <td>Sequential scan detection triggers asynchronous pre-fetch of upcoming pages</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="37-wal-write-ahead-log">3.7 WAL (Write-Ahead Log)</h3>
+<p>The WAL implements <strong>ARIES-style</strong> (Algorithm for Recovery and Isolation Exploiting Semantics) recovery to guarantee durability and atomicity. Every modification is first recorded in the WAL before being applied to data pages.</p>
+<p><strong>WAL Record Types:</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>Record Type</th>
+          <th>Code</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>BeginTxn</code></td>
+          <td>0x01</td>
+          <td>Transaction started</td>
+      </tr>
+      <tr>
+          <td><code>Insert</code></td>
+          <td>0x02</td>
+          <td>Row inserted (contains full tuple)</td>
+      </tr>
+      <tr>
+          <td><code>Update</code></td>
+          <td>0x03</td>
+          <td>Row updated (contains before/after images)</td>
+      </tr>
+      <tr>
+          <td><code>Delete</code></td>
+          <td>0x04</td>
+          <td>Row deleted (contains before image)</td>
+      </tr>
+      <tr>
+          <td><code>Commit</code></td>
+          <td>0x05</td>
+          <td>Transaction committed</td>
+      </tr>
+      <tr>
+          <td><code>Abort</code></td>
+          <td>0x06</td>
+          <td>Transaction aborted</td>
+      </tr>
+      <tr>
+          <td><code>Checkpoint</code></td>
+          <td>0x07</td>
+          <td>Fuzzy checkpoint marker with dirty page table and active txn table</td>
+      </tr>
+      <tr>
+          <td><code>CLR</code></td>
+          <td>0x08</td>
+          <td>Compensation Log Record (undo of an undo, prevents repeated undo)</td>
+      </tr>
+      <tr>
+          <td><code>PageSplit</code></td>
+          <td>0x09</td>
+          <td>B+Tree page split operation</td>
+      </tr>
+      <tr>
+          <td><code>PageMerge</code></td>
+          <td>0x0A</td>
+          <td>B+Tree page merge operation</td>
+      </tr>
+      <tr>
+          <td><code>CreateTable</code></td>
+          <td>0x0B</td>
+          <td>DDL: table creation</td>
+      </tr>
+      <tr>
+          <td><code>DropTable</code></td>
+          <td>0x0C</td>
+          <td>DDL: table deletion</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>WAL file structure:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>  WAL Directory
+</span></span><span style="display:flex;"><span>  +-- segment_000000000001.wal  (64MB)
+</span></span><span style="display:flex;"><span>  +-- segment_000000000002.wal  (64MB)
+</span></span><span style="display:flex;"><span>  +-- segment_000000000003.wal  (64MB, active)
+</span></span><span style="display:flex;"><span>  +-- checkpoint.meta
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Each segment:
+</span></span><span style="display:flex;"><span>  +---------------------------------------------------------------+
+</span></span><span style="display:flex;"><span>  | Segment Header: magic(4B), version(2B), segment_id(8B)       |
+</span></span><span style="display:flex;"><span>  +---------------------------------------------------------------+
+</span></span><span style="display:flex;"><span>  | Record 1: LSN(8B) | TxnId(8B) | Type(1B) | Len(4B) | Data   |
+</span></span><span style="display:flex;"><span>  | Record 2: LSN(8B) | TxnId(8B) | Type(1B) | Len(4B) | Data   |
+</span></span><span style="display:flex;"><span>  | ...                                                           |
+</span></span><span style="display:flex;"><span>  +---------------------------------------------------------------+
+</span></span></code></pre></div><p><strong>Group commit:</strong> Multiple transactions waiting to commit are batched into a single <code>fsync</code> call, amortizing the cost of durable writes across many transactions. This dramatically improves throughput under concurrent workloads.</p>
+<p><strong>Three-Phase Recovery:</strong></p>
+<ol>
+<li>
+<p><strong>Analysis Phase:</strong> Scan the WAL forward from the last checkpoint. Reconstruct the dirty page table (which pages had uncommitted modifications) and the active transaction table (which transactions were in-flight).</p>
+</li>
+<li>
+<p><strong>Redo Phase:</strong> Scan the WAL forward again, re-applying all logged operations to bring pages up to date. For each record, compare the page&rsquo;s LSN with the record&rsquo;s LSN; skip if the page is already current. This restores the database to its exact state at the moment of the crash.</p>
+</li>
+<li>
+<p><strong>Undo Phase:</strong> Scan the WAL backward, undoing all operations from transactions that were active (uncommitted) at crash time. CLR records are written during undo to ensure idempotency if the system crashes again during recovery.</p>
+</li>
+</ol>
+<hr>
+<h2 id="4-transaction-processing">4. Transaction Processing</h2>
+<h3 id="41-mvcc-multi-version-concurrency-control">4.1 MVCC (Multi-Version Concurrency Control)</h3>
+<p>ThunderDB implements MVCC to provide <strong>lock-free reads</strong>. Each row may have multiple versions, identified by <code>xmin</code> (creating transaction) and <code>xmax</code> (deleting transaction). A read transaction takes a snapshot at its start time and sees only versions committed before that snapshot.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>  Snapshot at T=100 sees:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Version 1: xmin=50  xmax=80   -&gt; INVISIBLE (deleted before snapshot)
+</span></span><span style="display:flex;"><span>  Version 2: xmin=80  xmax=0    -&gt; VISIBLE   (created before snapshot, not deleted)
+</span></span><span style="display:flex;"><span>  Version 3: xmin=110 xmax=0    -&gt; INVISIBLE (created after snapshot)
+</span></span></code></pre></div><p><strong>Visibility rules</strong> (simplified):</p>
+<ul>
+<li>A tuple is visible if <code>xmin</code> is committed AND <code>xmin &lt; snapshot_txn_id</code> AND (<code>xmax</code> is zero OR <code>xmax</code> is not committed OR <code>xmax &gt; snapshot_txn_id</code>).</li>
+</ul>
+<h3 id="42-ccp-cooperative-concurrency-protocol">4.2 CCP (Cooperative Concurrency Protocol)</h3>
+<p>For write-write conflicts, ThunderDB implements an optimistic concurrency control protocol called CCP. Transactions proceed without acquiring locks during their execution phase. At commit time, a validation phase checks whether any read-write or write-write conflicts occurred.</p>
+<p><strong>CCP phases:</strong></p>
+<ol>
+<li><strong>Read Phase:</strong> Transaction reads from its snapshot and writes to a private workspace.</li>
+<li><strong>Validation Phase:</strong> At commit time, check if any tuple read by this transaction was modified by a concurrent committed transaction.</li>
+<li><strong>Write Phase:</strong> If validation succeeds, apply all writes atomically. If it fails, abort and retry.</li>
+</ol>
+<h3 id="43-distributed-transactions-2pc">4.3 Distributed Transactions (2PC)</h3>
+<p>For transactions that span multiple nodes (regions), ThunderDB uses Two-Phase Commit (2PC) with an elected coordinator.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>  Coordinator                Participant A          Participant B
+</span></span><span style="display:flex;"><span>      |                           |                       |
+</span></span><span style="display:flex;"><span>      |--- PREPARE --------------&gt;|                       |
+</span></span><span style="display:flex;"><span>      |--- PREPARE ----------------------------------------&gt;|
+</span></span><span style="display:flex;"><span>      |                           |                       |
+</span></span><span style="display:flex;"><span>      |&lt;-- VOTE YES --------------|                       |
+</span></span><span style="display:flex;"><span>      |&lt;-- VOTE YES ----------------------------------------|
+</span></span><span style="display:flex;"><span>      |                           |                       |
+</span></span><span style="display:flex;"><span>      |--- COMMIT ---------------&gt;|                       |
+</span></span><span style="display:flex;"><span>      |--- COMMIT -----------------------------------------&gt;|
+</span></span><span style="display:flex;"><span>      |                           |                       |
+</span></span><span style="display:flex;"><span>      |&lt;-- ACK -------------------|                       |
+</span></span><span style="display:flex;"><span>      |&lt;-- ACK --------------------------------------------|
+</span></span></code></pre></div><p><strong>Failure handling:</strong></p>
+<ul>
+<li>If any participant votes NO, the coordinator sends ABORT to all.</li>
+<li>If the coordinator crashes after PREPARE but before COMMIT, participants hold locks until the coordinator recovers (or a new coordinator is elected via Raft).</li>
+<li>WAL records are written at each phase boundary for crash recovery.</li>
+</ul>
+<h3 id="44-deadlock-detection">4.4 Deadlock Detection</h3>
+<p>The lock manager maintains a <strong>wait-for graph</strong> where nodes represent transactions and edges represent &ldquo;waits for&rdquo; relationships. A background thread periodically traverses this graph looking for cycles.</p>
+<p><strong>Victim selection criteria (in priority order):</strong></p>
+<ol>
+<li>Transaction with the least amount of work done (fewest WAL records).</li>
+<li>Transaction that holds the fewest locks.</li>
+<li>Youngest transaction (highest TxnId).</li>
+</ol>
+<h3 id="45-isolation-levels">4.5 Isolation Levels</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Level</th>
+          <th>Dirty Read</th>
+          <th>Non-Repeatable Read</th>
+          <th>Phantom</th>
+          <th>Implementation</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Read Committed</td>
+          <td>No</td>
+          <td>Possible</td>
+          <td>Possible</td>
+          <td>New snapshot per statement</td>
+      </tr>
+      <tr>
+          <td>Repeatable Read</td>
+          <td>No</td>
+          <td>No</td>
+          <td>Possible</td>
+          <td>Single snapshot for entire transaction</td>
+      </tr>
+      <tr>
+          <td>Serializable</td>
+          <td>No</td>
+          <td>No</td>
+          <td>No</td>
+          <td>Snapshot + predicate locks (SSI)</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="46-txnid-format">4.6 TxnId Format</h3>
+<p>Transaction IDs are 64-bit values with embedded metadata for distributed coordination:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>  +---------------------------------------------------+----------+----------+
+</span></span><span style="display:flex;"><span>  |        Timestamp (48 bits)                         | Node ID  | Sequence |
+</span></span><span style="display:flex;"><span>  |        Milliseconds since epoch                    | (8 bits) | (8 bits) |
+</span></span><span style="display:flex;"><span>  +---------------------------------------------------+----------+----------+
+</span></span><span style="display:flex;"><span>   63                                                16 15       8 7        0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  - 48-bit timestamp: ~8,900 years of unique timestamps
+</span></span><span style="display:flex;"><span>  - 8-bit node ID:    Up to 256 nodes in the cluster
+</span></span><span style="display:flex;"><span>  - 8-bit sequence:   Up to 256 transactions per millisecond per node
+</span></span></code></pre></div><p>This format allows <strong>global ordering</strong> of transactions without centralized coordination. Any node can generate unique, monotonically increasing TxnIds independently.</p>
+<hr>
+<h2 id="5-query-processing-pipeline">5. Query Processing Pipeline</h2>
+<p>Every SQL query in ThunderDB passes through a five-stage pipeline before results are returned to the client.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>  SQL Text
+</span></span><span style="display:flex;"><span>    |
+</span></span><span style="display:flex;"><span>    v
+</span></span><span style="display:flex;"><span>  +----------+     AST       +-----------+   Bound AST   +-----------+
+</span></span><span style="display:flex;"><span>  |  Parser  | ------------&gt; | Analyzer  | ------------&gt; | Optimizer |
+</span></span><span style="display:flex;"><span>  | (sqlpar- |               | (semantic |               | (cost-    |
+</span></span><span style="display:flex;"><span>  |  ser)    |               |  checks)  |               |  based)   |
+</span></span><span style="display:flex;"><span>  +----------+               +-----------+               +-----------+
+</span></span><span style="display:flex;"><span>                                                              |
+</span></span><span style="display:flex;"><span>                                                        Logical Plan
+</span></span><span style="display:flex;"><span>                                                              |
+</span></span><span style="display:flex;"><span>                                                              v
+</span></span><span style="display:flex;"><span>                                                        +-----------+
+</span></span><span style="display:flex;"><span>                                                        | Planner   |
+</span></span><span style="display:flex;"><span>                                                        | (physical |
+</span></span><span style="display:flex;"><span>                                                        |  plan)    |
+</span></span><span style="display:flex;"><span>                                                        +-----------+
+</span></span><span style="display:flex;"><span>                                                              |
+</span></span><span style="display:flex;"><span>                                                        Physical Plan
+</span></span><span style="display:flex;"><span>                                                              |
+</span></span><span style="display:flex;"><span>                                                              v
+</span></span><span style="display:flex;"><span>                                                        +-----------+
+</span></span><span style="display:flex;"><span>                                                        | Executor  | ---&gt; Results
+</span></span><span style="display:flex;"><span>                                                        | (vector-  |
+</span></span><span style="display:flex;"><span>                                                        |  ized)    |
+</span></span><span style="display:flex;"><span>                                                        +-----------+
+</span></span></code></pre></div><h3 id="51-parser">5.1 Parser</h3>
+<p>The parser uses the <code>sqlparser</code> crate configured for the <strong>PostgreSQL dialect</strong>. It tokenizes the SQL input and constructs an Abstract Syntax Tree (AST). Multi-dialect support (45KB) enables alternative syntax acceptance for MySQL and Redis-style commands.</p>
+<h3 id="52-analyzer">5.2 Analyzer</h3>
+<p>The semantic analyzer resolves table and column references against the catalog, performs type checking and implicit type coercion, validates function signatures, resolves aliases, and checks permissions against the RBAC policy.</p>
+<h3 id="53-optimizer">5.3 Optimizer</h3>
+<p>The cost-based optimizer transforms logical plans to minimize estimated execution cost.</p>
+<p><strong>Rule-based transformations:</strong></p>
+<ul>
+<li>Predicate pushdown (push filters below joins)</li>
+<li>Projection pruning (eliminate unused columns early)</li>
+<li>Constant folding (evaluate constant expressions at compile time)</li>
+<li>Subquery decorrelation (convert correlated subqueries to joins)</li>
+<li>Common subexpression elimination</li>
+</ul>
+<p><strong>Cost-based decisions:</strong></p>
+<ul>
+<li><strong>Join ordering:</strong> Dynamic programming for small join counts (&lt; 10 tables), greedy heuristic for large join graphs.</li>
+<li><strong>Index selection:</strong> Compare sequential scan cost vs. index scan cost using selectivity estimates from column statistics (histograms, distinct counts, null fractions).</li>
+<li><strong>Join algorithm selection:</strong> Nested loop (small inner), hash join (equi-joins), sort-merge join (sorted inputs or large datasets).</li>
+<li><strong>Scan type:</strong> Row store scan for point queries and small ranges, column store scan for full-table analytics.</li>
+</ul>
+<h3 id="54-planner">5.4 Planner</h3>
+<p>The planner converts the optimized logical plan into a physical plan by selecting concrete operator implementations. For example, a logical &ldquo;Join&rdquo; becomes a physical &ldquo;HashJoin&rdquo; or &ldquo;MergeSortJoin&rdquo;.</p>
+<h3 id="55-execution">5.5 Execution</h3>
+<p>The executor implements a <strong>Volcano-style iterator model</strong> enhanced with <strong>vectorized processing</strong>:</p>
+<ul>
+<li><strong>Batch size:</strong> 1024+ rows per batch (configurable). Processing data in batches amortizes function call overhead and enables SIMD optimizations.</li>
+<li><strong>Parallel execution:</strong> The executor can partition work across multiple threads. Parallel hash joins, parallel scans, and parallel aggregations are supported. The degree of parallelism is auto-tuned based on available CPU cores and data size.</li>
+<li><strong>Physical operators:</strong> SeqScan, IndexScan, Filter, Project, HashJoin, MergeSortJoin, NestedLoopJoin, HashAggregate, SortAggregate, Sort, Limit, TopN, Union, Intersect, Except, Insert, Update, Delete, CreateTable, and more.</li>
+</ul>
+<h3 id="56-nlp--llm-integration">5.6 NLP &amp; LLM Integration</h3>
+<p>ThunderDB optionally supports <strong>natural language queries</strong> through an embedded LLM (llama.cpp integration, 23KB of glue code). Users can submit queries in plain English, which are translated to SQL via a retrieval-augmented generation (RAG) approach that incorporates schema context. The NLP layer (38KB) handles tokenization, intent classification, and entity extraction. ML operations (28KB) enable in-database inference for registered models.</p>
+<hr>
+<h2 id="6-distributed-architecture">6. Distributed Architecture</h2>
+<h3 id="61-raft-consensus">6.1 Raft Consensus</h3>
+<p>ThunderDB uses the <strong>Raft consensus protocol</strong> for leader election and replicated state machine consistency. Each cluster has one Raft group for metadata and one Raft group per region for data.</p>
+<p><strong>Raft roles:</strong></p>
+<ul>
+<li><strong>Leader:</strong> Handles all client requests, replicates log entries to followers.</li>
+<li><strong>Follower:</strong> Replicates the leader&rsquo;s log, responds to read requests (with lease-based reads).</li>
+<li><strong>Candidate:</strong> Temporarily during leader election.</li>
+</ul>
+<p><strong>Key parameters:</strong></p>
+<ul>
+<li>Election timeout: 150-300ms (randomized)</li>
+<li>Heartbeat interval: 50ms</li>
+<li>Log compaction: Snapshot when log exceeds 10,000 entries</li>
+</ul>
+<h3 id="62-region-based-sharding">6.2 Region-Based Sharding</h3>
+<p>Data is partitioned into <strong>regions</strong>, each responsible for a contiguous range of the primary key space.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>  Key Space:  [0 ................................................... MAX]
+</span></span><span style="display:flex;"><span>              |         |              |             |              |
+</span></span><span style="display:flex;"><span>              | Region1 |   Region2    |  Region3    |   Region4    |
+</span></span><span style="display:flex;"><span>              | [0, 100)|  [100, 500)  | [500, 800)  | [800, MAX)   |
+</span></span><span style="display:flex;"><span>              |  Node A |   Node B     |  Node A     |   Node C     |
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Max Region Size</td>
+          <td>256MB</td>
+      </tr>
+      <tr>
+          <td>Split Trigger</td>
+          <td>Region exceeds 256MB</td>
+      </tr>
+      <tr>
+          <td>Split Strategy</td>
+          <td>Midpoint of key range based on sampled keys</td>
+      </tr>
+      <tr>
+          <td>Merge Trigger</td>
+          <td>Two adjacent regions on the same node both below 64MB</td>
+      </tr>
+      <tr>
+          <td>Replication</td>
+          <td>Configurable factor (default 3)</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="63-auto-rebalancing">6.3 Auto-Rebalancing</h3>
+<p>A background scheduler on the cluster leader continuously monitors region sizes and node loads. When imbalance is detected:</p>
+<ol>
+<li><strong>Split:</strong> Over-sized regions are split at a sampled midpoint key.</li>
+<li><strong>Transfer:</strong> Regions are moved from overloaded nodes to underloaded nodes using Raft learner mechanism (add learner, replicate, promote, remove old replica).</li>
+<li><strong>Merge:</strong> Under-sized adjacent regions are merged to reduce metadata overhead.</li>
+</ol>
+<h3 id="64-grpc-transport">6.4 gRPC Transport</h3>
+<p>All inter-node communication uses gRPC with Protocol Buffers serialization. Key RPC services:</p>
+<ul>
+<li><code>RaftService</code>: AppendEntries, RequestVote, InstallSnapshot</li>
+<li><code>RegionService</code>: Get, Put, Delete, Scan, BatchGet</li>
+<li><code>AdminService</code>: SplitRegion, MergeRegion, TransferLeader, AddNode, RemoveNode</li>
+</ul>
+<p>Connection pooling and multiplexing minimize connection overhead. TLS is mandatory for inter-node traffic in production configurations.</p>
+<hr>
+<h2 id="7-protocol-compatibility">7. Protocol Compatibility</h2>
+<h3 id="71-postgresql-v3-wire-protocol-54kb">7.1 PostgreSQL v3 Wire Protocol (54KB)</h3>
+<p>ThunderDB implements the full PostgreSQL v3 extended query protocol, allowing connections from <code>psql</code>, pgAdmin, any PostgreSQL driver (JDBC, psycopg2, node-pg, etc.), and ORMs (SQLAlchemy, Hibernate, Prisma).</p>
+<p><strong>Supported message types:</strong></p>
+<ul>
+<li>Startup, Authentication (MD5, SCRAM-SHA-256), ParameterStatus</li>
+<li>SimpleQuery, Parse, Bind, Describe, Execute, Sync (extended query protocol)</li>
+<li>COPY IN/OUT for bulk data transfer</li>
+<li>LISTEN/NOTIFY for real-time event channels</li>
+<li>Prepared statements with parameter binding</li>
+<li>Portal-based cursors for large result sets</li>
+</ul>
+<h3 id="72-mysql-41-wire-protocol-36kb">7.2 MySQL 4.1+ Wire Protocol (36KB)</h3>
+<p>Full binary protocol support for MySQL client compatibility:</p>
+<ul>
+<li>Handshake with capability negotiation</li>
+<li>COM_QUERY, COM_STMT_PREPARE, COM_STMT_EXECUTE, COM_STMT_CLOSE</li>
+<li>MySQL native password authentication</li>
+<li>Server-side prepared statements</li>
+<li>Binary result set encoding</li>
+</ul>
+<h3 id="73-resp23-protocol-105kb">7.3 RESP2/3 Protocol (105KB)</h3>
+<p>ThunderDB implements the Redis Serialization Protocol, enabling compatibility with all Redis clients and tools (<code>redis-cli</code>, Jedis, ioredis, etc.).</p>
+<p><strong>Supported data structures and commands:</strong></p>
+<ul>
+<li><strong>Strings:</strong> GET, SET, MGET, MSET, INCR, DECR, APPEND, STRLEN, SETEX, SETNX</li>
+<li><strong>Hashes:</strong> HGET, HSET, HMGET, HMSET, HDEL, HGETALL, HKEYS, HVALS, HINCRBY</li>
+<li><strong>Lists:</strong> LPUSH, RPUSH, LPOP, RPOP, LRANGE, LLEN, LINDEX, LSET, LREM</li>
+<li><strong>Sets:</strong> SADD, SREM, SMEMBERS, SISMEMBER, SCARD, SUNION, SINTER, SDIFF</li>
+<li><strong>Sorted Sets:</strong> ZADD, ZREM, ZRANGE, ZRANGEBYSCORE, ZRANK, ZSCORE, ZCARD</li>
+<li><strong>Pub/Sub:</strong> SUBSCRIBE, UNSUBSCRIBE, PUBLISH, PSUBSCRIBE</li>
+<li><strong>Transactions:</strong> MULTI, EXEC, DISCARD, WATCH</li>
+<li><strong>Server:</strong> PING, INFO, DBSIZE, FLUSHDB, SELECT</li>
+</ul>
+<p>RESP commands are internally translated to SQL operations against the storage engine, providing full ACID guarantees that standard Redis does not offer.</p>
+<hr>
+<h2 id="8-integration-layer">8. Integration Layer</h2>
+<h3 id="81-cdc-architecture-change-data-capture">8.1 CDC Architecture (Change Data Capture)</h3>
+<p>CDC enables real-time data ingestion from external databases into ThunderDB. This is a key component of the companion deployment strategy, allowing ThunderDB to shadow an existing database during migration.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>  +----------------+         +--------------------+         +-----------+
+</span></span><span style="display:flex;"><span>  | External DB    |         | CDC Connector      |         | ThunderDB |
+</span></span><span style="display:flex;"><span>  | (PostgreSQL/   | ------&gt; | - Reads change log | ------&gt; | Storage   |
+</span></span><span style="display:flex;"><span>  |  MySQL/Mongo/  |         | - Transforms data  |         | Engine    |
+</span></span><span style="display:flex;"><span>  |  Redis)        |         | - Applies to target |         |           |
+</span></span><span style="display:flex;"><span>  +----------------+         +--------------------+         +-----------+
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  PostgreSQL: Logical replication slots + output plugins (pgoutput/wal2json)
+</span></span><span style="display:flex;"><span>  MySQL:      Binary log (ROW format) parsing via binlog protocol
+</span></span><span style="display:flex;"><span>  MongoDB:    Change streams (oplog tailing) via aggregation pipeline
+</span></span><span style="display:flex;"><span>  Redis:      Keyspace notifications (__keyevent@*__ channels)
+</span></span></code></pre></div><p><strong>CDC guarantees:</strong></p>
+<ul>
+<li><strong>At-least-once delivery:</strong> Connectors track their position in the source change log and resume from the last acknowledged position after restart.</li>
+<li><strong>Ordering:</strong> Changes are applied in the same order they were committed in the source database.</li>
+<li><strong>Schema evolution:</strong> DDL changes in the source are detected and propagated (add column, rename column).</li>
+</ul>
+<h3 id="82-fdw-architecture-foreign-data-wrappers">8.2 FDW Architecture (Foreign Data Wrappers)</h3>
+<p>FDW enables ThunderDB to query external databases as if they were local tables, without importing the data.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Register an external PostgreSQL database
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">FOREIGN</span> <span style="color:#ff79c6">TABLE</span> remote_users
+</span></span><span style="display:flex;"><span>  SERVER pg_production
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">OPTIONS</span> (<span style="color:#ff79c6">schema</span> <span style="color:#f1fa8c">&#39;public&#39;</span>, <span style="color:#ff79c6">table</span> <span style="color:#f1fa8c">&#39;users&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- Query spans local and remote data
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> u.name, o.total
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> remote_users u
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">JOIN</span> local_orders o <span style="color:#ff79c6">ON</span> u.id <span style="color:#ff79c6">=</span> o.user_id
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> u.country <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;US&#39;</span>;
+</span></span></code></pre></div><p><strong>Predicate pushdown:</strong> Filters and projections are pushed down to the remote database to minimize data transfer. In the example above, <code>WHERE u.country = 'US'</code> is executed on the remote PostgreSQL server, and only matching rows are transferred to ThunderDB for the join.</p>
+<p><strong>Cost estimation:</strong> The FDW layer estimates the cost of remote operations based on table statistics (row count, average row size, network latency), allowing the optimizer to make informed decisions about join ordering between local and remote tables.</p>
+<h3 id="83-zero-downtime-migration">8.3 Zero-Downtime Migration</h3>
+<p>CDC and FDW together enable a zero-downtime migration path:</p>
+<ol>
+<li><strong>Shadow phase:</strong> Deploy ThunderDB alongside the existing database. CDC replicates all data and changes in real-time.</li>
+<li><strong>Validation phase:</strong> Use FDW to run comparison queries between the two databases, verifying data consistency.</li>
+<li><strong>Cutover phase:</strong> Redirect application traffic to ThunderDB. CDC ensures no data is lost during the switch.</li>
+<li><strong>Cleanup phase:</strong> Decommission the old database and CDC connectors.</li>
+</ol>
+<hr>
+<h2 id="9-data-flow-diagrams">9. Data Flow Diagrams</h2>
+<h3 id="91-query-execution-flow-read-path">9.1 Query Execution Flow (Read Path)</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>  Client                ThunderDB
+</span></span><span style="display:flex;"><span>    |                      |
+</span></span><span style="display:flex;"><span>    |--- SQL Query -------&gt;|
+</span></span><span style="display:flex;"><span>    |                      +---&gt; Protocol Layer (decode wire format)
+</span></span><span style="display:flex;"><span>    |                      +---&gt; SQL Parser (text -&gt; AST)
+</span></span><span style="display:flex;"><span>    |                      +---&gt; Analyzer (AST -&gt; bound plan)
+</span></span><span style="display:flex;"><span>    |                      +---&gt; Optimizer (bound plan -&gt; optimized logical plan)
+</span></span><span style="display:flex;"><span>    |                      +---&gt; Planner (logical plan -&gt; physical plan)
+</span></span><span style="display:flex;"><span>    |                      +---&gt; Executor
+</span></span><span style="display:flex;"><span>    |                      |       +---&gt; Buffer Pool (check cache)
+</span></span><span style="display:flex;"><span>    |                      |       +---&gt; Storage (row store or column store)
+</span></span><span style="display:flex;"><span>    |                      |       +---&gt; MVCC visibility check
+</span></span><span style="display:flex;"><span>    |                      |       +---&gt; Vectorized batch assembly
+</span></span><span style="display:flex;"><span>    |                      +---&gt; Protocol Layer (encode result set)
+</span></span><span style="display:flex;"><span>    |&lt;-- Result Set -------|
+</span></span></code></pre></div><h3 id="92-write-path">9.2 Write Path</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>  Client                ThunderDB
+</span></span><span style="display:flex;"><span>    |                      |
+</span></span><span style="display:flex;"><span>    |--- INSERT/UPDATE ---&gt;|
+</span></span><span style="display:flex;"><span>    |                      +---&gt; Protocol Layer (decode)
+</span></span><span style="display:flex;"><span>    |                      +---&gt; SQL Parser -&gt; Analyzer -&gt; Optimizer -&gt; Planner
+</span></span><span style="display:flex;"><span>    |                      +---&gt; Transaction Manager
+</span></span><span style="display:flex;"><span>    |                      |       +---&gt; Acquire locks (if pessimistic)
+</span></span><span style="display:flex;"><span>    |                      |       +---&gt; Write WAL record (force to disk)
+</span></span><span style="display:flex;"><span>    |                      |       +---&gt; Modify page in buffer pool (dirty)
+</span></span><span style="display:flex;"><span>    |                      |       +---&gt; Update indexes
+</span></span><span style="display:flex;"><span>    |                      +---&gt; COMMIT
+</span></span><span style="display:flex;"><span>    |                      |       +---&gt; Write Commit WAL record
+</span></span><span style="display:flex;"><span>    |                      |       +---&gt; Group commit (fsync)
+</span></span><span style="display:flex;"><span>    |                      |       +---&gt; Release locks
+</span></span><span style="display:flex;"><span>    |                      |       +---&gt; Notify CDC propagation worker
+</span></span><span style="display:flex;"><span>    |                      +---&gt; Protocol Layer (encode OK/error)
+</span></span><span style="display:flex;"><span>    |&lt;-- OK ---------------|
+</span></span><span style="display:flex;"><span>    |                      |
+</span></span><span style="display:flex;"><span>    |                  [Background]
+</span></span><span style="display:flex;"><span>    |                      +---&gt; Column Store propagation worker
+</span></span><span style="display:flex;"><span>    |                      |       +---&gt; Read committed rows from WAL
+</span></span><span style="display:flex;"><span>    |                      |       +---&gt; Batch into row groups
+</span></span><span style="display:flex;"><span>    |                      |       +---&gt; Compress and write column segments
+</span></span><span style="display:flex;"><span>    |                      +---&gt; Checkpoint worker (periodic)
+</span></span><span style="display:flex;"><span>    |                             +---&gt; Flush dirty pages
+</span></span><span style="display:flex;"><span>    |                             +---&gt; Write checkpoint WAL record
+</span></span><span style="display:flex;"><span>    |                             +---&gt; Advance recycle LSN
+</span></span></code></pre></div><h3 id="93-cdc-flow">9.3 CDC Flow</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>  External Database              ThunderDB
+</span></span><span style="display:flex;"><span>  +----------------+             +--------------------------------------+
+</span></span><span style="display:flex;"><span>  | PostgreSQL     |             |                                      |
+</span></span><span style="display:flex;"><span>  | Logical Repl.  |--- WAL ---&gt;| CDC Connector (PostgreSQL)           |
+</span></span><span style="display:flex;"><span>  | Slot           |  Stream    |   +-&gt; Decode pgoutput messages       |
+</span></span><span style="display:flex;"><span>  +----------------+            |   +-&gt; Transform to ThunderDB ops     |
+</span></span><span style="display:flex;"><span>                                |   +-&gt; Begin transaction              |
+</span></span><span style="display:flex;"><span>  +----------------+            |   +-&gt; Apply INSERT/UPDATE/DELETE     |
+</span></span><span style="display:flex;"><span>  | MySQL          |            |   +-&gt; Commit transaction             |
+</span></span><span style="display:flex;"><span>  | Binlog         |--- ROW ---&gt;| CDC Connector (MySQL)                |
+</span></span><span style="display:flex;"><span>  | Events         |  Events    |   +-&gt; Parse binlog events            |
+</span></span><span style="display:flex;"><span>  +----------------+            |   +-&gt; Map columns and types          |
+</span></span><span style="display:flex;"><span>                                |   +-&gt; Apply changes                  |
+</span></span><span style="display:flex;"><span>  +----------------+            |                                      |
+</span></span><span style="display:flex;"><span>  | MongoDB        |--- Change  | CDC Connector (MongoDB)              |
+</span></span><span style="display:flex;"><span>  | Oplog          |  Stream---&gt;|   +-&gt; Consume change stream docs     |
+</span></span><span style="display:flex;"><span>  +----------------+            |   +-&gt; BSON -&gt; row conversion         |
+</span></span><span style="display:flex;"><span>                                |                                      |
+</span></span><span style="display:flex;"><span>  +----------------+            | CDC Connector (Redis)                |
+</span></span><span style="display:flex;"><span>  | Redis          |--- Key ---&gt;|   +-&gt; Subscribe to keyspace events   |
+</span></span><span style="display:flex;"><span>  | Keyspace       |  Events    |   +-&gt; Capture key mutations          |
+</span></span><span style="display:flex;"><span>  +----------------+            +--------------------------------------+
+</span></span></code></pre></div><h3 id="94-distributed-query-flow">9.4 Distributed Query Flow</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>  Client
+</span></span><span style="display:flex;"><span>    |
+</span></span><span style="display:flex;"><span>    v
+</span></span><span style="display:flex;"><span>  Coordinator Node
+</span></span><span style="display:flex;"><span>    |
+</span></span><span style="display:flex;"><span>    +---&gt; Parse &amp; Optimize query
+</span></span><span style="display:flex;"><span>    +---&gt; Identify involved regions
+</span></span><span style="display:flex;"><span>    +---&gt; Route sub-queries to region leaders
+</span></span><span style="display:flex;"><span>    |
+</span></span><span style="display:flex;"><span>    +----------+----------+----------+
+</span></span><span style="display:flex;"><span>    |          |          |          |
+</span></span><span style="display:flex;"><span>    v          v          v          v
+</span></span><span style="display:flex;"><span>  Region 1  Region 2  Region 3  Region 4
+</span></span><span style="display:flex;"><span>  (Node A)  (Node B)  (Node A)  (Node C)
+</span></span><span style="display:flex;"><span>    |          |          |          |
+</span></span><span style="display:flex;"><span>    +--- partial results ---+       |
+</span></span><span style="display:flex;"><span>    |          |                    |
+</span></span><span style="display:flex;"><span>    v          v                    v
+</span></span><span style="display:flex;"><span>  Coordinator Node
+</span></span><span style="display:flex;"><span>    |
+</span></span><span style="display:flex;"><span>    +---&gt; Merge/Aggregate partial results
+</span></span><span style="display:flex;"><span>    +---&gt; Apply final LIMIT/ORDER BY
+</span></span><span style="display:flex;"><span>    +---&gt; Return to client
+</span></span><span style="display:flex;"><span>    |
+</span></span><span style="display:flex;"><span>    v
+</span></span><span style="display:flex;"><span>  Client
+</span></span></code></pre></div><hr>
+<h2 id="10-design-decisions">10. Design Decisions</h2>
+<h3 id="101-why-rust">10.1 Why Rust?</h3>
+<p>ThunderDB is written entirely in Rust for three fundamental reasons:</p>
+<ul>
+<li>
+<p><strong>Memory safety without garbage collection:</strong> Rust&rsquo;s ownership model and borrow checker eliminate entire classes of bugs (use-after-free, double-free, data races) at compile time. For a database that manages raw memory (buffer pool, page cache), this prevents corruption bugs that are notoriously difficult to diagnose.</p>
+</li>
+<li>
+<p><strong>Zero-cost abstractions:</strong> Rust&rsquo;s trait system, generics, and iterators compile down to the same machine code as hand-written C/C++. The database pays no runtime overhead for its modular architecture.</p>
+</li>
+<li>
+<p><strong>No garbage collector:</strong> Database engines require predictable latency. GC pauses in Java or Go can introduce multi-millisecond stalls during critical operations (transaction commit, WAL flush). Rust&rsquo;s deterministic memory management guarantees consistent tail latencies.</p>
+</li>
+<li>
+<p><strong>Fearless concurrency:</strong> Rust&rsquo;s type system enforces thread safety at compile time. The <code>Send</code> and <code>Sync</code> traits ensure that concurrent access to shared data structures (buffer pool, lock tables, Raft state) is always correct.</p>
+</li>
+</ul>
+<h3 id="102-why-htap">10.2 Why HTAP?</h3>
+<p>Traditional architectures require separate OLTP and OLAP databases connected by ETL pipelines:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>  Traditional:  App --&gt; OLTP DB --&gt; ETL (hours) --&gt; OLAP DB --&gt; Dashboard
+</span></span><span style="display:flex;"><span>  ThunderDB:    App --&gt; ThunderDB (row + column store) --&gt; Dashboard
+</span></span></code></pre></div><ul>
+<li><strong>Eliminates data movement:</strong> No ETL pipelines to build, maintain, debug, and monitor.</li>
+<li><strong>Real-time analytics:</strong> The column store lags the row store by seconds, not hours.</li>
+<li><strong>Reduced operational complexity:</strong> One database to deploy, backup, monitor, and scale.</li>
+<li><strong>Consistent data:</strong> Analytics and transactions read from the same source of truth.</li>
+</ul>
+<h3 id="103-why-multi-protocol">10.3 Why Multi-Protocol?</h3>
+<p>Supporting PostgreSQL, MySQL, and Redis wire protocols means:</p>
+<ul>
+<li><strong>Zero application changes:</strong> Existing applications connect to ThunderDB using their current database drivers.</li>
+<li><strong>Existing tooling works:</strong> pgAdmin, MySQL Workbench, redis-cli, Grafana, Metabase, and thousands of other tools work without modification.</li>
+<li><strong>Gradual migration:</strong> Teams can switch one service at a time, using the protocol that service already speaks.</li>
+</ul>
+<h3 id="104-why-companion-approach">10.4 Why Companion Approach?</h3>
+<p>ThunderDB is designed to run alongside an existing database during migration:</p>
+<ul>
+<li><strong>Lower adoption barrier:</strong> No big-bang migration required. Start by deploying ThunderDB as a read replica via CDC.</li>
+<li><strong>Validation period:</strong> Run both databases in parallel, compare query results via FDW, and build confidence before cutover.</li>
+<li><strong>Rollback safety:</strong> If issues arise, traffic can be redirected back to the original database instantly since CDC keeps both in sync.</li>
+<li><strong>Incremental feature adoption:</strong> Teams can adopt ThunderDB features (vector search, real-time analytics, Redis compatibility) incrementally without disrupting existing workloads.</li>
+</ul>
+<hr>
+<h2 id="summary-of-key-metrics">Summary of Key Metrics</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Metric</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Total Lines of Code</td>
+          <td>~75,600</td>
+      </tr>
+      <tr>
+          <td>Number of Crates</td>
+          <td>14</td>
+      </tr>
+      <tr>
+          <td>Page Size</td>
+          <td>16KB</td>
+      </tr>
+      <tr>
+          <td>WAL Segment Size</td>
+          <td>64MB</td>
+      </tr>
+      <tr>
+          <td>B+Tree Fanout</td>
+          <td>256+ keys/node</td>
+      </tr>
+      <tr>
+          <td>Vectorized Batch Size</td>
+          <td>1024+ rows</td>
+      </tr>
+      <tr>
+          <td>Max Region Size</td>
+          <td>256MB</td>
+      </tr>
+      <tr>
+          <td>TxnId Width</td>
+          <td>64 bits (48 timestamp + 8 node + 8 sequence)</td>
+      </tr>
+      <tr>
+          <td>Max Cluster Size</td>
+          <td>256 nodes</td>
+      </tr>
+      <tr>
+          <td>Supported Wire Protocols</td>
+          <td>3 (PostgreSQL v3, MySQL 4.1+, RESP2/3)</td>
+      </tr>
+      <tr>
+          <td>CDC Sources</td>
+          <td>4 (PostgreSQL, MySQL, MongoDB, Redis)</td>
+      </tr>
+      <tr>
+          <td>FDW Targets</td>
+          <td>4 (PostgreSQL, MySQL, MongoDB, Redis)</td>
+      </tr>
+      <tr>
+          <td>API Interfaces</td>
+          <td>5 (REST, gRPC, GraphQL, WebSocket, Web Dashboard)</td>
+      </tr>
+      <tr>
+          <td>Compression Algorithms</td>
+          <td>6 (LZ4, Snappy, Zstd, RLE, Delta, Dictionary)</td>
+      </tr>
+      <tr>
+          <td>Authentication Methods</td>
+          <td>3 (MD5, SCRAM-SHA-256, MySQL native password)</td>
+      </tr>
+  </tbody>
+</table>
+
+	<div class="section-index">
+    
+    
+    </div>
+<style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<div class="d-print-none">
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+</div>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'page_helpful', {
+      'event_category': 'Helpful',
+      'event_label': window.location.pathname,
+      'value': value
+    });
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback( 100 );
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+<br />
+</div>
+
+          </main>
+        </div>
+      </div>
+      <footer class="td-footer row d-print-none">
+  <div class="container-fluid">
+    <div class="row mx-md-2">
+      <div class="td-footer__left col-6 col-sm-4 order-sm-1">
+        
+      </div><div class="td-footer__right col-6 col-sm-4 order-sm-3">
+        <ul class="td-footer__links-list">
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="GitHub" aria-label="GitHub">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="Discussions" aria-label="Discussions">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb/discussions" aria-label="Discussions">
+      <i class="fas fa-comments"></i>
+    </a>
+  </li>
+  
+</ul>
+
+      </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
+        <span class="td-footer__copyright">&copy;
+    2026
+    <span class="td-footer__authors">ThunderDB Contributors</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><p class="td-footer__about mt-2"><a href="/docs/about/">About ThunderDB</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script src="/docs/js/main.js"></script>
+<script defer src="/docs/js/click-to-copy.js" crossorigin="anonymous"></script>
+<script src='/docs/js/tabpane-persist.js'></script>
+
+  </body>
+</html>

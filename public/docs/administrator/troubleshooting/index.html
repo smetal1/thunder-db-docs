@@ -1,0 +1,1111 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
+  <head><script src="/docs/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=docs/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/docs/favicons/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/docs/favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/docs/favicons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/docs/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="/docs/favicons/favicon-256.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/docs/favicons/apple-touch-icon.png">
+<link rel="manifest" href="/docs/favicons/site.webmanifest">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="msapplication-TileColor" content="#0D0D0D">
+
+<title>Troubleshooting | ThunderDB Documentation</title>
+<meta name="description" content="Diagnose and resolve common issues with ThunderDB including connection problems, performance degradation, WAL corruption, and cluster failures.">
+<meta property="og:url" content="http://localhost:1313/docs/docs/administrator/troubleshooting/">
+  <meta property="og:site_name" content="ThunderDB Documentation">
+  <meta property="og:title" content="Troubleshooting">
+  <meta property="og:description" content="Diagnose and resolve common issues with ThunderDB including connection problems, performance degradation, WAL corruption, and cluster failures.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+
+  <meta itemprop="name" content="Troubleshooting">
+  <meta itemprop="description" content="Diagnose and resolve common issues with ThunderDB including connection problems, performance degradation, WAL corruption, and cluster failures.">
+  <meta itemprop="wordCount" content="2547">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Troubleshooting">
+  <meta name="twitter:description" content="Diagnose and resolve common issues with ThunderDB including connection problems, performance degradation, WAL corruption, and cluster failures.">
+<link href="/docs/scss/main.css" rel="stylesheet">
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+  crossorigin="anonymous"></script>
+<script defer
+  src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
+  integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
+  crossorigin="anonymous"></script>
+
+  </head>
+  <body class="td-section">
+    <header>
+      <nav class="td-navbar js-navbar-scroll" data-bs-theme="dark">
+<div class="td-navbar-container container-fluid flex-column flex-md-row">
+  <a class="navbar-brand" href="/docs/"><span class="navbar-brand__logo navbar-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="300" height="64"><defs><symbol id="b" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#331500" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FF6B00"/><rect width="4.8" height=".6" rx=".55" fill="#FA4" opacity=".5"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#F83" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#930" opacity=".35"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D50"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,200,100,0.3)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FC8" opacity=".55"/></symbol><symbol id="c" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#4D3000" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FA0"/><rect width="4.8" height=".6" rx=".55" fill="#FD6" opacity=".55"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#FB3" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#960" opacity=".3"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D80"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,230,150,0.35)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FE9" opacity=".6"/></symbol></defs><use href="#b" x="35" y="2" width="5" height="5"/><use href="#b" x="41" y="2" width="5" height="5"/><use href="#b" x="29" y="8" width="5" height="5"/><use href="#b" x="35" y="8" width="5" height="5"/><use href="#b" x="23" y="14" width="5" height="5"/><use href="#b" x="29" y="14" width="5" height="5"/><use href="#b" x="17" y="20" width="5" height="5"/><use href="#b" x="23" y="20" width="5" height="5"/><use href="#c" x="5" y="26" width="5" height="5"/><use href="#c" x="11" y="26" width="5" height="5"/><use href="#c" x="17" y="26" width="5" height="5"/><use href="#c" x="23" y="26" width="5" height="5"/><use href="#c" x="29" y="26" width="5" height="5"/><use href="#c" x="35" y="26" width="5" height="5"/><use href="#c" x="41" y="26" width="5" height="5"/><use href="#c" x="47" y="26" width="5" height="5"/><use href="#b" x="35" y="32" width="5" height="5"/><use href="#b" x="41" y="32" width="5" height="5"/><use href="#b" x="29" y="38" width="5" height="5"/><use href="#b" x="35" y="38" width="5" height="5"/><use href="#b" x="23" y="44" width="5" height="5"/><use href="#b" x="29" y="44" width="5" height="5"/><use href="#b" x="17" y="50" width="5" height="5"/><use href="#b" x="23" y="50" width="5" height="5"/><use href="#b" x="11" y="56" width="5" height="5"/><use href="#b" x="17" y="56" width="5" height="5"/><text x="66" y="43" font-family="'SF Mono','Fira Code','Consolas','Courier New',monospace" font-size="27" font-weight="900" letter-spacing=".5"><tspan fill="#FFF">Thunder</tspan><tspan fill="#FF6B00">DB</tspan></text></svg></span><span class="navbar-brand__name">ThunderDB Documentation</span></a>
+  <div class="td-navbar-nav-scroll td-navbar-nav-scroll--indicator" id="main_navbar">
+    <div class="scroll-indicator scroll-left"></div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/"><span>Documentation</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/architecture/"><span>Architecture</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/developer/api-reference/"><span>API Reference</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/about/"><span>About</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/thunderdb/thunderdb" target="_blank" rel="noopener"><i class='fab fa-github'></i><span>GitHub</span></a>
+      </li>
+      </ul>
+    <div class="scroll-indicator scroll-right"></div>
+  </div>
+  <div class="d-none d-lg-block td-navbar__search">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+  </div>
+</div>
+</nav>
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main" data-bs-spy="scroll" data-bs-target=".td-toc" data-bs-root-margin="0px 0px -10%">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+  <script>
+    $(function() {
+    $("#td-section-nav a").removeClass("active");
+    $("#td-section-nav #m-docsdocsadministratortroubleshooting").addClass("active");
+    $("#td-section-nav #m-docsdocsadministratortroubleshooting-li span").addClass("td-sidebar-nav-active-item");
+    $("#td-section-nav #m-docsdocsadministratortroubleshooting").parents("li").addClass("active-path");
+    $("#td-section-nav li.active-path").addClass("show");
+    $("#td-section-nav li.active-path").children("input").prop('checked', true);
+    $("#td-section-nav #m-docsdocsadministratortroubleshooting-li").siblings("li").addClass("show");
+    $("#td-section-nav #m-docsdocsadministratortroubleshooting-li").children("ul").children("li").addClass("show");
+    $("#td-sidebar-menu").toggleClass("d-none");
+    });
+  </script>
+  <div id="td-sidebar-menu" class="td-sidebar__inner d-none">
+  <form class="td-sidebar__search d-flex align-items-center">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+    <button class="btn btn-link td-sidebar__toggle" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  <nav class="td-sidebar-nav collapse foldable-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocs-li">
+    <a href="/docs/docs/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docsdocs"><span class="">Documentation</span></a>
+    <ul class="ul-1">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsgetting-started-li">
+    <input type="checkbox" id="m-docsdocsgetting-started-check"/>
+    <label for="m-docsdocsgetting-started-check"><a href="/docs/docs/getting-started/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsgetting-started"><span class="">Getting Started</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsarchitecture-li">
+    <input type="checkbox" id="m-docsdocsarchitecture-check"/>
+    <label for="m-docsdocsarchitecture-check"><a href="/docs/docs/architecture/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsarchitecture"><span class="">Architecture</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsdeveloper-li">
+    <input type="checkbox" id="m-docsdocsdeveloper-check"/>
+    <label for="m-docsdocsdeveloper-check"><a href="/docs/docs/developer/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloper"><span class="">Developer Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperapi-reference-li">
+    <input type="checkbox" id="m-docsdocsdeveloperapi-reference-check"/>
+    <label for="m-docsdocsdeveloperapi-reference-check"><a href="/docs/docs/developer/api-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperapi-reference"><span class="">API Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersql-reference-li">
+    <input type="checkbox" id="m-docsdocsdevelopersql-reference-check"/>
+    <label for="m-docsdocsdevelopersql-reference-check"><a href="/docs/docs/developer/sql-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersql-reference"><span class="">SQL Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersdk-li">
+    <input type="checkbox" id="m-docsdocsdevelopersdk-check"/>
+    <label for="m-docsdocsdevelopersdk-check"><a href="/docs/docs/developer/sdk/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersdk"><span class="">SDKs &amp; Drivers</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperexamples-li">
+    <input type="checkbox" id="m-docsdocsdeveloperexamples-check"/>
+    <label for="m-docsdocsdeveloperexamples-check"><a href="/docs/docs/developer/examples/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperexamples"><span class="">Examples &amp; Use Cases</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsadministrator-li">
+    <input type="checkbox" id="m-docsdocsadministrator-check"/>
+    <label for="m-docsdocsadministrator-check"><a href="/docs/docs/administrator/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministrator"><span class="">Administrator Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratordeployment-li">
+    <input type="checkbox" id="m-docsdocsadministratordeployment-check"/>
+    <label for="m-docsdocsadministratordeployment-check"><a href="/docs/docs/administrator/deployment/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratordeployment"><span class="">Deployment</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorconfiguration-li">
+    <input type="checkbox" id="m-docsdocsadministratorconfiguration-check"/>
+    <label for="m-docsdocsadministratorconfiguration-check"><a href="/docs/docs/administrator/configuration/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorconfiguration"><span class="">Configuration</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratormonitoring-li">
+    <input type="checkbox" id="m-docsdocsadministratormonitoring-check"/>
+    <label for="m-docsdocsadministratormonitoring-check"><a href="/docs/docs/administrator/monitoring/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratormonitoring"><span class="">Monitoring</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorbackup-recovery-li">
+    <input type="checkbox" id="m-docsdocsadministratorbackup-recovery-check"/>
+    <label for="m-docsdocsadministratorbackup-recovery-check"><a href="/docs/docs/administrator/backup-recovery/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorbackup-recovery"><span class="">Backup &amp; Recovery</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorsecurity-li">
+    <input type="checkbox" id="m-docsdocsadministratorsecurity-check"/>
+    <label for="m-docsdocsadministratorsecurity-check"><a href="/docs/docs/administrator/security/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorsecurity"><span class="">Security</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratortroubleshooting-li">
+    <input type="checkbox" id="m-docsdocsadministratortroubleshooting-check"/>
+    <label for="m-docsdocsadministratortroubleshooting-check"><a href="/docs/docs/administrator/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratortroubleshooting"><span class="">Troubleshooting</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocscontributor-li">
+    <input type="checkbox" id="m-docsdocscontributor-check"/>
+    <label for="m-docsdocscontributor-check"><a href="/docs/docs/contributor/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributor"><span class="">Contributor Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributordevelopment-setup-li">
+    <input type="checkbox" id="m-docsdocscontributordevelopment-setup-check"/>
+    <label for="m-docsdocscontributordevelopment-setup-check"><a href="/docs/docs/contributor/development-setup/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributordevelopment-setup"><span class="">Development Setup</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorcodebase-guide-li">
+    <input type="checkbox" id="m-docsdocscontributorcodebase-guide-check"/>
+    <label for="m-docsdocscontributorcodebase-guide-check"><a href="/docs/docs/contributor/codebase-guide/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorcodebase-guide"><span class="">Codebase Guide</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributortesting-li">
+    <input type="checkbox" id="m-docsdocscontributortesting-check"/>
+    <label for="m-docsdocscontributortesting-check"><a href="/docs/docs/contributor/testing/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributortesting"><span class="">Testing</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorrelease-process-li">
+    <input type="checkbox" id="m-docsdocscontributorrelease-process-check"/>
+    <label for="m-docsdocscontributorrelease-process-check"><a href="/docs/docs/contributor/release-process/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorrelease-process"><span class="">Release Process</span></a></label>
+    
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
+<a href="https://github.com/thunderdb/thunderdb/tree/main/content/docs/administrator/troubleshooting/_index.md" class="td-page-meta--view td-page-meta__view" target="_blank" rel="noopener"><i class="fa-solid fa-file-lines fa-fw"></i> View page source</a>
+  <a href="https://github.com/thunderdb/thunderdb/edit/main/content/docs/administrator/troubleshooting/_index.md" class="td-page-meta--edit td-page-meta__edit" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Edit this page</a>
+  <a href="https://github.com/thunderdb/thunderdb/new/main/content/docs/administrator/troubleshooting?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child td-page-meta__child" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Create child page</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new?title=Troubleshooting" class="td-page-meta--issue td-page-meta__issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create documentation issue</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new" class="td-page-meta--project td-page-meta__project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create project issue</a>
+  
+</div>
+
+            <div class="td-toc" data-proofer-ignore>
+<div class="td-toc-title">
+      <span class="td-toc-title__text">On this page</span>
+      <a class="td-toc-title__link" title="Top of page" href="#"></a>
+    </div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#diagnostic-tools">Diagnostic Tools</a>
+      <ul>
+        <li><a href="#debug-logging">Debug Logging</a></li>
+        <li><a href="#useful-log-targets">Useful Log Targets</a></li>
+        <li><a href="#health-and-status-endpoints">Health and Status Endpoints</a></li>
+      </ul>
+    </li>
+    <li><a href="#common-issues-and-solutions">Common Issues and Solutions</a>
+      <ul>
+        <li><a href="#thunderdb-fails-to-start">ThunderDB Fails to Start</a></li>
+        <li><a href="#thunderdb-starts-but-clients-cannot-connect">ThunderDB Starts but Clients Cannot Connect</a></li>
+      </ul>
+    </li>
+    <li><a href="#connection-problems-by-protocol">Connection Problems by Protocol</a>
+      <ul>
+        <li><a href="#postgresql-connection-issues">PostgreSQL Connection Issues</a></li>
+        <li><a href="#mysql-connection-issues">MySQL Connection Issues</a></li>
+        <li><a href="#resp-redis-connection-issues">RESP (Redis) Connection Issues</a></li>
+        <li><a href="#http-api-connection-issues">HTTP API Connection Issues</a></li>
+        <li><a href="#grpc-connection-issues">gRPC Connection Issues</a></li>
+      </ul>
+    </li>
+    <li><a href="#performance-degradation">Performance Degradation</a>
+      <ul>
+        <li><a href="#slow-queries">Slow Queries</a></li>
+        <li><a href="#high-cpu-usage">High CPU Usage</a></li>
+        <li><a href="#high-memory-usage">High Memory Usage</a></li>
+      </ul>
+    </li>
+    <li><a href="#wal-corruption-recovery">WAL Corruption Recovery</a>
+      <ul>
+        <li><a href="#detecting-wal-corruption">Detecting WAL Corruption</a></li>
+        <li><a href="#recovery-from-wal-corruption">Recovery from WAL Corruption</a></li>
+      </ul>
+    </li>
+    <li><a href="#cluster-split-brain-handling">Cluster Split-Brain Handling</a>
+      <ul>
+        <li><a href="#detecting-split-brain">Detecting Split-Brain</a></li>
+        <li><a href="#prevention">Prevention</a></li>
+        <li><a href="#resolution">Resolution</a></li>
+      </ul>
+    </li>
+    <li><a href="#memory-pressure-and-oom">Memory Pressure and OOM</a>
+      <ul>
+        <li><a href="#detecting-memory-pressure">Detecting Memory Pressure</a></li>
+        <li><a href="#preventing-oom">Preventing OOM</a></li>
+        <li><a href="#recovery-from-oom">Recovery from OOM</a></li>
+      </ul>
+    </li>
+    <li><a href="#disk-space-management">Disk Space Management</a>
+      <ul>
+        <li><a href="#monitoring-disk-usage">Monitoring Disk Usage</a></li>
+        <li><a href="#reclaiming-disk-space">Reclaiming Disk Space</a></li>
+        <li><a href="#emergency-disk-full">Emergency: Disk Full</a></li>
+      </ul>
+    </li>
+    <li><a href="#log-analysis-guide">Log Analysis Guide</a>
+      <ul>
+        <li><a href="#finding-errors">Finding Errors</a></li>
+        <li><a href="#analyzing-slow-queries">Analyzing Slow Queries</a></li>
+        <li><a href="#tracking-connection-events">Tracking Connection Events</a></li>
+        <li><a href="#cluster-event-timeline">Cluster Event Timeline</a></li>
+      </ul>
+    </li>
+    <li><a href="#emergency-procedures">Emergency Procedures</a>
+      <ul>
+        <li><a href="#emergency-node-unresponsive">Emergency: Node Unresponsive</a></li>
+        <li><a href="#emergency-cluster-lost-quorum">Emergency: Cluster Lost Quorum</a></li>
+        <li><a href="#emergency-data-corruption-detected">Emergency: Data Corruption Detected</a></li>
+        <li><a href="#emergency-security-breach-suspected">Emergency: Security Breach Suspected</a></li>
+      </ul>
+    </li>
+    <li><a href="#frequently-asked-troubleshooting-questions">Frequently Asked Troubleshooting Questions</a>
+      <ul>
+        <li><a href="#how-do-i-check-the-thunderdb-version">How do I check the ThunderDB version?</a></li>
+        <li><a href="#how-do-i-check-cluster-membership-from-any-node">How do I check cluster membership from any node?</a></li>
+        <li><a href="#how-do-i-see-active-queries">How do I see active queries?</a></li>
+        <li><a href="#how-do-i-kill-a-long-running-query">How do I kill a long-running query?</a></li>
+        <li><a href="#how-do-i-check-why-a-specific-query-is-slow">How do I check why a specific query is slow?</a></li>
+        <li><a href="#how-do-i-check-replication-lag">How do I check replication lag?</a></li>
+        <li><a href="#how-do-i-drain-a-node-for-maintenance">How do I drain a node for maintenance?</a></li>
+        <li><a href="#how-do-i-recover-from-a-failed-configuration-change">How do I recover from a failed configuration change?</a></li>
+        <li><a href="#where-do-i-get-help">Where do I get help?</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+
+            
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/">Documentation</a></li>
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/administrator/">Administrator Guide</a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    Troubleshooting</li>
+  </ol>
+</nav>
+<div class="td-content">
+	<h1>Troubleshooting</h1>
+  <div class="lead">Diagnose and resolve common issues with ThunderDB including connection problems, performance degradation, WAL corruption, and cluster failures.</div>
+	<header class="article-meta">
+		
+</header>
+	<h1 id="troubleshooting">Troubleshooting</h1>
+<p>This guide helps you diagnose and resolve common issues with ThunderDB. It covers connection problems, performance degradation, storage issues, cluster failures, and emergency procedures.</p>
+<hr>
+<h2 id="diagnostic-tools">Diagnostic Tools</h2>
+<p>Before diving into specific issues, familiarize yourself with the diagnostic tools available.</p>
+<h3 id="debug-logging">Debug Logging</h3>
+<p>Enable verbose logging to gather detailed information about internal operations:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Via environment variable (most detailed)</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">RUST_LOG</span><span style="color:#ff79c6">=</span>trace ./thunderdb --config /etc/thunderdb/thunderdb.toml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># For specific subsystems only</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">RUST_LOG</span><span style="color:#ff79c6">=</span>thunderdb::storage<span style="color:#ff79c6">=</span>debug,thunderdb::cluster<span style="color:#ff79c6">=</span>trace ./thunderdb --config /etc/thunderdb/thunderdb.toml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Via runtime API (does not require restart)</span>
+</span></span><span style="display:flex;"><span>curl -X PUT http://localhost:8088/admin/config/log_level -d <span style="color:#f1fa8c">&#39;{&#34;level&#34;: &#34;debug&#34;}&#39;</span>
+</span></span></code></pre></div><h3 id="useful-log-targets">Useful Log Targets</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Target</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>thunderdb::server</code></td>
+          <td>Server startup, shutdown, and connection handling.</td>
+      </tr>
+      <tr>
+          <td><code>thunderdb::query</code></td>
+          <td>Query parsing, planning, and execution.</td>
+      </tr>
+      <tr>
+          <td><code>thunderdb::storage</code></td>
+          <td>Buffer pool, page I/O, compaction.</td>
+      </tr>
+      <tr>
+          <td><code>thunderdb::wal</code></td>
+          <td>Write-ahead log operations.</td>
+      </tr>
+      <tr>
+          <td><code>thunderdb::cluster</code></td>
+          <td>Raft consensus, region management, replication.</td>
+      </tr>
+      <tr>
+          <td><code>thunderdb::txn</code></td>
+          <td>Transaction management, MVCC, locking.</td>
+      </tr>
+      <tr>
+          <td><code>thunderdb::protocol::pg</code></td>
+          <td>PostgreSQL wire protocol handling.</td>
+      </tr>
+      <tr>
+          <td><code>thunderdb::protocol::mysql</code></td>
+          <td>MySQL wire protocol handling.</td>
+      </tr>
+      <tr>
+          <td><code>thunderdb::protocol::resp</code></td>
+          <td>RESP (Redis) wire protocol handling.</td>
+      </tr>
+      <tr>
+          <td><code>thunderdb::security</code></td>
+          <td>Authentication, authorization, TLS.</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="health-and-status-endpoints">Health and Status Endpoints</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Overall health</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/health
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Readiness status</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/ready
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Cluster membership</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/cluster/members
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Raft status</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/cluster/raft
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Region distribution</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/cluster/regions
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Active connections</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/connections
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Current queries</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/queries
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Storage statistics</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/storage/stats
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># WAL status</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/wal/status
+</span></span></code></pre></div><hr>
+<h2 id="common-issues-and-solutions">Common Issues and Solutions</h2>
+<h3 id="thunderdb-fails-to-start">ThunderDB Fails to Start</h3>
+<p><strong>Symptom:</strong> ThunderDB exits immediately after startup with an error.</p>
+<p><strong>Check the logs:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>journalctl -u thunderdb --no-pager -n <span style="color:#bd93f9">50</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># or</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">RUST_LOG</span><span style="color:#ff79c6">=</span>debug ./thunderdb --config /etc/thunderdb/thunderdb.toml 2&gt;&amp;<span style="color:#bd93f9">1</span> | head -100
+</span></span></code></pre></div><p><strong>Common causes:</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>Error Message</th>
+          <th>Cause</th>
+          <th>Solution</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>Address already in use</code></td>
+          <td>Another process is using a required port.</td>
+          <td>Check <code>ss -tlnp | grep &lt;port&gt;</code> and stop the conflicting process or change the port.</td>
+      </tr>
+      <tr>
+          <td><code>Permission denied: /var/lib/thunderdb/data</code></td>
+          <td>ThunderDB does not have write access to the data directory.</td>
+          <td>Fix ownership: <code>chown -R thunder:thunder /var/lib/thunderdb</code>.</td>
+      </tr>
+      <tr>
+          <td><code>Invalid configuration</code></td>
+          <td>Syntax error or invalid value in <code>thunderdb.toml</code>.</td>
+          <td>Validate the TOML file and check against the configuration reference.</td>
+      </tr>
+      <tr>
+          <td><code>Failed to open WAL</code></td>
+          <td>WAL directory is missing or corrupted.</td>
+          <td>Verify the directory exists and has correct permissions. If corrupted, see WAL corruption recovery.</td>
+      </tr>
+      <tr>
+          <td><code>Cannot bind to address</code></td>
+          <td>The <code>listen_addr</code> is not available on this host.</td>
+          <td>Use <code>0.0.0.0</code> or a valid IP address assigned to the host.</td>
+      </tr>
+      <tr>
+          <td><code>Incompatible page size</code></td>
+          <td><code>page_size</code> differs from the existing data files.</td>
+          <td>Use the same <code>page_size</code> as when the data was created.</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="thunderdb-starts-but-clients-cannot-connect">ThunderDB Starts but Clients Cannot Connect</h3>
+<p><strong>Symptom:</strong> ThunderDB is running but clients receive connection refused or timeout errors.</p>
+<p><strong>Diagnostic steps:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 1. Verify ThunderDB is listening on the expected ports</span>
+</span></span><span style="display:flex;"><span>ss -tlnp | grep thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 2. Check if the node is ready</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/ready
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3. Test local connectivity</span>
+</span></span><span style="display:flex;"><span>psql -h 127.0.0.1 -p <span style="color:#bd93f9">5432</span> -U admin
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 4. Test remote connectivity</span>
+</span></span><span style="display:flex;"><span>psql -h &lt;thunderdb-ip&gt; -p <span style="color:#bd93f9">5432</span> -U admin
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 5. Check firewall rules</span>
+</span></span><span style="display:flex;"><span>sudo ufw status
+</span></span><span style="display:flex;"><span>sudo iptables -L -n
+</span></span></code></pre></div><hr>
+<h2 id="connection-problems-by-protocol">Connection Problems by Protocol</h2>
+<h3 id="postgresql-connection-issues">PostgreSQL Connection Issues</h3>
+<p><strong>&ldquo;Connection refused&rdquo;:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Verify pg_port is configured and ThunderDB is listening</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/health
+</span></span><span style="display:flex;"><span>ss -tln | grep <span style="color:#bd93f9">5432</span>
+</span></span></code></pre></div><p><strong>&ldquo;Authentication failed&rdquo;:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Verify the user exists and password is correct</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Check audit log for details</span>
+</span></span><span style="display:flex;"><span>tail -20 /var/log/thunderdb/audit.log | grep auth
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Verify authentication is configured correctly</span>
+</span></span><span style="display:flex;"><span>grep authentication_enabled /etc/thunderdb/thunderdb.toml
+</span></span></code></pre></div><p><strong>&ldquo;SSL required&rdquo; or TLS handshake errors:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># If TLS is enabled, clients must use SSL</span>
+</span></span><span style="display:flex;"><span>psql <span style="color:#f1fa8c">&#34;host=localhost port=5432 user=admin sslmode=require&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Verify certificate paths are correct</span>
+</span></span><span style="display:flex;"><span>openssl x509 -in /etc/thunderdb/tls/server.crt -noout -dates
+</span></span></code></pre></div><p><strong>Connection timeout:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Check network path</span>
+</span></span><span style="display:flex;"><span>traceroute &lt;thunderdb-host&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Check for connection limits</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/connections | python3 -m json.tool
+</span></span></code></pre></div><h3 id="mysql-connection-issues">MySQL Connection Issues</h3>
+<p><strong>&ldquo;Access denied for user&rdquo;:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Verify credentials</span>
+</span></span><span style="display:flex;"><span>mysql -h localhost -P <span style="color:#bd93f9">3306</span> -u admin -p
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Check if the MySQL protocol handler is running</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/health | python3 -m json.tool
+</span></span></code></pre></div><p><strong>&ldquo;Plugin caching_sha2_password could not be loaded&rdquo;:</strong></p>
+<p>This indicates the client is too old to support SHA-256 authentication. Either upgrade the client or connect using the legacy plugin:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mysql -h localhost -P <span style="color:#bd93f9">3306</span> -u admin -p --default-auth<span style="color:#ff79c6">=</span>mysql_native_password
+</span></span></code></pre></div><h3 id="resp-redis-connection-issues">RESP (Redis) Connection Issues</h3>
+<p><strong>&ldquo;NOAUTH Authentication required&rdquo;:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Authenticate after connecting</span>
+</span></span><span style="display:flex;"><span>redis-cli -h localhost -p <span style="color:#bd93f9">6379</span>
+</span></span><span style="display:flex;"><span>&gt; AUTH admin mypassword
+</span></span></code></pre></div><p><strong>&ldquo;Connection reset by peer&rdquo;:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Check if TLS is required</span>
+</span></span><span style="display:flex;"><span>redis-cli -h localhost -p <span style="color:#bd93f9">6379</span> --tls --cacert ca.crt
+</span></span></code></pre></div><h3 id="http-api-connection-issues">HTTP API Connection Issues</h3>
+<p><strong>&ldquo;Connection refused&rdquo; on port 8088:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># This is the admin/API port; verify it is enabled</span>
+</span></span><span style="display:flex;"><span>grep http_port /etc/thunderdb/thunderdb.toml
+</span></span><span style="display:flex;"><span>ss -tln | grep <span style="color:#bd93f9">8088</span>
+</span></span></code></pre></div><h3 id="grpc-connection-issues">gRPC Connection Issues</h3>
+<p><strong>&ldquo;Unavailable&rdquo; or &ldquo;Transport closing&rdquo;:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Verify gRPC port is accessible</span>
+</span></span><span style="display:flex;"><span>grpcurl -plaintext localhost:9090 list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># If TLS is enabled</span>
+</span></span><span style="display:flex;"><span>grpcurl -cacert ca.crt localhost:9090 list
+</span></span></code></pre></div><hr>
+<h2 id="performance-degradation">Performance Degradation</h2>
+<h3 id="slow-queries">Slow Queries</h3>
+<p><strong>Symptoms:</strong> Increasing query latency, slow query log entries, user complaints about response times.</p>
+<p><strong>Diagnostic steps:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 1. Check current slow queries</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/queries
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 2. Review slow query log</span>
+</span></span><span style="display:flex;"><span>grep <span style="color:#f1fa8c">&#34;Slow query&#34;</span> /var/log/thunderdb/thunderdb.log | tail -20
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3. Check buffer pool hit rate</span>
+</span></span><span style="display:flex;"><span>curl -s http://localhost:8088/admin/metrics | grep buffer_pool_hit_ratio
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Target: &gt; 0.95. If lower, buffer pool is too small.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 4. Check for lock contention</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/locks
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 5. Check compaction backlog</span>
+</span></span><span style="display:flex;"><span>curl -s http://localhost:8088/admin/metrics | grep compaction_pending
+</span></span></code></pre></div><p><strong>Solutions:</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>Cause</th>
+          <th>Metric Indicator</th>
+          <th>Solution</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Buffer pool too small</td>
+          <td><code>buffer_pool_hit_ratio &lt; 0.90</code></td>
+          <td>Increase <code>buffer_pool_size</code>.</td>
+      </tr>
+      <tr>
+          <td>Missing indexes</td>
+          <td>High <code>rows_examined</code> in slow queries</td>
+          <td>Create appropriate indexes.</td>
+      </tr>
+      <tr>
+          <td>Lock contention</td>
+          <td>High lock wait times</td>
+          <td>Optimize transaction scope, reduce transaction size.</td>
+      </tr>
+      <tr>
+          <td>Compaction backlog</td>
+          <td><code>compaction_pending &gt; 50</code></td>
+          <td>Increase <code>compaction_threads</code>.</td>
+      </tr>
+      <tr>
+          <td>Large result sets</td>
+          <td>High <code>rows_returned</code></td>
+          <td>Add LIMIT clauses, use pagination.</td>
+      </tr>
+      <tr>
+          <td>Full table scans</td>
+          <td>Sequential scan on large tables</td>
+          <td>Create indexes, rewrite queries.</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="high-cpu-usage">High CPU Usage</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 1. Check active queries for expensive operations</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/queries
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 2. Check compaction thread activity</span>
+</span></span><span style="display:flex;"><span>curl -s http://localhost:8088/admin/metrics | grep compaction
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3. Profile the process (requires perf tools)</span>
+</span></span><span style="display:flex;"><span>sudo perf top -p <span style="color:#ff79c6">$(</span>pgrep thunderdb<span style="color:#ff79c6">)</span>
+</span></span></code></pre></div><p><strong>Solutions:</strong></p>
+<ul>
+<li>Kill expensive queries: <code>curl -X POST http://localhost:8088/admin/queries/&lt;query_id&gt;/cancel</code></li>
+<li>Reduce <code>compaction_threads</code> if compaction is consuming too much CPU.</li>
+<li>Check for runaway analytics queries consuming excessive CPU.</li>
+</ul>
+<h3 id="high-memory-usage">High Memory Usage</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 1. Check memory breakdown</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/storage/stats
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 2. Check buffer pool usage</span>
+</span></span><span style="display:flex;"><span>curl -s http://localhost:8088/admin/metrics | grep memory_usage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3. Check OS-level memory</span>
+</span></span><span style="display:flex;"><span>free -h
+</span></span><span style="display:flex;"><span>cat /proc/<span style="color:#ff79c6">$(</span>pgrep thunderdb<span style="color:#ff79c6">)</span>/status | grep VmRSS
+</span></span></code></pre></div><p><strong>Solutions:</strong></p>
+<ul>
+<li>Reduce <code>buffer_pool_size</code> if the system is under memory pressure.</li>
+<li>Reduce <code>wal_buffer_size</code>.</li>
+<li>Check for memory leaks by monitoring memory growth over time.</li>
+</ul>
+<hr>
+<h2 id="wal-corruption-recovery">WAL Corruption Recovery</h2>
+<p>WAL corruption is rare but can occur due to hardware failures, abrupt power loss, or disk errors.</p>
+<h3 id="detecting-wal-corruption">Detecting WAL Corruption</h3>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>ThunderDB fails to start with WAL-related errors.</li>
+<li>Recovery phase reports checksum mismatches.</li>
+<li>Log messages like <code>WAL segment corrupted</code> or <code>Invalid WAL record at LSN</code>.</li>
+</ul>
+<p><strong>Check WAL integrity:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>thunderdb --verify-wal --config /etc/thunderdb/thunderdb.toml
+</span></span></code></pre></div><h3 id="recovery-from-wal-corruption">Recovery from WAL Corruption</h3>
+<p><strong>Option 1: Skip corrupted WAL records (potential data loss):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># WARNING: This may result in loss of recent transactions.</span>
+</span></span><span style="display:flex;"><span>thunderdb --recover-wal --skip-corrupted --config /etc/thunderdb/thunderdb.toml
+</span></span></code></pre></div><p>This skips corrupted WAL records during recovery. Transactions that depended on corrupted records may be lost.</p>
+<p><strong>Option 2: Restore from backup:</strong></p>
+<p>If data integrity is critical, restore from the most recent backup and replay WAL archives up to the point of corruption:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 1. Stop ThunderDB</span>
+</span></span><span style="display:flex;"><span>sudo systemctl stop thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 2. Restore from backup</span>
+</span></span><span style="display:flex;"><span>thunderdb --restore-pitr <span style="color:#f1fa8c">&#34;2026-01-15T10:00:00Z&#34;</span> <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --restore-backup /backups/thunderdb/full-2026-01-15
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3. Start ThunderDB</span>
+</span></span><span style="display:flex;"><span>sudo systemctl start thunderdb
+</span></span></code></pre></div><p><strong>Option 3: Re-replicate from cluster peers:</strong></p>
+<p>If the node is part of a healthy cluster, remove its data and let it re-replicate:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 1. Stop the node</span>
+</span></span><span style="display:flex;"><span>sudo systemctl stop thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 2. Remove data and WAL directories</span>
+</span></span><span style="display:flex;"><span>sudo rm -rf /var/lib/thunderdb/data/*
+</span></span><span style="display:flex;"><span>sudo rm -rf /var/lib/thunderdb/wal/*
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3. Start the node -- it will rejoin the cluster and re-replicate</span>
+</span></span><span style="display:flex;"><span>sudo systemctl start thunderdb
+</span></span></code></pre></div><hr>
+<h2 id="cluster-split-brain-handling">Cluster Split-Brain Handling</h2>
+<p>A split-brain occurs when network partitions cause cluster nodes to diverge, potentially electing multiple leaders.</p>
+<h3 id="detecting-split-brain">Detecting Split-Brain</h3>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Multiple nodes report themselves as leaders.</li>
+<li>Clients connected to different nodes see different data.</li>
+<li>Raft term increases rapidly (frequent elections).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Check Raft status on each node</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">for</span> node in 10.0.1.1 10.0.1.2 10.0.1.3; <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;--- Node: </span><span style="color:#8be9fd;font-style:italic">$node</span><span style="color:#f1fa8c"> ---&#34;</span>
+</span></span><span style="display:flex;"><span>  curl -s http://<span style="color:#8be9fd;font-style:italic">$node</span>:8088/admin/cluster/raft | python3 -m json.tool
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">done</span>
+</span></span></code></pre></div><h3 id="prevention">Prevention</h3>
+<p>ThunderDB&rsquo;s Raft implementation prevents split-brain through quorum-based consensus:</p>
+<ul>
+<li>A leader must have support from a majority of nodes (quorum).</li>
+<li>In a 3-node cluster, a leader needs 2 votes (tolerates 1 failure).</li>
+<li>In a 5-node cluster, a leader needs 3 votes (tolerates 2 failures).</li>
+</ul>
+<p><strong>Best practices:</strong></p>
+<ul>
+<li>Always use an odd number of nodes (3, 5, 7).</li>
+<li>Ensure reliable network connectivity between all nodes.</li>
+<li>Set appropriate <code>raft_election_timeout</code> (increase for unreliable networks).</li>
+<li>Monitor Raft term changes to detect election storms.</li>
+</ul>
+<h3 id="resolution">Resolution</h3>
+<p>If a split-brain does occur (e.g., due to a symmetric network partition):</p>
+<ol>
+<li>
+<p><strong>Identify the partition:</strong> Determine which nodes can communicate with which.</p>
+</li>
+<li>
+<p><strong>Resolve the network issue:</strong> Restore connectivity between all nodes.</p>
+</li>
+<li>
+<p><strong>The Raft protocol will self-heal:</strong> Once connectivity is restored, nodes will converge on a single leader with the highest term and most up-to-date log.</p>
+</li>
+<li>
+<p><strong>Verify data consistency:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl http://localhost:8088/admin/cluster/consistency-check
+</span></span></code></pre></div></li>
+<li>
+<p><strong>If data inconsistency is detected:</strong> The minority partition&rsquo;s writes (if any were accepted without quorum) are automatically rolled back when the partition heals.</p>
+</li>
+</ol>
+<hr>
+<h2 id="memory-pressure-and-oom">Memory Pressure and OOM</h2>
+<h3 id="detecting-memory-pressure">Detecting Memory Pressure</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Check if OOM killer was invoked</span>
+</span></span><span style="display:flex;"><span>dmesg | grep -i <span style="color:#f1fa8c">&#34;out of memory&#34;</span>
+</span></span><span style="display:flex;"><span>journalctl -k | grep -i oom
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Check ThunderDB memory usage</span>
+</span></span><span style="display:flex;"><span>curl -s http://localhost:8088/admin/metrics | grep memory_usage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Check system memory</span>
+</span></span><span style="display:flex;"><span>free -h
+</span></span><span style="display:flex;"><span>vmstat <span style="color:#bd93f9">1</span> <span style="color:#bd93f9">5</span>
+</span></span></code></pre></div><h3 id="preventing-oom">Preventing OOM</h3>
+<ol>
+<li>
+<p><strong>Size the buffer pool appropriately:</strong> Do not set <code>buffer_pool_size</code> to more than 70% of total system RAM.</p>
+</li>
+<li>
+<p><strong>Set memory limits:</strong></p>
+<p>For systemd:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#ff79c6">[Service]</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">MemoryMax</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">12G</span>
+</span></span><span style="display:flex;"><span><span style="color:#50fa7b">MemoryHigh</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">10G</span>
+</span></span></code></pre></div><p>For Kubernetes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#ff79c6">resources</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">limits</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">memory</span>: 12Gi
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">requests</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">memory</span>: 8Gi
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Monitor memory trends:</strong> Set up alerting for memory usage above 80%.</p>
+</li>
+<li>
+<p><strong>Disable swap</strong> to avoid performance degradation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo swapoff -a
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="recovery-from-oom">Recovery from OOM</h3>
+<p>If ThunderDB is killed by the OOM killer:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 1. Check if the process was OOM-killed</span>
+</span></span><span style="display:flex;"><span>dmesg | tail -20
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 2. Restart ThunderDB (ARIES recovery will handle crash recovery)</span>
+</span></span><span style="display:flex;"><span>sudo systemctl start thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3. Monitor recovery progress</span>
+</span></span><span style="display:flex;"><span>journalctl -u thunderdb -f
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 4. After recovery, reduce memory configuration to prevent recurrence</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Edit /etc/thunderdb/thunderdb.toml: reduce buffer_pool_size</span>
+</span></span><span style="display:flex;"><span>sudo systemctl restart thunderdb
+</span></span></code></pre></div><hr>
+<h2 id="disk-space-management">Disk Space Management</h2>
+<h3 id="monitoring-disk-usage">Monitoring Disk Usage</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># ThunderDB disk usage breakdown</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/storage/stats
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># System-level disk usage</span>
+</span></span><span style="display:flex;"><span>df -h /var/lib/thunderdb/data
+</span></span><span style="display:flex;"><span>df -h /var/lib/thunderdb/wal
+</span></span><span style="display:flex;"><span>du -sh /var/lib/thunderdb/data/*
+</span></span><span style="display:flex;"><span>du -sh /var/lib/thunderdb/wal/*
+</span></span></code></pre></div><h3 id="reclaiming-disk-space">Reclaiming Disk Space</h3>
+<p><strong>Force a checkpoint and compact:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Force a checkpoint to flush dirty pages and allow WAL truncation</span>
+</span></span><span style="display:flex;"><span>curl -X POST http://localhost:8088/admin/checkpoint
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Trigger manual compaction</span>
+</span></span><span style="display:flex;"><span>curl -X POST http://localhost:8088/admin/storage/compact
+</span></span></code></pre></div><p><strong>Clean up WAL archives:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Remove old WAL archive files beyond retention</span>
+</span></span><span style="display:flex;"><span>find /backups/thunderdb/wal-archive -mtime +7 -delete
+</span></span></code></pre></div><p><strong>Drop unused tables or databases:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">DROP</span> <span style="color:#ff79c6">TABLE</span> <span style="color:#ff79c6">IF</span> <span style="color:#ff79c6">EXISTS</span> old_data_table;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">DROP</span> <span style="color:#ff79c6">DATABASE</span> <span style="color:#ff79c6">IF</span> <span style="color:#ff79c6">EXISTS</span> staging;
+</span></span></code></pre></div><h3 id="emergency-disk-full">Emergency: Disk Full</h3>
+<p>If the disk is completely full, ThunderDB will stop accepting writes to prevent data corruption.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 1. Free space immediately by removing old WAL archive files or temp files</span>
+</span></span><span style="display:flex;"><span>sudo rm -f /var/lib/thunderdb/wal/*.tmp
+</span></span><span style="display:flex;"><span>sudo rm -rf /tmp/thunderdb-*
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 2. If WAL directory is full, force a checkpoint to allow WAL truncation</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># (This requires enough space for the checkpoint itself)</span>
+</span></span><span style="display:flex;"><span>curl -X POST http://localhost:8088/admin/checkpoint
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3. Add more disk space (expand volume, attach additional disk)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Then restart if ThunderDB entered read-only mode:</span>
+</span></span><span style="display:flex;"><span>sudo systemctl restart thunderdb
+</span></span></code></pre></div><hr>
+<h2 id="log-analysis-guide">Log Analysis Guide</h2>
+<h3 id="finding-errors">Finding Errors</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Search for errors in the last hour</span>
+</span></span><span style="display:flex;"><span>journalctl -u thunderdb --since <span style="color:#f1fa8c">&#34;1 hour ago&#34;</span> -p err
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Search for specific error patterns</span>
+</span></span><span style="display:flex;"><span>journalctl -u thunderdb | grep -i <span style="color:#f1fa8c">&#34;panic\|error\|fatal&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># For JSON-formatted logs, use jq</span>
+</span></span><span style="display:flex;"><span>journalctl -u thunderdb --output<span style="color:#ff79c6">=</span>cat | jq <span style="color:#f1fa8c">&#39;select(.level == &#34;error&#34;)&#39;</span>
+</span></span></code></pre></div><h3 id="analyzing-slow-queries">Analyzing Slow Queries</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Extract slow query entries</span>
+</span></span><span style="display:flex;"><span>journalctl -u thunderdb --output<span style="color:#ff79c6">=</span>cat | jq <span style="color:#f1fa8c">&#39;select(.target == &#34;thunderdb::query::slow&#34;)&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Get the top 10 slowest queries</span>
+</span></span><span style="display:flex;"><span>journalctl -u thunderdb --output<span style="color:#ff79c6">=</span>cat | <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  jq <span style="color:#f1fa8c">&#39;select(.target == &#34;thunderdb::query::slow&#34;) | {duration_ms, query}&#39;</span> | <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  jq -s <span style="color:#f1fa8c">&#39;sort_by(.duration_ms) | reverse | .[:10]&#39;</span>
+</span></span></code></pre></div><h3 id="tracking-connection-events">Tracking Connection Events</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Connection events</span>
+</span></span><span style="display:flex;"><span>journalctl -u thunderdb --output<span style="color:#ff79c6">=</span>cat | jq <span style="color:#f1fa8c">&#39;select(.message | test(&#34;connection|disconnect&#34;))&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Authentication failures</span>
+</span></span><span style="display:flex;"><span>journalctl -u thunderdb --output<span style="color:#ff79c6">=</span>cat | jq <span style="color:#f1fa8c">&#39;select(.event == &#34;auth&#34; and .status == &#34;failure&#34;)&#39;</span>
+</span></span></code></pre></div><h3 id="cluster-event-timeline">Cluster Event Timeline</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Raft elections and leader changes</span>
+</span></span><span style="display:flex;"><span>journalctl -u thunderdb --output<span style="color:#ff79c6">=</span>cat | jq <span style="color:#f1fa8c">&#39;select(.target == &#34;thunderdb::cluster&#34; and (.message | test(&#34;election|leader&#34;)))&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Region splits and merges</span>
+</span></span><span style="display:flex;"><span>journalctl -u thunderdb --output<span style="color:#ff79c6">=</span>cat | jq <span style="color:#f1fa8c">&#39;select(.message | test(&#34;region.*split|region.*merge&#34;))&#39;</span>
+</span></span></code></pre></div><hr>
+<h2 id="emergency-procedures">Emergency Procedures</h2>
+<p>The following procedures are derived from the operational runbook (<code>deploy/runbook.md</code>).</p>
+<h3 id="emergency-node-unresponsive">Emergency: Node Unresponsive</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 1. Check if the process is running</span>
+</span></span><span style="display:flex;"><span>pgrep -f thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 2. Check for resource exhaustion</span>
+</span></span><span style="display:flex;"><span>top -p <span style="color:#ff79c6">$(</span>pgrep thunderdb<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>free -h
+</span></span><span style="display:flex;"><span>df -h
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3. If the process is stuck (not responding to signals)</span>
+</span></span><span style="display:flex;"><span>sudo <span style="color:#8be9fd;font-style:italic">kill</span> -SIGQUIT <span style="color:#ff79c6">$(</span>pgrep thunderdb<span style="color:#ff79c6">)</span>  <span style="color:#6272a4"># Generates a thread dump in logs</span>
+</span></span><span style="display:flex;"><span>sleep <span style="color:#bd93f9">5</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 4. Force kill if necessary</span>
+</span></span><span style="display:flex;"><span>sudo <span style="color:#8be9fd;font-style:italic">kill</span> -9 <span style="color:#ff79c6">$(</span>pgrep thunderdb<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 5. Restart</span>
+</span></span><span style="display:flex;"><span>sudo systemctl start thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 6. Monitor recovery</span>
+</span></span><span style="display:flex;"><span>journalctl -u thunderdb -f
+</span></span></code></pre></div><h3 id="emergency-cluster-lost-quorum">Emergency: Cluster Lost Quorum</h3>
+<p>If the cluster has lost quorum (majority of nodes are down), it cannot accept writes.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 1. Determine cluster state</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">for</span> node in 10.0.1.1 10.0.1.2 10.0.1.3; <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;--- </span><span style="color:#8be9fd;font-style:italic">$node</span><span style="color:#f1fa8c"> ---&#34;</span>
+</span></span><span style="display:flex;"><span>  curl -s --connect-timeout <span style="color:#bd93f9">2</span> http://<span style="color:#8be9fd;font-style:italic">$node</span>:8088/admin/health <span style="color:#ff79c6">||</span> <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;UNREACHABLE&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 2. Restore failed nodes as quickly as possible</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># On each failed node:</span>
+</span></span><span style="display:flex;"><span>sudo systemctl start thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3. If nodes cannot be restored, and you need emergency write access,</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># force a single-node cluster (DANGER: data loss possible)</span>
+</span></span><span style="display:flex;"><span>thunderdb --force-new-cluster --config /etc/thunderdb/thunderdb.toml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 4. After quorum is restored, verify data consistency</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/cluster/consistency-check
+</span></span></code></pre></div><h3 id="emergency-data-corruption-detected">Emergency: Data Corruption Detected</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 1. Stop writes immediately</span>
+</span></span><span style="display:flex;"><span>curl -X POST http://localhost:8088/admin/read-only
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 2. Run integrity check</span>
+</span></span><span style="display:flex;"><span>thunderdb --verify-data --config /etc/thunderdb/thunderdb.toml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3. If corruption is limited:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># - Identify affected pages from the verification output</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># - If the node is in a cluster, the affected regions will be re-replicated from healthy replicas</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 4. If corruption is widespread:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># - Stop ThunderDB</span>
+</span></span><span style="display:flex;"><span>sudo systemctl stop thunderdb
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># - Restore from backup</span>
+</span></span><span style="display:flex;"><span>thunderdb --restore-pitr <span style="color:#f1fa8c">&#34;latest&#34;</span> --restore-backup /backups/thunderdb/full-latest
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># - Start ThunderDB</span>
+</span></span><span style="display:flex;"><span>sudo systemctl start thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 5. Investigate root cause (disk errors, firmware bugs, etc.)</span>
+</span></span><span style="display:flex;"><span>sudo smartctl -a /dev/sda
+</span></span><span style="display:flex;"><span>dmesg | grep -i <span style="color:#f1fa8c">&#34;error\|i/o\|sector&#34;</span>
+</span></span></code></pre></div><h3 id="emergency-security-breach-suspected">Emergency: Security Breach Suspected</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 1. Review audit logs for suspicious activity</span>
+</span></span><span style="display:flex;"><span>tail -1000 /var/log/thunderdb/audit.log | <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  jq <span style="color:#f1fa8c">&#39;select(.event == &#34;auth&#34; and .status == &#34;failure&#34;)&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 2. Check for unauthorized users</span>
+</span></span><span style="display:flex;"><span>psql -h localhost -U admin -c <span style="color:#f1fa8c">&#34;SELECT * FROM pg_catalog.pg_user;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3. Rotate all passwords</span>
+</span></span><span style="display:flex;"><span>thunderdb --hash-password  <span style="color:#6272a4"># Generate new hash for superuser</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Update THUNDERDB_SUPERUSER_PASSWORD_HASH</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 4. Rotate TLS certificates</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Generate new certificates and reload:</span>
+</span></span><span style="display:flex;"><span>sudo systemctl reload thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 5. Rotate encryption keys (if encryption at rest is enabled)</span>
+</span></span><span style="display:flex;"><span>thunderdb --rotate-encryption-key <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --old-key /etc/thunderdb/encryption.key.old <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>  --new-key /etc/thunderdb/encryption.key
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 6. Review and restrict network access</span>
+</span></span><span style="display:flex;"><span>sudo ufw status
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Tighten firewall rules as needed</span>
+</span></span></code></pre></div><hr>
+<h2 id="frequently-asked-troubleshooting-questions">Frequently Asked Troubleshooting Questions</h2>
+<h3 id="how-do-i-check-the-thunderdb-version">How do I check the ThunderDB version?</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>thunderdb --version
+</span></span></code></pre></div><h3 id="how-do-i-check-cluster-membership-from-any-node">How do I check cluster membership from any node?</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl http://localhost:8088/admin/cluster/members
+</span></span></code></pre></div><h3 id="how-do-i-see-active-queries">How do I see active queries?</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl http://localhost:8088/admin/queries
+</span></span></code></pre></div><h3 id="how-do-i-kill-a-long-running-query">How do I kill a long-running query?</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X POST http://localhost:8088/admin/queries/&lt;query_id&gt;/cancel
+</span></span></code></pre></div><h3 id="how-do-i-check-why-a-specific-query-is-slow">How do I check why a specific query is slow?</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6272a4">-- Via PostgreSQL protocol
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">EXPLAIN</span> <span style="color:#ff79c6">ANALYZE</span> <span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> orders <span style="color:#ff79c6">WHERE</span> customer_id <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">42</span>;
+</span></span></code></pre></div><h3 id="how-do-i-check-replication-lag">How do I check replication lag?</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -s http://localhost:8088/admin/metrics | grep replication_lag
+</span></span></code></pre></div><h3 id="how-do-i-drain-a-node-for-maintenance">How do I drain a node for maintenance?</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 1. Mark the node as draining (stops accepting new region replicas)</span>
+</span></span><span style="display:flex;"><span>curl -X POST http://localhost:8088/admin/drain
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 2. Wait for existing regions to migrate to other nodes</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8088/admin/drain/status
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3. Once drained, stop for maintenance</span>
+</span></span><span style="display:flex;"><span>sudo systemctl stop thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 4. After maintenance, rejoin the cluster</span>
+</span></span><span style="display:flex;"><span>sudo systemctl start thunderdb
+</span></span></code></pre></div><h3 id="how-do-i-recover-from-a-failed-configuration-change">How do I recover from a failed configuration change?</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># ThunderDB keeps a backup of the last working configuration</span>
+</span></span><span style="display:flex;"><span>cp /etc/thunderdb/thunderdb.toml.bak /etc/thunderdb/thunderdb.toml
+</span></span><span style="display:flex;"><span>sudo systemctl restart thunderdb
+</span></span></code></pre></div><h3 id="where-do-i-get-help">Where do I get help?</h3>
+<ul>
+<li>
+<p><strong>Documentation</strong>: <a href="https://thunderdb.io/docs">https://thunderdb.io/docs</a></p>
+</li>
+<li>
+<p><strong>GitHub Issues</strong>: <a href="https://github.com/thunderdb/thunderdb/issues">https://github.com/thunderdb/thunderdb/issues</a></p>
+</li>
+<li>
+<p><strong>Community Discord</strong>: <a href="https://discord.gg/thunderdb">https://discord.gg/thunderdb</a></p>
+</li>
+<li>
+<p><strong>Debug bundle</strong>: Generate a diagnostic bundle for support:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>thunderdb --diagnostic-bundle --output /tmp/thunderdb-diag.tar.gz
+</span></span></code></pre></div><p>This collects logs, metrics, configuration (with secrets redacted), and system information.</p>
+</li>
+</ul>
+
+	<div class="section-index">
+    
+    
+    </div>
+<style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<div class="d-print-none">
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+</div>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'page_helpful', {
+      'event_category': 'Helpful',
+      'event_label': window.location.pathname,
+      'value': value
+    });
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback( 100 );
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+<br />
+</div>
+
+          </main>
+        </div>
+      </div>
+      <footer class="td-footer row d-print-none">
+  <div class="container-fluid">
+    <div class="row mx-md-2">
+      <div class="td-footer__left col-6 col-sm-4 order-sm-1">
+        
+      </div><div class="td-footer__right col-6 col-sm-4 order-sm-3">
+        <ul class="td-footer__links-list">
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="GitHub" aria-label="GitHub">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="Discussions" aria-label="Discussions">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb/discussions" aria-label="Discussions">
+      <i class="fas fa-comments"></i>
+    </a>
+  </li>
+  
+</ul>
+
+      </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
+        <span class="td-footer__copyright">&copy;
+    2026
+    <span class="td-footer__authors">ThunderDB Contributors</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><p class="td-footer__about mt-2"><a href="/docs/about/">About ThunderDB</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script src="/docs/js/main.js"></script>
+<script defer src="/docs/js/click-to-copy.js" crossorigin="anonymous"></script>
+<script src='/docs/js/tabpane-persist.js'></script>
+
+  </body>
+</html>

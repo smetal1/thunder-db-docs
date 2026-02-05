@@ -1,0 +1,1372 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
+  <head><script src="/docs/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=docs/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/docs/favicons/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/docs/favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/docs/favicons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/docs/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="/docs/favicons/favicon-256.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/docs/favicons/apple-touch-icon.png">
+<link rel="manifest" href="/docs/favicons/site.webmanifest">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="msapplication-TileColor" content="#0D0D0D">
+
+<title>Release Process | ThunderDB Documentation</title>
+<meta name="description" content="How ThunderDB versions, builds, packages, and publishes releases -- covering version numbering, release checklists, binary builds, Docker images, Debian packages, changelogs, and post-release verification.">
+<meta property="og:url" content="http://localhost:1313/docs/docs/contributor/release-process/">
+  <meta property="og:site_name" content="ThunderDB Documentation">
+  <meta property="og:title" content="Release Process">
+  <meta property="og:description" content="How ThunderDB versions, builds, packages, and publishes releases -- covering version numbering, release checklists, binary builds, Docker images, Debian packages, changelogs, and post-release verification.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+
+  <meta itemprop="name" content="Release Process">
+  <meta itemprop="description" content="How ThunderDB versions, builds, packages, and publishes releases -- covering version numbering, release checklists, binary builds, Docker images, Debian packages, changelogs, and post-release verification.">
+  <meta itemprop="wordCount" content="2743">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Release Process">
+  <meta name="twitter:description" content="How ThunderDB versions, builds, packages, and publishes releases -- covering version numbering, release checklists, binary builds, Docker images, Debian packages, changelogs, and post-release verification.">
+<link href="/docs/scss/main.css" rel="stylesheet">
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+  crossorigin="anonymous"></script>
+<script defer
+  src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
+  integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
+  crossorigin="anonymous"></script>
+
+  </head>
+  <body class="td-section">
+    <header>
+      <nav class="td-navbar js-navbar-scroll" data-bs-theme="dark">
+<div class="td-navbar-container container-fluid flex-column flex-md-row">
+  <a class="navbar-brand" href="/docs/"><span class="navbar-brand__logo navbar-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="300" height="64"><defs><symbol id="b" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#331500" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FF6B00"/><rect width="4.8" height=".6" rx=".55" fill="#FA4" opacity=".5"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#F83" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#930" opacity=".35"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D50"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,200,100,0.3)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FC8" opacity=".55"/></symbol><symbol id="c" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#4D3000" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FA0"/><rect width="4.8" height=".6" rx=".55" fill="#FD6" opacity=".55"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#FB3" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#960" opacity=".3"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D80"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,230,150,0.35)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FE9" opacity=".6"/></symbol></defs><use href="#b" x="35" y="2" width="5" height="5"/><use href="#b" x="41" y="2" width="5" height="5"/><use href="#b" x="29" y="8" width="5" height="5"/><use href="#b" x="35" y="8" width="5" height="5"/><use href="#b" x="23" y="14" width="5" height="5"/><use href="#b" x="29" y="14" width="5" height="5"/><use href="#b" x="17" y="20" width="5" height="5"/><use href="#b" x="23" y="20" width="5" height="5"/><use href="#c" x="5" y="26" width="5" height="5"/><use href="#c" x="11" y="26" width="5" height="5"/><use href="#c" x="17" y="26" width="5" height="5"/><use href="#c" x="23" y="26" width="5" height="5"/><use href="#c" x="29" y="26" width="5" height="5"/><use href="#c" x="35" y="26" width="5" height="5"/><use href="#c" x="41" y="26" width="5" height="5"/><use href="#c" x="47" y="26" width="5" height="5"/><use href="#b" x="35" y="32" width="5" height="5"/><use href="#b" x="41" y="32" width="5" height="5"/><use href="#b" x="29" y="38" width="5" height="5"/><use href="#b" x="35" y="38" width="5" height="5"/><use href="#b" x="23" y="44" width="5" height="5"/><use href="#b" x="29" y="44" width="5" height="5"/><use href="#b" x="17" y="50" width="5" height="5"/><use href="#b" x="23" y="50" width="5" height="5"/><use href="#b" x="11" y="56" width="5" height="5"/><use href="#b" x="17" y="56" width="5" height="5"/><text x="66" y="43" font-family="'SF Mono','Fira Code','Consolas','Courier New',monospace" font-size="27" font-weight="900" letter-spacing=".5"><tspan fill="#FFF">Thunder</tspan><tspan fill="#FF6B00">DB</tspan></text></svg></span><span class="navbar-brand__name">ThunderDB Documentation</span></a>
+  <div class="td-navbar-nav-scroll td-navbar-nav-scroll--indicator" id="main_navbar">
+    <div class="scroll-indicator scroll-left"></div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/"><span>Documentation</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/architecture/"><span>Architecture</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/developer/api-reference/"><span>API Reference</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/about/"><span>About</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/thunderdb/thunderdb" target="_blank" rel="noopener"><i class='fab fa-github'></i><span>GitHub</span></a>
+      </li>
+      </ul>
+    <div class="scroll-indicator scroll-right"></div>
+  </div>
+  <div class="d-none d-lg-block td-navbar__search">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+  </div>
+</div>
+</nav>
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main" data-bs-spy="scroll" data-bs-target=".td-toc" data-bs-root-margin="0px 0px -10%">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+  <script>
+    $(function() {
+    $("#td-section-nav a").removeClass("active");
+    $("#td-section-nav #m-docsdocscontributorrelease-process").addClass("active");
+    $("#td-section-nav #m-docsdocscontributorrelease-process-li span").addClass("td-sidebar-nav-active-item");
+    $("#td-section-nav #m-docsdocscontributorrelease-process").parents("li").addClass("active-path");
+    $("#td-section-nav li.active-path").addClass("show");
+    $("#td-section-nav li.active-path").children("input").prop('checked', true);
+    $("#td-section-nav #m-docsdocscontributorrelease-process-li").siblings("li").addClass("show");
+    $("#td-section-nav #m-docsdocscontributorrelease-process-li").children("ul").children("li").addClass("show");
+    $("#td-sidebar-menu").toggleClass("d-none");
+    });
+  </script>
+  <div id="td-sidebar-menu" class="td-sidebar__inner d-none">
+  <form class="td-sidebar__search d-flex align-items-center">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+    <button class="btn btn-link td-sidebar__toggle" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  <nav class="td-sidebar-nav collapse foldable-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocs-li">
+    <a href="/docs/docs/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docsdocs"><span class="">Documentation</span></a>
+    <ul class="ul-1">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsgetting-started-li">
+    <input type="checkbox" id="m-docsdocsgetting-started-check"/>
+    <label for="m-docsdocsgetting-started-check"><a href="/docs/docs/getting-started/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsgetting-started"><span class="">Getting Started</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsarchitecture-li">
+    <input type="checkbox" id="m-docsdocsarchitecture-check"/>
+    <label for="m-docsdocsarchitecture-check"><a href="/docs/docs/architecture/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsarchitecture"><span class="">Architecture</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsdeveloper-li">
+    <input type="checkbox" id="m-docsdocsdeveloper-check"/>
+    <label for="m-docsdocsdeveloper-check"><a href="/docs/docs/developer/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloper"><span class="">Developer Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperapi-reference-li">
+    <input type="checkbox" id="m-docsdocsdeveloperapi-reference-check"/>
+    <label for="m-docsdocsdeveloperapi-reference-check"><a href="/docs/docs/developer/api-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperapi-reference"><span class="">API Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersql-reference-li">
+    <input type="checkbox" id="m-docsdocsdevelopersql-reference-check"/>
+    <label for="m-docsdocsdevelopersql-reference-check"><a href="/docs/docs/developer/sql-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersql-reference"><span class="">SQL Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersdk-li">
+    <input type="checkbox" id="m-docsdocsdevelopersdk-check"/>
+    <label for="m-docsdocsdevelopersdk-check"><a href="/docs/docs/developer/sdk/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersdk"><span class="">SDKs &amp; Drivers</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperexamples-li">
+    <input type="checkbox" id="m-docsdocsdeveloperexamples-check"/>
+    <label for="m-docsdocsdeveloperexamples-check"><a href="/docs/docs/developer/examples/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperexamples"><span class="">Examples &amp; Use Cases</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsadministrator-li">
+    <input type="checkbox" id="m-docsdocsadministrator-check"/>
+    <label for="m-docsdocsadministrator-check"><a href="/docs/docs/administrator/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministrator"><span class="">Administrator Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratordeployment-li">
+    <input type="checkbox" id="m-docsdocsadministratordeployment-check"/>
+    <label for="m-docsdocsadministratordeployment-check"><a href="/docs/docs/administrator/deployment/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratordeployment"><span class="">Deployment</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorconfiguration-li">
+    <input type="checkbox" id="m-docsdocsadministratorconfiguration-check"/>
+    <label for="m-docsdocsadministratorconfiguration-check"><a href="/docs/docs/administrator/configuration/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorconfiguration"><span class="">Configuration</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratormonitoring-li">
+    <input type="checkbox" id="m-docsdocsadministratormonitoring-check"/>
+    <label for="m-docsdocsadministratormonitoring-check"><a href="/docs/docs/administrator/monitoring/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratormonitoring"><span class="">Monitoring</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorbackup-recovery-li">
+    <input type="checkbox" id="m-docsdocsadministratorbackup-recovery-check"/>
+    <label for="m-docsdocsadministratorbackup-recovery-check"><a href="/docs/docs/administrator/backup-recovery/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorbackup-recovery"><span class="">Backup &amp; Recovery</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorsecurity-li">
+    <input type="checkbox" id="m-docsdocsadministratorsecurity-check"/>
+    <label for="m-docsdocsadministratorsecurity-check"><a href="/docs/docs/administrator/security/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorsecurity"><span class="">Security</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratortroubleshooting-li">
+    <input type="checkbox" id="m-docsdocsadministratortroubleshooting-check"/>
+    <label for="m-docsdocsadministratortroubleshooting-check"><a href="/docs/docs/administrator/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratortroubleshooting"><span class="">Troubleshooting</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocscontributor-li">
+    <input type="checkbox" id="m-docsdocscontributor-check"/>
+    <label for="m-docsdocscontributor-check"><a href="/docs/docs/contributor/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributor"><span class="">Contributor Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributordevelopment-setup-li">
+    <input type="checkbox" id="m-docsdocscontributordevelopment-setup-check"/>
+    <label for="m-docsdocscontributordevelopment-setup-check"><a href="/docs/docs/contributor/development-setup/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributordevelopment-setup"><span class="">Development Setup</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorcodebase-guide-li">
+    <input type="checkbox" id="m-docsdocscontributorcodebase-guide-check"/>
+    <label for="m-docsdocscontributorcodebase-guide-check"><a href="/docs/docs/contributor/codebase-guide/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorcodebase-guide"><span class="">Codebase Guide</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributortesting-li">
+    <input type="checkbox" id="m-docsdocscontributortesting-check"/>
+    <label for="m-docsdocscontributortesting-check"><a href="/docs/docs/contributor/testing/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributortesting"><span class="">Testing</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorrelease-process-li">
+    <input type="checkbox" id="m-docsdocscontributorrelease-process-check"/>
+    <label for="m-docsdocscontributorrelease-process-check"><a href="/docs/docs/contributor/release-process/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorrelease-process"><span class="">Release Process</span></a></label>
+    
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
+<a href="https://github.com/thunderdb/thunderdb/tree/main/content/docs/contributor/release-process/_index.md" class="td-page-meta--view td-page-meta__view" target="_blank" rel="noopener"><i class="fa-solid fa-file-lines fa-fw"></i> View page source</a>
+  <a href="https://github.com/thunderdb/thunderdb/edit/main/content/docs/contributor/release-process/_index.md" class="td-page-meta--edit td-page-meta__edit" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Edit this page</a>
+  <a href="https://github.com/thunderdb/thunderdb/new/main/content/docs/contributor/release-process?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child td-page-meta__child" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Create child page</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new?title=Release%20Process" class="td-page-meta--issue td-page-meta__issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create documentation issue</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new" class="td-page-meta--project td-page-meta__project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create project issue</a>
+  
+</div>
+
+            <div class="td-toc" data-proofer-ignore>
+<div class="td-toc-title">
+      <span class="td-toc-title__text">On this page</span>
+      <a class="td-toc-title__link" title="Top of page" href="#"></a>
+    </div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#version-numbering">Version Numbering</a>
+      <ul>
+        <li><a href="#pre-release-versions">Pre-Release Versions</a></li>
+        <li><a href="#compatibility-guarantees">Compatibility Guarantees</a></li>
+      </ul>
+    </li>
+    <li><a href="#release-checklist">Release Checklist</a>
+      <ul>
+        <li><a href="#pre-release">Pre-Release</a></li>
+        <li><a href="#build-and-test">Build and Test</a></li>
+        <li><a href="#release">Release</a></li>
+        <li><a href="#post-release">Post-Release</a></li>
+      </ul>
+    </li>
+    <li><a href="#updating-version-numbers">Updating Version Numbers</a>
+      <ul>
+        <li><a href="#files-to-update">Files to Update</a></li>
+      </ul>
+    </li>
+    <li><a href="#building-release-binaries">Building Release Binaries</a>
+      <ul>
+        <li><a href="#standard-release-build">Standard Release Build</a></li>
+        <li><a href="#cross-platform-builds">Cross-Platform Builds</a></li>
+        <li><a href="#static-linking-linux">Static Linking (Linux)</a></li>
+        <li><a href="#release-binary-verification">Release Binary Verification</a></li>
+      </ul>
+    </li>
+    <li><a href="#building-docker-images">Building Docker Images</a>
+      <ul>
+        <li><a href="#production-docker-image">Production Docker Image</a></li>
+        <li><a href="#docker-image-verification">Docker Image Verification</a></li>
+        <li><a href="#pushing-to-container-registry">Pushing to Container Registry</a></li>
+        <li><a href="#multi-architecture-docker-images">Multi-Architecture Docker Images</a></li>
+      </ul>
+    </li>
+    <li><a href="#building-debian-packages">Building Debian Packages</a>
+      <ul>
+        <li><a href="#using-the-build-script">Using the Build Script</a></li>
+        <li><a href="#package-contents">Package Contents</a></li>
+        <li><a href="#package-metadata">Package Metadata</a></li>
+        <li><a href="#installing-the-package">Installing the Package</a></li>
+        <li><a href="#verifying-the-package">Verifying the Package</a></li>
+      </ul>
+    </li>
+    <li><a href="#changelog-management">Changelog Management</a>
+      <ul>
+        <li><a href="#changelog-format">Changelog Format</a></li>
+        <li><a href="#changelog-categories">Changelog Categories</a></li>
+        <li><a href="#updating-the-changelog">Updating the Changelog</a></li>
+      </ul>
+    </li>
+    <li><a href="#git-tagging">Git Tagging</a>
+      <ul>
+        <li><a href="#creating-a-release-tag">Creating a Release Tag</a></li>
+        <li><a href="#tag-naming-convention">Tag Naming Convention</a></li>
+        <li><a href="#listing-tags">Listing Tags</a></li>
+      </ul>
+    </li>
+    <li><a href="#release-notes">Release Notes</a>
+      <ul>
+        <li><a href="#release-notes-structure">Release Notes Structure</a></li>
+        <li><a href="#graphql-api-256">GraphQL API (#256)</a></li>
+      </ul>
+    </li>
+    <li><a href="#breaking-changes">Breaking Changes</a></li>
+    <li><a href="#upgrade-guide">Upgrade Guide</a></li>
+    <li><a href="#download">Download</a></li>
+    <li><a href="#checksums">Checksums</a></li>
+    <li><a href="#full-changelog">Full Changelog</a></li>
+    <li><a href="#publishing-crates">Publishing Crates</a>
+      <ul>
+        <li><a href="#pre-publish-verification">Pre-Publish Verification</a></li>
+        <li><a href="#important-notes">Important Notes</a></li>
+      </ul>
+    </li>
+    <li><a href="#release-automation">Release Automation</a>
+      <ul>
+        <li><a href="#release-workflow-githubworkflowsreleaseyml">Release Workflow (<code>.github/workflows/release.yml</code>)</a></li>
+        <li><a href="#manual-steps">Manual Steps</a></li>
+      </ul>
+    </li>
+    <li><a href="#post-release-verification">Post-Release Verification</a>
+      <ul>
+        <li><a href="#binary-verification">Binary Verification</a></li>
+        <li><a href="#docker-verification">Docker Verification</a></li>
+        <li><a href="#debian-package-verification">Debian Package Verification</a></li>
+        <li><a href="#upgrade-path-verification">Upgrade Path Verification</a></li>
+      </ul>
+    </li>
+    <li><a href="#hotfix-process">Hotfix Process</a></li>
+    <li><a href="#release-schedule">Release Schedule</a></li>
+    <li><a href="#roles-and-responsibilities">Roles and Responsibilities</a></li>
+  </ul>
+</nav>
+  </div>
+
+            
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/">Documentation</a></li>
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/contributor/">Contributor Guide</a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    Release Process</li>
+  </ol>
+</nav>
+<div class="td-content">
+	<h1>Release Process</h1>
+  <div class="lead">How ThunderDB versions, builds, packages, and publishes releases &ndash; covering version numbering, release checklists, binary builds, Docker images, Debian packages, changelogs, and post-release verification.</div>
+	<header class="article-meta">
+		
+</header>
+	<h1 id="release-process">Release Process</h1>
+<p>This guide documents the end-to-end release process for ThunderDB. It covers version numbering conventions, the release checklist, building release artifacts, changelog management, and post-release verification.</p>
+<h2 id="version-numbering">Version Numbering</h2>
+<p>ThunderDB follows <a href="https://semver.org/">Semantic Versioning 2.0.0</a> (SemVer):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>MAJOR.MINOR.PATCH[-PRERELEASE][+BUILD]
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th>Component</th>
+          <th>When to Increment</th>
+          <th>Example</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>MAJOR</strong></td>
+          <td>Breaking changes to the public API, wire protocol incompatibilities, data format changes requiring migration</td>
+          <td><code>1.0.0</code> -&gt; <code>2.0.0</code></td>
+      </tr>
+      <tr>
+          <td><strong>MINOR</strong></td>
+          <td>New features, new SQL functions, new API endpoints, new configuration options (backward compatible)</td>
+          <td><code>1.2.0</code> -&gt; <code>1.3.0</code></td>
+      </tr>
+      <tr>
+          <td><strong>PATCH</strong></td>
+          <td>Bug fixes, performance improvements, documentation updates (backward compatible, no new features)</td>
+          <td><code>1.2.3</code> -&gt; <code>1.2.4</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="pre-release-versions">Pre-Release Versions</h3>
+<p>Pre-release versions are used for testing before a stable release:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Tag</th>
+          <th>Purpose</th>
+          <th>Example</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>-alpha.N</code></td>
+          <td>Early development, API may change significantly</td>
+          <td><code>1.3.0-alpha.1</code></td>
+      </tr>
+      <tr>
+          <td><code>-beta.N</code></td>
+          <td>Feature-complete, testing and stabilization</td>
+          <td><code>1.3.0-beta.1</code></td>
+      </tr>
+      <tr>
+          <td><code>-rc.N</code></td>
+          <td>Release candidate, final validation</td>
+          <td><code>1.3.0-rc.1</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="compatibility-guarantees">Compatibility Guarantees</h3>
+<ul>
+<li><strong>Wire protocol compatibility:</strong> PostgreSQL, MySQL, and Redis wire protocol compatibility is maintained across MINOR versions. Breaking protocol changes require a MAJOR version bump.</li>
+<li><strong>Data format compatibility:</strong> On-disk data format changes that require migration are only allowed in MAJOR versions. Minor versions must be able to read data written by previous minor versions of the same major version.</li>
+<li><strong>Configuration compatibility:</strong> New configuration options may be added in MINOR versions with sensible defaults. Removing or renaming configuration options requires a MAJOR version bump with a migration guide.</li>
+<li><strong>Client library compatibility:</strong> The <code>thunder-client</code> crate follows the same versioning as the server. Client version <code>X.Y.*</code> is compatible with server version <code>X.Y.*</code>.</li>
+</ul>
+<h2 id="release-checklist">Release Checklist</h2>
+<p>The following checklist must be completed for every release. Each step is detailed in the sections below.</p>
+<h3 id="pre-release">Pre-Release</h3>
+<ul>
+<li><input disabled="" type="checkbox"> All CI checks pass on the <code>main</code> branch</li>
+<li><input disabled="" type="checkbox"> All planned features for this release are merged</li>
+<li><input disabled="" type="checkbox"> All known release-blocking bugs are fixed</li>
+<li><input disabled="" type="checkbox"> Version numbers are updated in all <code>Cargo.toml</code> files</li>
+<li><input disabled="" type="checkbox"> <code>CHANGELOG.md</code> is updated with all changes since the last release</li>
+<li><input disabled="" type="checkbox"> Release notes are drafted</li>
+<li><input disabled="" type="checkbox"> Documentation is updated for new features and changes</li>
+<li><input disabled="" type="checkbox"> Upgrade/migration guide is written (for MAJOR versions)</li>
+<li><input disabled="" type="checkbox"> Performance benchmarks show no unexpected regressions</li>
+</ul>
+<h3 id="build-and-test">Build and Test</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Release binary builds successfully: <code>cargo build --release</code></li>
+<li><input disabled="" type="checkbox"> Full test suite passes against the release binary</li>
+<li><input disabled="" type="checkbox"> ACID compliance tests pass</li>
+<li><input disabled="" type="checkbox"> Chaos tests pass</li>
+<li><input disabled="" type="checkbox"> Load tests meet minimum performance thresholds</li>
+<li><input disabled="" type="checkbox"> Docker image builds successfully</li>
+<li><input disabled="" type="checkbox"> Docker image smoke test passes</li>
+<li><input disabled="" type="checkbox"> Debian package builds successfully (if applicable)</li>
+<li><input disabled="" type="checkbox"> Cross-platform builds succeed (Linux x86_64, Linux aarch64, macOS x86_64, macOS aarch64)</li>
+</ul>
+<h3 id="release">Release</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Git tag is created and pushed</li>
+<li><input disabled="" type="checkbox"> Release artifacts are uploaded to GitHub Releases</li>
+<li><input disabled="" type="checkbox"> Docker image is pushed to container registry</li>
+<li><input disabled="" type="checkbox"> Debian package is published to package repository (if applicable)</li>
+<li><input disabled="" type="checkbox"> Crates are published to crates.io (if applicable)</li>
+<li><input disabled="" type="checkbox"> Release announcement is published</li>
+</ul>
+<h3 id="post-release">Post-Release</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Download and verify release artifacts</li>
+<li><input disabled="" type="checkbox"> Smoke test release artifacts on a clean machine</li>
+<li><input disabled="" type="checkbox"> Verify Docker image works with <code>docker run</code></li>
+<li><input disabled="" type="checkbox"> Monitor issue tracker for release-related bug reports</li>
+<li><input disabled="" type="checkbox"> Update version numbers on <code>main</code> to next development version</li>
+</ul>
+<h2 id="updating-version-numbers">Updating Version Numbers</h2>
+<p>Version numbers must be updated in all <code>Cargo.toml</code> files in the workspace. Use a script or do it manually:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># The version update script updates all Cargo.toml files consistently</span>
+</span></span><span style="display:flex;"><span>./scripts/bump-version.sh 1.3.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Or manually update each Cargo.toml:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 1. Root Cargo.toml (workspace.package.version)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 2. Each crate&#39;s Cargo.toml (package.version)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3. Inter-crate dependency versions</span>
+</span></span></code></pre></div><h3 id="files-to-update">Files to Update</h3>
+<table>
+  <thead>
+      <tr>
+          <th>File</th>
+          <th>Field</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>Cargo.toml</code> (root)</td>
+          <td><code>workspace.package.version</code></td>
+      </tr>
+      <tr>
+          <td><code>thunder-common/Cargo.toml</code></td>
+          <td><code>package.version</code></td>
+      </tr>
+      <tr>
+          <td><code>thunder-storage/Cargo.toml</code></td>
+          <td><code>package.version</code>, dependency versions</td>
+      </tr>
+      <tr>
+          <td><code>thunder-txn/Cargo.toml</code></td>
+          <td><code>package.version</code>, dependency versions</td>
+      </tr>
+      <tr>
+          <td><code>thunder-sql/Cargo.toml</code></td>
+          <td><code>package.version</code>, dependency versions</td>
+      </tr>
+      <tr>
+          <td><code>thunder-query/Cargo.toml</code></td>
+          <td><code>package.version</code>, dependency versions</td>
+      </tr>
+      <tr>
+          <td><code>thunder-cluster/Cargo.toml</code></td>
+          <td><code>package.version</code>, dependency versions</td>
+      </tr>
+      <tr>
+          <td><code>thunder-protocol/Cargo.toml</code></td>
+          <td><code>package.version</code>, dependency versions</td>
+      </tr>
+      <tr>
+          <td><code>thunder-vector/Cargo.toml</code></td>
+          <td><code>package.version</code>, dependency versions</td>
+      </tr>
+      <tr>
+          <td><code>thunder-api/Cargo.toml</code></td>
+          <td><code>package.version</code>, dependency versions</td>
+      </tr>
+      <tr>
+          <td><code>thunder-cdc/Cargo.toml</code></td>
+          <td><code>package.version</code>, dependency versions</td>
+      </tr>
+      <tr>
+          <td><code>thunder-fdw/Cargo.toml</code></td>
+          <td><code>package.version</code>, dependency versions</td>
+      </tr>
+      <tr>
+          <td><code>thunder-server/Cargo.toml</code></td>
+          <td><code>package.version</code>, dependency versions</td>
+      </tr>
+      <tr>
+          <td><code>thunder-client/Cargo.toml</code></td>
+          <td><code>package.version</code>, dependency versions</td>
+      </tr>
+  </tbody>
+</table>
+<p>After updating, verify that the workspace builds:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cargo build --release
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span>
+</span></span></code></pre></div><h2 id="building-release-binaries">Building Release Binaries</h2>
+<h3 id="standard-release-build">Standard Release Build</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cargo build --release
+</span></span></code></pre></div><p>This produces the <code>thunder-server</code> binary at <code>target/release/thunder-server</code> with the release profile settings:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Setting</th>
+          <th>Value</th>
+          <th>Effect</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>opt-level</code></td>
+          <td><code>3</code></td>
+          <td>Maximum optimization for best runtime performance</td>
+      </tr>
+      <tr>
+          <td><code>lto</code></td>
+          <td><code>&quot;thin&quot;</code></td>
+          <td>Thin link-time optimization enables cross-crate inlining</td>
+      </tr>
+      <tr>
+          <td><code>codegen-units</code></td>
+          <td><code>1</code></td>
+          <td>Single codegen unit allows maximum LLVM optimization</td>
+      </tr>
+      <tr>
+          <td><code>panic</code></td>
+          <td><code>&quot;abort&quot;</code></td>
+          <td>Abort on panic produces smaller binaries with no unwinding overhead</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="cross-platform-builds">Cross-Platform Builds</h3>
+<p>ThunderDB supports the following target platforms:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Platform</th>
+          <th>Target Triple</th>
+          <th>Build Command</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Linux x86_64</td>
+          <td><code>x86_64-unknown-linux-gnu</code></td>
+          <td><code>cargo build --release --target x86_64-unknown-linux-gnu</code></td>
+      </tr>
+      <tr>
+          <td>Linux aarch64</td>
+          <td><code>aarch64-unknown-linux-gnu</code></td>
+          <td><code>cross build --release --target aarch64-unknown-linux-gnu</code></td>
+      </tr>
+      <tr>
+          <td>macOS x86_64</td>
+          <td><code>x86_64-apple-darwin</code></td>
+          <td><code>cargo build --release --target x86_64-apple-darwin</code></td>
+      </tr>
+      <tr>
+          <td>macOS aarch64</td>
+          <td><code>aarch64-apple-darwin</code></td>
+          <td><code>cargo build --release --target aarch64-apple-darwin</code></td>
+      </tr>
+  </tbody>
+</table>
+<p>For cross-compilation, use the <a href="https://github.com/cross-rs/cross">cross</a> tool:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Install cross</span>
+</span></span><span style="display:flex;"><span>cargo install cross
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Build for Linux aarch64 from a Linux x86_64 or macOS host</span>
+</span></span><span style="display:flex;"><span>cross build --release --target aarch64-unknown-linux-gnu
+</span></span></code></pre></div><h3 id="static-linking-linux">Static Linking (Linux)</h3>
+<p>For maximum portability on Linux, build a statically linked binary using musl:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Add the musl target</span>
+</span></span><span style="display:flex;"><span>rustup target add x86_64-unknown-linux-musl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Build statically linked binary</span>
+</span></span><span style="display:flex;"><span>cargo build --release --target x86_64-unknown-linux-musl
+</span></span></code></pre></div><p>The resulting binary has no dynamic library dependencies and runs on any Linux distribution.</p>
+<h3 id="release-binary-verification">Release Binary Verification</h3>
+<p>After building, verify the release binary:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Check the binary exists and is the expected type</span>
+</span></span><span style="display:flex;"><span>file target/release/thunder-server
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Check the binary size (should be 30-80MB depending on features)</span>
+</span></span><span style="display:flex;"><span>ls -lh target/release/thunder-server
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Verify the version string is correct</span>
+</span></span><span style="display:flex;"><span>./target/release/thunder-server --version
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run a quick smoke test</span>
+</span></span><span style="display:flex;"><span>./target/release/thunder-server --config config/test.toml &amp;
+</span></span><span style="display:flex;"><span>sleep <span style="color:#bd93f9">2</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8080/api/v1/health
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">kill</span> %1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Strip debug symbols for smaller production binary (optional)</span>
+</span></span><span style="display:flex;"><span>strip target/release/thunder-server
+</span></span></code></pre></div><h2 id="building-docker-images">Building Docker Images</h2>
+<h3 id="production-docker-image">Production Docker Image</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Build the production image</span>
+</span></span><span style="display:flex;"><span>docker build -t thunderdb:1.3.0 .
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Also tag as latest</span>
+</span></span><span style="display:flex;"><span>docker tag thunderdb:1.3.0 thunderdb:latest
+</span></span></code></pre></div><p>The <code>Dockerfile</code> uses a multi-stage build for minimal image size:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#6272a4"># Stage 1: Build</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> <span style="color:#f1fa8c">rust:1.75</span> <span style="color:#ff79c6">AS</span> <span style="color:#f1fa8c">builder</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WORKDIR</span> <span style="color:#f1fa8c">/app</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> . .
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">RUN</span> cargo build --release
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Stage 2: Runtime</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> <span style="color:#f1fa8c">debian:bookworm-slim</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">RUN</span> apt-get update <span style="color:#ff79c6">&amp;&amp;</span> apt-get install -y <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    ca-certificates <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    libssl3 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&amp;&amp;</span> rm -rf /var/lib/apt/lists/*
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>builder /app/target/release/thunder-server /usr/local/bin/
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> config/prod.toml /etc/thunderdb/config.toml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">EXPOSE</span> <span style="color:#f1fa8c">5432</span> <span style="color:#bd93f9">3306</span> <span style="color:#bd93f9">6379</span> <span style="color:#bd93f9">8080</span> <span style="color:#bd93f9">50051</span> <span style="color:#bd93f9">8081</span> <span style="color:#bd93f9">8082</span> <span style="color:#bd93f9">9090</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ENTRYPOINT</span> [<span style="color:#f1fa8c">&#34;thunder-server&#34;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">CMD</span> [<span style="color:#f1fa8c">&#34;--config&#34;</span>, <span style="color:#f1fa8c">&#34;/etc/thunderdb/config.toml&#34;</span>]
+</span></span></code></pre></div><h3 id="docker-image-verification">Docker Image Verification</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Verify the image was built correctly</span>
+</span></span><span style="display:flex;"><span>docker images thunderdb:1.3.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run a smoke test</span>
+</span></span><span style="display:flex;"><span>docker run -d --name thunder-test -p 5432:5432 -p 8080:8080 thunderdb:1.3.0
+</span></span><span style="display:flex;"><span>sleep <span style="color:#bd93f9">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Health check</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8080/api/v1/health
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Connect with psql</span>
+</span></span><span style="display:flex;"><span>psql -h localhost -p <span style="color:#bd93f9">5432</span> -U admin -d thunderdb -c <span style="color:#f1fa8c">&#34;SELECT version();&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Clean up</span>
+</span></span><span style="display:flex;"><span>docker stop thunder-test <span style="color:#ff79c6">&amp;&amp;</span> docker rm thunder-test
+</span></span></code></pre></div><h3 id="pushing-to-container-registry">Pushing to Container Registry</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Tag for registry</span>
+</span></span><span style="display:flex;"><span>docker tag thunderdb:1.3.0 ghcr.io/thunderdb/thunderdb:1.3.0
+</span></span><span style="display:flex;"><span>docker tag thunderdb:1.3.0 ghcr.io/thunderdb/thunderdb:latest
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Push</span>
+</span></span><span style="display:flex;"><span>docker push ghcr.io/thunderdb/thunderdb:1.3.0
+</span></span><span style="display:flex;"><span>docker push ghcr.io/thunderdb/thunderdb:latest
+</span></span></code></pre></div><h3 id="multi-architecture-docker-images">Multi-Architecture Docker Images</h3>
+<p>For ARM64 support (Apple Silicon, AWS Graviton, etc.):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Create a multi-architecture builder</span>
+</span></span><span style="display:flex;"><span>docker buildx create --name thunder-builder --use
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Build and push multi-arch image</span>
+</span></span><span style="display:flex;"><span>docker buildx build <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    --platform linux/amd64,linux/arm64 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    -t ghcr.io/thunderdb/thunderdb:1.3.0 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    -t ghcr.io/thunderdb/thunderdb:latest <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    --push .
+</span></span></code></pre></div><h2 id="building-debian-packages">Building Debian Packages</h2>
+<h3 id="using-the-build-script">Using the Build Script</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./scripts/build-deb.sh
+</span></span></code></pre></div><p>This script:</p>
+<ol>
+<li>Builds the release binary</li>
+<li>Creates the Debian package directory structure</li>
+<li>Writes the control file with package metadata</li>
+<li>Includes the binary, default configuration, systemd service file, and man pages</li>
+<li>Runs <code>dpkg-deb</code> to produce the <code>.deb</code> file</li>
+</ol>
+<h3 id="package-contents">Package Contents</h3>
+<p>The Debian package installs the following files:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Path</th>
+          <th>Content</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>/usr/bin/thunder-server</code></td>
+          <td>Server binary</td>
+      </tr>
+      <tr>
+          <td><code>/etc/thunderdb/config.toml</code></td>
+          <td>Default configuration file</td>
+      </tr>
+      <tr>
+          <td><code>/lib/systemd/system/thunderdb.service</code></td>
+          <td>systemd service unit</td>
+      </tr>
+      <tr>
+          <td><code>/var/lib/thunderdb/</code></td>
+          <td>Data directory (created on install)</td>
+      </tr>
+      <tr>
+          <td><code>/var/log/thunderdb/</code></td>
+          <td>Log directory (created on install)</td>
+      </tr>
+      <tr>
+          <td><code>/usr/share/man/man1/thunder-server.1.gz</code></td>
+          <td>Man page</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="package-metadata">Package Metadata</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span>Package: thunderdb
+</span></span><span style="display:flex;"><span>Version: <span style="color:#bd93f9">1.3</span><span style="color:#ff79c6">.</span><span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>Architecture: amd64
+</span></span><span style="display:flex;"><span>Maintainer: ThunderDB Team <span style="color:#ff79c6">&lt;</span>team@thunderdb<span style="color:#ff79c6">.</span>io<span style="color:#ff79c6">&gt;</span>
+</span></span><span style="display:flex;"><span>Description: ThunderDB <span style="color:#ff79c6">-</span> Distributed HTAP Database
+</span></span><span style="display:flex;"><span> A high<span style="color:#ff79c6">-</span>performance distributed database that unifies transactional
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">and</span> analytical workloads with multi<span style="color:#ff79c6">-</span>protocol support<span style="color:#ff79c6">.</span>
+</span></span><span style="display:flex;"><span>Depends: libc6 (<span style="color:#ff79c6">&gt;=</span> <span style="color:#bd93f9">2.31</span>), libssl3
+</span></span></code></pre></div><h3 id="installing-the-package">Installing the Package</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Install</span>
+</span></span><span style="display:flex;"><span>sudo dpkg -i thunderdb_1.3.0_amd64.deb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Start the service</span>
+</span></span><span style="display:flex;"><span>sudo systemctl start thunderdb
+</span></span><span style="display:flex;"><span>sudo systemctl <span style="color:#8be9fd;font-style:italic">enable</span> thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Check status</span>
+</span></span><span style="display:flex;"><span>sudo systemctl status thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># View logs</span>
+</span></span><span style="display:flex;"><span>sudo journalctl -u thunderdb -f
+</span></span></code></pre></div><h3 id="verifying-the-package">Verifying the Package</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># List package contents</span>
+</span></span><span style="display:flex;"><span>dpkg -c thunderdb_1.3.0_amd64.deb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Verify package metadata</span>
+</span></span><span style="display:flex;"><span>dpkg -I thunderdb_1.3.0_amd64.deb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Install and verify</span>
+</span></span><span style="display:flex;"><span>sudo dpkg -i thunderdb_1.3.0_amd64.deb
+</span></span><span style="display:flex;"><span>thunder-server --version
+</span></span></code></pre></div><h2 id="changelog-management">Changelog Management</h2>
+<p>ThunderDB maintains a <code>CHANGELOG.md</code> file in the repository root following the <a href="https://keepachangelog.com/">Keep a Changelog</a> format.</p>
+<h3 id="changelog-format">Changelog Format</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span><span style="font-weight:bold"># Changelog
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>All notable changes to ThunderDB are documented in this file.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>The format is based on [<span style="color:#ff79c6">Keep a Changelog</span>](<span style="color:#50fa7b">https://keepachangelog.com/en/1.1.0/</span>),
+</span></span><span style="display:flex;"><span>and this project adheres to [<span style="color:#ff79c6">Semantic Versioning</span>](<span style="color:#50fa7b">https://semver.org/spec/v2.0.0.html</span>).
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">## [Unreleased]
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">### Added
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">-</span> Vector search support with HNSW and IVF indexes (#234)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">-</span> GraphQL API endpoint (#256)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">### Changed
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">-</span> Improved B+Tree prefix compression reduces index size by 15% (#245)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">### Fixed
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">-</span> Fixed deadlock in concurrent DDL operations (#267)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">## [1.2.0] - 2025-12-15
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">### Added
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">-</span> MySQL wire protocol support (#189)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">-</span> Change Data Capture (CDC) with Kafka output (#195)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">-</span> WebSocket API for live query subscriptions (#201)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">### Changed
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">-</span> Upgraded Tokio runtime to 1.35 (#210)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">-</span> WAL group commit batch size is now configurable (#215)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">### Fixed
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">-</span> Fixed memory leak in buffer pool eviction under high concurrency (#220)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">-</span> Fixed incorrect NULL handling in outer joins (#225)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">### Security
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">-</span> Fixed timing side-channel in password authentication (#230)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">## [1.1.0] - 2025-09-01
+</span></span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><h3 id="changelog-categories">Changelog Categories</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Category</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Added</strong></td>
+          <td>New features</td>
+      </tr>
+      <tr>
+          <td><strong>Changed</strong></td>
+          <td>Changes to existing functionality</td>
+      </tr>
+      <tr>
+          <td><strong>Deprecated</strong></td>
+          <td>Features that will be removed in a future version</td>
+      </tr>
+      <tr>
+          <td><strong>Removed</strong></td>
+          <td>Features removed in this version</td>
+      </tr>
+      <tr>
+          <td><strong>Fixed</strong></td>
+          <td>Bug fixes</td>
+      </tr>
+      <tr>
+          <td><strong>Security</strong></td>
+          <td>Security-related fixes</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="updating-the-changelog">Updating the Changelog</h3>
+<p>When preparing a release:</p>
+<ol>
+<li>
+<p>Review all merged pull requests since the last release:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git log v1.2.0..HEAD --oneline --merges
+</span></span></code></pre></div></li>
+<li>
+<p>Categorize each change into the appropriate changelog section.</p>
+</li>
+<li>
+<p>Move items from <code>[Unreleased]</code> to the new version section with the release date.</p>
+</li>
+<li>
+<p>Include issue/PR numbers for each entry for traceability.</p>
+</li>
+</ol>
+<h2 id="git-tagging">Git Tagging</h2>
+<h3 id="creating-a-release-tag">Creating a Release Tag</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Ensure you are on the main branch and it is up to date</span>
+</span></span><span style="display:flex;"><span>git checkout main
+</span></span><span style="display:flex;"><span>git pull origin main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Verify all tests pass</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Create an annotated tag</span>
+</span></span><span style="display:flex;"><span>git tag -a v1.3.0 -m <span style="color:#f1fa8c">&#34;ThunderDB v1.3.0
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">Highlights:
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">- Vector search support with HNSW indexes
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">- GraphQL API endpoint
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">- 15% reduction in index size through improved prefix compression
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">See CHANGELOG.md for the complete list of changes.&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Push the tag</span>
+</span></span><span style="display:flex;"><span>git push origin v1.3.0
+</span></span></code></pre></div><h3 id="tag-naming-convention">Tag Naming Convention</h3>
+<p>Tags follow the format <code>v{MAJOR}.{MINOR}.{PATCH}[-PRERELEASE]</code>:</p>
+<ul>
+<li><code>v1.3.0</code> &ndash; Stable release</li>
+<li><code>v1.3.0-alpha.1</code> &ndash; Alpha pre-release</li>
+<li><code>v1.3.0-beta.1</code> &ndash; Beta pre-release</li>
+<li><code>v1.3.0-rc.1</code> &ndash; Release candidate</li>
+</ul>
+<h3 id="listing-tags">Listing Tags</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># List all tags</span>
+</span></span><span style="display:flex;"><span>git tag -l
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># List tags matching a pattern</span>
+</span></span><span style="display:flex;"><span>git tag -l <span style="color:#f1fa8c">&#39;v1.3.*&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Show tag details</span>
+</span></span><span style="display:flex;"><span>git show v1.3.0
+</span></span></code></pre></div><h2 id="release-notes">Release Notes</h2>
+<p>Release notes are published on GitHub Releases and provide a user-friendly summary of the release.</p>
+<h3 id="release-notes-structure">Release Notes Structure</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span><span style="font-weight:bold"># ThunderDB v1.3.0
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>**Release date:** 2026-01-15
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">## Highlights
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">-</span> **Vector Search:** ThunderDB now supports vector similarity search with
+</span></span><span style="display:flex;"><span>  HNSW and IVF indexes, enabling AI/ML workloads directly in the database.
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">-</span> **GraphQL API:** A new GraphQL endpoint auto-generates a schema from your
+</span></span><span style="display:flex;"><span>  database tables, supporting queries, mutations, and subscriptions.
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">-</span> **Smaller Indexes:** Improved B+Tree prefix compression reduces index storage
+</span></span><span style="display:flex;"><span>  by approximately 15%.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">## What&#39;s New
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">### Vector Search (#234)
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Store and search high-dimensional vectors directly in ThunderDB:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>```sql
+</span></span><span style="display:flex;"><span>CREATE TABLE embeddings (
+</span></span><span style="display:flex;"><span>    id INT PRIMARY KEY,
+</span></span><span style="display:flex;"><span>    content TEXT,
+</span></span><span style="display:flex;"><span>    embedding VECTOR(1536)
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CREATE INDEX ON embeddings USING hnsw (embedding vector_cosine_ops);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SELECT * FROM embeddings
+</span></span><span style="display:flex;"><span>ORDER BY embedding &lt;=&gt; &#39;[0.1, 0.2, ...]&#39;::vector
+</span></span><span style="display:flex;"><span>LIMIT 10;
+</span></span></code></pre></div><h3 id="graphql-api-256">GraphQL API (#256)</h3>
+<p>Access your data through a fully-featured GraphQL endpoint at <code>/graphql</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-graphql" data-lang="graphql"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">query</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#50fa7b">users</span>(where: { <span style="color:#50fa7b">age</span>: { <span style="color:#50fa7b">gt</span>: <span style="color:#50fa7b">21</span> } }, limit: <span style="color:#50fa7b">10</span>) {
+</span></span><span style="display:flex;"><span>    id
+</span></span><span style="display:flex;"><span>    name
+</span></span><span style="display:flex;"><span>    email
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="breaking-changes">Breaking Changes</h2>
+<p>None in this release.</p>
+<h2 id="upgrade-guide">Upgrade Guide</h2>
+<p>This is a backward-compatible release. Simply replace the binary and restart:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl stop thunderdb
+</span></span><span style="display:flex;"><span>sudo dpkg -i thunderdb_1.3.0_amd64.deb
+</span></span><span style="display:flex;"><span>sudo systemctl start thunderdb
+</span></span></code></pre></div><h2 id="download">Download</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Platform</th>
+          <th>Architecture</th>
+          <th>Download</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Linux</td>
+          <td>x86_64</td>
+          <td><a href="link">thunderdb-1.3.0-linux-amd64.tar.gz</a></td>
+      </tr>
+      <tr>
+          <td>Linux</td>
+          <td>aarch64</td>
+          <td><a href="link">thunderdb-1.3.0-linux-arm64.tar.gz</a></td>
+      </tr>
+      <tr>
+          <td>macOS</td>
+          <td>x86_64</td>
+          <td><a href="link">thunderdb-1.3.0-darwin-amd64.tar.gz</a></td>
+      </tr>
+      <tr>
+          <td>macOS</td>
+          <td>aarch64</td>
+          <td><a href="link">thunderdb-1.3.0-darwin-arm64.tar.gz</a></td>
+      </tr>
+      <tr>
+          <td>Docker</td>
+          <td>multi-arch</td>
+          <td><code>docker pull ghcr.io/thunderdb/thunderdb:1.3.0</code></td>
+      </tr>
+      <tr>
+          <td>Debian</td>
+          <td>amd64</td>
+          <td><a href="link">thunderdb_1.3.0_amd64.deb</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="checksums">Checksums</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>sha256  abc123...  thunderdb-1.3.0-linux-amd64.tar.gz
+</span></span><span style="display:flex;"><span>sha256  def456...  thunderdb-1.3.0-linux-arm64.tar.gz
+</span></span><span style="display:flex;"><span>sha256  ghi789...  thunderdb-1.3.0-darwin-amd64.tar.gz
+</span></span><span style="display:flex;"><span>sha256  jkl012...  thunderdb-1.3.0-darwin-arm64.tar.gz
+</span></span><span style="display:flex;"><span>sha256  mno345...  thunderdb_1.3.0_amd64.deb
+</span></span></code></pre></div><h2 id="full-changelog">Full Changelog</h2>
+<p>See <a href="link">CHANGELOG.md</a> for the complete list of changes.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>### Creating a GitHub Release
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>```bash
+</span></span><span style="display:flex;"><span># Create a GitHub release from the tag
+</span></span><span style="display:flex;"><span>gh release create v1.3.0 \
+</span></span><span style="display:flex;"><span>    --title &#34;ThunderDB v1.3.0&#34; \
+</span></span><span style="display:flex;"><span>    --notes-file release-notes-1.3.0.md \
+</span></span><span style="display:flex;"><span>    target/release-artifacts/thunderdb-1.3.0-linux-amd64.tar.gz \
+</span></span><span style="display:flex;"><span>    target/release-artifacts/thunderdb-1.3.0-linux-arm64.tar.gz \
+</span></span><span style="display:flex;"><span>    target/release-artifacts/thunderdb-1.3.0-darwin-amd64.tar.gz \
+</span></span><span style="display:flex;"><span>    target/release-artifacts/thunderdb-1.3.0-darwin-arm64.tar.gz \
+</span></span><span style="display:flex;"><span>    target/release-artifacts/thunderdb_1.3.0_amd64.deb \
+</span></span><span style="display:flex;"><span>    target/release-artifacts/SHA256SUMS
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># For pre-release versions
+</span></span><span style="display:flex;"><span>gh release create v1.3.0-beta.1 \
+</span></span><span style="display:flex;"><span>    --title &#34;ThunderDB v1.3.0-beta.1&#34; \
+</span></span><span style="display:flex;"><span>    --prerelease \
+</span></span><span style="display:flex;"><span>    --notes-file release-notes-1.3.0-beta.1.md \
+</span></span><span style="display:flex;"><span>    target/release-artifacts/*
+</span></span></code></pre></div><h2 id="publishing-crates">Publishing Crates</h2>
+<p>If ThunderDB publishes individual crates to <a href="https://crates.io/">crates.io</a>, they must be published in dependency order (leaf crates first):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># 1. Publish the leaf crate first</span>
+</span></span><span style="display:flex;"><span>cargo publish -p thunder-common
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 2. Publish crates that depend only on thunder-common</span>
+</span></span><span style="display:flex;"><span>cargo publish -p thunder-storage
+</span></span><span style="display:flex;"><span>cargo publish -p thunder-sql
+</span></span><span style="display:flex;"><span>cargo publish -p thunder-client
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 3. Continue up the dependency graph</span>
+</span></span><span style="display:flex;"><span>cargo publish -p thunder-txn
+</span></span><span style="display:flex;"><span>cargo publish -p thunder-cluster
+</span></span><span style="display:flex;"><span>cargo publish -p thunder-cdc
+</span></span><span style="display:flex;"><span>cargo publish -p thunder-vector
+</span></span><span style="display:flex;"><span>cargo publish -p thunder-fdw
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 4. Publish crates with many dependencies</span>
+</span></span><span style="display:flex;"><span>cargo publish -p thunder-query
+</span></span><span style="display:flex;"><span>cargo publish -p thunder-protocol
+</span></span><span style="display:flex;"><span>cargo publish -p thunder-api
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 5. Publish the top-level binary last</span>
+</span></span><span style="display:flex;"><span>cargo publish -p thunder-server
+</span></span></code></pre></div><h3 id="pre-publish-verification">Pre-Publish Verification</h3>
+<p>Before publishing to crates.io:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Dry run: verify the crate can be packaged</span>
+</span></span><span style="display:flex;"><span>cargo publish -p thunder-common --dry-run
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Check what files will be included in the package</span>
+</span></span><span style="display:flex;"><span>cargo package -p thunder-common --list
+</span></span></code></pre></div><h3 id="important-notes">Important Notes</h3>
+<ul>
+<li>Once published to crates.io, a version <strong>cannot be unpublished</strong> (only yanked).</li>
+<li>Ensure all <code>Cargo.toml</code> metadata is correct: <code>license</code>, <code>repository</code>, <code>description</code>, <code>readme</code>, <code>keywords</code>, <code>categories</code>.</li>
+<li>All public APIs should have documentation (<code>///</code> doc comments).</li>
+<li>Run <code>cargo doc --no-deps</code> to verify documentation builds without warnings.</li>
+</ul>
+<h2 id="release-automation">Release Automation</h2>
+<p>The release process is partially automated through GitHub Actions:</p>
+<h3 id="release-workflow-githubworkflowsreleaseyml">Release Workflow (<code>.github/workflows/release.yml</code>)</h3>
+<p>Triggered when a tag matching <code>v*</code> is pushed:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>v* tag pushed
+</span></span><span style="display:flex;"><span>    |
+</span></span><span style="display:flex;"><span>    +-- Build release binaries (parallel matrix)
+</span></span><span style="display:flex;"><span>    |       +-- Linux x86_64
+</span></span><span style="display:flex;"><span>    |       +-- Linux aarch64
+</span></span><span style="display:flex;"><span>    |       +-- macOS x86_64
+</span></span><span style="display:flex;"><span>    |       +-- macOS aarch64
+</span></span><span style="display:flex;"><span>    |
+</span></span><span style="display:flex;"><span>    +-- Run full test suite against release binaries
+</span></span><span style="display:flex;"><span>    |
+</span></span><span style="display:flex;"><span>    +-- Build Docker image (multi-arch)
+</span></span><span style="display:flex;"><span>    |
+</span></span><span style="display:flex;"><span>    +-- Build Debian package
+</span></span><span style="display:flex;"><span>    |
+</span></span><span style="display:flex;"><span>    +-- Create GitHub Release with artifacts
+</span></span><span style="display:flex;"><span>    |
+</span></span><span style="display:flex;"><span>    +-- Push Docker image to registry
+</span></span><span style="display:flex;"><span>    |
+</span></span><span style="display:flex;"><span>    +-- Publish crates to crates.io (manual approval)
+</span></span></code></pre></div><h3 id="manual-steps">Manual Steps</h3>
+<p>Even with automation, some steps require manual action:</p>
+<ol>
+<li><strong>Version bump and changelog update</strong> must be done manually before tagging.</li>
+<li><strong>Release notes</strong> should be reviewed and edited by a maintainer.</li>
+<li><strong>crates.io publishing</strong> requires manual approval in the CI pipeline.</li>
+<li><strong>Release announcement</strong> (blog post, social media, mailing list) is done manually.</li>
+</ol>
+<h2 id="post-release-verification">Post-Release Verification</h2>
+<p>After a release is published, verify that all artifacts work correctly:</p>
+<h3 id="binary-verification">Binary Verification</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Download the release binary on a clean machine</span>
+</span></span><span style="display:flex;"><span>curl -LO https://github.com/thunderdb/thunderdb/releases/download/v1.3.0/thunderdb-1.3.0-linux-amd64.tar.gz
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Verify checksum</span>
+</span></span><span style="display:flex;"><span>sha256sum -c SHA256SUMS
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Extract and run</span>
+</span></span><span style="display:flex;"><span>tar xzf thunderdb-1.3.0-linux-amd64.tar.gz
+</span></span><span style="display:flex;"><span>./thunder-server --version
+</span></span><span style="display:flex;"><span>./thunder-server --config config/prod.toml &amp;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Verify health</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8080/api/v1/health
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run basic queries</span>
+</span></span><span style="display:flex;"><span>psql -h localhost -p <span style="color:#bd93f9">5432</span> -U admin -d thunderdb -c <span style="color:#f1fa8c">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    CREATE TABLE test (id INT PRIMARY KEY, name TEXT);
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    INSERT INTO test VALUES (1, &#39;hello&#39;);
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    SELECT * FROM test;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    DROP TABLE test;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;</span>
+</span></span></code></pre></div><h3 id="docker-verification">Docker Verification</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Pull and run the released Docker image</span>
+</span></span><span style="display:flex;"><span>docker pull ghcr.io/thunderdb/thunderdb:1.3.0
+</span></span><span style="display:flex;"><span>docker run -d --name thunder-verify -p 5432:5432 ghcr.io/thunderdb/thunderdb:1.3.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Verify</span>
+</span></span><span style="display:flex;"><span>docker logs thunder-verify
+</span></span><span style="display:flex;"><span>psql -h localhost -p <span style="color:#bd93f9">5432</span> -U admin -d thunderdb -c <span style="color:#f1fa8c">&#34;SELECT version();&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Clean up</span>
+</span></span><span style="display:flex;"><span>docker stop thunder-verify <span style="color:#ff79c6">&amp;&amp;</span> docker rm thunder-verify
+</span></span></code></pre></div><h3 id="debian-package-verification">Debian Package Verification</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Install on a clean Ubuntu/Debian system</span>
+</span></span><span style="display:flex;"><span>sudo dpkg -i thunderdb_1.3.0_amd64.deb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Verify service starts</span>
+</span></span><span style="display:flex;"><span>sudo systemctl start thunderdb
+</span></span><span style="display:flex;"><span>sudo systemctl status thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Verify connectivity</span>
+</span></span><span style="display:flex;"><span>psql -h localhost -p <span style="color:#bd93f9">5432</span> -U admin -d thunderdb -c <span style="color:#f1fa8c">&#34;SELECT version();&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Uninstall</span>
+</span></span><span style="display:flex;"><span>sudo dpkg -r thunderdb
+</span></span></code></pre></div><h3 id="upgrade-path-verification">Upgrade Path Verification</h3>
+<p>For MINOR and PATCH releases, verify the upgrade path:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Start the previous version with data</span>
+</span></span><span style="display:flex;"><span>docker run -d --name thunder-old -v thunder-data:/var/lib/thunderdb <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    ghcr.io/thunderdb/thunderdb:1.2.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Load test data</span>
+</span></span><span style="display:flex;"><span>psql -h localhost -p <span style="color:#bd93f9">5432</span> -U admin -d thunderdb -c <span style="color:#f1fa8c">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    CREATE TABLE upgrade_test (id INT PRIMARY KEY, data TEXT);
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    INSERT INTO upgrade_test SELECT generate_series(1, 10000), &#39;data&#39;;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Stop the old version</span>
+</span></span><span style="display:flex;"><span>docker stop thunder-old <span style="color:#ff79c6">&amp;&amp;</span> docker rm thunder-old
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Start the new version with the same data volume</span>
+</span></span><span style="display:flex;"><span>docker run -d --name thunder-new -v thunder-data:/var/lib/thunderdb <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    ghcr.io/thunderdb/thunderdb:1.3.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Verify data is intact</span>
+</span></span><span style="display:flex;"><span>psql -h localhost -p <span style="color:#bd93f9">5432</span> -U admin -d thunderdb -c <span style="color:#f1fa8c">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    SELECT COUNT(*) FROM upgrade_test;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Expected: 10000</span>
+</span></span></code></pre></div><h2 id="hotfix-process">Hotfix Process</h2>
+<p>For critical bugs that need to be fixed immediately:</p>
+<ol>
+<li>
+<p><strong>Create a release branch</strong> from the last release tag:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout -b release/1.2.1 v1.2.0
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Cherry-pick the fix</strong> from <code>main</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git cherry-pick &lt;commit-hash&gt;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Update version and changelog</strong> on the release branch.</p>
+</li>
+<li>
+<p><strong>Tag and release</strong> following the standard process.</p>
+</li>
+<li>
+<p><strong>Merge the release branch back to <code>main</code></strong> to ensure the fix is included:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout main
+</span></span><span style="display:flex;"><span>git merge release/1.2.1
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="release-schedule">Release Schedule</h2>
+<p>ThunderDB follows a time-based release cadence:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Release Type</th>
+          <th>Frequency</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>MAJOR</td>
+          <td>Annually (approximately)</td>
+          <td>Breaking changes, major new features</td>
+      </tr>
+      <tr>
+          <td>MINOR</td>
+          <td>Quarterly</td>
+          <td>New features, improvements</td>
+      </tr>
+      <tr>
+          <td>PATCH</td>
+          <td>As needed</td>
+          <td>Bug fixes, security patches</td>
+      </tr>
+  </tbody>
+</table>
+<p>The release schedule is approximate. Releases may be delayed if critical bugs are discovered during the release candidate phase, or accelerated for security patches.</p>
+<h2 id="roles-and-responsibilities">Roles and Responsibilities</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Role</th>
+          <th>Responsibility</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Release Manager</strong></td>
+          <td>Coordinates the release process, manages the checklist, creates the tag</td>
+      </tr>
+      <tr>
+          <td><strong>Build Engineer</strong></td>
+          <td>Builds and verifies release artifacts, manages CI/CD pipeline</td>
+      </tr>
+      <tr>
+          <td><strong>Documentation Lead</strong></td>
+          <td>Updates documentation, writes release notes</td>
+      </tr>
+      <tr>
+          <td><strong>QA Lead</strong></td>
+          <td>Runs the full test suite, performs manual verification</td>
+      </tr>
+      <tr>
+          <td><strong>Security Lead</strong></td>
+          <td>Reviews security-related changes, verifies security fixes</td>
+      </tr>
+  </tbody>
+</table>
+<p>The Release Manager role rotates among senior maintainers for each release.</p>
+
+	<div class="section-index">
+    
+    
+    </div>
+<style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<div class="d-print-none">
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+</div>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'page_helpful', {
+      'event_category': 'Helpful',
+      'event_label': window.location.pathname,
+      'value': value
+    });
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback( 100 );
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+<br />
+</div>
+
+          </main>
+        </div>
+      </div>
+      <footer class="td-footer row d-print-none">
+  <div class="container-fluid">
+    <div class="row mx-md-2">
+      <div class="td-footer__left col-6 col-sm-4 order-sm-1">
+        
+      </div><div class="td-footer__right col-6 col-sm-4 order-sm-3">
+        <ul class="td-footer__links-list">
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="GitHub" aria-label="GitHub">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="Discussions" aria-label="Discussions">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb/discussions" aria-label="Discussions">
+      <i class="fas fa-comments"></i>
+    </a>
+  </li>
+  
+</ul>
+
+      </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
+        <span class="td-footer__copyright">&copy;
+    2026
+    <span class="td-footer__authors">ThunderDB Contributors</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><p class="td-footer__about mt-2"><a href="/docs/about/">About ThunderDB</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script src="/docs/js/main.js"></script>
+<script defer src="/docs/js/click-to-copy.js" crossorigin="anonymous"></script>
+<script src='/docs/js/tabpane-persist.js'></script>
+
+  </body>
+</html>

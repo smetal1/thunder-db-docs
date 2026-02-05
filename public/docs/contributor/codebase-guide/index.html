@@ -1,0 +1,1600 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
+  <head><script src="/docs/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=docs/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/docs/favicons/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/docs/favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/docs/favicons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/docs/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="/docs/favicons/favicon-256.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/docs/favicons/apple-touch-icon.png">
+<link rel="manifest" href="/docs/favicons/site.webmanifest">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="msapplication-TileColor" content="#0D0D0D">
+
+<title>Codebase Guide | ThunderDB Documentation</title>
+<meta name="description" content="A detailed walkthrough of the ThunderDB codebase -- workspace structure, crate dependency graph, key source files, external dependencies, and design patterns used throughout the project.">
+<meta property="og:url" content="http://localhost:1313/docs/docs/contributor/codebase-guide/">
+  <meta property="og:site_name" content="ThunderDB Documentation">
+  <meta property="og:title" content="Codebase Guide">
+  <meta property="og:description" content="A detailed walkthrough of the ThunderDB codebase -- workspace structure, crate dependency graph, key source files, external dependencies, and design patterns used throughout the project.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+
+  <meta itemprop="name" content="Codebase Guide">
+  <meta itemprop="description" content="A detailed walkthrough of the ThunderDB codebase -- workspace structure, crate dependency graph, key source files, external dependencies, and design patterns used throughout the project.">
+  <meta itemprop="wordCount" content="5267">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Codebase Guide">
+  <meta name="twitter:description" content="A detailed walkthrough of the ThunderDB codebase -- workspace structure, crate dependency graph, key source files, external dependencies, and design patterns used throughout the project.">
+<link href="/docs/scss/main.css" rel="stylesheet">
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+  crossorigin="anonymous"></script>
+<script defer
+  src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
+  integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
+  crossorigin="anonymous"></script>
+
+  </head>
+  <body class="td-section">
+    <header>
+      <nav class="td-navbar js-navbar-scroll" data-bs-theme="dark">
+<div class="td-navbar-container container-fluid flex-column flex-md-row">
+  <a class="navbar-brand" href="/docs/"><span class="navbar-brand__logo navbar-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="300" height="64"><defs><symbol id="b" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#331500" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FF6B00"/><rect width="4.8" height=".6" rx=".55" fill="#FA4" opacity=".5"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#F83" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#930" opacity=".35"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D50"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,200,100,0.3)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FC8" opacity=".55"/></symbol><symbol id="c" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#4D3000" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FA0"/><rect width="4.8" height=".6" rx=".55" fill="#FD6" opacity=".55"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#FB3" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#960" opacity=".3"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D80"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,230,150,0.35)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FE9" opacity=".6"/></symbol></defs><use href="#b" x="35" y="2" width="5" height="5"/><use href="#b" x="41" y="2" width="5" height="5"/><use href="#b" x="29" y="8" width="5" height="5"/><use href="#b" x="35" y="8" width="5" height="5"/><use href="#b" x="23" y="14" width="5" height="5"/><use href="#b" x="29" y="14" width="5" height="5"/><use href="#b" x="17" y="20" width="5" height="5"/><use href="#b" x="23" y="20" width="5" height="5"/><use href="#c" x="5" y="26" width="5" height="5"/><use href="#c" x="11" y="26" width="5" height="5"/><use href="#c" x="17" y="26" width="5" height="5"/><use href="#c" x="23" y="26" width="5" height="5"/><use href="#c" x="29" y="26" width="5" height="5"/><use href="#c" x="35" y="26" width="5" height="5"/><use href="#c" x="41" y="26" width="5" height="5"/><use href="#c" x="47" y="26" width="5" height="5"/><use href="#b" x="35" y="32" width="5" height="5"/><use href="#b" x="41" y="32" width="5" height="5"/><use href="#b" x="29" y="38" width="5" height="5"/><use href="#b" x="35" y="38" width="5" height="5"/><use href="#b" x="23" y="44" width="5" height="5"/><use href="#b" x="29" y="44" width="5" height="5"/><use href="#b" x="17" y="50" width="5" height="5"/><use href="#b" x="23" y="50" width="5" height="5"/><use href="#b" x="11" y="56" width="5" height="5"/><use href="#b" x="17" y="56" width="5" height="5"/><text x="66" y="43" font-family="'SF Mono','Fira Code','Consolas','Courier New',monospace" font-size="27" font-weight="900" letter-spacing=".5"><tspan fill="#FFF">Thunder</tspan><tspan fill="#FF6B00">DB</tspan></text></svg></span><span class="navbar-brand__name">ThunderDB Documentation</span></a>
+  <div class="td-navbar-nav-scroll td-navbar-nav-scroll--indicator" id="main_navbar">
+    <div class="scroll-indicator scroll-left"></div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/"><span>Documentation</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/architecture/"><span>Architecture</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/developer/api-reference/"><span>API Reference</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/about/"><span>About</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/thunderdb/thunderdb" target="_blank" rel="noopener"><i class='fab fa-github'></i><span>GitHub</span></a>
+      </li>
+      </ul>
+    <div class="scroll-indicator scroll-right"></div>
+  </div>
+  <div class="d-none d-lg-block td-navbar__search">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+  </div>
+</div>
+</nav>
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main" data-bs-spy="scroll" data-bs-target=".td-toc" data-bs-root-margin="0px 0px -10%">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+  <script>
+    $(function() {
+    $("#td-section-nav a").removeClass("active");
+    $("#td-section-nav #m-docsdocscontributorcodebase-guide").addClass("active");
+    $("#td-section-nav #m-docsdocscontributorcodebase-guide-li span").addClass("td-sidebar-nav-active-item");
+    $("#td-section-nav #m-docsdocscontributorcodebase-guide").parents("li").addClass("active-path");
+    $("#td-section-nav li.active-path").addClass("show");
+    $("#td-section-nav li.active-path").children("input").prop('checked', true);
+    $("#td-section-nav #m-docsdocscontributorcodebase-guide-li").siblings("li").addClass("show");
+    $("#td-section-nav #m-docsdocscontributorcodebase-guide-li").children("ul").children("li").addClass("show");
+    $("#td-sidebar-menu").toggleClass("d-none");
+    });
+  </script>
+  <div id="td-sidebar-menu" class="td-sidebar__inner d-none">
+  <form class="td-sidebar__search d-flex align-items-center">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+    <button class="btn btn-link td-sidebar__toggle" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  <nav class="td-sidebar-nav collapse foldable-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocs-li">
+    <a href="/docs/docs/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docsdocs"><span class="">Documentation</span></a>
+    <ul class="ul-1">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsgetting-started-li">
+    <input type="checkbox" id="m-docsdocsgetting-started-check"/>
+    <label for="m-docsdocsgetting-started-check"><a href="/docs/docs/getting-started/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsgetting-started"><span class="">Getting Started</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsarchitecture-li">
+    <input type="checkbox" id="m-docsdocsarchitecture-check"/>
+    <label for="m-docsdocsarchitecture-check"><a href="/docs/docs/architecture/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsarchitecture"><span class="">Architecture</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsdeveloper-li">
+    <input type="checkbox" id="m-docsdocsdeveloper-check"/>
+    <label for="m-docsdocsdeveloper-check"><a href="/docs/docs/developer/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloper"><span class="">Developer Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperapi-reference-li">
+    <input type="checkbox" id="m-docsdocsdeveloperapi-reference-check"/>
+    <label for="m-docsdocsdeveloperapi-reference-check"><a href="/docs/docs/developer/api-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperapi-reference"><span class="">API Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersql-reference-li">
+    <input type="checkbox" id="m-docsdocsdevelopersql-reference-check"/>
+    <label for="m-docsdocsdevelopersql-reference-check"><a href="/docs/docs/developer/sql-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersql-reference"><span class="">SQL Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersdk-li">
+    <input type="checkbox" id="m-docsdocsdevelopersdk-check"/>
+    <label for="m-docsdocsdevelopersdk-check"><a href="/docs/docs/developer/sdk/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersdk"><span class="">SDKs &amp; Drivers</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperexamples-li">
+    <input type="checkbox" id="m-docsdocsdeveloperexamples-check"/>
+    <label for="m-docsdocsdeveloperexamples-check"><a href="/docs/docs/developer/examples/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperexamples"><span class="">Examples &amp; Use Cases</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsadministrator-li">
+    <input type="checkbox" id="m-docsdocsadministrator-check"/>
+    <label for="m-docsdocsadministrator-check"><a href="/docs/docs/administrator/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministrator"><span class="">Administrator Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratordeployment-li">
+    <input type="checkbox" id="m-docsdocsadministratordeployment-check"/>
+    <label for="m-docsdocsadministratordeployment-check"><a href="/docs/docs/administrator/deployment/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratordeployment"><span class="">Deployment</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorconfiguration-li">
+    <input type="checkbox" id="m-docsdocsadministratorconfiguration-check"/>
+    <label for="m-docsdocsadministratorconfiguration-check"><a href="/docs/docs/administrator/configuration/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorconfiguration"><span class="">Configuration</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratormonitoring-li">
+    <input type="checkbox" id="m-docsdocsadministratormonitoring-check"/>
+    <label for="m-docsdocsadministratormonitoring-check"><a href="/docs/docs/administrator/monitoring/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratormonitoring"><span class="">Monitoring</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorbackup-recovery-li">
+    <input type="checkbox" id="m-docsdocsadministratorbackup-recovery-check"/>
+    <label for="m-docsdocsadministratorbackup-recovery-check"><a href="/docs/docs/administrator/backup-recovery/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorbackup-recovery"><span class="">Backup &amp; Recovery</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorsecurity-li">
+    <input type="checkbox" id="m-docsdocsadministratorsecurity-check"/>
+    <label for="m-docsdocsadministratorsecurity-check"><a href="/docs/docs/administrator/security/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorsecurity"><span class="">Security</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratortroubleshooting-li">
+    <input type="checkbox" id="m-docsdocsadministratortroubleshooting-check"/>
+    <label for="m-docsdocsadministratortroubleshooting-check"><a href="/docs/docs/administrator/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratortroubleshooting"><span class="">Troubleshooting</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocscontributor-li">
+    <input type="checkbox" id="m-docsdocscontributor-check"/>
+    <label for="m-docsdocscontributor-check"><a href="/docs/docs/contributor/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributor"><span class="">Contributor Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributordevelopment-setup-li">
+    <input type="checkbox" id="m-docsdocscontributordevelopment-setup-check"/>
+    <label for="m-docsdocscontributordevelopment-setup-check"><a href="/docs/docs/contributor/development-setup/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributordevelopment-setup"><span class="">Development Setup</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorcodebase-guide-li">
+    <input type="checkbox" id="m-docsdocscontributorcodebase-guide-check"/>
+    <label for="m-docsdocscontributorcodebase-guide-check"><a href="/docs/docs/contributor/codebase-guide/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorcodebase-guide"><span class="">Codebase Guide</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributortesting-li">
+    <input type="checkbox" id="m-docsdocscontributortesting-check"/>
+    <label for="m-docsdocscontributortesting-check"><a href="/docs/docs/contributor/testing/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributortesting"><span class="">Testing</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorrelease-process-li">
+    <input type="checkbox" id="m-docsdocscontributorrelease-process-check"/>
+    <label for="m-docsdocscontributorrelease-process-check"><a href="/docs/docs/contributor/release-process/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorrelease-process"><span class="">Release Process</span></a></label>
+    
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
+<a href="https://github.com/thunderdb/thunderdb/tree/main/content/docs/contributor/codebase-guide/_index.md" class="td-page-meta--view td-page-meta__view" target="_blank" rel="noopener"><i class="fa-solid fa-file-lines fa-fw"></i> View page source</a>
+  <a href="https://github.com/thunderdb/thunderdb/edit/main/content/docs/contributor/codebase-guide/_index.md" class="td-page-meta--edit td-page-meta__edit" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Edit this page</a>
+  <a href="https://github.com/thunderdb/thunderdb/new/main/content/docs/contributor/codebase-guide?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child td-page-meta__child" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Create child page</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new?title=Codebase%20Guide" class="td-page-meta--issue td-page-meta__issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create documentation issue</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new" class="td-page-meta--project td-page-meta__project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create project issue</a>
+  
+</div>
+
+            <div class="td-toc" data-proofer-ignore>
+<div class="td-toc-title">
+      <span class="td-toc-title__text">On this page</span>
+      <a class="td-toc-title__link" title="Top of page" href="#"></a>
+    </div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#workspace-structure">Workspace Structure</a>
+      <ul>
+        <li><a href="#root-cargotoml">Root Cargo.toml</a></li>
+        <li><a href="#build-profiles">Build Profiles</a></li>
+        <li><a href="#directory-layout">Directory Layout</a></li>
+      </ul>
+    </li>
+    <li><a href="#crate-dependency-graph">Crate Dependency Graph</a>
+      <ul>
+        <li><a href="#visual-dependency-graph">Visual Dependency Graph</a></li>
+        <li><a href="#crate-dependency-details">Crate Dependency Details</a></li>
+      </ul>
+    </li>
+    <li><a href="#key-source-files">Key Source Files</a>
+      <ul>
+        <li><a href="#thunder-common">thunder-common</a></li>
+        <li><a href="#thunder-storage-1">thunder-storage</a></li>
+        <li><a href="#thunder-txn-1">thunder-txn</a></li>
+        <li><a href="#thunder-sql-1">thunder-sql</a></li>
+        <li><a href="#thunder-query-1">thunder-query</a></li>
+        <li><a href="#thunder-protocol-1">thunder-protocol</a></li>
+        <li><a href="#thunder-api-1">thunder-api</a></li>
+        <li><a href="#thunder-server">thunder-server</a></li>
+        <li><a href="#thunder-cdc-1">thunder-cdc</a></li>
+        <li><a href="#thunder-vector-1">thunder-vector</a></li>
+        <li><a href="#thunder-fdw-1">thunder-fdw</a></li>
+        <li><a href="#thunder-client-1">thunder-client</a></li>
+      </ul>
+    </li>
+    <li><a href="#key-external-dependencies">Key External Dependencies</a>
+      <ul>
+        <li><a href="#async-runtime-and-networking">Async Runtime and Networking</a></li>
+        <li><a href="#sql-and-data-processing">SQL and Data Processing</a></li>
+        <li><a href="#storage">Storage</a></li>
+        <li><a href="#distributed-systems">Distributed Systems</a></li>
+        <li><a href="#concurrency">Concurrency</a></li>
+        <li><a href="#vector-and-simd">Vector and SIMD</a></li>
+        <li><a href="#serialization">Serialization</a></li>
+        <li><a href="#observability">Observability</a></li>
+        <li><a href="#utilities">Utilities</a></li>
+      </ul>
+    </li>
+    <li><a href="#design-patterns">Design Patterns</a>
+      <ul>
+        <li><a href="#builder-pattern">Builder Pattern</a></li>
+        <li><a href="#raii-for-resource-management">RAII for Resource Management</a></li>
+        <li><a href="#interior-mutability">Interior Mutability</a></li>
+        <li><a href="#type-state-pattern-for-transactions">Type-State Pattern for Transactions</a></li>
+        <li><a href="#visitor-pattern-in-sql-optimizer">Visitor Pattern in SQL Optimizer</a></li>
+        <li><a href="#error-propagation-pattern">Error Propagation Pattern</a></li>
+      </ul>
+    </li>
+    <li><a href="#where-to-start">Where to Start</a></li>
+  </ul>
+</nav>
+  </div>
+
+            
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/">Documentation</a></li>
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/contributor/">Contributor Guide</a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    Codebase Guide</li>
+  </ol>
+</nav>
+<div class="td-content">
+	<h1>Codebase Guide</h1>
+  <div class="lead">A detailed walkthrough of the ThunderDB codebase &ndash; workspace structure, crate dependency graph, key source files, external dependencies, and design patterns used throughout the project.</div>
+	<header class="article-meta">
+		
+</header>
+	<h1 id="codebase-guide">Codebase Guide</h1>
+<p>This guide provides a comprehensive tour of the ThunderDB codebase. ThunderDB is organized as a Cargo workspace with 14 crates totaling approximately 75,600 lines of Rust code. Understanding the structure, dependencies, and patterns used throughout the codebase is essential for effective contribution.</p>
+<h2 id="workspace-structure">Workspace Structure</h2>
+<p>ThunderDB uses a single Cargo workspace defined in the root <code>Cargo.toml</code>. All crates live in the workspace and share a common <code>Cargo.lock</code> file, ensuring consistent dependency versions across the project.</p>
+<h3 id="root-cargotoml">Root Cargo.toml</h3>
+<p>The root <code>Cargo.toml</code> defines the workspace members, shared dependency versions, and build profiles:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[workspace]
+</span></span><span style="display:flex;"><span>members = [
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;thunder-common&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;thunder-storage&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;thunder-txn&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;thunder-sql&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;thunder-query&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;thunder-cluster&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;thunder-protocol&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;thunder-vector&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;thunder-api&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;thunder-cdc&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;thunder-fdw&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;thunder-server&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;thunder-client&#34;</span>,
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>resolver = <span style="color:#f1fa8c">&#34;2&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[workspace.dependencies]
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Shared dependency versions are defined here and inherited by crates</span>
+</span></span><span style="display:flex;"><span>tokio = { version = <span style="color:#f1fa8c">&#34;1.35&#34;</span>, features = [<span style="color:#f1fa8c">&#34;full&#34;</span>] }
+</span></span><span style="display:flex;"><span>serde = { version = <span style="color:#f1fa8c">&#34;1.0&#34;</span>, features = [<span style="color:#f1fa8c">&#34;derive&#34;</span>] }
+</span></span><span style="display:flex;"><span>tracing = <span style="color:#f1fa8c">&#34;0.1&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># ... additional shared dependencies</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[profile.release]
+</span></span><span style="display:flex;"><span>opt-level = <span style="color:#bd93f9">3</span>
+</span></span><span style="display:flex;"><span>lto = <span style="color:#f1fa8c">&#34;thin&#34;</span>
+</span></span><span style="display:flex;"><span>codegen-units = <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>panic = <span style="color:#f1fa8c">&#34;abort&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[profile.dev]
+</span></span><span style="display:flex;"><span>opt-level = <span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>debug = <span style="color:#ff79c6">true</span>
+</span></span></code></pre></div><h3 id="build-profiles">Build Profiles</h3>
+<p>ThunderDB defines two primary build profiles:</p>
+<p><strong>Development Profile (<code>cargo build</code>):</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>Setting</th>
+          <th>Value</th>
+          <th>Rationale</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>opt-level</code></td>
+          <td><code>0</code></td>
+          <td>No optimization &ndash; fastest compilation</td>
+      </tr>
+      <tr>
+          <td><code>debug</code></td>
+          <td><code>true</code></td>
+          <td>Full debug information &ndash; enables debugger use</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Release Profile (<code>cargo build --release</code>):</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>Setting</th>
+          <th>Value</th>
+          <th>Rationale</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>opt-level</code></td>
+          <td><code>3</code></td>
+          <td>Maximum optimization &ndash; best runtime performance</td>
+      </tr>
+      <tr>
+          <td><code>lto</code></td>
+          <td><code>&quot;thin&quot;</code></td>
+          <td>Thin link-time optimization &ndash; cross-crate inlining with reasonable build times</td>
+      </tr>
+      <tr>
+          <td><code>codegen-units</code></td>
+          <td><code>1</code></td>
+          <td>Single codegen unit &ndash; enables maximum optimization at the cost of parallelism</td>
+      </tr>
+      <tr>
+          <td><code>panic</code></td>
+          <td><code>&quot;abort&quot;</code></td>
+          <td>Abort on panic &ndash; smaller binary, no stack unwinding overhead, better for server software</td>
+      </tr>
+  </tbody>
+</table>
+<p>The release profile produces binaries suitable for production deployment and accurate benchmarking. Development builds are optimized for fast iteration.</p>
+<h3 id="directory-layout">Directory Layout</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span>thunderdb<span style="color:#ff79c6">/</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> Cargo<span style="color:#ff79c6">.</span>toml              <span style="color:#6272a4"># Workspace root</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> Cargo<span style="color:#ff79c6">.</span>lock              <span style="color:#6272a4"># Locked dependency versions</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> rust<span style="color:#ff79c6">-</span>toolchain<span style="color:#ff79c6">.</span>toml     <span style="color:#6272a4"># Rust version (1.75+)</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> <span style="color:#ff79c6">.</span>rustfmt<span style="color:#ff79c6">.</span>toml           <span style="color:#6272a4"># Formatting configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> <span style="color:#ff79c6">.</span>clippy<span style="color:#ff79c6">.</span>toml            <span style="color:#6272a4"># Clippy configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> config<span style="color:#ff79c6">/</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>   <span style="color:#ff79c6">+--</span> dev<span style="color:#ff79c6">.</span>toml            <span style="color:#6272a4"># Development configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>   <span style="color:#ff79c6">+--</span> test<span style="color:#ff79c6">.</span>toml           <span style="color:#6272a4"># Test configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>   <span style="color:#ff79c6">+--</span> prod<span style="color:#ff79c6">.</span>toml           <span style="color:#6272a4"># Production configuration template</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> scripts<span style="color:#ff79c6">/</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>   <span style="color:#ff79c6">+--</span> dev<span style="color:#ff79c6">.</span>sh              <span style="color:#6272a4"># Start development server</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>   <span style="color:#ff79c6">+--</span> run_tests<span style="color:#ff79c6">.</span>sh        <span style="color:#6272a4"># Run full test suite</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>   <span style="color:#ff79c6">+--</span> build<span style="color:#ff79c6">-</span>deb<span style="color:#ff79c6">.</span>sh        <span style="color:#6272a4"># Build Debian package</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>   <span style="color:#ff79c6">+--</span> install<span style="color:#ff79c6">-</span>hooks<span style="color:#ff79c6">.</span>sh    <span style="color:#6272a4"># Install git hooks</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> docker<span style="color:#ff79c6">/</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>   <span style="color:#ff79c6">+--</span> Dockerfile          <span style="color:#6272a4"># Production container image</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>   <span style="color:#ff79c6">+--</span> Dockerfile<span style="color:#ff79c6">.</span>dev      <span style="color:#6272a4"># Development container image</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> docker<span style="color:#ff79c6">-</span>compose<span style="color:#ff79c6">.</span>yml      <span style="color:#6272a4"># Multi-container dev environment</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> thunder<span style="color:#ff79c6">-</span>common<span style="color:#ff79c6">/</span>         <span style="color:#6272a4"># Shared types, errors, utilities</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> thunder<span style="color:#ff79c6">-</span>storage<span style="color:#ff79c6">/</span>        <span style="color:#6272a4"># Storage engine (WAL, B+Tree, buffer pool)</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> thunder<span style="color:#ff79c6">-</span>txn<span style="color:#ff79c6">/</span>            <span style="color:#6272a4"># Transaction management (MVCC, 2PC)</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> thunder<span style="color:#ff79c6">-</span>sql<span style="color:#ff79c6">/</span>            <span style="color:#6272a4"># SQL parsing, analysis, optimization</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> thunder<span style="color:#ff79c6">-</span>query<span style="color:#ff79c6">/</span>          <span style="color:#6272a4"># Query execution engine</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> thunder<span style="color:#ff79c6">-</span>cluster<span style="color:#ff79c6">/</span>        <span style="color:#6272a4"># Distributed cluster management</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> thunder<span style="color:#ff79c6">-</span>protocol<span style="color:#ff79c6">/</span>       <span style="color:#6272a4"># Wire protocols (PostgreSQL, MySQL, Redis)</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> thunder<span style="color:#ff79c6">-</span>vector<span style="color:#ff79c6">/</span>         <span style="color:#6272a4"># Vector search and embeddings</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> thunder<span style="color:#ff79c6">-</span>api<span style="color:#ff79c6">/</span>            <span style="color:#6272a4"># REST, gRPC, GraphQL, WebSocket APIs</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> thunder<span style="color:#ff79c6">-</span>cdc<span style="color:#ff79c6">/</span>            <span style="color:#6272a4"># Change data capture</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> thunder<span style="color:#ff79c6">-</span>fdw<span style="color:#ff79c6">/</span>            <span style="color:#6272a4"># Foreign data wrappers</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> thunder<span style="color:#ff79c6">-</span>server<span style="color:#ff79c6">/</span>         <span style="color:#6272a4"># Main server binary</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+--</span> thunder<span style="color:#ff79c6">-</span>client<span style="color:#ff79c6">/</span>         <span style="color:#6272a4"># Client library</span>
+</span></span></code></pre></div><h2 id="crate-dependency-graph">Crate Dependency Graph</h2>
+<p>Understanding the dependency relationships between crates is critical for navigating the codebase and understanding the impact of changes. The crates form a directed acyclic graph (DAG) with <code>thunder-common</code> at the base and <code>thunder-server</code> at the top.</p>
+<h3 id="visual-dependency-graph">Visual Dependency Graph</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>                         thunder-server
+</span></span><span style="display:flex;"><span>                        /   |   |   |   \
+</span></span><span style="display:flex;"><span>                       /    |   |   |    \
+</span></span><span style="display:flex;"><span>                      /     |   |   |     \
+</span></span><span style="display:flex;"><span>               thunder-api  |   |   |  thunder-cdc
+</span></span><span style="display:flex;"><span>              / |  |  \     |   |   |      |
+</span></span><span style="display:flex;"><span>             /  |  |   \    |   |   |      |
+</span></span><span style="display:flex;"><span>            /   |  |    \   |   |   |      |
+</span></span><span style="display:flex;"><span>  t-protocol  t-cluster |  |  t-vector  t-fdw
+</span></span><span style="display:flex;"><span>   / | | \      |       |  |    |        / |
+</span></span><span style="display:flex;"><span>  /  | |  \     |       |  |    |       /  |
+</span></span><span style="display:flex;"><span> /   | |   \    |       |  |    |      /   |
+</span></span><span style="display:flex;"><span>t-sql t-query t-txn     |  |    |   t-sql  |
+</span></span><span style="display:flex;"><span>  |   /|\      / \      |  |    |          |
+</span></span><span style="display:flex;"><span>  |  / | \    /   \     |  |    |          |
+</span></span><span style="display:flex;"><span>  | /  |  \  /     \    |  |    |          |
+</span></span><span style="display:flex;"><span>  |/   |   \/       \   |  |    |          |
+</span></span><span style="display:flex;"><span>  t-storage  t-sql   |  |  |    |          |
+</span></span><span style="display:flex;"><span>       |       |     |  |  |    |          |
+</span></span><span style="display:flex;"><span>       |       |     |  |  |    |          |
+</span></span><span style="display:flex;"><span>       +-------+-----+--+--+----+----------+
+</span></span><span style="display:flex;"><span>                     |
+</span></span><span style="display:flex;"><span>               thunder-common
+</span></span></code></pre></div><h3 id="crate-dependency-details">Crate Dependency Details</h3>
+<p>Each crate&rsquo;s internal dependencies are listed below, along with its role in the system:</p>
+<h4 id="thunder-common-leaf-crate">thunder-common (Leaf Crate)</h4>
+<p><strong>Internal dependencies:</strong> None</p>
+<p>This is the foundational crate with zero internal dependencies. It defines the core types, error types, configuration structures, and shared utilities used throughout the entire system. Changes to this crate trigger a rebuild of every other crate in the workspace.</p>
+<h4 id="thunder-storage">thunder-storage</h4>
+<p><strong>Internal dependencies:</strong> <code>thunder-common</code></p>
+<p>The storage engine layer. Manages persistent data through the write-ahead log (WAL), B+Tree indexes, buffer pool, row-oriented and columnar storage formats, system catalog, and compression.</p>
+<h4 id="thunder-txn">thunder-txn</h4>
+<p><strong>Internal dependencies:</strong> <code>thunder-common</code>, <code>thunder-storage</code></p>
+<p>The transaction management layer. Implements multi-version concurrency control (MVCC), optimistic concurrency control, distributed transaction coordination via two-phase commit (2PC), lock management, and deadlock detection.</p>
+<h4 id="thunder-sql">thunder-sql</h4>
+<p><strong>Internal dependencies:</strong> <code>thunder-common</code></p>
+<p>The SQL processing layer. Handles SQL parsing, semantic analysis, query optimization, and query plan generation. Also includes dialect support for multiple SQL dialects, natural language processing, LLM integration, ML operations, and user-defined functions.</p>
+<h4 id="thunder-query">thunder-query</h4>
+<p><strong>Internal dependencies:</strong> <code>thunder-common</code>, <code>thunder-sql</code>, <code>thunder-storage</code>, <code>thunder-txn</code></p>
+<p>The query execution engine. Takes optimized query plans from <code>thunder-sql</code> and executes them against the storage engine within transaction contexts. Implements physical operators, vectorized batch processing, and parallel multi-threaded execution.</p>
+<h4 id="thunder-cluster">thunder-cluster</h4>
+<p><strong>Internal dependencies:</strong> <code>thunder-common</code>, <code>thunder-storage</code></p>
+<p>The distributed cluster management layer. Handles node discovery, Raft consensus, data partitioning, replication, and cluster membership changes.</p>
+<h4 id="thunder-protocol">thunder-protocol</h4>
+<p><strong>Internal dependencies:</strong> <code>thunder-common</code>, <code>thunder-sql</code>, <code>thunder-query</code>, <code>thunder-txn</code></p>
+<p>The wire protocol layer. Implements compatibility with existing database clients through the PostgreSQL v3 wire protocol, MySQL wire protocol, and Redis RESP protocol. Also manages sessions, authentication, and TLS.</p>
+<h4 id="thunder-vector">thunder-vector</h4>
+<p><strong>Internal dependencies:</strong> <code>thunder-common</code>, <code>thunder-storage</code></p>
+<p>The vector search engine. Provides vector indexing (HNSW, IVF), similarity search, and embedding storage for AI/ML workloads.</p>
+<h4 id="thunder-api">thunder-api</h4>
+<p><strong>Internal dependencies:</strong> <code>thunder-common</code>, <code>thunder-sql</code>, <code>thunder-query</code>, <code>thunder-protocol</code>, <code>thunder-cluster</code></p>
+<p>The API gateway layer. Exposes ThunderDB through REST, gRPC, GraphQL, and WebSocket APIs. Includes the web admin dashboard, request handlers, authentication, and rate limiting.</p>
+<h4 id="thunder-cdc">thunder-cdc</h4>
+<p><strong>Internal dependencies:</strong> <code>thunder-common</code>, <code>thunder-storage</code></p>
+<p>Change data capture. Reads the WAL to produce a stream of data change events for downstream consumers, enabling real-time data replication and event-driven architectures.</p>
+<h4 id="thunder-fdw">thunder-fdw</h4>
+<p><strong>Internal dependencies:</strong> <code>thunder-common</code>, <code>thunder-sql</code></p>
+<p>Foreign data wrappers. Enables ThunderDB to query external data sources (PostgreSQL, MySQL, CSV, Parquet, S3) as if they were local tables.</p>
+<h4 id="thunder-client">thunder-client</h4>
+<p><strong>Internal dependencies:</strong> <code>thunder-common</code></p>
+<p>The official Rust client library for connecting to ThunderDB. Provides a type-safe API for executing queries, managing transactions, and subscribing to change streams.</p>
+<h4 id="thunder-server-top-level-binary">thunder-server (Top-Level Binary)</h4>
+<p><strong>Internal dependencies:</strong> All crates</p>
+<p>The main server binary that wires everything together. Parses CLI arguments, loads configuration, initializes all subsystems, and starts the server. This is the only crate that produces an executable binary.</p>
+<h2 id="key-source-files">Key Source Files</h2>
+<p>This section documents the most important source files in each crate, describing their purpose, size, and key abstractions.</p>
+<h3 id="thunder-common">thunder-common</h3>
+<p>The shared foundation crate containing types, errors, and utilities used across the entire system.</p>
+<h4 id="typesrs--core-type-definitions"><code>types.rs</code> &ndash; Core Type Definitions</h4>
+<p>This file defines the fundamental identifier types and data representations used throughout ThunderDB:</p>
+<p><strong>Identifier Types:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#6272a4">// Each ID type is a newtype wrapper for type safety
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">DatabaseId</span>(<span style="color:#ff79c6">pub</span> <span style="color:#8be9fd">u64</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">TableId</span>(<span style="color:#ff79c6">pub</span> <span style="color:#8be9fd">u64</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">ColumnId</span>(<span style="color:#ff79c6">pub</span> <span style="color:#8be9fd">u32</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">IndexId</span>(<span style="color:#ff79c6">pub</span> <span style="color:#8be9fd">u64</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">RowId</span>(<span style="color:#ff79c6">pub</span> <span style="color:#8be9fd">u64</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">PageId</span>(<span style="color:#ff79c6">pub</span> <span style="color:#8be9fd">u64</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">TxnId</span>(<span style="color:#ff79c6">pub</span> <span style="color:#8be9fd">u64</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">RegionId</span>(<span style="color:#ff79c6">pub</span> <span style="color:#8be9fd">u32</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">NodeId</span>(<span style="color:#ff79c6">pub</span> <span style="color:#8be9fd">u64</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">Lsn</span>(<span style="color:#ff79c6">pub</span> <span style="color:#8be9fd">u64</span>);  <span style="color:#6272a4">// Log Sequence Number
+</span></span></span></code></pre></div><p><strong>Data Types:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">enum</span> <span style="color:#50fa7b">DataType</span> {
+</span></span><span style="display:flex;"><span>    Boolean,
+</span></span><span style="display:flex;"><span>    Int8, Int16, Int32, Int64,
+</span></span><span style="display:flex;"><span>    UInt8, UInt16, UInt32, UInt64,
+</span></span><span style="display:flex;"><span>    Float32, Float64,
+</span></span><span style="display:flex;"><span>    Decimal(<span style="color:#8be9fd">u8</span>, <span style="color:#8be9fd">u8</span>),  <span style="color:#6272a4">// precision, scale
+</span></span></span><span style="display:flex;"><span>    Varchar(<span style="color:#8be9fd">usize</span>),
+</span></span><span style="display:flex;"><span>    Text,
+</span></span><span style="display:flex;"><span>    Blob,
+</span></span><span style="display:flex;"><span>    Date, Time, Timestamp, TimestampTz,
+</span></span><span style="display:flex;"><span>    Interval,
+</span></span><span style="display:flex;"><span>    Uuid,
+</span></span><span style="display:flex;"><span>    Json, Jsonb,
+</span></span><span style="display:flex;"><span>    Vector(<span style="color:#8be9fd">usize</span>),  <span style="color:#6272a4">// dimensionality
+</span></span></span><span style="display:flex;"><span>    Array(<span style="color:#8be9fd;font-style:italic">Box</span><span style="color:#ff79c6">&lt;</span>DataType<span style="color:#ff79c6">&gt;</span>),
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Value Representation:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">enum</span> <span style="color:#50fa7b">Value</span> {
+</span></span><span style="display:flex;"><span>    Null,
+</span></span><span style="display:flex;"><span>    Boolean(<span style="color:#8be9fd">bool</span>),
+</span></span><span style="display:flex;"><span>    Int64(<span style="color:#8be9fd">i64</span>),
+</span></span><span style="display:flex;"><span>    Float64(<span style="color:#8be9fd">f64</span>),
+</span></span><span style="display:flex;"><span>    Decimal(rust_decimal::Decimal),
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">String</span>(<span style="color:#8be9fd;font-style:italic">String</span>),
+</span></span><span style="display:flex;"><span>    Bytes(<span style="color:#8be9fd;font-style:italic">Vec</span><span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">u8</span><span style="color:#ff79c6">&gt;</span>),
+</span></span><span style="display:flex;"><span>    Date(chrono::NaiveDate),
+</span></span><span style="display:flex;"><span>    Timestamp(chrono::NaiveDateTime),
+</span></span><span style="display:flex;"><span>    Uuid(uuid::Uuid),
+</span></span><span style="display:flex;"><span>    Json(serde_json::Value),
+</span></span><span style="display:flex;"><span>    Vector(<span style="color:#8be9fd;font-style:italic">Vec</span><span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">f32</span><span style="color:#ff79c6">&gt;</span>),
+</span></span><span style="display:flex;"><span>    Array(<span style="color:#8be9fd;font-style:italic">Vec</span><span style="color:#ff79c6">&lt;</span>Value<span style="color:#ff79c6">&gt;</span>),
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Core Structures:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">Row</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">pub</span> id: <span style="color:#50fa7b">RowId</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">pub</span> values: <span style="color:#8be9fd;font-style:italic">Vec</span><span style="color:#ff79c6">&lt;</span>Value<span style="color:#ff79c6">&gt;</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">Schema</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">pub</span> columns: <span style="color:#8be9fd;font-style:italic">Vec</span><span style="color:#ff79c6">&lt;</span>ColumnDef<span style="color:#ff79c6">&gt;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">pub</span> primary_key: <span style="color:#8be9fd;font-style:italic">Vec</span><span style="color:#ff79c6">&lt;</span>ColumnId<span style="color:#ff79c6">&gt;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">pub</span> indexes: <span style="color:#8be9fd;font-style:italic">Vec</span><span style="color:#ff79c6">&lt;</span>IndexDef<span style="color:#ff79c6">&gt;</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="configrs--configuration-parsing"><code>config.rs</code> &ndash; Configuration Parsing</h4>
+<p>Handles loading and validating configuration from TOML files and environment variables. Defines the hierarchical configuration structure covering storage, networking, cluster, security, and logging settings. Uses <code>serde</code> for deserialization with default values.</p>
+<h4 id="errorrs--error-types"><code>error.rs</code> &ndash; Error Types</h4>
+<p>Defines the unified error hierarchy for the entire system:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">enum</span> <span style="color:#50fa7b">ThunderError</span> {
+</span></span><span style="display:flex;"><span>    Sql(SqlError),
+</span></span><span style="display:flex;"><span>    Storage(StorageError),
+</span></span><span style="display:flex;"><span>    Transaction(TransactionError),
+</span></span><span style="display:flex;"><span>    Io(std::io::Error),
+</span></span><span style="display:flex;"><span>    Config(ConfigError),
+</span></span><span style="display:flex;"><span>    Cluster(ClusterError),
+</span></span><span style="display:flex;"><span>    Protocol(ProtocolError),
+</span></span><span style="display:flex;"><span>    Internal(<span style="color:#8be9fd;font-style:italic">String</span>),
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Each variant has a corresponding detailed error enum. All errors implement <code>std::error::Error</code> and <code>Display</code>. Error propagation uses the <code>?</code> operator with <code>From</code> trait implementations.</p>
+<h4 id="rbacrs--role-based-access-control"><code>rbac.rs</code> &ndash; Role-Based Access Control</h4>
+<p>Defines roles, permissions, and access control policies. Supports hierarchical roles with privilege inheritance and fine-grained permissions at database, table, and column levels.</p>
+<h4 id="auditrs--audit-logging"><code>audit.rs</code> &ndash; Audit Logging</h4>
+<p>Structured audit logging for security-relevant events (authentication, authorization decisions, DDL operations, data access). Events are serialized and written to a dedicated audit log.</p>
+<h4 id="metricsrs--prometheus-metrics"><code>metrics.rs</code> &ndash; Prometheus Metrics</h4>
+<p>Defines and registers Prometheus metrics for monitoring. Includes counters, gauges, and histograms for query latency, throughput, storage utilization, connection counts, and more.</p>
+<hr>
+<h3 id="thunder-storage-1">thunder-storage</h3>
+<p>The storage engine crate, responsible for all persistent data management.</p>
+<h4 id="walrs-67kb--write-ahead-log"><code>wal.rs</code> (~67KB) &ndash; Write-Ahead Log</h4>
+<p>The largest file in the storage crate, implementing a high-performance write-ahead log:</p>
+<ul>
+<li><strong>ARIES-style recovery:</strong> Supports analysis, redo, and undo phases for crash recovery</li>
+<li><strong>Segment management:</strong> WAL is divided into fixed-size segments that are rotated and archived</li>
+<li><strong>Group commit:</strong> Batches multiple transaction commits into a single <code>fsync()</code> call for throughput</li>
+<li><strong>Log record types:</strong> Insert, Update, Delete, Commit, Abort, Checkpoint, CompensationLogRecord (CLR)</li>
+<li><strong>Checkpointing:</strong> Periodic fuzzy checkpoints to bound recovery time</li>
+<li><strong>Log sequence numbers (LSN):</strong> Monotonically increasing sequence numbers for ordering</li>
+</ul>
+<p>Key types: <code>WalManager</code>, <code>WalWriter</code>, <code>WalReader</code>, <code>LogRecord</code>, <code>WalSegment</code>, <code>CheckpointManager</code></p>
+<h4 id="btreers-29kb--btree-indexes"><code>btree.rs</code> (~29KB) &ndash; B+Tree Indexes</h4>
+<p>Implements concurrent B+Tree indexes, the primary index structure for row-oriented data:</p>
+<ul>
+<li><strong>Latch coupling (crabbing):</strong> Lock-coupling protocol for concurrent access without coarse-grained locking</li>
+<li><strong>Prefix compression:</strong> Reduces key storage overhead in leaf and internal nodes</li>
+<li><strong>Leaf page chaining:</strong> Doubly-linked leaf pages for efficient range scans</li>
+<li><strong>Bulk loading:</strong> Optimized bottom-up construction for initial data load</li>
+<li><strong>Split and merge:</strong> Page splits and merges maintain tree balance</li>
+<li><strong>Iterator interface:</strong> <code>BTreeIterator</code> for sequential and reverse scanning</li>
+</ul>
+<p>Key types: <code>BTree</code>, <code>BTreeNode</code>, <code>InternalNode</code>, <code>LeafNode</code>, <code>BTreeIterator</code>, <code>BTreeBuilder</code></p>
+<h4 id="bufferrs--buffer-pool"><code>buffer.rs</code> &ndash; Buffer Pool</h4>
+<p>Manages a fixed-size pool of in-memory page frames:</p>
+<ul>
+<li><strong>LRU eviction:</strong> Least-recently-used eviction policy with clock approximation</li>
+<li><strong>Page pinning:</strong> Prevents eviction of actively used pages</li>
+<li><strong>Dirty page tracking:</strong> Tracks modified pages for write-back</li>
+<li><strong>Read/write latching:</strong> Per-page read-write locks for concurrent access</li>
+<li><strong>Prefetching:</strong> Sequential scan detection and asynchronous prefetching</li>
+</ul>
+<p>Key types: <code>BufferPool</code>, <code>BufferFrame</code>, <code>PageHandle</code>, <code>EvictionPolicy</code></p>
+<h4 id="row_storers--row-oriented-storage"><code>row_store.rs</code> &ndash; Row-Oriented Storage</h4>
+<p>Implements the row-oriented storage format optimized for OLTP workloads:</p>
+<ul>
+<li><strong>Heap file organization:</strong> Pages organized as a heap with free space tracking</li>
+<li><strong>Slot directory:</strong> Each page has a slot directory mapping slot numbers to row offsets</li>
+<li><strong>Row format:</strong> Fixed-size header followed by column values with null bitmap</li>
+<li><strong>Free space map:</strong> Tracks available space per page for fast insertion</li>
+</ul>
+<p>Key types: <code>RowStore</code>, <code>HeapFile</code>, <code>SlotPage</code>, <code>RowHeader</code>, <code>FreeSpaceMap</code></p>
+<h4 id="column_storers--columnar-storage"><code>column_store.rs</code> &ndash; Columnar Storage</h4>
+<p>Implements the columnar storage format optimized for OLAP workloads:</p>
+<ul>
+<li><strong>Column groups:</strong> Columns are stored in groups based on access patterns</li>
+<li><strong>Row groups:</strong> Data is divided into row groups (typically 64K-128K rows) for batch processing</li>
+<li><strong>Encoding:</strong> Type-specific encodings (dictionary, RLE, delta, bit-packing)</li>
+<li><strong>Statistics:</strong> Min/max/null count per column chunk for predicate pushdown</li>
+<li><strong>Apache Arrow integration:</strong> Native Arrow columnar format for zero-copy analytics</li>
+</ul>
+<p>Key types: <code>ColumnStore</code>, <code>ColumnGroup</code>, <code>RowGroup</code>, <code>ColumnChunk</code>, <code>ColumnEncoder</code></p>
+<h4 id="catalogrs--system-catalog"><code>catalog.rs</code> &ndash; System Catalog</h4>
+<p>Manages metadata about databases, tables, columns, indexes, users, and other database objects:</p>
+<ul>
+<li><strong>In-memory cache:</strong> Frequently accessed metadata is cached in memory</li>
+<li><strong>Persistent storage:</strong> Catalog data is stored in system tables</li>
+<li><strong>Versioning:</strong> Catalog changes are versioned for DDL transactional support</li>
+<li><strong>Schema evolution:</strong> Supports adding/removing columns, changing types (with restrictions)</li>
+</ul>
+<p>Key types: <code>Catalog</code>, <code>DatabaseMeta</code>, <code>TableMeta</code>, <code>ColumnMeta</code>, <code>IndexMeta</code></p>
+<h4 id="compressionrs--compression-algorithms"><code>compression.rs</code> &ndash; Compression Algorithms</h4>
+<p>Implements multiple compression algorithms with a unified interface:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Algorithm</th>
+          <th>Best For</th>
+          <th>Ratio</th>
+          <th>Speed</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>LZ4</strong></td>
+          <td>General purpose, hot data</td>
+          <td>Moderate</td>
+          <td>Very fast</td>
+      </tr>
+      <tr>
+          <td><strong>Snappy</strong></td>
+          <td>General purpose, balanced</td>
+          <td>Moderate</td>
+          <td>Fast</td>
+      </tr>
+      <tr>
+          <td><strong>Zstd</strong></td>
+          <td>Cold data, archival</td>
+          <td>High</td>
+          <td>Moderate</td>
+      </tr>
+      <tr>
+          <td><strong>RLE</strong> (Run-Length Encoding)</td>
+          <td>Columns with many repeated values</td>
+          <td>Variable</td>
+          <td>Very fast</td>
+      </tr>
+      <tr>
+          <td><strong>Delta</strong></td>
+          <td>Monotonically increasing values (timestamps, sequences)</td>
+          <td>High</td>
+          <td>Very fast</td>
+      </tr>
+      <tr>
+          <td><strong>Dictionary</strong></td>
+          <td>Low-cardinality string columns</td>
+          <td>High</td>
+          <td>Fast</td>
+      </tr>
+  </tbody>
+</table>
+<p>Key types: <code>Compressor</code>, <code>CompressionAlgorithm</code>, <code>CompressedBlock</code></p>
+<h4 id="pagers--page-management"><code>page.rs</code> &ndash; Page Management</h4>
+<p>Defines the 16KB page format used throughout the storage engine:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#ff79c6">+------------------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span> Page Header      <span style="color:#ff79c6">|</span>  (fixed size: <span style="color:#bd93f9">64</span> bytes)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>   <span style="color:#ff79c6">-</span> page_id      <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>   <span style="color:#ff79c6">-</span> page_type    <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>   <span style="color:#ff79c6">-</span> lsn          <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>   <span style="color:#ff79c6">-</span> checksum     <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>   <span style="color:#ff79c6">-</span> free_space   <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+------------------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span> Page Content     <span style="color:#ff79c6">|</span>  (variable, depends on page type)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span>   <span style="color:#ff79c6">...</span>            <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+------------------+</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">|</span> Page Footer      <span style="color:#ff79c6">|</span>  (checksum validation)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">+------------------+</span>
+</span></span></code></pre></div><p>Page types: <code>Data</code>, <code>Index</code>, <code>Overflow</code>, <code>FreeSpaceMap</code>, <code>Undo</code>, <code>System</code></p>
+<p>Key types: <code>Page</code>, <code>PageHeader</code>, <code>PageType</code>, <code>PageManager</code></p>
+<h4 id="diskrs--disk-io"><code>disk.rs</code> &ndash; Disk I/O</h4>
+<p>Low-level disk I/O layer with direct I/O support:</p>
+<ul>
+<li><strong>Asynchronous I/O:</strong> Uses <code>tokio::fs</code> for non-blocking file operations</li>
+<li><strong>Direct I/O:</strong> Optional <code>O_DIRECT</code> support to bypass OS page cache</li>
+<li><strong>I/O scheduling:</strong> Request merging and prioritization</li>
+<li><strong>File management:</strong> Tablespace and data file management</li>
+</ul>
+<p>Key types: <code>DiskManager</code>, <code>FileHandle</code>, <code>IoRequest</code>, <code>IoScheduler</code></p>
+<hr>
+<h3 id="thunder-txn-1">thunder-txn</h3>
+<p>Transaction management, ensuring ACID properties across the distributed system.</p>
+<h4 id="mvccrs--multi-version-concurrency-control"><code>mvcc.rs</code> &ndash; Multi-Version Concurrency Control</h4>
+<p>Implements MVCC for snapshot isolation and serializable isolation levels:</p>
+<ul>
+<li><strong>Version chains:</strong> Each row maintains a chain of versions tagged with transaction IDs</li>
+<li><strong>Visibility rules:</strong> A version is visible to a transaction if it was committed before the transaction&rsquo;s snapshot</li>
+<li><strong>Garbage collection:</strong> Old versions that are no longer visible to any active transaction are reclaimed</li>
+<li><strong>Snapshot management:</strong> Efficient tracking of active transactions and their snapshots</li>
+</ul>
+<p>Key types: <code>MvccManager</code>, <code>Version</code>, <code>VersionChain</code>, <code>Snapshot</code>, <code>VisibilityChecker</code></p>
+<h4 id="ccprs--optimistic-concurrency-control"><code>ccp.rs</code> &ndash; Optimistic Concurrency Control</h4>
+<p>Implements optimistic concurrency control (OCC) for low-contention workloads:</p>
+<ul>
+<li><strong>Read phase:</strong> Transaction reads are tracked without acquiring locks</li>
+<li><strong>Validation phase:</strong> At commit time, the transaction validates that no conflicts occurred</li>
+<li><strong>Write phase:</strong> If validation succeeds, changes are applied atomically</li>
+<li><strong>Conflict detection:</strong> Tracks read and write sets for intersection checking</li>
+</ul>
+<p>Key types: <code>OccManager</code>, <code>ReadSet</code>, <code>WriteSet</code>, <code>ValidationResult</code></p>
+<h4 id="coordinatorrs--2pc-distributed-transaction-coordinator"><code>coordinator.rs</code> &ndash; 2PC Distributed Transaction Coordinator</h4>
+<p>Coordinates distributed transactions across multiple nodes using two-phase commit:</p>
+<ul>
+<li><strong>Prepare phase:</strong> Coordinator sends prepare request to all participants; each participant votes commit or abort</li>
+<li><strong>Commit/abort phase:</strong> Based on unanimous votes, coordinator sends global commit or abort decision</li>
+<li><strong>Recovery:</strong> Handles coordinator and participant failures using persistent log</li>
+<li><strong>Timeout handling:</strong> Configurable timeouts with automatic abort on expiry</li>
+</ul>
+<p>Key types: <code>TxnCoordinator</code>, <code>Participant</code>, <code>PrepareResult</code>, <code>TxnLog</code></p>
+<h4 id="lock_managerrs--lock-management"><code>lock_manager.rs</code> &ndash; Lock Management</h4>
+<p>Fine-grained locking for pessimistic concurrency control:</p>
+<ul>
+<li><strong>Lock modes:</strong> Shared (S), Exclusive (X), Intent Shared (IS), Intent Exclusive (IX), Shared Intent Exclusive (SIX)</li>
+<li><strong>Lock granularity:</strong> Database, table, page, row level locks</li>
+<li><strong>Lock escalation:</strong> Automatic escalation from row to page to table when lock count exceeds threshold</li>
+<li><strong>Wait-for graph:</strong> Maintained for deadlock detection</li>
+</ul>
+<p>Key types: <code>LockManager</code>, <code>LockMode</code>, <code>LockRequest</code>, <code>LockTable</code></p>
+<h4 id="deadlockrs--deadlock-detection"><code>deadlock.rs</code> &ndash; Deadlock Detection</h4>
+<p>Implements deadlock detection and resolution:</p>
+<ul>
+<li><strong>Wait-for graph:</strong> Directed graph of transaction dependencies</li>
+<li><strong>Cycle detection:</strong> Periodic cycle detection using DFS</li>
+<li><strong>Victim selection:</strong> Chooses the youngest transaction (lowest cost) as the deadlock victim</li>
+<li><strong>Automatic abort:</strong> Victim transaction is automatically aborted and retried</li>
+</ul>
+<p>Key types: <code>DeadlockDetector</code>, <code>WaitForGraph</code>, <code>DeadlockVictim</code></p>
+<hr>
+<h3 id="thunder-sql-1">thunder-sql</h3>
+<p>SQL processing pipeline from text to optimized logical plan.</p>
+<h4 id="parserrs--sql-parser"><code>parser.rs</code> &ndash; SQL Parser</h4>
+<p>Parses SQL text into an abstract syntax tree (AST). Built on the <code>sqlparser</code> crate with ThunderDB-specific extensions:</p>
+<ul>
+<li>Standard SQL parsing (SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, DROP)</li>
+<li>ThunderDB extensions (VECTOR SEARCH, CREATE ML MODEL, NLP QUERY)</li>
+<li>Error recovery with helpful diagnostics</li>
+</ul>
+<p>Key types: <code>Parser</code>, <code>Statement</code>, <code>Expr</code>, <code>SelectStatement</code>, <code>ParseError</code></p>
+<h4 id="analyzerrs--semantic-analyzer"><code>analyzer.rs</code> &ndash; Semantic Analyzer</h4>
+<p>Performs semantic analysis on the parsed AST:</p>
+<ul>
+<li><strong>Name resolution:</strong> Resolves table names, column references, and aliases against the catalog</li>
+<li><strong>Type checking:</strong> Validates and infers types for expressions, function calls, and operators</li>
+<li><strong>Privilege checking:</strong> Verifies the current user has permissions for the requested operations</li>
+<li><strong>Validation:</strong> Checks constraints, foreign key references, and schema compatibility</li>
+</ul>
+<p>Key types: <code>Analyzer</code>, <code>AnalyzedStatement</code>, <code>NameResolver</code>, <code>TypeChecker</code></p>
+<h4 id="optimizerrs--query-optimizer"><code>optimizer.rs</code> &ndash; Query Optimizer</h4>
+<p>Transforms logical query plans into optimized forms using cost-based optimization:</p>
+<ul>
+<li><strong>Predicate pushdown:</strong> Moves filter predicates closer to data sources</li>
+<li><strong>Projection pushdown:</strong> Eliminates unnecessary columns early</li>
+<li><strong>Join reordering:</strong> Explores join orders using dynamic programming for small join counts, greedy for large</li>
+<li><strong>Cost model:</strong> Estimates I/O cost, CPU cost, and memory usage based on catalog statistics</li>
+<li><strong>Rule-based optimization:</strong> Applies heuristic transformations (constant folding, predicate simplification)</li>
+<li><strong>Subquery decorrelation:</strong> Converts correlated subqueries to joins where possible</li>
+</ul>
+<p>Key types: <code>Optimizer</code>, <code>LogicalPlan</code>, <code>OptimizationRule</code>, <code>CostModel</code>, <code>Statistics</code></p>
+<h4 id="plannerrs--query-planner"><code>planner.rs</code> &ndash; Query Planner</h4>
+<p>Converts optimized logical plans to physical execution plans:</p>
+<ul>
+<li><strong>Physical operator selection:</strong> Chooses between hash join vs. merge join vs. nested loop based on cost</li>
+<li><strong>Index selection:</strong> Determines when to use index scans vs. full table scans</li>
+<li><strong>Parallelism planning:</strong> Determines degree of parallelism and data partitioning strategy</li>
+<li><strong>Memory budgeting:</strong> Allocates memory among operators for sort, hash, and aggregation buffers</li>
+</ul>
+<p>Key types: <code>Planner</code>, <code>PhysicalPlan</code>, <code>PhysicalOperator</code>, <code>ExecutionStrategy</code></p>
+<h4 id="dialectrs-45kb--multi-dialect-sql-support"><code>dialect.rs</code> (~45KB) &ndash; Multi-Dialect SQL Support</h4>
+<p>Implements compatibility with multiple SQL dialects:</p>
+<ul>
+<li><strong>PostgreSQL dialect:</strong> Compatible with PostgreSQL-specific syntax and functions</li>
+<li><strong>MySQL dialect:</strong> MySQL-specific syntax, quoting rules, and function names</li>
+<li><strong>SQLite dialect:</strong> SQLite compatibility for lightweight use cases</li>
+<li><strong>Standard SQL:</strong> ANSI SQL:2016 compliance</li>
+</ul>
+<p>Each dialect defines parsing rules, type mappings, function mappings, and behavioral differences.</p>
+<p>Key types: <code>Dialect</code>, <code>PostgresDialect</code>, <code>MySqlDialect</code>, <code>SqliteDialect</code>, <code>StandardDialect</code></p>
+<h4 id="nlprs-38kb--natural-language-processing"><code>nlp.rs</code> (~38KB) &ndash; Natural Language Processing</h4>
+<p>Enables querying ThunderDB using natural language:</p>
+<ul>
+<li><strong>Intent recognition:</strong> Classifies user intent (query, insert, update, schema modification)</li>
+<li><strong>Entity extraction:</strong> Identifies table names, column names, and values from natural language</li>
+<li><strong>SQL generation:</strong> Converts structured intent into executable SQL</li>
+<li><strong>Disambiguation:</strong> Interactive clarification when intent is ambiguous</li>
+<li><strong>Context management:</strong> Maintains conversation context for follow-up queries</li>
+</ul>
+<p>Key types: <code>NlpEngine</code>, <code>Intent</code>, <code>Entity</code>, <code>NlpContext</code>, <code>Disambiguation</code></p>
+<h4 id="llmrs-23kb--llm-integration"><code>llm.rs</code> (~23KB) &ndash; LLM Integration</h4>
+<p>Integrates with large language models for advanced query generation:</p>
+<ul>
+<li><strong>Provider abstraction:</strong> Pluggable LLM providers (OpenAI, Anthropic, local models)</li>
+<li><strong>Prompt engineering:</strong> Schema-aware prompts for accurate SQL generation</li>
+<li><strong>Output validation:</strong> Validates LLM-generated SQL against the schema before execution</li>
+<li><strong>Caching:</strong> Caches LLM responses for repeated query patterns</li>
+<li><strong>Rate limiting:</strong> Configurable rate limits per provider</li>
+</ul>
+<p>Key types: <code>LlmEngine</code>, <code>LlmProvider</code>, <code>LlmRequest</code>, <code>LlmResponse</code>, <code>PromptTemplate</code></p>
+<h4 id="mlrs-28kb--ml-operations"><code>ml.rs</code> (~28KB) &ndash; ML Operations</h4>
+<p>SQL-integrated machine learning operations:</p>
+<ul>
+<li><strong>Model management:</strong> CREATE, TRAIN, EVALUATE, PREDICT SQL extensions</li>
+<li><strong>Feature engineering:</strong> Built-in transformations (normalization, one-hot encoding, binning)</li>
+<li><strong>Algorithms:</strong> Linear regression, logistic regression, decision trees, k-means clustering</li>
+<li><strong>Model storage:</strong> Trained models stored in the catalog for persistence</li>
+<li><strong>Batch prediction:</strong> Efficient batch inference using vectorized execution</li>
+</ul>
+<p>Key types: <code>MlEngine</code>, <code>Model</code>, <code>TrainingConfig</code>, <code>Prediction</code>, <code>FeatureTransform</code></p>
+<h4 id="udfrs--user-defined-functions"><code>udf.rs</code> &ndash; User-Defined Functions</h4>
+<p>Framework for registering and executing user-defined functions:</p>
+<ul>
+<li><strong>Scalar UDFs:</strong> Functions that operate on a single row</li>
+<li><strong>Aggregate UDFs:</strong> Functions that aggregate across multiple rows</li>
+<li><strong>Table UDFs:</strong> Functions that return a table (table-valued functions)</li>
+<li><strong>WebAssembly UDFs:</strong> Sandboxed execution of user-provided WASM modules</li>
+</ul>
+<p>Key types: <code>UdfRegistry</code>, <code>ScalarUdf</code>, <code>AggregateUdf</code>, <code>TableUdf</code>, <code>WasmRuntime</code></p>
+<hr>
+<h3 id="thunder-query-1">thunder-query</h3>
+<p>The query execution engine that runs physical plans against the storage engine.</p>
+<h4 id="executorrs-60kb--main-query-executor"><code>executor.rs</code> (~60KB) &ndash; Main Query Executor</h4>
+<p>The largest file in the codebase, implementing the core query execution framework:</p>
+<ul>
+<li><strong>Volcano model:</strong> Iterator-based pull model for row-at-a-time execution</li>
+<li><strong>Vectorized execution:</strong> Batch processing mode for analytical queries</li>
+<li><strong>Adaptive execution:</strong> Runtime switching between row and batch modes based on query characteristics</li>
+<li><strong>Memory management:</strong> Per-operator memory tracking with spill-to-disk capability</li>
+<li><strong>Cancellation:</strong> Cooperative cancellation support for long-running queries</li>
+<li><strong>Progress tracking:</strong> Real-time query progress reporting</li>
+</ul>
+<p>Key types: <code>Executor</code>, <code>ExecutionContext</code>, <code>OperatorState</code>, <code>QueryResult</code>, <code>ExecutionStats</code></p>
+<h4 id="physical_planrs-38kb--physical-operators"><code>physical_plan.rs</code> (~38KB) &ndash; Physical Operators</h4>
+<p>Defines all physical operators available for query execution:</p>
+<ul>
+<li><strong>Scan operators:</strong> <code>SeqScan</code>, <code>IndexScan</code>, <code>IndexOnlyScan</code>, <code>BitmapScan</code></li>
+<li><strong>Join operators:</strong> <code>NestedLoopJoin</code>, <code>HashJoin</code>, <code>MergeJoin</code>, <code>IndexNestedLoopJoin</code></li>
+<li><strong>Aggregation operators:</strong> <code>HashAggregate</code>, <code>SortAggregate</code>, <code>StreamingAggregate</code></li>
+<li><strong>Sort operators:</strong> <code>ExternalSort</code> (with spill-to-disk), <code>TopN</code></li>
+<li><strong>Set operators:</strong> <code>Union</code>, <code>Intersect</code>, <code>Except</code></li>
+<li><strong>DML operators:</strong> <code>Insert</code>, <code>Update</code>, <code>Delete</code></li>
+<li><strong>Utility operators:</strong> <code>Limit</code>, <code>Offset</code>, <code>Project</code>, <code>Filter</code>, <code>Materialize</code></li>
+</ul>
+<p>Each operator implements the <code>PhysicalOperator</code> trait:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">trait</span> PhysicalOperator: <span style="color:#8be9fd;font-style:italic">Send</span> <span style="color:#ff79c6">+</span> <span style="color:#8be9fd;font-style:italic">Sync</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">open</span>(<span style="color:#ff79c6">&amp;</span><span style="color:#ff79c6">mut</span> <span style="font-style:italic">self</span>, ctx: <span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">ExecutionContext</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>()<span style="color:#ff79c6">&gt;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">next</span>(<span style="color:#ff79c6">&amp;</span><span style="color:#ff79c6">mut</span> <span style="font-style:italic">self</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd;font-style:italic">Option</span><span style="color:#ff79c6">&lt;</span>Row<span style="color:#ff79c6">&gt;&gt;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">next_batch</span>(<span style="color:#ff79c6">&amp;</span><span style="color:#ff79c6">mut</span> <span style="font-style:italic">self</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd;font-style:italic">Option</span><span style="color:#ff79c6">&lt;</span>RecordBatch<span style="color:#ff79c6">&gt;&gt;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">close</span>(<span style="color:#ff79c6">&amp;</span><span style="color:#ff79c6">mut</span> <span style="font-style:italic">self</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>()<span style="color:#ff79c6">&gt;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">estimated_cost</span>(<span style="color:#ff79c6">&amp;</span><span style="font-style:italic">self</span>) -&gt; <span style="color:#50fa7b">OperatorCost</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">children</span>(<span style="color:#ff79c6">&amp;</span><span style="font-style:italic">self</span>) -&gt; <span style="color:#ff79c6">&amp;</span>[<span style="color:#8be9fd;font-style:italic">Box</span><span style="color:#ff79c6">&lt;</span><span style="color:#ff79c6">dyn</span> PhysicalOperator<span style="color:#ff79c6">&gt;</span>];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="vectorizedrs-33kb--vectorized-batch-processing"><code>vectorized.rs</code> (~33KB) &ndash; Vectorized Batch Processing</h4>
+<p>Implements vectorized execution for analytical workloads:</p>
+<ul>
+<li><strong>Arrow-based:</strong> Uses Apache Arrow <code>RecordBatch</code> as the internal batch format</li>
+<li><strong>SIMD acceleration:</strong> Leverages SIMD intrinsics for filter evaluation, aggregation, and comparison</li>
+<li><strong>Batch size tuning:</strong> Adaptive batch sizes based on available memory and cache characteristics</li>
+<li><strong>Late materialization:</strong> Defers tuple construction until necessary</li>
+<li><strong>Filter pushdown:</strong> Evaluates filters on compressed/encoded data where possible</li>
+</ul>
+<p>Key types: <code>VectorizedExecutor</code>, <code>BatchOperator</code>, <code>FilterMask</code>, <code>AggregateAccumulator</code></p>
+<h4 id="parallelrs-35kb--multi-threaded-execution"><code>parallel.rs</code> (~35KB) &ndash; Multi-Threaded Execution</h4>
+<p>Implements intra-query and inter-query parallelism:</p>
+<ul>
+<li><strong>Exchange operators:</strong> <code>HashPartition</code>, <code>RoundRobin</code>, <code>Broadcast</code> for data redistribution</li>
+<li><strong>Pipeline parallelism:</strong> Multiple operators execute concurrently in a pipeline</li>
+<li><strong>Partition-parallel execution:</strong> Same operator runs on multiple partitions simultaneously</li>
+<li><strong>Work stealing:</strong> Idle threads steal work from busy threads for load balancing</li>
+<li><strong>Resource management:</strong> Per-query thread pools with configurable limits</li>
+</ul>
+<p>Key types: <code>ParallelExecutor</code>, <code>Exchange</code>, <code>Pipeline</code>, <code>WorkerPool</code>, <code>PartitionState</code></p>
+<hr>
+<h3 id="thunder-protocol-1">thunder-protocol</h3>
+<p>Wire protocol implementations for client compatibility.</p>
+<h4 id="postgresrs-54kb--postgresql-wire-protocol"><code>postgres.rs</code> (~54KB) &ndash; PostgreSQL Wire Protocol</h4>
+<p>Full implementation of the PostgreSQL v3 frontend/backend protocol:</p>
+<ul>
+<li><strong>Startup sequence:</strong> SSL negotiation, authentication (password, MD5, SCRAM-SHA-256), parameter exchange</li>
+<li><strong>Simple query:</strong> Parse, execute, and return results for text queries</li>
+<li><strong>Extended query:</strong> Prepare, bind, describe, execute flow for parameterized queries</li>
+<li><strong>Copy protocol:</strong> COPY IN/OUT for bulk data loading and extraction</li>
+<li><strong>Type system mapping:</strong> PostgreSQL OID to ThunderDB type mapping</li>
+<li><strong>Error and notice messages:</strong> PostgreSQL-compatible error codes and messages</li>
+<li><strong>Cancellation:</strong> Query cancellation via cancel key</li>
+</ul>
+<p>Compatible with <code>psql</code>, <code>libpq</code>, JDBC (<code>pgjdbc</code>), Python (<code>psycopg2</code>, <code>asyncpg</code>), Go (<code>pgx</code>), and other PostgreSQL client libraries.</p>
+<p>Key types: <code>PostgresProtocol</code>, <code>PostgresMessage</code>, <code>PostgresSession</code>, <code>PostgresTypeMap</code></p>
+<h4 id="mysqlrs-36kb--mysql-wire-protocol"><code>mysql.rs</code> (~36KB) &ndash; MySQL Wire Protocol</h4>
+<p>Implementation of the MySQL client/server protocol:</p>
+<ul>
+<li><strong>Handshake:</strong> Capability negotiation, authentication (native password, caching SHA2)</li>
+<li><strong>Command phase:</strong> COM_QUERY, COM_STMT_PREPARE, COM_STMT_EXECUTE, COM_STMT_CLOSE</li>
+<li><strong>Result set protocol:</strong> Column definitions, row data, EOF markers</li>
+<li><strong>Type system mapping:</strong> MySQL type codes to ThunderDB types</li>
+<li><strong>Character set handling:</strong> UTF-8 and other MySQL character set negotiations</li>
+</ul>
+<p>Compatible with the <code>mysql</code> CLI, MySQL Connector/J, Python (<code>mysql-connector-python</code>, <code>PyMySQL</code>), and other MySQL client libraries.</p>
+<p>Key types: <code>MysqlProtocol</code>, <code>MysqlPacket</code>, <code>MysqlSession</code>, <code>MysqlCapabilities</code></p>
+<h4 id="resprs-105kb--redis-resp-protocol"><code>resp.rs</code> (~105KB) &ndash; Redis RESP Protocol</h4>
+<p>The largest file in the entire codebase, implementing the Redis Serialization Protocol (RESP) for key-value and cache workloads:</p>
+<ul>
+<li><strong>RESP2 and RESP3:</strong> Full support for both protocol versions</li>
+<li><strong>Command parsing:</strong> Parses and dispatches all supported Redis commands</li>
+<li><strong>Data structure commands:</strong> String, Hash, List, Set, Sorted Set, Stream operations</li>
+<li><strong>Pub/Sub:</strong> Publish/Subscribe messaging</li>
+<li><strong>Lua scripting:</strong> EVAL and EVALSHA commands with embedded Lua interpreter</li>
+<li><strong>Transaction commands:</strong> MULTI/EXEC/DISCARD for Redis-style transactions</li>
+<li><strong>Cluster commands:</strong> CLUSTER INFO, CLUSTER NODES for cluster-aware clients</li>
+<li><strong>Pipeline support:</strong> Multiple commands in a single round trip</li>
+<li><strong>SQL bridge:</strong> Translates Redis operations to underlying SQL/KV operations</li>
+</ul>
+<p>Compatible with <code>redis-cli</code>, <code>redis-py</code>, <code>ioredis</code>, <code>jedis</code>, and other Redis client libraries.</p>
+<p>Key types: <code>RespProtocol</code>, <code>RespValue</code>, <code>RespCommand</code>, <code>RedisSession</code>, <code>CommandDispatcher</code></p>
+<h4 id="sessionrs-41kb--session-management"><code>session.rs</code> (~41KB) &ndash; Session Management</h4>
+<p>Manages client sessions across all protocols:</p>
+<ul>
+<li><strong>Session lifecycle:</strong> Creation, authentication, parameter setting, query execution, disconnection</li>
+<li><strong>Session state:</strong> Current database, transaction state, prepared statements, portal cursors</li>
+<li><strong>Connection pooling:</strong> Efficient session reuse for high-concurrency workloads</li>
+<li><strong>Idle timeout:</strong> Automatic cleanup of idle sessions</li>
+<li><strong>Session variables:</strong> Per-session configuration overrides</li>
+</ul>
+<p>Key types: <code>SessionManager</code>, <code>Session</code>, <code>SessionState</code>, <code>SessionConfig</code></p>
+<h4 id="authrs--authentication"><code>auth.rs</code> &ndash; Authentication</h4>
+<p>Multi-method authentication:</p>
+<ul>
+<li>Password-based authentication (bcrypt, Argon2)</li>
+<li>SCRAM-SHA-256 (PostgreSQL SASL)</li>
+<li>X.509 certificate authentication</li>
+<li>LDAP integration</li>
+<li>JWT token validation</li>
+</ul>
+<p>Key types: <code>Authenticator</code>, <code>AuthMethod</code>, <code>Credential</code>, <code>AuthResult</code></p>
+<h4 id="tlsrs--tlsssl"><code>tls.rs</code> &ndash; TLS/SSL</h4>
+<p>TLS transport security:</p>
+<ul>
+<li>TLS 1.2 and 1.3 support</li>
+<li>Certificate management and rotation</li>
+<li>SNI (Server Name Indication) support</li>
+<li>Mutual TLS (mTLS) for client certificate verification</li>
+</ul>
+<p>Key types: <code>TlsConfig</code>, <code>TlsAcceptor</code>, <code>CertificateManager</code></p>
+<hr>
+<h3 id="thunder-api-1">thunder-api</h3>
+<p>HTTP-based API servers and the web administration dashboard.</p>
+<h4 id="restrs--rest-api-server"><code>rest.rs</code> &ndash; REST API Server</h4>
+<p>RESTful API built on <code>axum</code>:</p>
+<ul>
+<li>CRUD operations for databases, tables, and data</li>
+<li>Query execution endpoint</li>
+<li>Bulk import/export</li>
+<li>OpenAPI/Swagger documentation</li>
+<li>Content negotiation (JSON, CSV, Parquet)</li>
+<li>Pagination and cursor-based navigation</li>
+</ul>
+<h4 id="grpcrs--grpc-api-server"><code>grpc.rs</code> &ndash; gRPC API Server</h4>
+<p>gRPC API built on <code>tonic</code>:</p>
+<ul>
+<li>Protobuf-defined service interfaces</li>
+<li>Streaming query results (server-side streaming)</li>
+<li>Bi-directional streaming for live data feeds</li>
+<li>Health checking service</li>
+<li>Reflection service for dynamic clients</li>
+</ul>
+<h4 id="graphqlrs--graphql-api-server"><code>graphql.rs</code> &ndash; GraphQL API Server</h4>
+<p>Auto-generated GraphQL API:</p>
+<ul>
+<li>Schema introspection</li>
+<li>Query, mutation, and subscription support</li>
+<li>Automatic schema generation from database tables</li>
+<li>N+1 query prevention with DataLoader pattern</li>
+<li>Depth and complexity limiting</li>
+</ul>
+<h4 id="websocketrs--websocket-api-server"><code>websocket.rs</code> &ndash; WebSocket API Server</h4>
+<p>Real-time WebSocket API:</p>
+<ul>
+<li>Live query subscriptions (receive updates when query results change)</li>
+<li>Change stream subscriptions</li>
+<li>Binary and text message support</li>
+<li>Heartbeat and automatic reconnection</li>
+</ul>
+<h4 id="dashboardrs-40kb--web-admin-dashboard"><code>dashboard.rs</code> (~40KB) &ndash; Web Admin Dashboard</h4>
+<p>Embedded web administration interface:</p>
+<ul>
+<li><strong>Cluster overview:</strong> Node health, topology, resource utilization</li>
+<li><strong>Query console:</strong> Interactive SQL editor with syntax highlighting and autocomplete</li>
+<li><strong>Performance monitoring:</strong> Real-time query latency, throughput, and resource metrics</li>
+<li><strong>Slow query log:</strong> Identify and analyze slow queries</li>
+<li><strong>Schema browser:</strong> Navigate databases, tables, indexes, and views</li>
+<li><strong>User management:</strong> Create and manage users, roles, and permissions</li>
+<li><strong>Configuration editor:</strong> View and modify server configuration</li>
+<li><strong>Backup management:</strong> Initiate and monitor backup and restore operations</li>
+</ul>
+<h4 id="handlersrs--request-handlers"><code>handlers.rs</code> &ndash; Request Handlers</h4>
+<p>Shared request handling logic for all API endpoints. Includes request parsing, parameter validation, result serialization, and error response formatting.</p>
+<h4 id="authrs--api-authentication"><code>auth.rs</code> &ndash; API Authentication</h4>
+<p>API-specific authentication middleware:</p>
+<ul>
+<li>API key authentication</li>
+<li>OAuth 2.0 / OpenID Connect</li>
+<li>JWT bearer token validation</li>
+<li>Session-based authentication</li>
+</ul>
+<h4 id="rate_limitrs--rate-limiting"><code>rate_limit.rs</code> &ndash; Rate Limiting</h4>
+<p>Token bucket rate limiter:</p>
+<ul>
+<li>Per-user and per-IP rate limits</li>
+<li>Configurable burst and sustained rates</li>
+<li>Rate limit headers in responses (<code>X-RateLimit-*</code>)</li>
+<li>Distributed rate limiting via shared state in cluster mode</li>
+</ul>
+<hr>
+<h3 id="thunder-server">thunder-server</h3>
+<p>The top-level binary crate that ties everything together.</p>
+<h4 id="mainrs--server-entry-point"><code>main.rs</code> &ndash; Server Entry Point</h4>
+<p>The application entry point:</p>
+<ul>
+<li><strong>CLI argument parsing:</strong> Uses <code>clap</code> for command-line interface:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>thunder-server [OPTIONS]
+</span></span><span style="display:flex;"><span>    --config &lt;PATH&gt;       Path to configuration file
+</span></span><span style="display:flex;"><span>    --data-dir &lt;PATH&gt;     Data directory
+</span></span><span style="display:flex;"><span>    --log-level &lt;LEVEL&gt;   Log level (trace, debug, info, warn, error)
+</span></span><span style="display:flex;"><span>    --bind &lt;ADDR&gt;         Bind address
+</span></span><span style="display:flex;"><span>    --cluster-join &lt;ADDR&gt; Join an existing cluster
+</span></span><span style="display:flex;"><span>    --init                Initialize a new database
+</span></span><span style="display:flex;"><span>    --version             Print version information
+</span></span></code></pre></div></li>
+<li><strong>Signal handling:</strong> Graceful shutdown on SIGTERM/SIGINT</li>
+<li><strong>Panic handling:</strong> Custom panic hook for logging and crash reporting</li>
+<li><strong>Tokio runtime setup:</strong> Configures the async runtime with appropriate thread counts</li>
+</ul>
+<h4 id="enginers--core-engine-coordination"><code>engine.rs</code> &ndash; Core Engine Coordination</h4>
+<p>The central coordination layer that initializes and connects all subsystems:</p>
+<ul>
+<li><strong>Startup sequence:</strong> Catalog recovery, WAL replay, buffer pool initialization, cluster join</li>
+<li><strong>Shutdown sequence:</strong> Graceful client disconnection, WAL flush, checkpoint, resource cleanup</li>
+<li><strong>Health monitoring:</strong> Periodic health checks of all subsystems</li>
+<li><strong>Configuration reloading:</strong> Dynamic configuration changes without restart</li>
+</ul>
+<p>Key types: <code>Engine</code>, <code>EngineConfig</code>, <code>SubsystemHandle</code></p>
+<h4 id="workersrs--background-tasks"><code>workers.rs</code> &ndash; Background Tasks</h4>
+<p>Long-running background tasks:</p>
+<ul>
+<li><strong>Checkpoint worker:</strong> Periodic fuzzy checkpointing</li>
+<li><strong>Compaction worker:</strong> Background compaction of storage files</li>
+<li><strong>Statistics worker:</strong> Periodic collection of table and index statistics for the query optimizer</li>
+<li><strong>WAL archival worker:</strong> Archiving old WAL segments</li>
+<li><strong>Garbage collection worker:</strong> MVCC version garbage collection</li>
+<li><strong>Monitoring worker:</strong> Metrics collection and export</li>
+</ul>
+<p>Key types: <code>WorkerManager</code>, <code>Worker</code>, <code>WorkerConfig</code></p>
+<hr>
+<h3 id="thunder-cdc-1">thunder-cdc</h3>
+<h4 id="key-files">Key Files</h4>
+<ul>
+<li><strong><code>cdc.rs</code>:</strong> Core CDC engine that reads WAL records and converts them to change events</li>
+<li><strong><code>publisher.rs</code>:</strong> Publishes change events to downstream consumers (Kafka, Pulsar, webhooks)</li>
+<li><strong><code>filter.rs</code>:</strong> Table and column-level filtering for selective replication</li>
+<li><strong><code>format.rs</code>:</strong> Change event serialization (JSON, Avro, Protobuf)</li>
+</ul>
+<hr>
+<h3 id="thunder-vector-1">thunder-vector</h3>
+<h4 id="key-files-1">Key Files</h4>
+<ul>
+<li><strong><code>index.rs</code>:</strong> Vector index implementations (HNSW, IVF-Flat, IVF-PQ)</li>
+<li><strong><code>search.rs</code>:</strong> k-NN and approximate nearest neighbor search</li>
+<li><strong><code>distance.rs</code>:</strong> Distance functions (Euclidean, cosine, dot product, Hamming) with SIMD acceleration via <code>simsimd</code></li>
+<li><strong><code>embedding.rs</code>:</strong> Embedding storage and retrieval</li>
+</ul>
+<hr>
+<h3 id="thunder-fdw-1">thunder-fdw</h3>
+<h4 id="key-files-2">Key Files</h4>
+<ul>
+<li><strong><code>wrapper.rs</code>:</strong> Foreign data wrapper trait and registry</li>
+<li><strong><code>postgres_fdw.rs</code>:</strong> Foreign data wrapper for PostgreSQL</li>
+<li><strong><code>mysql_fdw.rs</code>:</strong> Foreign data wrapper for MySQL</li>
+<li><strong><code>csv_fdw.rs</code>:</strong> Foreign data wrapper for CSV files</li>
+<li><strong><code>parquet_fdw.rs</code>:</strong> Foreign data wrapper for Parquet files</li>
+<li><strong><code>s3_fdw.rs</code>:</strong> Foreign data wrapper for S3-compatible object storage</li>
+</ul>
+<hr>
+<h3 id="thunder-client-1">thunder-client</h3>
+<h4 id="key-files-3">Key Files</h4>
+<ul>
+<li><strong><code>client.rs</code>:</strong> Main client API with builder pattern (<code>ClientBuilder</code>)</li>
+<li><strong><code>connection.rs</code>:</strong> Connection management and pooling</li>
+<li><strong><code>query.rs</code>:</strong> Query building and execution</li>
+<li><strong><code>transaction.rs</code>:</strong> Transaction lifecycle management</li>
+<li><strong><code>stream.rs</code>:</strong> Change stream subscription</li>
+</ul>
+<h2 id="key-external-dependencies">Key External Dependencies</h2>
+<p>ThunderDB relies on a curated set of high-quality external crates:</p>
+<h3 id="async-runtime-and-networking">Async Runtime and Networking</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Crate</th>
+          <th>Purpose</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>tokio</code></td>
+          <td>Async runtime (multi-threaded scheduler, I/O, timers, channels)</td>
+      </tr>
+      <tr>
+          <td><code>axum</code></td>
+          <td>HTTP framework for REST and WebSocket APIs</td>
+      </tr>
+      <tr>
+          <td><code>tonic</code></td>
+          <td>gRPC framework (client and server)</td>
+      </tr>
+      <tr>
+          <td><code>tower</code></td>
+          <td>Service abstractions and middleware (rate limiting, timeout, retry)</td>
+      </tr>
+      <tr>
+          <td><code>hyper</code></td>
+          <td>Low-level HTTP implementation (used by axum and tonic)</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="sql-and-data-processing">SQL and Data Processing</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Crate</th>
+          <th>Purpose</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>sqlparser</code></td>
+          <td>SQL parsing into AST</td>
+      </tr>
+      <tr>
+          <td><code>arrow</code></td>
+          <td>Apache Arrow columnar memory format</td>
+      </tr>
+      <tr>
+          <td><code>datafusion</code></td>
+          <td>Analytical query engine components</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="storage">Storage</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Crate</th>
+          <th>Purpose</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>rocksdb</code></td>
+          <td>Embedded key-value store (used for metadata and auxiliary storage)</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="distributed-systems">Distributed Systems</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Crate</th>
+          <th>Purpose</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>raft</code></td>
+          <td>Raft consensus protocol implementation</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="concurrency">Concurrency</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Crate</th>
+          <th>Purpose</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>crossbeam</code></td>
+          <td>Lock-free data structures and utilities</td>
+      </tr>
+      <tr>
+          <td><code>dashmap</code></td>
+          <td>Concurrent hash map</td>
+      </tr>
+      <tr>
+          <td><code>parking_lot</code></td>
+          <td>Fast mutex and RwLock implementations</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="vector-and-simd">Vector and SIMD</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Crate</th>
+          <th>Purpose</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>simsimd</code></td>
+          <td>SIMD-accelerated vector distance functions</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="serialization">Serialization</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Crate</th>
+          <th>Purpose</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>serde</code></td>
+          <td>Serialization/deserialization framework</td>
+      </tr>
+      <tr>
+          <td><code>serde_json</code></td>
+          <td>JSON serialization</td>
+      </tr>
+      <tr>
+          <td><code>prost</code></td>
+          <td>Protocol Buffers (used by tonic for gRPC)</td>
+      </tr>
+      <tr>
+          <td><code>bincode</code></td>
+          <td>Compact binary serialization for internal use</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="observability">Observability</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Crate</th>
+          <th>Purpose</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>tracing</code></td>
+          <td>Structured, async-aware logging and instrumentation</td>
+      </tr>
+      <tr>
+          <td><code>tracing-subscriber</code></td>
+          <td>Log formatting and filtering</td>
+      </tr>
+      <tr>
+          <td><code>prometheus</code></td>
+          <td>Metrics collection and export</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="utilities">Utilities</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Crate</th>
+          <th>Purpose</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>clap</code></td>
+          <td>CLI argument parsing</td>
+      </tr>
+      <tr>
+          <td><code>chrono</code></td>
+          <td>Date and time handling</td>
+      </tr>
+      <tr>
+          <td><code>uuid</code></td>
+          <td>UUID generation and parsing</td>
+      </tr>
+      <tr>
+          <td><code>rust_decimal</code></td>
+          <td>Arbitrary-precision decimal arithmetic</td>
+      </tr>
+      <tr>
+          <td><code>bytes</code></td>
+          <td>Efficient byte buffer management</td>
+      </tr>
+      <tr>
+          <td><code>thiserror</code></td>
+          <td>Derive macro for <code>std::error::Error</code></td>
+      </tr>
+      <tr>
+          <td><code>anyhow</code></td>
+          <td>Flexible error type (used in tests and CLI)</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="design-patterns">Design Patterns</h2>
+<p>ThunderDB follows established Rust design patterns throughout the codebase. Understanding these patterns helps you write consistent, idiomatic contributions.</p>
+<h3 id="builder-pattern">Builder Pattern</h3>
+<p>Used extensively for constructing complex objects with many optional parameters:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#6272a4">// thunder-client/src/client.rs
+</span></span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">let</span> client <span style="color:#ff79c6">=</span> ClientBuilder::new()
+</span></span><span style="display:flex;"><span>    .host(<span style="color:#f1fa8c">&#34;localhost&#34;</span>)
+</span></span><span style="display:flex;"><span>    .port(<span style="color:#bd93f9">5432</span>)
+</span></span><span style="display:flex;"><span>    .username(<span style="color:#f1fa8c">&#34;admin&#34;</span>)
+</span></span><span style="display:flex;"><span>    .password(<span style="color:#f1fa8c">&#34;secret&#34;</span>)
+</span></span><span style="display:flex;"><span>    .database(<span style="color:#f1fa8c">&#34;mydb&#34;</span>)
+</span></span><span style="display:flex;"><span>    .pool_size(<span style="color:#bd93f9">10</span>)
+</span></span><span style="display:flex;"><span>    .connect_timeout(Duration::from_secs(<span style="color:#bd93f9">5</span>))
+</span></span><span style="display:flex;"><span>    .build()
+</span></span><span style="display:flex;"><span>    .<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span></code></pre></div><p>The builder pattern is used for <code>ClientBuilder</code>, <code>ServerConfig</code>, <code>QueryBuilder</code>, <code>IndexBuilder</code>, and many other configuration objects.</p>
+<h3 id="raii-for-resource-management">RAII for Resource Management</h3>
+<p>Resources are tied to object lifetimes, ensuring cleanup on drop:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#6272a4">// Buffer pool page handles automatically release the page on drop
+</span></span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> page <span style="color:#ff79c6">=</span> buffer_pool.fetch_page(page_id).<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// page is pinned in the buffer pool
+</span></span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// ... use the page ...
+</span></span></span><span style="display:flex;"><span>}  <span style="color:#6272a4">// page is automatically unpinned when dropped
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Transaction handles automatically abort on drop if not committed
+</span></span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> txn <span style="color:#ff79c6">=</span> engine.begin_transaction().<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// ... perform operations ...
+</span></span></span><span style="display:flex;"><span>    txn.commit().<span style="color:#ff79c6">await</span><span style="color:#ff79c6">?</span>;  <span style="color:#6272a4">// explicit commit
+</span></span></span><span style="display:flex;"><span>}  <span style="color:#6272a4">// if commit was not called, txn aborts on drop
+</span></span></span></code></pre></div><h3 id="interior-mutability">Interior Mutability</h3>
+<p>Shared mutable state is managed through interior mutability patterns:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#6272a4">// Arc&lt;RwLock&lt;T&gt;&gt; for shared state with read-heavy access
+</span></span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">let</span> catalog: <span style="color:#50fa7b">Arc</span><span style="color:#ff79c6">&lt;</span>RwLock<span style="color:#ff79c6">&lt;</span>Catalog<span style="color:#ff79c6">&gt;&gt;</span> <span style="color:#ff79c6">=</span> Arc::new(RwLock::new(Catalog::new()));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// DashMap for concurrent hash maps (lock-free reads)
+</span></span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">let</span> sessions: <span style="color:#50fa7b">DashMap</span><span style="color:#ff79c6">&lt;</span>SessionId, Session<span style="color:#ff79c6">&gt;</span> <span style="color:#ff79c6">=</span> DashMap::new();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Arc&lt;Mutex&lt;T&gt;&gt; for exclusive-access shared state
+</span></span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">let</span> wal_writer: <span style="color:#50fa7b">Arc</span><span style="color:#ff79c6">&lt;</span>Mutex<span style="color:#ff79c6">&lt;</span>WalWriter<span style="color:#ff79c6">&gt;&gt;</span> <span style="color:#ff79c6">=</span> Arc::new(Mutex::new(WalWriter::new()));
+</span></span></code></pre></div><p><code>DashMap</code> is preferred over <code>RwLock&lt;HashMap&gt;</code> when the map is accessed from many concurrent tasks and contention needs to be minimized.</p>
+<h3 id="type-state-pattern-for-transactions">Type-State Pattern for Transactions</h3>
+<p>Transactions use the type-state pattern to enforce correct lifecycle at compile time:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#6272a4">// Transaction states are encoded in the type system
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">Transaction</span><span style="color:#ff79c6">&lt;</span>S: <span style="color:#50fa7b">TxnState</span><span style="color:#ff79c6">&gt;</span> {
+</span></span><span style="display:flex;"><span>    id: <span style="color:#50fa7b">TxnId</span>,
+</span></span><span style="display:flex;"><span>    state: <span style="color:#50fa7b">PhantomData</span><span style="color:#ff79c6">&lt;</span>S<span style="color:#ff79c6">&gt;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// ...
+</span></span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">Active</span>;    <span style="color:#6272a4">// Transaction is active
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">Prepared</span>;  <span style="color:#6272a4">// Transaction has been prepared (2PC)
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">impl</span> Transaction<span style="color:#ff79c6">&lt;</span>Active<span style="color:#ff79c6">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">read</span>(<span style="color:#ff79c6">&amp;</span><span style="font-style:italic">self</span>, key: <span style="color:#ff79c6">&amp;</span>[<span style="color:#8be9fd">u8</span>]) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>Value<span style="color:#ff79c6">&gt;</span> { <span style="color:#6272a4">/* ... */</span> }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">write</span>(<span style="color:#ff79c6">&amp;</span><span style="color:#ff79c6">mut</span> <span style="font-style:italic">self</span>, key: <span style="color:#ff79c6">&amp;</span>[<span style="color:#8be9fd">u8</span>], value: <span style="color:#50fa7b">Value</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>()<span style="color:#ff79c6">&gt;</span> { <span style="color:#6272a4">/* ... */</span> }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">commit</span>(<span style="font-style:italic">self</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>()<span style="color:#ff79c6">&gt;</span> { <span style="color:#6272a4">/* consumes self */</span> }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">abort</span>(<span style="font-style:italic">self</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>()<span style="color:#ff79c6">&gt;</span> { <span style="color:#6272a4">/* consumes self */</span> }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">prepare</span>(<span style="font-style:italic">self</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>Transaction<span style="color:#ff79c6">&lt;</span>Prepared<span style="color:#ff79c6">&gt;&gt;</span> { <span style="color:#6272a4">/* state transition */</span> }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">impl</span> Transaction<span style="color:#ff79c6">&lt;</span>Prepared<span style="color:#ff79c6">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">commit</span>(<span style="font-style:italic">self</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>()<span style="color:#ff79c6">&gt;</span> { <span style="color:#6272a4">/* ... */</span> }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">abort</span>(<span style="font-style:italic">self</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>()<span style="color:#ff79c6">&gt;</span> { <span style="color:#6272a4">/* ... */</span> }
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Cannot call read() or write() on a Prepared transaction -- compile error!
+</span></span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This prevents misuse like writing to a prepared transaction or preparing a transaction twice.</p>
+<h3 id="visitor-pattern-in-sql-optimizer">Visitor Pattern in SQL Optimizer</h3>
+<p>The SQL optimizer uses the visitor pattern to traverse and transform query plan trees:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">trait</span> PlanVisitor {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">pre_visit</span>(<span style="color:#ff79c6">&amp;</span><span style="color:#ff79c6">mut</span> <span style="font-style:italic">self</span>, plan: <span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">LogicalPlan</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">bool</span><span style="color:#ff79c6">&gt;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">post_visit</span>(<span style="color:#ff79c6">&amp;</span><span style="color:#ff79c6">mut</span> <span style="font-style:italic">self</span>, plan: <span style="color:#ff79c6">&amp;</span><span style="color:#50fa7b">LogicalPlan</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">bool</span><span style="color:#ff79c6">&gt;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">trait</span> PlanRewriter {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">rewrite</span>(<span style="color:#ff79c6">&amp;</span><span style="color:#ff79c6">mut</span> <span style="font-style:italic">self</span>, plan: <span style="color:#50fa7b">LogicalPlan</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>LogicalPlan<span style="color:#ff79c6">&gt;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Example: Predicate pushdown implemented as a visitor
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">PredicatePushdown</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">impl</span> PlanRewriter <span style="color:#ff79c6">for</span> PredicatePushdown {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">rewrite</span>(<span style="color:#ff79c6">&amp;</span><span style="color:#ff79c6">mut</span> <span style="font-style:italic">self</span>, plan: <span style="color:#50fa7b">LogicalPlan</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>LogicalPlan<span style="color:#ff79c6">&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">match</span> plan {
+</span></span><span style="display:flex;"><span>            LogicalPlan::Filter { predicate, input } <span style="color:#ff79c6">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#6272a4">// Try to push predicate down into the input node
+</span></span></span><span style="display:flex;"><span>                <span style="font-style:italic">self</span>.push_predicate_down(predicate, <span style="color:#ff79c6">*</span>input)
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            _ <span style="color:#ff79c6">=&gt;</span> <span style="color:#8be9fd;font-style:italic">Ok</span>(plan),
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Each optimization rule is implemented as a separate visitor/rewriter, making it easy to add new optimizations independently.</p>
+<h3 id="error-propagation-pattern">Error Propagation Pattern</h3>
+<p>Errors use the <code>thiserror</code> crate for derived <code>Error</code> implementations and the <code>?</code> operator for propagation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-rust" data-lang="rust"><span style="display:flex;"><span><span style="color:#ff79c6">use</span> thiserror::Error;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">#[derive(Error, Debug)]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">enum</span> <span style="color:#50fa7b">StorageError</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">#[error(</span><span style="color:#f1fa8c">&#34;page {0} not found&#34;</span><span style="color:#ff79c6">)]</span>
+</span></span><span style="display:flex;"><span>    PageNotFound(PageId),
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">#[error(</span><span style="color:#f1fa8c">&#34;WAL write failed: {0}&#34;</span><span style="color:#ff79c6">)]</span>
+</span></span><span style="display:flex;"><span>    WalWriteFailed(<span style="color:#ff79c6">#[from]</span> std::io::Error),
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">#[error(</span><span style="color:#f1fa8c">&#34;checksum mismatch on page {page_id}: expected {expected}, got {actual}&#34;</span><span style="color:#ff79c6">)]</span>
+</span></span><span style="display:flex;"><span>    ChecksumMismatch {
+</span></span><span style="display:flex;"><span>        page_id: <span style="color:#50fa7b">PageId</span>,
+</span></span><span style="display:flex;"><span>        expected: <span style="color:#8be9fd">u32</span>,
+</span></span><span style="display:flex;"><span>        actual: <span style="color:#8be9fd">u32</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Errors propagate cleanly with ?
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">read_page</span>(<span style="color:#ff79c6">&amp;</span><span style="font-style:italic">self</span>, page_id: <span style="color:#50fa7b">PageId</span>) -&gt; <span style="color:#8be9fd;font-style:italic">Result</span><span style="color:#ff79c6">&lt;</span>Page, StorageError<span style="color:#ff79c6">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> data <span style="color:#ff79c6">=</span> <span style="font-style:italic">self</span>.disk.read(page_id)<span style="color:#ff79c6">?</span>;  <span style="color:#6272a4">// io::Error -&gt; StorageError via From
+</span></span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">let</span> page <span style="color:#ff79c6">=</span> Page::from_bytes(<span style="color:#ff79c6">&amp;</span>data)<span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>    page.verify_checksum()<span style="color:#ff79c6">?</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">Ok</span>(page)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="where-to-start">Where to Start</h2>
+<p>If you are new to the codebase, here is a recommended exploration path:</p>
+<ol>
+<li><strong>Start with <code>thunder-common/src/types.rs</code></strong> to understand the fundamental types.</li>
+<li><strong>Read <code>thunder-common/src/error.rs</code></strong> to see how errors are structured.</li>
+<li><strong>Explore <code>thunder-storage/src/page.rs</code></strong> to understand the page format.</li>
+<li><strong>Read <code>thunder-storage/src/wal.rs</code></strong> (at least the public API) to understand durability.</li>
+<li><strong>Trace a simple query</strong> from <code>thunder-sql/src/parser.rs</code> through <code>analyzer.rs</code>, <code>optimizer.rs</code>, <code>planner.rs</code>, and into <code>thunder-query/src/executor.rs</code>.</li>
+<li><strong>Read <code>thunder-protocol/src/postgres.rs</code></strong> to see how client connections are handled.</li>
+<li><strong>Finally, read <code>thunder-server/src/main.rs</code></strong> and <code>engine.rs</code> to see how everything is wired together.</li>
+</ol>
+<p>This path takes you from the foundations through the storage engine, query processing pipeline, protocol handling, and finally the server orchestration layer.</p>
+
+	<div class="section-index">
+    
+    
+    </div>
+<style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<div class="d-print-none">
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+</div>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'page_helpful', {
+      'event_category': 'Helpful',
+      'event_label': window.location.pathname,
+      'value': value
+    });
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback( 100 );
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+<br />
+</div>
+
+          </main>
+        </div>
+      </div>
+      <footer class="td-footer row d-print-none">
+  <div class="container-fluid">
+    <div class="row mx-md-2">
+      <div class="td-footer__left col-6 col-sm-4 order-sm-1">
+        
+      </div><div class="td-footer__right col-6 col-sm-4 order-sm-3">
+        <ul class="td-footer__links-list">
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="GitHub" aria-label="GitHub">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="Discussions" aria-label="Discussions">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb/discussions" aria-label="Discussions">
+      <i class="fas fa-comments"></i>
+    </a>
+  </li>
+  
+</ul>
+
+      </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
+        <span class="td-footer__copyright">&copy;
+    2026
+    <span class="td-footer__authors">ThunderDB Contributors</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><p class="td-footer__about mt-2"><a href="/docs/about/">About ThunderDB</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script src="/docs/js/main.js"></script>
+<script defer src="/docs/js/click-to-copy.js" crossorigin="anonymous"></script>
+<script src='/docs/js/tabpane-persist.js'></script>
+
+  </body>
+</html>

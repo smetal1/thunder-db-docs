@@ -1,0 +1,1063 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
+  <head><script src="/docs/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=docs/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/docs/favicons/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/docs/favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/docs/favicons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/docs/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="/docs/favicons/favicon-256.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/docs/favicons/apple-touch-icon.png">
+<link rel="manifest" href="/docs/favicons/site.webmanifest">
+<meta name="theme-color" content="#0D0D0D">
+<meta name="msapplication-TileColor" content="#0D0D0D">
+
+<title>Development Setup | ThunderDB Documentation</title>
+<meta name="description" content="How to set up your local development environment for ThunderDB, including prerequisites, building, testing, IDE configuration, and development workflows.">
+<meta property="og:url" content="http://localhost:1313/docs/docs/contributor/development-setup/">
+  <meta property="og:site_name" content="ThunderDB Documentation">
+  <meta property="og:title" content="Development Setup">
+  <meta property="og:description" content="How to set up your local development environment for ThunderDB, including prerequisites, building, testing, IDE configuration, and development workflows.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+
+  <meta itemprop="name" content="Development Setup">
+  <meta itemprop="description" content="How to set up your local development environment for ThunderDB, including prerequisites, building, testing, IDE configuration, and development workflows.">
+  <meta itemprop="wordCount" content="2075">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Development Setup">
+  <meta name="twitter:description" content="How to set up your local development environment for ThunderDB, including prerequisites, building, testing, IDE configuration, and development workflows.">
+<link href="/docs/scss/main.css" rel="stylesheet">
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+  crossorigin="anonymous"></script>
+<script defer
+  src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
+  integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
+  crossorigin="anonymous"></script>
+
+  </head>
+  <body class="td-section">
+    <header>
+      <nav class="td-navbar js-navbar-scroll" data-bs-theme="dark">
+<div class="td-navbar-container container-fluid flex-column flex-md-row">
+  <a class="navbar-brand" href="/docs/"><span class="navbar-brand__logo navbar-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="300" height="64"><defs><symbol id="b" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#331500" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FF6B00"/><rect width="4.8" height=".6" rx=".55" fill="#FA4" opacity=".5"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#F83" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#930" opacity=".35"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D50"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,200,100,0.3)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FC8" opacity=".55"/></symbol><symbol id="c" viewBox="0 0 5 5" overflow="visible"><rect y=".3" width="4.8" height="4.9" rx=".55" fill="#4D3000" opacity=".6"/><rect width="4.8" height="4.8" rx=".55" fill="#FA0"/><rect width="4.8" height=".6" rx=".55" fill="#FD6" opacity=".55"/><rect y=".6" width="4.8" height=".5" rx=".3" fill="#FB3" opacity=".3"/><rect y="4" width="4.8" height=".8" rx=".4" fill="#960" opacity=".3"/><circle cx="2.4" cy="2.55" r="1.15" fill="#D80"/><circle cx="2.4" cy="2.55" r="1.15" fill="none" stroke="rgba(255,230,150,0.35)" stroke-width=".3"/><circle cx="2" cy="2.15" r=".4" fill="#FE9" opacity=".6"/></symbol></defs><use href="#b" x="35" y="2" width="5" height="5"/><use href="#b" x="41" y="2" width="5" height="5"/><use href="#b" x="29" y="8" width="5" height="5"/><use href="#b" x="35" y="8" width="5" height="5"/><use href="#b" x="23" y="14" width="5" height="5"/><use href="#b" x="29" y="14" width="5" height="5"/><use href="#b" x="17" y="20" width="5" height="5"/><use href="#b" x="23" y="20" width="5" height="5"/><use href="#c" x="5" y="26" width="5" height="5"/><use href="#c" x="11" y="26" width="5" height="5"/><use href="#c" x="17" y="26" width="5" height="5"/><use href="#c" x="23" y="26" width="5" height="5"/><use href="#c" x="29" y="26" width="5" height="5"/><use href="#c" x="35" y="26" width="5" height="5"/><use href="#c" x="41" y="26" width="5" height="5"/><use href="#c" x="47" y="26" width="5" height="5"/><use href="#b" x="35" y="32" width="5" height="5"/><use href="#b" x="41" y="32" width="5" height="5"/><use href="#b" x="29" y="38" width="5" height="5"/><use href="#b" x="35" y="38" width="5" height="5"/><use href="#b" x="23" y="44" width="5" height="5"/><use href="#b" x="29" y="44" width="5" height="5"/><use href="#b" x="17" y="50" width="5" height="5"/><use href="#b" x="23" y="50" width="5" height="5"/><use href="#b" x="11" y="56" width="5" height="5"/><use href="#b" x="17" y="56" width="5" height="5"/><text x="66" y="43" font-family="'SF Mono','Fira Code','Consolas','Courier New',monospace" font-size="27" font-weight="900" letter-spacing=".5"><tspan fill="#FFF">Thunder</tspan><tspan fill="#FF6B00">DB</tspan></text></svg></span><span class="navbar-brand__name">ThunderDB Documentation</span></a>
+  <div class="td-navbar-nav-scroll td-navbar-nav-scroll--indicator" id="main_navbar">
+    <div class="scroll-indicator scroll-left"></div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/"><span>Documentation</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/architecture/"><span>Architecture</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/docs/developer/api-reference/"><span>API Reference</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/docs/about/"><span>About</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/thunderdb/thunderdb" target="_blank" rel="noopener"><i class='fab fa-github'></i><span>GitHub</span></a>
+      </li>
+      </ul>
+    <div class="scroll-indicator scroll-right"></div>
+  </div>
+  <div class="d-none d-lg-block td-navbar__search">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+  </div>
+</div>
+</nav>
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main" data-bs-spy="scroll" data-bs-target=".td-toc" data-bs-root-margin="0px 0px -10%">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+  <script>
+    $(function() {
+    $("#td-section-nav a").removeClass("active");
+    $("#td-section-nav #m-docsdocscontributordevelopment-setup").addClass("active");
+    $("#td-section-nav #m-docsdocscontributordevelopment-setup-li span").addClass("td-sidebar-nav-active-item");
+    $("#td-section-nav #m-docsdocscontributordevelopment-setup").parents("li").addClass("active-path");
+    $("#td-section-nav li.active-path").addClass("show");
+    $("#td-section-nav li.active-path").children("input").prop('checked', true);
+    $("#td-section-nav #m-docsdocscontributordevelopment-setup-li").siblings("li").addClass("show");
+    $("#td-section-nav #m-docsdocscontributordevelopment-setup-li").children("ul").children("li").addClass("show");
+    $("#td-sidebar-menu").toggleClass("d-none");
+    });
+  </script>
+  <div id="td-sidebar-menu" class="td-sidebar__inner d-none">
+  <form class="td-sidebar__search d-flex align-items-center">
+    <div class="td-search td-search--offline">
+  <div class="td-search__icon"></div>
+  <input
+    type="search"
+    class="td-search__input form-control"
+    placeholder="Search this site…"
+    aria-label="Search this site…"
+    autocomplete="off"
+    
+    data-offline-search-index-json-src="/docs/offline-search-index.json"
+    data-offline-search-base-href="/"
+    data-offline-search-max-results="10"
+  >
+</div>
+    <button class="btn btn-link td-sidebar__toggle" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  <nav class="td-sidebar-nav collapse foldable-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocs-li">
+    <a href="/docs/docs/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docsdocs"><span class="">Documentation</span></a>
+    <ul class="ul-1">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsgetting-started-li">
+    <input type="checkbox" id="m-docsdocsgetting-started-check"/>
+    <label for="m-docsdocsgetting-started-check"><a href="/docs/docs/getting-started/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsgetting-started"><span class="">Getting Started</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsarchitecture-li">
+    <input type="checkbox" id="m-docsdocsarchitecture-check"/>
+    <label for="m-docsdocsarchitecture-check"><a href="/docs/docs/architecture/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsarchitecture"><span class="">Architecture</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsdeveloper-li">
+    <input type="checkbox" id="m-docsdocsdeveloper-check"/>
+    <label for="m-docsdocsdeveloper-check"><a href="/docs/docs/developer/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloper"><span class="">Developer Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperapi-reference-li">
+    <input type="checkbox" id="m-docsdocsdeveloperapi-reference-check"/>
+    <label for="m-docsdocsdeveloperapi-reference-check"><a href="/docs/docs/developer/api-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperapi-reference"><span class="">API Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersql-reference-li">
+    <input type="checkbox" id="m-docsdocsdevelopersql-reference-check"/>
+    <label for="m-docsdocsdevelopersql-reference-check"><a href="/docs/docs/developer/sql-reference/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersql-reference"><span class="">SQL Reference</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdevelopersdk-li">
+    <input type="checkbox" id="m-docsdocsdevelopersdk-check"/>
+    <label for="m-docsdocsdevelopersdk-check"><a href="/docs/docs/developer/sdk/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdevelopersdk"><span class="">SDKs &amp; Drivers</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsdeveloperexamples-li">
+    <input type="checkbox" id="m-docsdocsdeveloperexamples-check"/>
+    <label for="m-docsdocsdeveloperexamples-check"><a href="/docs/docs/developer/examples/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsdeveloperexamples"><span class="">Examples &amp; Use Cases</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocsadministrator-li">
+    <input type="checkbox" id="m-docsdocsadministrator-check"/>
+    <label for="m-docsdocsadministrator-check"><a href="/docs/docs/administrator/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministrator"><span class="">Administrator Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratordeployment-li">
+    <input type="checkbox" id="m-docsdocsadministratordeployment-check"/>
+    <label for="m-docsdocsadministratordeployment-check"><a href="/docs/docs/administrator/deployment/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratordeployment"><span class="">Deployment</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorconfiguration-li">
+    <input type="checkbox" id="m-docsdocsadministratorconfiguration-check"/>
+    <label for="m-docsdocsadministratorconfiguration-check"><a href="/docs/docs/administrator/configuration/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorconfiguration"><span class="">Configuration</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratormonitoring-li">
+    <input type="checkbox" id="m-docsdocsadministratormonitoring-check"/>
+    <label for="m-docsdocsadministratormonitoring-check"><a href="/docs/docs/administrator/monitoring/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratormonitoring"><span class="">Monitoring</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorbackup-recovery-li">
+    <input type="checkbox" id="m-docsdocsadministratorbackup-recovery-check"/>
+    <label for="m-docsdocsadministratorbackup-recovery-check"><a href="/docs/docs/administrator/backup-recovery/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorbackup-recovery"><span class="">Backup &amp; Recovery</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratorsecurity-li">
+    <input type="checkbox" id="m-docsdocsadministratorsecurity-check"/>
+    <label for="m-docsdocsadministratorsecurity-check"><a href="/docs/docs/administrator/security/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratorsecurity"><span class="">Security</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocsadministratortroubleshooting-li">
+    <input type="checkbox" id="m-docsdocsadministratortroubleshooting-check"/>
+    <label for="m-docsdocsadministratortroubleshooting-check"><a href="/docs/docs/administrator/troubleshooting/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocsadministratortroubleshooting"><span class="">Troubleshooting</span></a></label>
+    
+  </li>
+    </ul>
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsdocscontributor-li">
+    <input type="checkbox" id="m-docsdocscontributor-check"/>
+    <label for="m-docsdocscontributor-check"><a href="/docs/docs/contributor/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributor"><span class="">Contributor Guide</span></a></label>
+    
+    <ul class="ul-2 foldable">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributordevelopment-setup-li">
+    <input type="checkbox" id="m-docsdocscontributordevelopment-setup-check"/>
+    <label for="m-docsdocscontributordevelopment-setup-check"><a href="/docs/docs/contributor/development-setup/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributordevelopment-setup"><span class="">Development Setup</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorcodebase-guide-li">
+    <input type="checkbox" id="m-docsdocscontributorcodebase-guide-check"/>
+    <label for="m-docsdocscontributorcodebase-guide-check"><a href="/docs/docs/contributor/codebase-guide/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorcodebase-guide"><span class="">Codebase Guide</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributortesting-li">
+    <input type="checkbox" id="m-docsdocscontributortesting-check"/>
+    <label for="m-docsdocscontributortesting-check"><a href="/docs/docs/contributor/testing/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributortesting"><span class="">Testing</span></a></label>
+    
+  </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsdocscontributorrelease-process-li">
+    <input type="checkbox" id="m-docsdocscontributorrelease-process-check"/>
+    <label for="m-docsdocscontributorrelease-process-check"><a href="/docs/docs/contributor/release-process/" class="align-left ps-0  td-sidebar-link td-sidebar-link__section" id="m-docsdocscontributorrelease-process"><span class="">Release Process</span></a></label>
+    
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
+<a href="https://github.com/thunderdb/thunderdb/tree/main/content/docs/contributor/development-setup/_index.md" class="td-page-meta--view td-page-meta__view" target="_blank" rel="noopener"><i class="fa-solid fa-file-lines fa-fw"></i> View page source</a>
+  <a href="https://github.com/thunderdb/thunderdb/edit/main/content/docs/contributor/development-setup/_index.md" class="td-page-meta--edit td-page-meta__edit" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Edit this page</a>
+  <a href="https://github.com/thunderdb/thunderdb/new/main/content/docs/contributor/development-setup?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child td-page-meta__child" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> Create child page</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new?title=Development%20Setup" class="td-page-meta--issue td-page-meta__issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create documentation issue</a>
+  <a href="https://github.com/thunderdb/thunderdb/issues/new" class="td-page-meta--project td-page-meta__project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create project issue</a>
+  
+</div>
+
+            <div class="td-toc" data-proofer-ignore>
+<div class="td-toc-title">
+      <span class="td-toc-title__text">On this page</span>
+      <a class="td-toc-title__link" title="Top of page" href="#"></a>
+    </div>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#prerequisites">Prerequisites</a>
+      <ul>
+        <li><a href="#required">Required</a></li>
+        <li><a href="#optional">Optional</a></li>
+        <li><a href="#installing-prerequisites">Installing Prerequisites</a></li>
+      </ul>
+    </li>
+    <li><a href="#cloning-the-repository">Cloning the Repository</a></li>
+    <li><a href="#building-thunderdb">Building ThunderDB</a>
+      <ul>
+        <li><a href="#debug-build">Debug Build</a></li>
+        <li><a href="#release-build">Release Build</a></li>
+        <li><a href="#building-individual-crates">Building Individual Crates</a></li>
+        <li><a href="#common-build-issues">Common Build Issues</a></li>
+      </ul>
+    </li>
+    <li><a href="#running-tests">Running Tests</a>
+      <ul>
+        <li><a href="#full-test-suite">Full Test Suite</a></li>
+        <li><a href="#running-tests-for-a-specific-crate">Running Tests for a Specific Crate</a></li>
+        <li><a href="#running-a-specific-test">Running a Specific Test</a></li>
+        <li><a href="#using-cargo-nextest-recommended">Using cargo-nextest (Recommended)</a></li>
+        <li><a href="#test-categories">Test Categories</a></li>
+      </ul>
+    </li>
+    <li><a href="#running-the-development-server">Running the Development Server</a>
+      <ul>
+        <li><a href="#using-the-dev-script">Using the Dev Script</a></li>
+        <li><a href="#manual-start">Manual Start</a></li>
+        <li><a href="#default-development-ports">Default Development Ports</a></li>
+        <li><a href="#connecting-to-the-dev-server">Connecting to the Dev Server</a></li>
+      </ul>
+    </li>
+    <li><a href="#ide-setup">IDE Setup</a>
+      <ul>
+        <li><a href="#vs-code-recommended">VS Code (Recommended)</a></li>
+        <li><a href="#intellij-idea--clion">IntelliJ IDEA / CLion</a></li>
+        <li><a href="#neovim">Neovim</a></li>
+      </ul>
+    </li>
+    <li><a href="#docker-based-development">Docker-Based Development</a>
+      <ul>
+        <li><a href="#starting-the-dev-environment">Starting the Dev Environment</a></li>
+        <li><a href="#development-inside-docker">Development Inside Docker</a></li>
+        <li><a href="#multi-node-cluster-testing">Multi-Node Cluster Testing</a></li>
+      </ul>
+    </li>
+    <li><a href="#code-formatting">Code Formatting</a>
+      <ul>
+        <li><a href="#running-the-formatter">Running the Formatter</a></li>
+        <li><a href="#key-formatting-rules">Key Formatting Rules</a></li>
+      </ul>
+    </li>
+    <li><a href="#linting">Linting</a>
+      <ul>
+        <li><a href="#running-clippy">Running Clippy</a></li>
+      </ul>
+    </li>
+    <li><a href="#pre-commit-hooks">Pre-Commit Hooks</a>
+      <ul>
+        <li><a href="#installing-hooks">Installing Hooks</a></li>
+        <li><a href="#bypassing-hooks-emergency-only">Bypassing Hooks (Emergency Only)</a></li>
+      </ul>
+    </li>
+    <li><a href="#running-individual-crates">Running Individual Crates</a>
+      <ul>
+        <li><a href="#crate-build-order">Crate Build Order</a></li>
+      </ul>
+    </li>
+    <li><a href="#environment-variables">Environment Variables</a></li>
+    <li><a href="#troubleshooting">Troubleshooting</a>
+      <ul>
+        <li><a href="#build-fails-with-no-space-left-on-device">Build Fails with &ldquo;No Space Left on Device&rdquo;</a></li>
+        <li><a href="#rust-analyzer-is-slow-or-consuming-too-much-memory">rust-analyzer Is Slow or Consuming Too Much Memory</a></li>
+        <li><a href="#tests-fail-with-address-already-in-use">Tests Fail with &ldquo;Address Already in Use&rdquo;</a></li>
+        <li><a href="#protobuf-generation-fails">Protobuf Generation Fails</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+
+            
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/">Documentation</a></li>
+  <li class="breadcrumb-item">
+    <a href="/docs/docs/contributor/">Contributor Guide</a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    Development Setup</li>
+  </ol>
+</nav>
+<div class="td-content">
+	<h1>Development Setup</h1>
+  <div class="lead">How to set up your local development environment for ThunderDB, including prerequisites, building, testing, IDE configuration, and development workflows.</div>
+	<header class="article-meta">
+		
+</header>
+	<h1 id="development-setup">Development Setup</h1>
+<p>This guide walks you through setting up a complete development environment for ThunderDB. By the end, you will be able to build the project, run tests, and start a local development server.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Before you begin, ensure the following tools are installed on your system.</p>
+<h3 id="required">Required</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Tool</th>
+          <th>Version</th>
+          <th>Purpose</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Rust</strong></td>
+          <td>1.75+ (pinned in <code>rust-toolchain.toml</code>)</td>
+          <td>Compiler and standard library</td>
+      </tr>
+      <tr>
+          <td><strong>Cargo</strong></td>
+          <td>Included with Rust</td>
+          <td>Build system and package manager</td>
+      </tr>
+      <tr>
+          <td><strong>Git</strong></td>
+          <td>2.30+</td>
+          <td>Version control</td>
+      </tr>
+      <tr>
+          <td><strong>Protobuf Compiler</strong> (<code>protoc</code>)</td>
+          <td>3.15+</td>
+          <td>Compiling <code>.proto</code> files for gRPC services</td>
+      </tr>
+      <tr>
+          <td><strong>C/C++ Compiler</strong></td>
+          <td>GCC 9+ or Clang 12+</td>
+          <td>Building native dependencies (RocksDB, etc.)</td>
+      </tr>
+      <tr>
+          <td><strong>CMake</strong></td>
+          <td>3.16+</td>
+          <td>Build system for native dependencies</td>
+      </tr>
+      <tr>
+          <td><strong>pkg-config</strong></td>
+          <td>Any recent version</td>
+          <td>Locating system libraries</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="optional">Optional</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Tool</th>
+          <th>Version</th>
+          <th>Purpose</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Docker</strong></td>
+          <td>20.10+</td>
+          <td>Containerized development and testing</td>
+      </tr>
+      <tr>
+          <td><strong>Docker Compose</strong></td>
+          <td>2.0+</td>
+          <td>Multi-container dev environment</td>
+      </tr>
+      <tr>
+          <td><strong>cargo-watch</strong></td>
+          <td>Latest</td>
+          <td>Auto-rebuild on file changes</td>
+      </tr>
+      <tr>
+          <td><strong>cargo-nextest</strong></td>
+          <td>Latest</td>
+          <td>Faster test runner</td>
+      </tr>
+      <tr>
+          <td><strong>cargo-tarpaulin</strong></td>
+          <td>Latest</td>
+          <td>Code coverage</td>
+      </tr>
+      <tr>
+          <td><strong>cargo-criterion</strong></td>
+          <td>Latest</td>
+          <td>Benchmark runner</td>
+      </tr>
+      <tr>
+          <td><strong>cargo-udeps</strong></td>
+          <td>Latest</td>
+          <td>Detect unused dependencies</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="installing-prerequisites">Installing Prerequisites</h3>
+<p><strong>macOS (Homebrew):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Install Rust via rustup</span>
+</span></span><span style="display:flex;"><span>curl --proto <span style="color:#f1fa8c">&#39;=https&#39;</span> --tlsv1.2 -sSf https://sh.rustup.rs | sh
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Install system dependencies</span>
+</span></span><span style="display:flex;"><span>brew install protobuf cmake pkg-config
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Optional: Docker Desktop</span>
+</span></span><span style="display:flex;"><span>brew install --cask docker
+</span></span></code></pre></div><p><strong>Ubuntu / Debian:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Install Rust via rustup</span>
+</span></span><span style="display:flex;"><span>curl --proto <span style="color:#f1fa8c">&#39;=https&#39;</span> --tlsv1.2 -sSf https://sh.rustup.rs | sh
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Install system dependencies</span>
+</span></span><span style="display:flex;"><span>sudo apt update
+</span></span><span style="display:flex;"><span>sudo apt install -y protobuf-compiler libprotobuf-dev cmake pkg-config <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span>    build-essential libssl-dev libclang-dev
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Optional: Docker</span>
+</span></span><span style="display:flex;"><span>sudo apt install -y docker.io docker-compose-v2
+</span></span></code></pre></div><p><strong>Arch Linux:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl --proto <span style="color:#f1fa8c">&#39;=https&#39;</span> --tlsv1.2 -sSf https://sh.rustup.rs | sh
+</span></span><span style="display:flex;"><span>sudo pacman -S protobuf cmake pkg-config base-devel openssl clang
+</span></span></code></pre></div><p><strong>Windows (WSL2 recommended):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Use WSL2 with Ubuntu, then follow the Ubuntu instructions above.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Native Windows builds are not officially supported but may work.</span>
+</span></span></code></pre></div><h2 id="cloning-the-repository">Cloning the Repository</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Clone the main repository</span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/thunderdb/thunderdb.git
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">cd</span> thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># The rust-toolchain.toml file will automatically configure the correct</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Rust version when you run any cargo command.</span>
+</span></span></code></pre></div><p>Verify your setup:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>rustc --version    <span style="color:#6272a4"># Should show 1.75.0 or later</span>
+</span></span><span style="display:flex;"><span>cargo --version    <span style="color:#6272a4"># Should match the Rust version</span>
+</span></span><span style="display:flex;"><span>protoc --version   <span style="color:#6272a4"># Should show libprotoc 3.15 or later</span>
+</span></span></code></pre></div><h2 id="building-thunderdb">Building ThunderDB</h2>
+<h3 id="debug-build">Debug Build</h3>
+<p>The debug build compiles quickly and includes debug symbols, but runs slower due to lack of optimizations:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cargo build
+</span></span></code></pre></div><p>This builds all 14 crates in the workspace. The resulting binary is located at <code>target/debug/thunder-server</code>.</p>
+<p>Build times for a clean debug build on typical hardware:</p>
+<ul>
+<li>Apple M2 Pro (12 cores, 32GB RAM): ~2-3 minutes</li>
+<li>Intel i7-12700K (12 cores, 32GB RAM): ~3-4 minutes</li>
+<li>GitHub Actions runner: ~5-7 minutes</li>
+</ul>
+<h3 id="release-build">Release Build</h3>
+<p>The release build enables full optimizations as defined in the workspace <code>Cargo.toml</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cargo build --release
+</span></span></code></pre></div><p>The release profile is configured with:</p>
+<ul>
+<li><code>opt-level = 3</code> &ndash; Maximum optimization</li>
+<li><code>lto = &quot;thin&quot;</code> &ndash; Thin link-time optimization for better codegen with reasonable build times</li>
+<li><code>codegen-units = 1</code> &ndash; Single codegen unit for maximum optimization</li>
+<li><code>panic = &quot;abort&quot;</code> &ndash; Abort on panic (smaller binary, no unwinding overhead)</li>
+</ul>
+<p>The resulting binary is at <code>target/release/thunder-server</code>. Release builds take significantly longer (10-20 minutes) but produce binaries suitable for benchmarking and deployment.</p>
+<h3 id="building-individual-crates">Building Individual Crates</h3>
+<p>To build a specific crate without building the entire workspace:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Build only the storage engine</span>
+</span></span><span style="display:flex;"><span>cargo build -p thunder-storage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Build only the SQL layer</span>
+</span></span><span style="display:flex;"><span>cargo build -p thunder-sql
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Build only the protocol layer</span>
+</span></span><span style="display:flex;"><span>cargo build -p thunder-protocol
+</span></span></code></pre></div><p>This is useful during development when you are working on a single crate and want fast iteration.</p>
+<h3 id="common-build-issues">Common Build Issues</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Issue</th>
+          <th>Solution</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>protoc</code> not found</td>
+          <td>Install <code>protobuf-compiler</code> or set <code>PROTOC</code> env var</td>
+      </tr>
+      <tr>
+          <td>RocksDB compilation fails</td>
+          <td>Ensure C++ compiler and CMake are installed</td>
+      </tr>
+      <tr>
+          <td>Out of memory during linking</td>
+          <td>Use <code>lto = &quot;thin&quot;</code> instead of <code>&quot;fat&quot;</code>, or increase swap</td>
+      </tr>
+      <tr>
+          <td>Linker errors on macOS</td>
+          <td>Run <code>xcode-select --install</code> to install command line tools</td>
+      </tr>
+      <tr>
+          <td>OpenSSL not found</td>
+          <td>Install <code>libssl-dev</code> (Ubuntu) or <code>openssl</code> (Homebrew)</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="running-tests">Running Tests</h2>
+<h3 id="full-test-suite">Full Test Suite</h3>
+<p>Run the entire test suite across all crates:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span>
+</span></span></code></pre></div><p>Or use the project test script, which sets up any required test infrastructure:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./scripts/run_tests.sh
+</span></span></code></pre></div><h3 id="running-tests-for-a-specific-crate">Running Tests for a Specific Crate</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Test only the storage engine</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-storage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Test only the transaction manager</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-txn
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Test only the query engine</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-query
+</span></span></code></pre></div><h3 id="running-a-specific-test">Running a Specific Test</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Run a test by name (partial match)</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> test_btree_insert
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run a specific test in a specific crate</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-storage test_wal_recovery
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run tests matching a pattern</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-sql parser::
+</span></span></code></pre></div><h3 id="using-cargo-nextest-recommended">Using cargo-nextest (Recommended)</h3>
+<p><code>cargo-nextest</code> provides faster test execution through better parallelism and clearer output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Install</span>
+</span></span><span style="display:flex;"><span>cargo install cargo-nextest
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run all tests</span>
+</span></span><span style="display:flex;"><span>cargo nextest run
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run tests for a specific crate</span>
+</span></span><span style="display:flex;"><span>cargo nextest run -p thunder-storage
+</span></span></code></pre></div><h3 id="test-categories">Test Categories</h3>
+<p>ThunderDB has several categories of tests with different execution characteristics:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Unit tests (fast, no external dependencies)</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> --lib
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Integration tests (may require running server)</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> --test <span style="color:#f1fa8c">&#39;*&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Documentation tests</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> --doc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Ignored tests (long-running, require special setup)</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> -- --ignored
+</span></span></code></pre></div><p>See the <a href="../testing/">Testing</a> guide for comprehensive details.</p>
+<h2 id="running-the-development-server">Running the Development Server</h2>
+<h3 id="using-the-dev-script">Using the Dev Script</h3>
+<p>The simplest way to start a development server:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./scripts/dev.sh
+</span></span></code></pre></div><p>This script:</p>
+<ul>
+<li>Builds ThunderDB in debug mode</li>
+<li>Starts a single-node instance with default development configuration</li>
+<li>Enables verbose logging</li>
+<li>Exposes all protocol endpoints on localhost</li>
+</ul>
+<h3 id="manual-start">Manual Start</h3>
+<p>You can also start the server directly:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Build and run in one step</span>
+</span></span><span style="display:flex;"><span>cargo run -- --config config/dev.toml
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Or run the built binary</span>
+</span></span><span style="display:flex;"><span>cargo build
+</span></span><span style="display:flex;"><span>./target/debug/thunder-server --config config/dev.toml
+</span></span></code></pre></div><h3 id="default-development-ports">Default Development Ports</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Service</th>
+          <th>Port</th>
+          <th>Protocol</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>PostgreSQL wire protocol</td>
+          <td>5432</td>
+          <td>TCP</td>
+      </tr>
+      <tr>
+          <td>MySQL wire protocol</td>
+          <td>3306</td>
+          <td>TCP</td>
+      </tr>
+      <tr>
+          <td>Redis RESP protocol</td>
+          <td>6379</td>
+          <td>TCP</td>
+      </tr>
+      <tr>
+          <td>REST API</td>
+          <td>8080</td>
+          <td>HTTP</td>
+      </tr>
+      <tr>
+          <td>gRPC API</td>
+          <td>50051</td>
+          <td>HTTP/2</td>
+      </tr>
+      <tr>
+          <td>GraphQL API</td>
+          <td>8081</td>
+          <td>HTTP</td>
+      </tr>
+      <tr>
+          <td>WebSocket API</td>
+          <td>8082</td>
+          <td>WS</td>
+      </tr>
+      <tr>
+          <td>Admin Dashboard</td>
+          <td>9090</td>
+          <td>HTTP</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="connecting-to-the-dev-server">Connecting to the Dev Server</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># PostgreSQL client</span>
+</span></span><span style="display:flex;"><span>psql -h localhost -p <span style="color:#bd93f9">5432</span> -U admin -d thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># MySQL client</span>
+</span></span><span style="display:flex;"><span>mysql -h 127.0.0.1 -P <span style="color:#bd93f9">3306</span> -u admin -p thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Redis client</span>
+</span></span><span style="display:flex;"><span>redis-cli -h localhost -p <span style="color:#bd93f9">6379</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># REST API</span>
+</span></span><span style="display:flex;"><span>curl http://localhost:8080/api/v1/health
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Admin Dashboard</span>
+</span></span><span style="display:flex;"><span>open http://localhost:9090
+</span></span></code></pre></div><h2 id="ide-setup">IDE Setup</h2>
+<h3 id="vs-code-recommended">VS Code (Recommended)</h3>
+<p>VS Code with <code>rust-analyzer</code> provides the best development experience for Rust projects.</p>
+<p><strong>Required Extensions:</strong></p>
+<ul>
+<li><strong>rust-analyzer</strong> &ndash; Rust language support (code completion, go-to-definition, inline errors, refactoring)</li>
+<li><strong>CodeLLDB</strong> &ndash; Debugger support for Rust</li>
+</ul>
+<p><strong>Recommended Extensions:</strong></p>
+<ul>
+<li><strong>Even Better TOML</strong> &ndash; Syntax highlighting for <code>Cargo.toml</code> and other TOML files</li>
+<li><strong>Error Lens</strong> &ndash; Inline error display</li>
+<li><strong>crates</strong> &ndash; Dependency version management in <code>Cargo.toml</code></li>
+<li><strong>GitLens</strong> &ndash; Enhanced Git integration</li>
+</ul>
+<p><strong>Workspace Settings (<code>.vscode/settings.json</code>):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;rust-analyzer.cargo.features&#34;</span>: <span style="color:#f1fa8c">&#34;all&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;rust-analyzer.check.command&#34;</span>: <span style="color:#f1fa8c">&#34;clippy&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;rust-analyzer.check.extraArgs&#34;</span>: [<span style="color:#f1fa8c">&#34;--all-targets&#34;</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;rust-analyzer.procMacro.enable&#34;</span>: <span style="color:#ff79c6">true</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;rust-analyzer.cargo.buildScripts.enable&#34;</span>: <span style="color:#ff79c6">true</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;rust-analyzer.inlayHints.parameterHints.enable&#34;</span>: <span style="color:#ff79c6">true</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;rust-analyzer.inlayHints.typeHints.enable&#34;</span>: <span style="color:#ff79c6">true</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;rust-analyzer.lens.run.enable&#34;</span>: <span style="color:#ff79c6">true</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;rust-analyzer.lens.debug.enable&#34;</span>: <span style="color:#ff79c6">true</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;editor.formatOnSave&#34;</span>: <span style="color:#ff79c6">true</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;[rust]&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&#34;editor.defaultFormatter&#34;</span>: <span style="color:#f1fa8c">&#34;rust-lang.rust-analyzer&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Debugging in VS Code:</strong></p>
+<p>Create a <code>.vscode/launch.json</code> for debugging the server:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;version&#34;</span>: <span style="color:#f1fa8c">&#34;0.2.0&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;configurations&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;type&#34;</span>: <span style="color:#f1fa8c">&#34;lldb&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;request&#34;</span>: <span style="color:#f1fa8c">&#34;launch&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;Debug thunder-server&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;cargo&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">&#34;args&#34;</span>: [<span style="color:#f1fa8c">&#34;build&#34;</span>, <span style="color:#f1fa8c">&#34;--bin=thunder-server&#34;</span>, <span style="color:#f1fa8c">&#34;--package=thunder-server&#34;</span>],
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">&#34;filter&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;thunder-server&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#ff79c6">&#34;kind&#34;</span>: <span style="color:#f1fa8c">&#34;bin&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;args&#34;</span>: [<span style="color:#f1fa8c">&#34;--config&#34;</span>, <span style="color:#f1fa8c">&#34;config/dev.toml&#34;</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;cwd&#34;</span>: <span style="color:#f1fa8c">&#34;${workspaceFolder}&#34;</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;type&#34;</span>: <span style="color:#f1fa8c">&#34;lldb&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;request&#34;</span>: <span style="color:#f1fa8c">&#34;launch&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;Debug Unit Tests&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;cargo&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">&#34;args&#34;</span>: [<span style="color:#f1fa8c">&#34;test&#34;</span>, <span style="color:#f1fa8c">&#34;--no-run&#34;</span>, <span style="color:#f1fa8c">&#34;--lib&#34;</span>, <span style="color:#f1fa8c">&#34;--package=${input:crate}&#34;</span>],
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">&#34;filter&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#ff79c6">&#34;kind&#34;</span>: <span style="color:#f1fa8c">&#34;lib&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;cwd&#34;</span>: <span style="color:#f1fa8c">&#34;${workspaceFolder}&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;inputs&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;id&#34;</span>: <span style="color:#f1fa8c">&#34;crate&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;type&#34;</span>: <span style="color:#f1fa8c">&#34;pickString&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;description&#34;</span>: <span style="color:#f1fa8c">&#34;Select crate to debug&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;options&#34;</span>: [
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;thunder-common&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;thunder-storage&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;thunder-txn&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;thunder-sql&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;thunder-query&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;thunder-protocol&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;thunder-api&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;thunder-server&#34;</span>
+</span></span><span style="display:flex;"><span>            ]
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="intellij-idea--clion">IntelliJ IDEA / CLion</h3>
+<p>JetBrains IDEs provide excellent Rust support through the Rust plugin.</p>
+<p><strong>Setup:</strong></p>
+<ol>
+<li>Install IntelliJ IDEA (Ultimate or Community) or CLion.</li>
+<li>Install the <strong>Rust</strong> plugin from the JetBrains Marketplace.</li>
+<li>Open the ThunderDB root directory as a project.</li>
+<li>IntelliJ will detect the <code>Cargo.toml</code> workspace and index all crates.</li>
+</ol>
+<p><strong>Recommended Settings:</strong></p>
+<ul>
+<li>Enable &ldquo;Expand macros&rdquo; for proc-macro support</li>
+<li>Set &ldquo;Cargo check&rdquo; to use <code>clippy</code> for enhanced linting</li>
+<li>Enable &ldquo;External linter&rdquo; with <code>cargo clippy</code></li>
+<li>Configure run configurations for <code>thunder-server</code> with dev config</li>
+</ul>
+<h3 id="neovim">Neovim</h3>
+<p>For Neovim users, the following setup provides a productive Rust development experience:</p>
+<ul>
+<li><strong>nvim-lspconfig</strong> with rust-analyzer</li>
+<li><strong>nvim-cmp</strong> for completion</li>
+<li><strong>nvim-dap</strong> with CodeLLDB for debugging</li>
+<li><strong>rust-tools.nvim</strong> for enhanced Rust integration</li>
+</ul>
+<h2 id="docker-based-development">Docker-Based Development</h2>
+<p>For contributors who prefer containerized development or need to test multi-node clusters, Docker Compose provides a complete environment.</p>
+<h3 id="starting-the-dev-environment">Starting the Dev Environment</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker-compose up
+</span></span></code></pre></div><p>This starts:</p>
+<ul>
+<li>A ThunderDB build container with all prerequisites</li>
+<li>A three-node ThunderDB cluster for integration testing</li>
+<li>Supporting services (monitoring, log aggregation)</li>
+</ul>
+<h3 id="development-inside-docker">Development Inside Docker</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Enter the build container</span>
+</span></span><span style="display:flex;"><span>docker-compose <span style="color:#8be9fd;font-style:italic">exec</span> dev bash
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Build inside the container</span>
+</span></span><span style="display:flex;"><span>cargo build
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run tests inside the container</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span>
+</span></span></code></pre></div><h3 id="multi-node-cluster-testing">Multi-Node Cluster Testing</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Start a three-node cluster</span>
+</span></span><span style="display:flex;"><span>docker-compose --profile cluster up
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Connect to node 1</span>
+</span></span><span style="display:flex;"><span>psql -h localhost -p <span style="color:#bd93f9">5432</span> -U admin -d thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Connect to node 2</span>
+</span></span><span style="display:flex;"><span>psql -h localhost -p <span style="color:#bd93f9">5433</span> -U admin -d thunderdb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Connect to node 3</span>
+</span></span><span style="display:flex;"><span>psql -h localhost -p <span style="color:#bd93f9">5434</span> -U admin -d thunderdb
+</span></span></code></pre></div><h2 id="code-formatting">Code Formatting</h2>
+<p>ThunderDB uses <code>cargo fmt</code> with a custom <code>.rustfmt.toml</code> configuration to enforce consistent code style across the entire codebase.</p>
+<h3 id="running-the-formatter">Running the Formatter</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Format all code</span>
+</span></span><span style="display:flex;"><span>cargo fmt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Check formatting without modifying files</span>
+</span></span><span style="display:flex;"><span>cargo fmt -- --check
+</span></span></code></pre></div><p>The <code>.rustfmt.toml</code> configuration defines the project&rsquo;s formatting rules. All code must be formatted before committing. The CI pipeline will reject PRs with formatting violations.</p>
+<h3 id="key-formatting-rules">Key Formatting Rules</h3>
+<ul>
+<li>Maximum line width: 100 characters</li>
+<li>Use block indentation for function arguments</li>
+<li>Trailing commas in multi-line constructs</li>
+<li>Group imports by standard library, external crates, and internal crates</li>
+</ul>
+<h2 id="linting">Linting</h2>
+<p>ThunderDB uses <code>cargo clippy</code> for static analysis and linting.</p>
+<h3 id="running-clippy">Running Clippy</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Run clippy on all crates</span>
+</span></span><span style="display:flex;"><span>cargo clippy --all-targets --all-features
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run clippy on a specific crate</span>
+</span></span><span style="display:flex;"><span>cargo clippy -p thunder-storage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run clippy and treat warnings as errors (same as CI)</span>
+</span></span><span style="display:flex;"><span>cargo clippy --all-targets --all-features -- -D warnings
+</span></span></code></pre></div><p>Clippy warnings must be resolved before merging. If a warning is a false positive, it may be suppressed with an <code>#[allow(...)]</code> attribute and an explanatory comment.</p>
+<h2 id="pre-commit-hooks">Pre-Commit Hooks</h2>
+<p>ThunderDB provides Git pre-commit hooks to catch common issues before they reach CI.</p>
+<h3 id="installing-hooks">Installing Hooks</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Install the pre-commit hooks</span>
+</span></span><span style="display:flex;"><span>./scripts/install-hooks.sh
+</span></span></code></pre></div><p>The pre-commit hook runs:</p>
+<ol>
+<li><code>cargo fmt -- --check</code> &ndash; Verify formatting</li>
+<li><code>cargo clippy --all-targets -- -D warnings</code> &ndash; Check for lint violations</li>
+<li><code>cargo test --lib</code> &ndash; Run unit tests</li>
+</ol>
+<p>If any check fails, the commit is rejected with a message explaining what needs to be fixed.</p>
+<h3 id="bypassing-hooks-emergency-only">Bypassing Hooks (Emergency Only)</h3>
+<p>In rare cases, you may need to bypass hooks:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git commit --no-verify -m <span style="color:#f1fa8c">&#34;WIP: work in progress&#34;</span>
+</span></span></code></pre></div><p>This should only be used for work-in-progress commits on feature branches. The CI pipeline enforces the same checks, so any violations will still be caught.</p>
+<h2 id="running-individual-crates">Running Individual Crates</h2>
+<p>During development, you often want to work on and test a single crate in isolation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Build a single crate</span>
+</span></span><span style="display:flex;"><span>cargo build -p thunder-storage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Test a single crate</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-storage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Test a single crate with output</span>
+</span></span><span style="display:flex;"><span>cargo <span style="color:#8be9fd;font-style:italic">test</span> -p thunder-storage -- --nocapture
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Run clippy on a single crate</span>
+</span></span><span style="display:flex;"><span>cargo clippy -p thunder-storage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Check a single crate (faster than build, no codegen)</span>
+</span></span><span style="display:flex;"><span>cargo check -p thunder-storage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Generate documentation for a single crate</span>
+</span></span><span style="display:flex;"><span>cargo doc -p thunder-storage --open
+</span></span></code></pre></div><h3 id="crate-build-order">Crate Build Order</h3>
+<p>Due to the dependency graph, crates build in a specific order. The leaf crate <code>thunder-common</code> builds first, followed by crates that depend on it. Understanding this helps you predict build times when modifying specific crates:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>thunder-common (leaf, builds first)
+</span></span><span style="display:flex;"><span>  |
+</span></span><span style="display:flex;"><span>  +-- thunder-storage
+</span></span><span style="display:flex;"><span>  |     +-- thunder-txn
+</span></span><span style="display:flex;"><span>  |     +-- thunder-cluster
+</span></span><span style="display:flex;"><span>  |     +-- thunder-cdc
+</span></span><span style="display:flex;"><span>  |
+</span></span><span style="display:flex;"><span>  +-- thunder-sql
+</span></span><span style="display:flex;"><span>  |     +-- thunder-query (also depends on storage, txn)
+</span></span><span style="display:flex;"><span>  |     +-- thunder-fdw
+</span></span><span style="display:flex;"><span>  |
+</span></span><span style="display:flex;"><span>  +-- thunder-protocol (depends on sql, query, txn)
+</span></span><span style="display:flex;"><span>  +-- thunder-vector (depends on storage)
+</span></span><span style="display:flex;"><span>  +-- thunder-client
+</span></span><span style="display:flex;"><span>  +-- thunder-api (depends on sql, query, protocol, cluster)
+</span></span><span style="display:flex;"><span>  +-- thunder-server (depends on all, builds last)
+</span></span></code></pre></div><p>Changes to <code>thunder-common</code> trigger a rebuild of the entire workspace. Changes to <code>thunder-server</code> only require rebuilding that single crate.</p>
+<h2 id="environment-variables">Environment Variables</h2>
+<p>ThunderDB uses several environment variables for development:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Variable</th>
+          <th>Default</th>
+          <th>Purpose</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>THUNDER_LOG</code></td>
+          <td><code>info</code></td>
+          <td>Log level (<code>trace</code>, <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>)</td>
+      </tr>
+      <tr>
+          <td><code>THUNDER_CONFIG</code></td>
+          <td><code>config/dev.toml</code></td>
+          <td>Path to configuration file</td>
+      </tr>
+      <tr>
+          <td><code>THUNDER_DATA_DIR</code></td>
+          <td><code>./data</code></td>
+          <td>Data directory for development</td>
+      </tr>
+      <tr>
+          <td><code>RUST_BACKTRACE</code></td>
+          <td><code>0</code></td>
+          <td>Set to <code>1</code> for backtraces on panic</td>
+      </tr>
+      <tr>
+          <td><code>RUST_LOG</code></td>
+          <td>(unset)</td>
+          <td>Fine-grained logging control (e.g., <code>thunder_storage=debug</code>)</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="build-fails-with-no-space-left-on-device">Build Fails with &ldquo;No Space Left on Device&rdquo;</h3>
+<p>The <code>target/</code> directory can grow very large. Clean it periodically:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cargo clean
+</span></span></code></pre></div><h3 id="rust-analyzer-is-slow-or-consuming-too-much-memory">rust-analyzer Is Slow or Consuming Too Much Memory</h3>
+<p>For large workspaces, configure rust-analyzer to check fewer targets:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;rust-analyzer.cargo.features&#34;</span>: [],
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;rust-analyzer.check.extraArgs&#34;</span>: [<span style="color:#f1fa8c">&#34;--target-dir&#34;</span>, <span style="color:#f1fa8c">&#34;target/ra&#34;</span>]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Using a separate <code>target-dir</code> for rust-analyzer prevents it from invalidating your build cache.</p>
+<h3 id="tests-fail-with-address-already-in-use">Tests Fail with &ldquo;Address Already in Use&rdquo;</h3>
+<p>If a previous test run did not clean up properly, ports may still be in use:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Find processes using ThunderDB ports</span>
+</span></span><span style="display:flex;"><span>lsof -i :5432 -i :3306 -i :6379 -i :8080
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Kill orphaned processes</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">kill</span> <span style="color:#ff79c6">$(</span>lsof -t -i :5432<span style="color:#ff79c6">)</span>
+</span></span></code></pre></div><h3 id="protobuf-generation-fails">Protobuf Generation Fails</h3>
+<p>Ensure <code>protoc</code> is on your PATH and the version is 3.15+:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>protoc --version
+</span></span><span style="display:flex;"><span>which protoc
+</span></span></code></pre></div><p>If you installed protoc via Homebrew on macOS with Apple Silicon, you may need:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">export</span> <span style="color:#8be9fd;font-style:italic">PROTOC</span><span style="color:#ff79c6">=</span><span style="color:#ff79c6">$(</span>which protoc<span style="color:#ff79c6">)</span>
+</span></span></code></pre></div>
+	<div class="section-index">
+    
+    
+    </div>
+<style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<div class="d-print-none">
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. <a href="https://github.com/thunderdb/thunderdb/issues/new">Tell us how we can improve</a>.
+</p>
+</div>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'page_helpful', {
+      'event_category': 'Helpful',
+      'event_label': window.location.pathname,
+      'value': value
+    });
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback( 100 );
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+<br />
+</div>
+
+          </main>
+        </div>
+      </div>
+      <footer class="td-footer row d-print-none">
+  <div class="container-fluid">
+    <div class="row mx-md-2">
+      <div class="td-footer__left col-6 col-sm-4 order-sm-1">
+        
+      </div><div class="td-footer__right col-6 col-sm-4 order-sm-3">
+        <ul class="td-footer__links-list">
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="GitHub" aria-label="GitHub">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="Discussions" aria-label="Discussions">
+    <a target="_blank" rel="noopener" href="https://github.com/thunderdb/thunderdb/discussions" aria-label="Discussions">
+      <i class="fas fa-comments"></i>
+    </a>
+  </li>
+  
+</ul>
+
+      </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
+        <span class="td-footer__copyright">&copy;
+    2026
+    <span class="td-footer__authors">ThunderDB Contributors</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><p class="td-footer__about mt-2"><a href="/docs/about/">About ThunderDB</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script src="/docs/js/main.js"></script>
+<script defer src="/docs/js/click-to-copy.js" crossorigin="anonymous"></script>
+<script src='/docs/js/tabpane-persist.js'></script>
+
+  </body>
+</html>
