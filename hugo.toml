@@ -1,4 +1,4 @@
-baseURL = "https://thunderdb.io/docs/"
+baseURL = "https://smetal1.github.io/thunder-db-docs/"
 title = "ThunderDB Documentation"
 languageCode = "en-us"
 contentDir = "content"
