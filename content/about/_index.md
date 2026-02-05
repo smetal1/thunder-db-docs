@@ -5,7 +5,7 @@ menu:
   main:
     weight: 40
 description: >
-  Learn about ThunderDB's vision, roadmap, and the team behind it.
+  Learn about ThunderDB's vision and the team behind it.
 ---
 
 ## What Is ThunderDB?
@@ -145,120 +145,6 @@ YugabyteDB provides strong PostgreSQL compatibility and a Cassandra-compatible A
 ThunderDB differentiates with its integrated HTAP engine (columnar + row + vector),
 native MySQL and Redis protocol support, and the memory safety guarantees that come
 from being written entirely in Rust.
-
----
-
-## Roadmap
-
-ThunderDB follows a 42-month development roadmap divided into seven phases. Each
-phase builds upon the previous one, progressively expanding capabilities while
-maintaining production stability.
-
-### Phase 1: Foundation (Months 1-6)
-
-**Goal:** Core single-node database engine with basic SQL support.
-
-- Rust-based storage engine with B-tree and LSM-tree hybrid
-- SQL parser and query planner (PostgreSQL-compatible subset)
-- PostgreSQL wire protocol implementation
-- Basic data types: integers, floats, strings, booleans, timestamps
-- ACID transactions with MVCC (Multi-Version Concurrency Control)
-- Write-ahead log (WAL) for crash recovery
-- Basic configuration system (TOML-based)
-- Unit and integration test framework
-- CI/CD pipeline and release automation
-
-### Phase 2: Multi-Protocol and API Layer (Months 7-12)
-
-**Goal:** Expand protocol support and build the API surface.
-
-- MySQL wire protocol implementation
-- Redis/RESP protocol for key-value operations
-- REST API with OpenAPI specification
-- gRPC API with Protocol Buffers definitions
-- Connection pooling and session management
-- Authentication (password, SCRAM-SHA-256)
-- TLS/SSL for all protocols
-- Basic role-based access control (RBAC)
-- Query result caching layer
-- Prepared statements and parameterized queries
-
-### Phase 3: Distributed Engine (Months 13-18)
-
-**Goal:** Scale beyond a single node with distributed consensus.
-
-- Raft consensus protocol implementation
-- Automatic sharding with consistent hashing
-- Distributed transactions with two-phase commit (2PC)
-- Multi-node cluster formation and discovery
-- Leader election and failover
-- Distributed query routing and execution
-- Cross-shard query coordination
-- Node membership management (add/remove nodes)
-- Rebalancing and data migration
-- Cluster-aware connection routing
-
-### Phase 4: HTAP Engine (Months 19-24)
-
-**Goal:** True HTAP with columnar storage and vectorized execution.
-
-- Columnar storage engine (Apache Arrow-based)
-- Vectorized query execution engine
-- Automatic workload classification (OLTP vs OLAP)
-- Row-to-columnar data transformation pipeline
-- Hybrid query optimizer (cost-based)
-- Parallel query execution
-- Window functions and advanced aggregations
-- Materialized views with incremental refresh
-- Query result streaming
-- Resource isolation between OLTP and OLAP workloads
-
-### Phase 5: AI-Native Features (Months 25-30)
-
-**Goal:** Native vector search and AI/ML integration.
-
-- VECTOR data type with configurable dimensions
-- HNSW (Hierarchical Navigable Small World) index
-- IVF (Inverted File) index for billion-scale datasets
-- Cosine, Euclidean, and inner-product distance functions
-- Hybrid search (vector + metadata filtering)
-- Built-in embedding generation via ONNX Runtime
-- RAG (Retrieval-Augmented Generation) pipeline helpers
-- Full-text search with BM25 scoring
-- GraphQL API with subscription support
-- WebSocket API for real-time streaming
-
-### Phase 6: Data Integration (Months 31-36)
-
-**Goal:** Seamless integration with the broader data ecosystem.
-
-- Change Data Capture (CDC) consumer for PostgreSQL
-- CDC consumer for MySQL (binlog)
-- CDC consumer for MongoDB (change streams)
-- Foreign Data Wrappers (FDW) for PostgreSQL, MySQL, SQLite
-- FDW for S3 / Parquet / CSV / JSON files
-- FDW for REST APIs (generic HTTP wrapper)
-- Outbound CDC (ThunderDB as source)
-- Kafka Connect integration
-- Apache Spark connector
-- dbt adapter
-
-### Phase 7: Enterprise and Ecosystem (Months 37-42)
-
-**Goal:** Enterprise-grade features and ecosystem maturity.
-
-- Multi-region replication with conflict resolution
-- Encryption at rest (AES-256)
-- Comprehensive audit logging
-- Fine-grained access control (column-level, row-level)
-- Online schema changes (non-blocking DDL)
-- Point-in-time recovery (PITR)
-- Automated backup to S3 / GCS / Azure Blob
-- Web-based management console (ThunderDB Studio)
-- Kubernetes Operator for declarative cluster management
-- Terraform and Pulumi providers
-- Grafana and Datadog integration packages
-- Comprehensive benchmarking suite (TPC-C, TPC-H, ANN-Benchmarks)
 
 ---
 
