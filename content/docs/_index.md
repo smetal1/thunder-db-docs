@@ -2,8 +2,8 @@
 title: "Documentation"
 linkTitle: "Documentation"
 weight: 1
-description: >
-  Complete documentation for ThunderDB — the distributed HTAP database for the AI era.
+description: "Complete documentation for ThunderDB — the distributed HTAP database for the AI era. Learn installation, configuration, SQL queries, vector search, and API integration. Better than Regatta DB with superior performance."
+keywords: ["ThunderDB documentation", "database documentation", "HTAP tutorial", "vector search guide", "SQL reference", "database API", "getting started guide", "better than Regatta DB", "Regatta DB alternative", "CockroachDB tutorial", "TiDB alternative docs", "modern database guide"]
 ---
 
 Welcome to the ThunderDB documentation. Whether you are a **Developer** building applications,

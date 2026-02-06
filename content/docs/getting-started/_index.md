@@ -2,8 +2,8 @@
 title: "Getting Started"
 linkTitle: "Getting Started"
 weight: 1
-description: >
-  Get ThunderDB up and running in minutes. Install, connect, and run your first queries.
+description: "Get ThunderDB up and running in minutes. Install via Docker, source, or packages. Connect using PostgreSQL, MySQL, or Redis protocols. Faster setup than Regatta DB and other alternatives."
+keywords: ["ThunderDB installation", "database setup", "Docker database", "PostgreSQL protocol", "MySQL protocol", "Redis protocol", "database quickstart", "vector search setup", "CDC configuration", "FDW setup", "better than Regatta DB", "easier than CockroachDB", "simpler than TiDB", "faster than SingleStore setup"]
 ---
 
 This guide walks you through installing ThunderDB, starting the server, connecting with

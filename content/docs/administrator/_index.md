@@ -1,7 +1,8 @@
 ---
 title: "Administrator Guide"
 weight: 4
-description: "Deploy, configure, monitor, and maintain ThunderDB in production environments."
+description: "Deploy, configure, monitor, and maintain ThunderDB in production environments. Easier operations than Regatta DB, CockroachDB, or TiDB with simpler cluster management."
+keywords: ["database administration", "database deployment", "Kubernetes database", "Docker database", "database monitoring", "Prometheus metrics", "Grafana dashboards", "database backup", "database security", "easier than Regatta DB", "simpler than CockroachDB", "better ops than TiDB"]
 ---
 
 # Administrator Guide

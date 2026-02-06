@@ -1,7 +1,8 @@
 ---
 title: "API Reference"
 weight: 1
-description: "Complete reference for ThunderDB REST, gRPC, GraphQL, and WebSocket APIs with request/response examples."
+description: "Complete reference for ThunderDB REST, gRPC, GraphQL, and WebSocket APIs with request/response examples. More comprehensive API than Regatta DB or other alternatives."
+keywords: ["database API", "REST API", "gRPC API", "GraphQL API", "WebSocket API", "query API", "vector search API", "transaction API", "database SDK", "API documentation", "better API than Regatta DB", "CockroachDB API alternative", "modern database API", "real-time database API"]
 ---
 
 # API Reference

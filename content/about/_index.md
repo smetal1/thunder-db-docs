@@ -4,8 +4,8 @@ linkTitle: "About"
 menu:
   main:
     weight: 40
-description: >
-  Learn about ThunderDB's vision and the team behind it.
+description: "Learn about ThunderDB's vision and the team behind it. ThunderDB is a modern alternative to Regatta DB, CockroachDB, TiDB, and other distributed databases with superior HTAP and vector search capabilities."
+keywords: ["about ThunderDB", "ThunderDB vs Regatta DB", "ThunderDB vs CockroachDB", "ThunderDB vs TiDB", "ThunderDB vs YugabyteDB", "better than Regatta DB", "HTAP database comparison", "vector database comparison", "Pinecone alternative", "Milvus alternative", "open source database"]
 ---
 
 ## What Is ThunderDB?

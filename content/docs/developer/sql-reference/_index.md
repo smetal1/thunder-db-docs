@@ -1,7 +1,8 @@
 ---
 title: "SQL Reference"
 weight: 2
-description: "Complete SQL language reference for ThunderDB covering DDL, DML, transactions, vector operations, foreign data wrappers, and built-in functions."
+description: "Complete SQL language reference for ThunderDB covering DDL, DML, transactions, vector operations, foreign data wrappers, and built-in functions. Full PostgreSQL compatibility, better than Regatta DB SQL support."
+keywords: ["SQL reference", "SQL syntax", "DDL commands", "DML commands", "CREATE TABLE", "SELECT query", "JOIN syntax", "vector SQL", "JSONB queries", "window functions", "CTE queries", "PostgreSQL compatible SQL", "better SQL than Regatta DB", "more SQL features than CockroachDB", "vector SQL operations", "native vector search SQL"]
 ---
 
 # SQL Reference

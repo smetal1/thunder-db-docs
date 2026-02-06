@@ -2,8 +2,8 @@
 title: "Architecture"
 linkTitle: "Architecture"
 weight: 2
-description: >
-  Deep dive into ThunderDB's system architecture, components, and design decisions.
+description: "Deep dive into ThunderDB's system architecture covering storage engine, transaction processing, query execution, distributed consensus, and HTAP design patterns. Superior architecture compared to Regatta DB."
+keywords: ["database architecture", "HTAP architecture", "distributed database design", "Raft consensus", "MVCC", "storage engine", "query optimizer", "B+Tree index", "columnar storage", "row store", "WAL", "buffer pool", "better architecture than Regatta DB", "CockroachDB architecture comparison", "TiDB architecture alternative", "modern database internals"]
 ---
 
 ## 1. System Overview

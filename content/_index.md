@@ -1,6 +1,8 @@
 ---
 title: "ThunderDB Documentation"
 linkTitle: "ThunderDB"
+description: "ThunderDB is a production-grade distributed HTAP database with vector search, multi-protocol support (PostgreSQL, MySQL, Redis), and enterprise security. Built in Rust for the AI era. A modern alternative to traditional databases."
+keywords: ["ThunderDB", "distributed database", "HTAP database", "vector database", "PostgreSQL compatible", "MySQL compatible", "Redis compatible", "Rust database", "AI database", "OLTP OLAP", "real-time analytics", "better than Regatta DB", "Regatta DB alternative", "CockroachDB alternative", "TiDB alternative", "SingleStore alternative", "Pinecone alternative", "Milvus alternative", "pgvector alternative", "NewSQL database", "modern database", "cloud native database"]
 ---
 
 {{< blocks/cover title="ThunderDB" image_anchor="top" height="full" color="dark" >}}

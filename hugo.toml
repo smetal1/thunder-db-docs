@@ -21,12 +21,22 @@ tag = "tags"
 category = "categories"
 
 [params]
-description = "ThunderDB — The Distributed HTAP Database for the AI Era"
+description = "ThunderDB — The Distributed HTAP Database for the AI Era. A production-grade distributed HTAP database with vector search, multi-protocol support, and enterprise security."
 copyright = "ThunderDB Contributors"
 privacy_policy = ""
 
+# SEO Keywords
+keywords = ["ThunderDB", "distributed database", "HTAP database", "vector database", "vector search", "PostgreSQL compatible", "MySQL compatible", "Rust database", "AI database", "OLTP OLAP", "real-time analytics", "hybrid transactional analytical processing", "RAG database", "semantic search", "embedding database", "better than Regatta DB", "Regatta DB alternative", "CockroachDB alternative", "TiDB alternative", "SingleStore alternative", "Pinecone alternative", "Milvus alternative", "Weaviate alternative", "PostgreSQL vector extension", "pgvector alternative", "faster than PostgreSQL", "NewSQL database", "modern database", "cloud native database", "Kubernetes database", "open source database", "time series database alternative", "ClickHouse alternative", "DuckDB alternative", "analytical database", "transactional database", "unified database"]
+
 offlineSearch = true
 prism_syntax_highlighting = false
+
+# Open Graph / Social Media
+[params.social]
+twitter = "thunderdb"
+
+# Images for social sharing
+images = ["images/thunderdb-og.png"]
 
 version_menu = "Releases"
 archived_version = false
@@ -94,8 +104,13 @@ url = "https://github.com/smetal1/thunder-db"
 pre = "<i class='fab fa-github'></i>"
 
 [outputs]
-home = ["HTML"]
-section = ["HTML"]
+home = ["HTML", "RSS"]
+section = ["HTML", "RSS"]
+
+[sitemap]
+changefreq = "weekly"
+priority = 0.5
+filename = "sitemap.xml"
 
 [mediaTypes]
 [mediaTypes."application/javascript"]

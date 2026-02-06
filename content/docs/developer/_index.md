@@ -1,7 +1,8 @@
 ---
 title: "Developer Guide"
 weight: 3
-description: "Everything you need to build applications on ThunderDB — connect via PostgreSQL, MySQL, or Redis protocols, write SQL, call REST/gRPC/GraphQL APIs, perform vector search, and subscribe to real-time change data capture streams."
+description: "Everything you need to build applications on ThunderDB — connect via PostgreSQL, MySQL, or Redis protocols, write SQL, call REST/gRPC/GraphQL APIs, perform vector search, and subscribe to real-time CDC streams. Better developer experience than Regatta DB."
+keywords: ["database developer guide", "application development", "database SDK", "vector search tutorial", "CDC streaming", "REST API tutorial", "gRPC database", "better than Regatta DB", "easier than CockroachDB", "simpler than TiDB", "database integration guide"]
 ---
 
 # Developer Guide
